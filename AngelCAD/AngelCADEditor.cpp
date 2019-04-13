@@ -116,7 +116,7 @@ void AngelCADEditor::SetLexerCPP()
 
   // wxString sets = DescribeKeyWordSets();
 
-   SetKeyWords(0, wxT("@ auto class interface mixin if return funcdef for while break enum continue array dictionary switch case const double float void string bool sin cos tan atan2 int8 int16 int int64 uint8 uint16 uint uint64"));
+   SetKeyWords(0, wxT("@ auto class interface mixin if return funcdef for while break enum continue array dictionary map unordered_map switch case const double float void string bool sin cos tan atan2 int8 int16 int int64 uint8 uint16 uint uint64"));
    SetKeyWords(1, wxT("shape shape2d circle square rectangle polygon offset2d spline2d hull2d fill2d union2d difference2d intersection2d pos2d vec2d solid sphere cone cube cuboid cylinder polyhedron pface hull3d union3d difference3d difference3d intersection3d linear_extrude spline_path sweep rotate_extrude transform_extrude pos3d vec3d locsys3d spline3d boundingbox"));
    SetKeyWords(3, wxT("tmatrix mirror rotate_x rotate_y rotate_z scale translate hmatrix"));
 }
