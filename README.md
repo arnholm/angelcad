@@ -5,7 +5,9 @@ as described in https://github.com/arnholm/cpde_utils
 
 Before building AngelCAD, you must build the following workspaces
 
-* spacelibs: spacemath, spaceio
-* xcsg 
+* spacelibs - https://github.com/arnholm/spacelibs
+   - spacemath
+   - spaceio
+* xcsg - https://github.com/arnholm/xcsg
 
 
