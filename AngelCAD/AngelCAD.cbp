@@ -198,6 +198,7 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="threads/ts_queue.h" />
 		<Unit filename="wxConfigPath.cpp">
 			<Option virtualFolder="Config/" />
 		</Unit>
