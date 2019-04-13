@@ -58,7 +58,7 @@ Some rules
 
 
 \section technology_sec Technology 
-AngelCAD uses <a href="https://github.com/arnholm/xcsg">xcsg</a> for 3d computations. xcsg is based on the <a href="https://github.com/arnholm/carve">carve library</a> created by Tobias Sargeant. xcsg also uses qhull by C.B. Barber and libtess2 by Mikko Mononen. The AngelCAD language interpreter - as_csg - is based on the AngelScript language by Andreas Jönsson, as_csg extends the language with 3d modelling types and operations for constructive solid geometry. The AngelCAD IDE and Viewer applications use the <a href="https://wxwidgets.org/">wxWidgets</a> cross-platform GUI library to create native GUI for Windows and Linux.
+AngelCAD uses <a href="https://github.com/arnholm/xcsg">xcsg</a> for 3d computations. xcsg is based on the <a href="https://github.com/arnholm/carve">carve library</a> by Tobias Sargeant. xcsg also uses <a href="http://angusj.com/delphi/clipper.php">Clipper</a> by Angus Johnson, qhull by C.B. Barber and libtess2 by Mikko Mononen. The AngelCAD language interpreter - as_csg - is based on the AngelScript language by Andreas Jönsson, as_csg extends the language with 3d modelling types and operations for constructive solid geometry. The AngelCAD IDE and Viewer applications use the <a href="https://wxwidgets.org/">wxWidgets</a> cross-platform GUI library to create native GUI for Windows and Linux.
 
 */
 
