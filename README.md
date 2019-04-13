@@ -1,3 +1,8 @@
+### User documentation ###
+
+https://arnholm.github.io/angelcad-docs/
+
+
 ### Dependencies ###
 
 AngelCAD build system is based on Code::Blocks
