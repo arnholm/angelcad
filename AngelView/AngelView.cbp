@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="AngelView" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc" />
+		<Option virtualFolders="OpenGL/;Bitmaps/;wxConfig/" />
+		<Build>
+			<Target title="MSVC_Debug">
+				<Option output=".cmp/msvc/bin/Debug/AngelViewd" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="msvc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/GF" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/RTCsu" />
+					<Add option="/Fd$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.debug) --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --libs aui,gl,core,base`" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="spacemathd" />
+					<Add library="spaceiod" />
+					<Add library="msvcrtd.lib" />
+				</Linker>
+			</Target>
+			<Target title="MSVC_Release">
+				<Option output=".cmp/msvc/bin/Release/AngelView" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Release/" />
+				<Option type="0" />
+				<Option compiler="msvc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/GF" />
+					<Add option="/Ox" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.release) --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --libs aui,gl,core,base`" />
+					<Add option="/SUBSYSTEM:WINDOWS" />
+					<Add option="/NODEFAULTLIB:libcmtd.lib" />
+					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="spacemath" />
+					<Add library="spaceio" />
+					<Add library="msvcrt.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="mt.exe /nologo /manifest $(TARGET_OUTPUT_FILE).manifest /outputresource:$(TARGET_OUTPUT_FILE);1" />
+					<Add after="$(CPDE_USR)\bin\cpde_usr -bin -xi -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Debug">
+				<Option output=".cmp/gcc/angelviewd" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="`$(#wx.config) --cxxflags --debug`" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(#wx.config) --libs std,aui,gl --static --debug`" />
+					<Add library="spacemathd" />
+					<Add library="spaceiod" />
+					<Add library="boost_filesystem" />
+					<Add library="boost_system" />
+				</Linker>
+			</Target>
+			<Target title="GCC_Release">
+				<Option output=".cmp/gcc/angelview" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-std=c++0x" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="`$(#wx.config) --cxxflags`" />
+					<Add option="-DNOPCH" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+					<Add directory="/user/include" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(#wx.config) --libs std,aui,gl --static`" />
+					<Add library="spacemath" />
+					<Add library="spaceio" />
+					<Add library="boost_filesystem" />
+					<Add library="boost_system" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
+					<Add after="# upx $(TARGET_OUTPUT_FILE)" />
+					<Add after="$(CPDE_USR)/bin/cpde_usr -bin -xi -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="$(CPDE_USR)/include" />
+			<Add directory="$(#boost.include)" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="$(#wx)/include" />
+		</ResourceCompiler>
+		<Linker>
+			<Add directory="$(CPDE_USR)/lib" />
+			<Add directory="$(#boost.lib)" />
+		</Linker>
+		<Unit filename="AngelFileSystemWatcher.cpp" />
+		<Unit filename="AngelFileSystemWatcher.h" />
+		<Unit filename="AngelGLUICanvas.cpp" />
+		<Unit filename="AngelGLUICanvas.h" />
+		<Unit filename="AngelGLUIContext.cpp" />
+		<Unit filename="AngelGLUIContext.h" />
+		<Unit filename="AngelViewApp.cpp" />
+		<Unit filename="AngelViewApp.h" />
+		<Unit filename="AngelViewBitmapLibrary.cpp">
+			<Option virtualFolder="Bitmaps/" />
+		</Unit>
+		<Unit filename="AngelViewBitmapLibrary.h">
+			<Option virtualFolder="Bitmaps/" />
+		</Unit>
+		<Unit filename="AngelViewDropTarget.cpp" />
+		<Unit filename="AngelViewDropTarget.h" />
+		<Unit filename="AngelViewMain.cpp" />
+		<Unit filename="AngelViewMain.h" />
+		<Unit filename="PolyhedronGL.cpp" />
+		<Unit filename="PolyhedronGL.h" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="wxBitmapLibrary.cpp">
+			<Option virtualFolder="Bitmaps/" />
+		</Unit>
+		<Unit filename="wxBitmapLibrary.h">
+			<Option virtualFolder="Bitmaps/" />
+		</Unit>
+		<Unit filename="wxConfigBooleans.cpp">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxConfigBooleans.h">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxConfigPath.cpp">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxConfigPath.h">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxConfigSaveRestore.cpp">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxConfigSaveRestore.h">
+			<Option virtualFolder="wxConfig/" />
+		</Unit>
+		<Unit filename="wxGLUICanvas.cpp">
+			<Option virtualFolder="OpenGL/" />
+		</Unit>
+		<Unit filename="wxGLUICanvas.h">
+			<Option virtualFolder="OpenGL/" />
+		</Unit>
+		<Unit filename="wxGLUIContext.cpp">
+			<Option virtualFolder="OpenGL/" />
+		</Unit>
+		<Unit filename="wxGLUIContext.h">
+			<Option virtualFolder="OpenGL/" />
+		</Unit>
+		<Unit filename="wxsmith/AngelViewframe.wxs" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="AngelViewApp.cpp" main="AngelViewFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/AngelViewframe.wxs" src="AngelViewMain.cpp" hdr="AngelViewMain.h" fwddecl="0" i18n="1" name="AngelViewFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

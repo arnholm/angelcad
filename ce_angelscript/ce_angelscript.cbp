@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ce_angelscript" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc" />
+		<Build>
+			<Target title="MSVC_Debug">
+				<Option output=".cmp/msvc/ce_angelscriptd" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output=".cmp/msvc/obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/RTCsu" />
+					<Add option="/Fd$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.debug) --iso --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add option="/DAS_NO_EXCEPTIONS" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR) -iroot=angelscript_2.31.0\sdk  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="MSVC_Release">
+				<Option output=".cmp/msvc/ce_angelscript" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output=".cmp/msvc/obj/Release/" />
+				<Option type="2" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Ox" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.release) --iso --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add option="/DAS_NO_EXCEPTIONS" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR) -iroot=angelscript_2.31.0\sdk  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Debug">
+				<Option output=".cmp/gcc/ce_angelscriptd" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output=".cmp/gcc/obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="-Wno-sign-compare" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DAS_USE_STLNAMES=1" />
+					<Add option="-DAS_NO_EXCEPTIONS" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR) -iroot=angelscript_2.31.0/sdk  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Release">
+				<Option output=".cmp/gcc/ce_angelscript" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output=".cmp/gcc/obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-std=c++0x" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="-Wno-sign-compare" />
+					<Add option="-DNOPCH" />
+					<Add option="-DAS_USE_STLNAMES=1" />
+					<Add option="-DAS_NO_EXCEPTIONS" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR) -iroot=angelscript_2.31.0/sdk  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DCE_ANGELSCRIPT_IMPLEMENTATION" />
+			<Add option="-DAS_USE_STLNAMES=1" />
+			<Add directory="$(CPDE_USR)/include" />
+			<Add directory="$(#boost.include)" />
+			<Add directory="angelscript_2.31.0/sdk/angelscript/include" />
+		</Compiler>
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_common.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_common.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_config.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_deque.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_deque.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_list.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_list.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_listing.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_listing_heavy.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_map.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_map.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_mapped_templated_shared.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_mapped_templated_shared_method.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_set.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_set.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_shared.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_shared.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_templated_shared.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_templated_shared_method.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_tempspec_shared.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_tempspec_shared_method.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_unordered_map.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_unordered_map.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_unordered_set.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_unordered_set.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_vector.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_container_vector.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_enginestorage.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_enginestorage.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_hash.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_hash.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_registration.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_serializer.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_serializer.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/aatc/aatc_templatemagic.hpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/autowrapper/aswrappedcall.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/autowrapper/generator/generateheader.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/contextmgr/contextmgr.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/contextmgr/contextmgr.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/debugger/debugger.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/debugger/debugger.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptany/scriptany.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptany/scriptany.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptarray/scriptarray.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptarray/scriptarray.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptbuilder/scriptbuilder.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptbuilder/scriptbuilder.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptdictionary/scriptdictionary.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptdictionary/scriptdictionary.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptfile/scriptfile.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptfile/scriptfile.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptfile/scriptfilesystem.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptfile/scriptfilesystem.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptgrid/scriptgrid.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptgrid/scriptgrid.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scripthandle/scripthandle.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scripthandle/scripthandle.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scripthelper/scripthelper.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scripthelper/scripthelper.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptmath/scriptmath.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptmath/scriptmath.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptmath/scriptmathcomplex.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptmath/scriptmathcomplex.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptstdstring/scriptstdstring.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptstdstring/scriptstdstring.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/scriptstdstring/scriptstdstring_utils.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/serializer/serializer.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/serializer/serializer.h" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/weakref/weakref.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/add_on/weakref/weakref.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/include/angelscript.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/projects/BCBuilder/pch1.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_array.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_atomic.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_atomic.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_builder.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_builder.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_bytecode.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_bytecode.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_arm.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_arm_gcc.S">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_arm_msvc.asm">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_arm_vita.S">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_arm_xcode.S">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_mips.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_ppc.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_ppc_64.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_sh4.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_x64_gcc.cpp">
+			<Option target="GCC_Debug" />
+			<Option target="GCC_Release" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_x64_mingw.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_x64_msvc.cpp">
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_x64_msvc_asm.asm">
+			<Option compiler="msvc" use="1" buildCommand="$(#MSVC_TOOLCHAIN.ASM)  /c /nologo /W3 /Zi  /Fo$object $file" />
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_x86.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_callfunc_xenon.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_compiler.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_compiler.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_config.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_configgroup.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_configgroup.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_context.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_context.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_criticalsection.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_datatype.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_datatype.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_debug.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_gc.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_gc.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_generic.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_generic.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_globalproperty.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_map.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_memory.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_memory.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_module.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_module.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_namespace.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_objecttype.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_objecttype.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_outputbuffer.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_outputbuffer.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_parser.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_parser.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_property.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_restore.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_restore.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptcode.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptcode.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptengine.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptengine.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptfunction.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptfunction.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptnode.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptnode.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptobject.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_scriptobject.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_string.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_string.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_string_util.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_string_util.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_symboltable.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_texts.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_thread.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_thread.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_tokendef.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_tokenizer.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_tokenizer.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_typeinfo.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_typeinfo.h" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_variablescope.cpp" />
+		<Unit filename="angelscript_2.31.0/sdk/angelscript/source/as_variablescope.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

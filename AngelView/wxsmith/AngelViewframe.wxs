@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="AngelViewFrame">
+		<title>AngelView - STL/AMF/OBJ/OFF viewer</title>
+		<size>1100,800</size>
+		<handler function="OnClose" entry="EVT_CLOSE" />
+		<object class="wxAuiManager" variable="AuiManager1" member="yes">
+			<object class="AuiManagerItem">
+				<object class="wxPanel" name="ID_PANEL1" variable="m_center" member="yes">
+					<pos>222,354</pos>
+					<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+						<orient>wxVERTICAL</orient>
+						<object class="sizeritem">
+							<object class="Custom" name="ID_CUSTOM1" subclass="AngelGLUICanvas" variable="m_canvas" member="yes">
+								<creating_code>$(THIS) = new $(CLASS)($(PARENT),$(ID),0,$(POS),$(SIZE),0,$(NAME));</creating_code>
+								<style></style>
+							</object>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<option>1</option>
+						</object>
+					</object>
+				</object>
+				<name>CenterPane</name>
+				<standardpanetype>Center</standardpanetype>
+				<caption>Pane caption</caption>
+				<captionvisible>0</captionvisible>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<closebutton>0</closebutton>
+				<dockdirection>Center</dockdirection>
+				<dockfixed>0</dockfixed>
+				<dockabledirection></dockabledirection>
+				<floatable>0</floatable>
+				<movable>0</movable>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+			<object class="AuiManagerItem">
+				<object class="wxAuiToolBar" name="ID_AUITOOLBAR1" variable="AuiToolBar1" member="yes">
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_FILEOPEN" variable="AuiToolBarItem1" member="yes">
+							<bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Open File</shorthelp>
+							<longhelp>Open File</longhelp>
+							<handler function="OnFileOpen" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarSpacer" name="ID_AUITOOLBARSPACER1">
+							<pixels>15</pixels>
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWRESET" variable="m_view_reset" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Default View</shorthelp>
+							<longhelp>Default View</longhelp>
+							<handler function="OnViewReset" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWXNEG" variable="m_viewxneg" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from -X</shorthelp>
+							<longhelp>View from -X</longhelp>
+							<handler function="OnViewXneg" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWZPOS" variable="m_view_zpos" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from +Z</shorthelp>
+							<longhelp>View from +Z</longhelp>
+							<handler function="OnViewZpos" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWZNEG" variable="m_view_zneg" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from -Z</shorthelp>
+							<longhelp>View from -Z</longhelp>
+							<handler function="OnViewZneg" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWXPOS" variable="m_view_xpos" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from +X</shorthelp>
+							<longhelp>View from +X</longhelp>
+							<handler function="OnViewXpos" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWYNEG" variable="m_view_yneg" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from -Y</shorthelp>
+							<longhelp>View from -Y</longhelp>
+							<handler function="OnViewYneg" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_VIEWYPOS" variable="m_view_ypos" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View from +Y</shorthelp>
+							<longhelp>View from +Y</longhelp>
+							<handler function="OnViewYpos" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarSeparator" />
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_BACKGROUND" variable="m_background" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Dark/Bright background</shorthelp>
+							<longhelp>Dark/Bright background</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnBackground" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_ROTATE_RMB" variable="m_rotate_rmb" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>RMB rotate</shorthelp>
+							<longhelp>RMB rotate</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnRMBrotate" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarSeparator" />
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOW_AXES" variable="m_show_axes" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show Axes</shorthelp>
+							<longhelp>Show Axes</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowAxesToolBar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOW_MARKERS" variable="m_show_markers" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show Markers</shorthelp>
+							<longhelp>Show Markers</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowAxesToolBar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOWCENTER" variable="m_show_center" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show center of rotation</shorthelp>
+							<longhelp>Show center of rotation</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowCenterToolbar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarSeparator" />
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOWFILLED" variable="m_show_filled" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show filled</shorthelp>
+							<longhelp>Show filled</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowPolygonsToolbar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOWEDGES" variable="m_show_edges" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show edges</shorthelp>
+							<longhelp>Show edges</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowPolygonsToolbar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM_SHOWBACK" variable="m_show_backside" member="yes">
+							<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Show backside faces</shorthelp>
+							<longhelp>Show backside faces</longhelp>
+							<itemkind>Check</itemkind>
+							<handler function="OnShowBacksideToolbar" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+				</object>
+				<name>PaneName</name>
+				<standardpanetype>Toolbar</standardpanetype>
+				<caption>Pane caption</caption>
+				<captionvisible>0</captionvisible>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<layer>10</layer>
+				<dockfixed>0</dockfixed>
+				<dockabledirection></dockabledirection>
+				<gripper>Default</gripper>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+		</object>
+		<object class="wxMenuBar" variable="MenuBar1" member="yes">
+			<object class="wxMenu" variable="Menu1" member="no">
+				<label>&amp;File</label>
+				<object class="wxMenuItem" name="ID_MENUITEM1" variable="MenuItem3" member="yes">
+					<label>Open...</label>
+					<handler function="OnFileOpen" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FILERELOAD" variable="MenuItem18" member="yes">
+					<label>Reload</label>
+					<accel>F6</accel>
+					<help>Reload Current File</help>
+					<enabled>0</enabled>
+					<handler function="OnFileReload" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM2" variable="MenuItem17" member="yes">
+					<label>Save Image ...</label>
+					<handler function="OnFileSaveImage" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">
+					<label>Quit</label>
+					<accel>Alt-F4</accel>
+					<help>Quit the application</help>
+					<handler function="OnQuit" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu3" member="yes">
+				<label>View</label>
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWFILLED" variable="MenuItem11" member="yes">
+					<label>Show Filled</label>
+					<checked>1</checked>
+					<handler function="OnShowPolygonsMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWEDGES" variable="MenuItem12" member="yes">
+					<label>Show Wireframe</label>
+					<handler function="OnShowPolygonsMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWBACK" variable="MenuItem16" member="yes">
+					<label>Show Backside Faces</label>
+					<handler function="OnShowBackSideMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWAXES" variable="MenuItem13" member="yes">
+					<label>Show Axes</label>
+					<handler function="OnShowAxesMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWMARKERS" variable="MenuItem14" member="yes">
+					<label>Show Markers</label>
+					<handler function="OnShowAxesMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_SHOWCENTER" variable="MenuItem15" member="yes">
+					<label>Show Center</label>
+					<handler function="OnShowCenterMenuBar" entry="EVT_MENU" />
+					<checkable>1</checkable>
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM_RESETVIEW" variable="MenuItem4" member="yes">
+					<label>Default View</label>
+					<handler function="OnViewReset" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROM_XNEG" variable="MenuItem5" member="yes">
+					<label>From -X</label>
+					<handler function="OnViewXneg" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROMXPOS" variable="MenuItem6" member="yes">
+					<label>From +X</label>
+					<handler function="OnViewXpos" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROMYNEG" variable="MenuItem7" member="yes">
+					<label>From -Y</label>
+					<handler function="OnViewYneg" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROMYPOS" variable="MenuItem8" member="yes">
+					<label>From +Y</label>
+					<handler function="OnViewYpos" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROMZNEG" variable="MenuItem9" member="yes">
+					<label>From -Z</label>
+					<handler function="OnViewZneg" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_FROMZPOS" variable="MenuItem10" member="yes">
+					<label>From +Z</label>
+					<handler function="OnViewZpos" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu2" member="no">
+				<label>Help</label>
+				<object class="wxMenuItem" name="idMenuAbout" variable="MenuItem2" member="no">
+					<label>About</label>
+					<accel>F1</accel>
+					<help>Show info about this application</help>
+					<handler function="OnAbout" entry="EVT_MENU" />
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="StatusBar1" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+		<object class="wxTimer" name="ID_TIMER1" variable="Timer1" member="yes">
+			<oneshot>1</oneshot>
+			<handler function="OnTimer1Trigger" entry="EVT_TIMER" />
+		</object>
+	</object>
+</wxsmith>

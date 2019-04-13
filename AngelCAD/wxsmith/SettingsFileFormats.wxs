@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxPanel" name="SettingsFileFormats">
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="spacer">
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<size>0,10</size>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_stl" member="yes">
+					<label>STL - (3D) - STereoLitography </label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX2" variable="m_amf" member="yes">
+					<label>AMF - (3D) - Additive Manufacturing Format</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX3" variable="m_obj" member="yes">
+					<label>OBJ - (3D) - Wavefront file format</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX4" variable="m_off" member="yes">
+					<label>OFF - (3D) - Geomview Object File Format</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX6" variable="m_dxf" member="yes">
+					<label>DXF - (2D) - AutCAD DXF</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX7" variable="m_svg" member="yes">
+					<label>SVG - (2D) - Scalar Vector Graphics</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="ID_CHECKBOX5" variable="m_csg" member="yes">
+					<label>CSG - OpenSCAD Constructive Solid Geometry</label>
+					<handler function="OnCheckClick" entry="EVT_CHECKBOX" />
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

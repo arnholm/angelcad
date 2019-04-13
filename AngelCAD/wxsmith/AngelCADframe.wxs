@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxFrame" name="AngelCADFrame">
+		<size>1100,1000</size>
+		<handler function="OnClose" entry="EVT_CLOSE" />
+		<object class="wxAuiManager" variable="AuiManager1" member="yes">
+			<object class="AuiManagerItem">
+				<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
+					<pos>83,350</pos>
+					<handler function="OnAuiNotebookPageClose" entry="EVT_AUINOTEBOOK_PAGE_CLOSE" />
+					<handler function="OnAuiNotebookPageClosed" entry="EVT_AUINOTEBOOK_PAGE_CLOSED" />
+					<handler function="OnAuiNotebookPageChanged" entry="EVT_AUINOTEBOOK_PAGE_CHANGED" />
+				</object>
+				<name>PaneName</name>
+				<standardpanetype>Center</standardpanetype>
+				<caption>Pane caption</caption>
+				<captionvisible>0</captionvisible>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<closebutton>0</closebutton>
+				<dockdirection>Center</dockdirection>
+				<dockfixed>0</dockfixed>
+				<dockabledirection></dockabledirection>
+				<floatable>0</floatable>
+				<movable>0</movable>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+			<object class="AuiManagerItem">
+				<object class="wxPanel" name="ID_PANEL1" subclass="ConsolePanel" variable="m_console" member="yes">
+					<size>-1,150</size>
+				</object>
+				<name>Console</name>
+				<caption>Console</caption>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<closebutton>0</closebutton>
+				<dockdirection>Bottom</dockdirection>
+				<dockfixed>0</dockfixed>
+				<dockabledirection>.TopDockable(false).LeftDockable(false).RightDockable(false)</dockabledirection>
+				<floatable>0</floatable>
+				<movable>0</movable>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+			<object class="AuiManagerItem">
+				<object class="wxAuiToolBar" name="ID_AUITOOLBAR1" variable="AuiToolBar1" member="yes">
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM2" variable="AuiToolBarItemFileNew" member="yes">
+							<bitmap stock_id="wxSTD_NEW" stock_client="wxART_TOOLBAR" />
+							<shorthelp>New source file</shorthelp>
+							<longhelp>New source file</longhelp>
+							<handler function="OnFileNew" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM1" variable="AuiToolBarItemFileOpen" member="yes">
+							<bitmap stock_id="wxSTD_FILE_OPEN" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Open existing source file</shorthelp>
+							<longhelp>Open existing source file</longhelp>
+							<handler function="OnFileOpen" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM3" variable="AuiToolBarItemFileSave" member="yes">
+							<bitmap stock_id="wxSTD_FILE_SAVE" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Save current source file</shorthelp>
+							<longhelp>Save current source file</longhelp>
+							<handler function="OnFileSave" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM4" variable="AuiToolBarItemFileSaveAs" member="yes">
+							<bitmap stock_id="wxSTD_FILE_SAVE_AS" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Save current source file to another name</shorthelp>
+							<longhelp>Save current source file to another name</longhelp>
+							<handler function="OnFileSaveAs" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM6" variable="AuiToolBarItemBuildFile" member="yes">
+							<bitmap stock_id="wxSTD_GO_FORWARD" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Build current file</shorthelp>
+							<longhelp>Build current file</longhelp>
+							<handler function="OnBuildCurrentFile" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM7" variable="AuiToolBarItem1" member="yes">
+							<bitmap stock_id="wxSTD_KILL" stock_client="wxART_TOOLBAR" />
+							<shorthelp>Stop current build</shorthelp>
+							<longhelp>Stop current build</longhelp>
+							<handler function="OnKillProcess" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM8" variable="AuiToolBarItem2" member="yes">
+							<bitmap stock_id="wxSTD_CUBE" stock_client="wxART_TOOLBAR" />
+							<shorthelp>View model</shorthelp>
+							<longhelp>View model</longhelp>
+							<handler function="OnViewSTL_AMF_DXF" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+				</object>
+				<name>ToolBarPane</name>
+				<standardpanetype>Toolbar</standardpanetype>
+				<caption>Pane caption</caption>
+				<captionvisible>0</captionvisible>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<layer>10</layer>
+				<dockfixed>0</dockfixed>
+				<dockabledirection></dockabledirection>
+				<gripper>Default</gripper>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+			<object class="AuiManagerItem">
+				<object class="wxPanel" name="ID_PANEL2" subclass="FindReplacePanel" variable="m_find_replace" member="yes" />
+				<name>FindReplacePane</name>
+				<caption>Find &amp; Replace</caption>
+				<minimizebutton>0</minimizebutton>
+				<maximizebutton>0</maximizebutton>
+				<pinbutton>0</pinbutton>
+				<dockfixed>0</dockfixed>
+				<dockabledirection></dockabledirection>
+				<visible>0</visible>
+				<destroyonclose>0</destroyonclose>
+				<firstadd>0</firstadd>
+			</object>
+		</object>
+		<object class="wxMenuBar" variable="MenuBar1" member="no">
+			<object class="wxMenu" variable="Menu1" member="no">
+				<label>&amp;File</label>
+				<object class="wxMenuItem" name="ID_MENUITEM2" variable="MenuItem4" member="yes">
+					<label>New ...</label>
+					<accel>Ctrl+N</accel>
+					<help>New AngelCAD source file</help>
+					<handler function="OnFileNew" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM1" variable="MenuItem3" member="yes">
+					<label>Open...</label>
+					<accel>Ctrl+O</accel>
+					<help>Open AngelCAD source file</help>
+					<handler function="OnFileOpen" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM11" variable="MenuItem12" member="yes">
+					<label>Open Containing Folder</label>
+					<help>Open file browser in source file folder</help>
+					<handler function="OnOpenContainingFolder" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM3" variable="MenuItem5" member="yes">
+					<label>Save</label>
+					<accel>Ctrl+S</accel>
+					<help>Save current file</help>
+					<handler function="OnFileSave" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM4" variable="MenuItem6" member="yes">
+					<label>Save As...</label>
+					<accel>Ctrl+Alt+S</accel>
+					<help>Save current file as...</help>
+					<handler function="OnFileSaveAs" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM5" variable="MenuItem7" member="yes">
+					<label>Save All</label>
+					<accel>Ctrl+Shift+S</accel>
+					<help>Save All files</help>
+					<handler function="OnFileSaveAll" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenu" name="ID_MENUITEM14" variable="MenuItem15" member="yes">
+					<label>History</label>
+					<object class="wxMenuItem" name="ID_MENUITEM13" variable="MenuItem14" member="yes">
+						<label>Remove Current File</label>
+						<handler function="OnRemoveFromMRU" entry="EVT_MENU" />
+					</object>
+				</object>
+				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">
+					<label>Quit</label>
+					<accel>Alt-F4</accel>
+					<help>Quit the application</help>
+					<handler function="OnQuit" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu3" member="yes">
+				<label>Search</label>
+				<object class="wxMenuItem" name="ID_MENUITEM6" variable="MenuItem8" member="yes">
+					<label>Find/Replace...</label>
+					<accel>F3</accel>
+					<handler function="OnFindReplace" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu4" member="yes">
+				<label>Build</label>
+				<object class="wxMenuItem" name="ID_MENUITEM7" variable="MenuItem9" member="yes">
+					<label>Compile AngelScript</label>
+					<accel>F5</accel>
+					<help>Compile</help>
+					<handler function="OnCompileAngelScript" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM8" variable="MenuItem10" member="yes">
+					<label>Build Current File</label>
+					<accel>F6</accel>
+					<help>Build</help>
+					<handler function="OnBuildCurrentFile" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu5" member="yes">
+				<label>Tools</label>
+				<object class="wxMenuItem" name="ID_MENUITEM12" variable="MenuItem13" member="yes">
+					<label>View STL/AMF/DXF</label>
+					<accel>F7</accel>
+					<help>Run STL/AMF/DXF viewer</help>
+					<handler function="OnViewSTL_AMF_DXF" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM9" variable="MenuItem11" member="yes">
+					<label>View OpenSCAD CSG</label>
+					<accel>F8</accel>
+					<help>View OpenSCAD CSG</help>
+					<handler function="OnRunOpenSCAD" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM10" variable="Menu6" member="yes">
+					<label>Settings ...</label>
+					<handler function="OnSettings" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu2" member="no">
+				<label>Help</label>
+				<object class="wxMenuItem" name="ID_MENUITEM15" variable="MenuItem16" member="yes">
+					<label>Online documentation...</label>
+					<accel>Shift+F1</accel>
+					<handler function="OnOnlineDocumentation" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="idMenuAbout" variable="MenuItem2" member="no">
+					<label>About</label>
+					<accel>F1</accel>
+					<help>Show info about this application</help>
+					<handler function="OnAbout" entry="EVT_MENU" />
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="ID_STATUSBAR1" variable="m_statusbar" member="yes">
+			<fields>1</fields>
+			<widths>-1</widths>
+			<styles>wxSB_NORMAL</styles>
+		</object>
+	</object>
+</wxsmith>

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AngelCAD IDE
+GenericName=Integrated development environment
+Comment=3d modelling IDE
+Exec=angelcad %F
+Icon=/usr/share/doc/angelcad/angel_64x64.xpm
+Terminal=false
+X-MultipleArgs=false
+Categories=Graphics;
+StartupNotify=true
+MimeType=

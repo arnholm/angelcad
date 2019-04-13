@@ -1,0 +1,35 @@
+/* XPM */
+static const char *wxSTD_KILL_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"24 24 4 1",
+". c Black",
+"  c None",
+"o c #FFFFFF",
+"X c #ED1C24",
+/* pixels */
+"                        ",
+"                        ",
+"                        ",
+"     ..............     ",
+"    .XXXXXXXXXXXXXX.    ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"   .XXXXooXXXXooXXXX.   ",
+"   .XXXXoooXXoooXXXX.   ",
+"   .XXXXXooooooXXXXX.   ",
+"   .XXXXXXooooXXXXXX.   ",
+"   .XXXXXXooooXXXXXX.   ",
+"   .XXXXXooooooXXXXX.   ",
+"   .XXXXoooXXoooXXXX.   ",
+"   .XXXXooXXXXooXXXX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"    .XXXXXXXXXXXXXX.    ",
+"     ..............     ",
+"                        ",
+"                        ",
+"                        "
+};
+

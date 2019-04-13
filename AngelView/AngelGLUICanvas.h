@@ -1,0 +1,38 @@
+// BeginLicense:
+// Part of: angelcad - script based 3D solid modeller 
+// Copyright (C) 2017 Carsten Arnholm
+// All rights reserved
+//
+// This file may be used under the terms of either the GNU General
+// Public License version 2 or 3 (at your option) as published by the
+// Free Software Foundation and appearing in the files LICENSE.GPL2
+// and LICENSE.GPL3 included in the packaging of this file.
+//
+// This file is provided "AS IS" with NO WARRANTY OF ANY KIND,
+// INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE.
+// EndLicense:
+   
+#ifndef ANGELGLUICANVAS_H
+#define ANGELGLUICANVAS_H
+
+#include "wxGLUICanvas.h"
+
+class wxGLUIContext;
+
+class AngelGLUICanvas : public wxGLUICanvas {
+public:
+   AngelGLUICanvas(wxWindow* parent,
+                   wxWindowID id=wxID_ANY,
+                   const int* attribList=NULL,
+                   const wxPoint& pos=wxDefaultPosition,
+                   const wxSize& size=wxDefaultSize,
+                   long style=wxTAB_TRAVERSAL,
+                   const wxString& name=wxPanelNameStr);
+
+   virtual ~AngelGLUICanvas();
+
+   wxGLUIContext* GetCurrentContext();
+};
+
+#endif // ANGELGLUICANVAS_H

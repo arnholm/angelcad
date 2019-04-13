@@ -1,0 +1,42 @@
+/* XPM */
+static const char *angelview_32x32_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"32 32 3 1",
+"X c Black",
+"  c None",
+". c #FF8000",
+/* pixels */
+"                                ",
+"              .....             ",
+"                                ",
+"    XX                     XX   ",
+"   XXXX      ......       XXXX  ",
+"   XXXX     ........      XXXX  ",
+"   XXXXX    .........    XXXXX  ",
+"   XXXXXX   .........   XXXXXX  ",
+"   XXXXXXX  .........  XXXXXXX  ",
+"  XXXXXXXX  ......... XXXXXXXXX ",
+"  XXXXXXXXX ........  XXXXXXXXX ",
+"  XXXXXXXXX  .......  XXXXXXXXX ",
+"  XXXXXXXX .  ....  .  XXXXXXX  ",
+"   XXXXXX  ..      ... XXXXXXX  ",
+"   XXXXXX ............  XXXXXX  ",
+"   XXXXX  ............. XXXXXX  ",
+"    XXXX ..............  XXXX   ",
+"    XXX  ............... XXXX   ",
+"     XX ................  XX    ",
+"        .................       ",
+"        .................       ",
+"       ..................       ",
+"       ..................       ",
+"       ...................      ",
+"       ...................      ",
+"      ....................      ",
+"      ....................      ",
+"      ....................      ",
+"      ....................      ",
+"        ................        ",
+"                                ",
+"                                "
+};
+

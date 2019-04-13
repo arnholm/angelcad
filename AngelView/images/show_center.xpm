@@ -1,0 +1,33 @@
+/* XPM */
+static const char *show_center_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"28 23 3 1",
+". c Black",
+"  c None",
+"X c #ED1C24",
+/* pixels */
+"                            ",
+"                            ",
+"     .                      ",
+"     .                      ",
+"     .                      ",
+"     .                      ",
+"     .              ..      ",
+"     .            ..        ",
+"     .          ..          ",
+"     .        ..            ",
+"     .      ..              ",
+"     .    ..      X         ",
+"     .  ..       XXX        ",
+"     ...        XXXXX       ",
+"       ..        XXX        ",
+"         ..       X         ",
+"           ..               ",
+"             ..             ",
+"               ..           ",
+"                 ..         ",
+"                   ..       ",
+"                            ",
+"                            "
+};
+

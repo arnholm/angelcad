@@ -1,0 +1,26 @@
+/* XPM */
+static const char *angelview_16x16_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1",
+"X c Black",
+"  c None",
+". c #FF8000",
+/* pixels */
+"       ...      ",
+"  X           X ",
+"  XX  ....   XX ",
+"  XXX ..... XXX ",
+" XXXX .....XXXXX",
+" XXXXX ... XXXXX",
+"  XXX .   . XXX ",
+"  XX .......XXX ",
+"  XX ....... XX ",
+"    .........   ",
+"    .........   ",
+"    .........   ",
+"   ..........   ",
+"   ..........   ",
+"    ........    ",
+"                "
+};
+

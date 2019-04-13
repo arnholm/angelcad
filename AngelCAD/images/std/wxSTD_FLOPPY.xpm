@@ -1,0 +1,38 @@
+/* XPM */
+static const char *wxSTD_FLOPPY_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"24 24 7 1",
+"  c None",
+"@ c #4B4B4B",
+"X c #4C4C4C",
+". c #4D4D4D",
+"o c #4E4E4E",
+"+ c #4F4F4F",
+"O c #666666",
+/* pixels */
+"                        ",
+"                        ",
+"                        ",
+"   .XXXXXXXXXXXXX.      ",
+"   .XooX.oooo.....o     ",
+"   ..  ..   O....+.o    ",
+"   ..  ..   O.... o..   ",
+"   ..  ..   O....  o.   ",
+"   ..  .o+++o....  ..   ",
+"   ..  XooooooooX  ..   ",
+"   ..              ..   ",
+"   ..              ..   ",
+"   .. ............ ..   ",
+"   .. ..@@@@@@@@.. ..   ",
+"   .. ..        .. ..   ",
+"   .. ..        .. ..   ",
+"   .. ..        .. ..   ",
+"   .. ..        .. ..   ",
+"   .. ..        .. ..   ",
+"   .Xo..oooooooo..oX.   ",
+"   .XXXXXXXXXXXXXXXX.   ",
+"                        ",
+"                        ",
+"                        "
+};
+

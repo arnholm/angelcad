@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxPanel" name="SettingsExternalFiles">
+		<id_arg>0</id_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="spacer">
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<size>0,10</size>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="no">
+							<label>as__csg - AngelCAD compiler</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL1" variable="m_file_as_csg" member="yes">
+							<message>Select AngelCAD compiler executable</message>
+							<wildcard>as__csg*</wildcard>
+							<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+							<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer6" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText5" member="no">
+							<label>Relative output subdirectory</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="m_text_outsub" member="yes">
+							<handler function="OnText" entry="EVT_TEXT" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>2</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_nosubdir" member="yes">
+							<label>No subdir</label>
+							<handler function="OnNoSubdirClick" entry="EVT_CHECKBOX" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText2" member="no">
+							<label>xcsg compiler</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL2" variable="m_file_xcsg" member="yes">
+							<message>Select xcsg compiler executable</message>
+							<wildcard>xcsg*</wildcard>
+							<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+							<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer7" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText6" member="no">
+							<label>STL/AMF viewer</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL5" variable="m_viewer_stl_amf" member="yes">
+							<message>Select STL/AMF viewer executable</message>
+							<wildcard>angelview*</wildcard>
+							<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+							<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer8" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText7" member="no">
+							<label>DXF viewer</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL6" variable="m_viewer_dxf" member="yes">
+							<message>Select DXF viewer executable</message>
+							<wildcard></wildcard>
+							<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+							<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText4" member="no">
+							<label>OpenSCAD CSG Viewer</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL4" variable="m_file_openscad" member="yes">
+							<message>Select OpenSCAD executable</message>
+							<wildcard>openscad*</wildcard>
+							<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+							<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticLine" name="ID_STATICLINE1" variable="StaticLine1" member="yes">
+					<size>10,-1</size>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+					<object class="sizeritem">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText3" member="no">
+							<label>AngelCAD Online Help</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="m_text_docurl" member="yes">
+							<handler function="OnText" entry="EVT_TEXT" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>3</option>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

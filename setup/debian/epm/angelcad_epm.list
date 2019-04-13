@@ -1,0 +1,34 @@
+$instdir=/usr/local
+$docdir=/usr/share/doc
+$appdir=/usr/share/applications
+$bindir=${instdir}/bin
+$libdir=${instdir}/lib
+%product angelcad
+%copyright 2016-2017 Carsten Arnholm.
+%vendor Carsten Arnholm
+%description AngelCAD is a script-based CAD application for creating 
+%description solid objects using Constructive Solid Geometry (CSG)
+%description modelling technique. It is based on the AngelScript
+%description language with extensions for CSG.
+%version ${ANGELCAD_VERSION}
+%readme README.txt
+%license LICENSE.txt
+%requires udev
+%requires grep
+%requires libboost-dev
+%requires libboost-system-dev
+%requires libboost-filesystem-dev
+%requires libboost-thread-dev
+%requires xcsg
+%requires gnome-themes-standard
+%postinstall ldconfig
+
+f 755 root sys ${bindir}/angelcad ${CPDE_USR}/bin/angelcad
+f 755 root sys ${bindir}/angelview ${CPDE_USR}/bin/angelview
+f 755 root sys ${bindir}/as_csg ${CPDE_USR}/bin/as_csg
+f 755 root sys ${libdir}/libspaceio.so ${CPDE_USR}/bin/libspaceio.so
+f 755 root sys ${libdir}/libspacemath.so ${CPDE_USR}/bin/libspacemath.so
+f 755 root sys ${docdir}/angelcad/README.txt ./epm/README.txt
+f 755 root sys ${docdir}/angelcad/LICENSE.txt ./epm/LICENSE.txt
+f 755 root sys ${docdir}/angelcad/angel_64x64.xpm ./epm/angel_64x64.xpm
+f 755 root sys ${appdir}/angelcad.desktop ./epm/angelcad.desktop

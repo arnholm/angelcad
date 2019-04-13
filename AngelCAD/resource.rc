@@ -1,0 +1,3 @@
+///aaaa ICON "wx/msw/std.ico"
+aaaa ICON "images/angel_48x48.ico"
+#include "wx/msw/wx.rc"

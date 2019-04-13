@@ -1,0 +1,33 @@
+/* XPM */
+static const char *background_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"28 23 3 1",
+". c Black",
+"  c None",
+"X c #FFFFBE",
+/* pixels */
+"                            ",
+"                            ",
+"    ....................    ",
+"    ...................X    ",
+"    ..................XX    ",
+"    .................XXX    ",
+"    ................XXXX    ",
+"    ...............XXXXX    ",
+"    ..............XXXXXX    ",
+"    .............XXXXXXX    ",
+"    ............XXXXXXXX    ",
+"    ...........XXXXXXXXX    ",
+"    ..........XXXXXXXXXX    ",
+"    .........XXXXXXXXXXX    ",
+"    ........XXXXXXXXXXXX    ",
+"    .......XXXXXXXXXXXXX    ",
+"    ......XXXXXXXXXXXXXX    ",
+"    .....XXXXXXXXXXXXXXX    ",
+"    ....XXXXXXXXXXXXXXXX    ",
+"    ...XXXXXXXXXXXXXXXXX    ",
+"    ..XXXXXXXXXXXXXXXXXX    ",
+"    .XXXXXXXXXXXXXXXXXXX    ",
+"                            "
+};
+

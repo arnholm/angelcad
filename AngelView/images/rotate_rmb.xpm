@@ -1,0 +1,33 @@
+/* XPM */
+static const char *rotate_rmb_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"28 23 3 1",
+"X c Black",
+". c #C3C3C3",
+"  c None",
+/* pixels */
+"                            ",
+"                            ",
+"         .XXXXXX.           ",
+"        XXXX. .XXX          ",
+"       XX        XX         ",
+"      XX  XXXXX.  XX        ",
+"     XX   XXXXXX.  XX .X    ",
+"    XX    XX   XX   XXXX    ",
+"   .X     XX   XX  .XXXX    ",
+"   XX     XX   XX .XXXXX    ",
+"   XX     XX   XX  .XXXX    ",
+"   X.     XXXXXX.   .XXX    ",
+"   X      XXXXX.     .XX    ",
+"   X.     XX XX.      .X    ",
+"   XX     XX .XX            ",
+"   .X     XX  XX.           ",
+"    XX    XX  .XX           ",
+"     XX   XX   XX           ",
+"      XX                    ",
+"       XX                   ",
+"        XXXX.               ",
+"         .XXXX              ",
+"                            "
+};
+

@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="as_csg" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc" />
+		<Option virtualFolders="utilities/;Boolean/2d/;Boolean/3d/;shapes/2d/;Transforms/base/;Transforms/;shapes/;aaa/;shapes/3d/;aaa_document/;utilities/noscript/" />
+		<Build>
+			<Target title="MSVC_Debug">
+				<Option output=".cmp/msvc/bin/Debug/as_csgd" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="msvc" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/RTCsu" />
+					<Add option="/Fd$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.debug) --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --libs`" />
+					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="ce_angelscript_exd" />
+					<Add library="ce_angelscriptd" />
+					<Add library="spaceiod" />
+					<Add library="spacemathd" />
+					<Add library="msvcrtd.lib" />
+				</Linker>
+			</Target>
+			<Target title="MSVC_Release">
+				<Option output=".cmp/msvc/bin/Release/as_csg" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Release/" />
+				<Option type="1" />
+				<Option compiler="msvc" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Ox" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.release) --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --libs`" />
+					<Add option="/NODEFAULTLIB:libcmtd.lib" />
+					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="ce_angelscript_ex" />
+					<Add library="ce_angelscript" />
+					<Add library="spaceio" />
+					<Add library="spacemath" />
+					<Add library="msvcrt.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)\bin\cpde_usr  -bin -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Debug">
+				<Option output=".cmp/gcc/bin/Debug/as_csgd" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="`$(#wx.config) --cxxflags --debug`" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(#wx.config) --libs std,aui --static --debug`" />
+					<Add library="ce_angelscript_exd" />
+					<Add library="ce_angelscriptd" />
+					<Add library="spaceiod" />
+					<Add library="spacemathd" />
+					<Add library="boost_filesystem" />
+					<Add library="boost_system" />
+				</Linker>
+			</Target>
+			<Target title="GCC_Release">
+				<Option output=".cmp/gcc/bin/Release/as_csg" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-std=c++0x" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="`$(#wx.config) --cxxflags`" />
+					<Add option="-DNOPCH" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(#wx.config) --libs std,aui --static`" />
+					<Add library="ce_angelscript_ex" />
+					<Add library="ce_angelscript" />
+					<Add library="spaceio" />
+					<Add library="spacemath" />
+					<Add library="boost_filesystem" />
+					<Add library="boost_system" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
+					<Add after="# upx $(TARGET_OUTPUT_FILE)" />
+					<Add after="$(CPDE_USR)/bin/cpde_usr -bin -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="$(CPDE_USR)/include" />
+			<Add directory="$(#boost.include)" />
+		</Compiler>
+		<Linker>
+			<Add directory="$(CPDE_USR)/lib" />
+			<Add directory="$(#boost.lib)" />
+		</Linker>
+		<Unit filename="as_csg.cpp">
+			<Option virtualFolder="aaa/" />
+		</Unit>
+		<Unit filename="as_csg.h">
+			<Option virtualFolder="aaa/" />
+		</Unit>
+		<Unit filename="as_doc_type.cpp">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="as_doc_type.h">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="as_doc_type_doxy.cpp">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="as_doc_type_doxy.h">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="as_document.cpp">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="as_document.h">
+			<Option virtualFolder="aaa_document/" />
+		</Unit>
+		<Unit filename="boundingbox.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="boundingbox.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="circle.cpp">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="circle.h">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="cone.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cone.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cube.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cube.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cuboid.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cuboid.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cylinder.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="cylinder.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="difference2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="difference2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="difference3d.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="difference3d.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="fill2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="fill2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="hmatrix.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="hmatrix.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="hull2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="hull2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="hull3d.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="hull3d.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="intersection2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="intersection2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="intersection3d.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="intersection3d.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="linear_extrude.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="linear_extrude.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="localsystem3d.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="localsystem3d.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="main.cpp">
+			<Option virtualFolder="aaa/" />
+		</Unit>
+		<Unit filename="minkowski2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="minkowski2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="minkowski3d.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="minkowski3d.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="mirror.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="mirror.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="node_csg.cpp">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="node_csg.h">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="offset2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="offset2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="polygon.cpp">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="polygon.h">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="polyhedron.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="polyhedron.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="polyhedron_face.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="polyhedron_face.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="pos2.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="pos2.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="pos3.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="pos3.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="rectangle.cpp">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="rectangle.h">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="rotate_extrude.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="rotate_extrude.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="rotate_x.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="rotate_x.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="rotate_y.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="rotate_y.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="rotate_z.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="rotate_z.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="scale.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="scale.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="shape.cpp">
+			<Option virtualFolder="shapes/" />
+		</Unit>
+		<Unit filename="shape.h">
+			<Option virtualFolder="shapes/" />
+		</Unit>
+		<Unit filename="shape2d.cpp">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="shape2d.h">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="shape2d_vector.cpp">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="shape2d_vector.h">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="solid.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="solid.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="solid_vector.cpp">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="solid_vector.h">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="sphere.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="sphere.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="spline2.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="spline2.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="spline3.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="spline3.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="spline_path.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="spline_path.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="square.cpp">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="square.h">
+			<Option virtualFolder="shapes/2d/" />
+		</Unit>
+		<Unit filename="sweep.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="sweep.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="tin_model.cpp">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="tin_model.h">
+			<Option virtualFolder="shapes/3d/" />
+		</Unit>
+		<Unit filename="tmatrix.cpp">
+			<Option virtualFolder="Transforms/base/" />
+		</Unit>
+		<Unit filename="tmatrix.h">
+			<Option virtualFolder="Transforms/base/" />
+		</Unit>
+		<Unit filename="transform_extrude.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="transform_extrude.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="translate.cpp">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="translate.h">
+			<Option virtualFolder="Transforms/" />
+		</Unit>
+		<Unit filename="union2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="union2d.h">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="union3d.cpp">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="union3d.h">
+			<Option virtualFolder="Boolean/3d/" />
+		</Unit>
+		<Unit filename="vec2.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="vec2.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="vec3.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="vec3.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="version.h">
+			<Option virtualFolder="aaa/" />
+		</Unit>
+		<Unit filename="xcsg_vector.cpp">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Unit filename="xcsg_vector.h">
+			<Option virtualFolder="utilities/noscript/" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

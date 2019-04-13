@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="SettingsDialog">
+		<title>AngelCAD Settings</title>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
+					<size>800,400</size>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="ID_PANEL1" subclass="SettingsFileFormats" variable="Panel1" member="yes" />
+						<label>Output File Formats</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="ID_PANEL2" subclass="SettingsExternalFiles" variable="Panel2" member="yes" />
+						<label>External Files</label>
+					</object>
+				</object>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTON2" variable="CloseButton" member="no">
+							<label>Close</label>
+							<handler function="OnCloseButtonClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_RIGHT</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

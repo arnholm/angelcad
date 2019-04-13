@@ -1,0 +1,34 @@
+/* XPM */
+static const char *show_backside_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"28 23 4 1",
+"X c #B97A57",
+"  c None",
+"o c #ED1C24",
+". c #FFC90E",
+/* pixels */
+"                            ",
+"                            ",
+"              ..            ",
+"            ......          ",
+"           ..........       ",
+"         ..............     ",
+"       ..................   ",
+"      ..................X   ",
+"    ...................XX   ",
+"   ...................XXX   ",
+"   oo................XXXX   ",
+"   oooooo...........XXXXX   ",
+"   ooooooooo.......XXXXXX   ",
+"   ooooooooooooo..XXXXXXX   ",
+"   ooooooooooooooXXXXXXX    ",
+"   ooooooooooooooXXXXXX     ",
+"   ooooooooooooooXXXXX      ",
+"   ooooooooooooooXXXX       ",
+"    oooooooooooooXXX        ",
+"        oooooooooXX         ",
+"            oooooX          ",
+"                            ",
+"                            "
+};
+

@@ -1,0 +1,5 @@
+Copyright (C) 2017 Carsten Arnholm arnholm@arnholm.org
+
+Using AngelCAD requires purchasing a software license. 
+Please contact the author at the above adress.
+Unlicensed use is prohibited.
