@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,10 +12,10 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef AS_CSG_VERSION_H
 #define AS_CSG_VERSION_H
 
-#define AS_CSG_version "v1.2-00"
+#define AS_CSG_version "v1.3-00"
 
 #endif // AS_CSG_VERSION_H
