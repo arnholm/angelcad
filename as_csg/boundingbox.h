@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
 
@@ -34,6 +34,7 @@ public:
    double dx() const;
    double dy() const;
    double dz() const;
+   double diagonal() const;
 
    pos3* p1() const;
    pos3* p2() const;
@@ -78,6 +79,7 @@ protected:
       r = DeclareMethod(engine,type_name,"double dx() const", asMETHOD(boundingbox,dx)); as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"double dy() const", asMETHOD(boundingbox,dy)); as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"double dz() const", asMETHOD(boundingbox,dz)); as_assert( r >= 0 );
+      r = DeclareMethod(engine,type_name,"double diagonal() const", asMETHOD(boundingbox,diagonal)); as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"bool is_empty() const", asMETHOD(boundingbox,is_empty)); as_assert( r >= 0 );
    }
 private:
