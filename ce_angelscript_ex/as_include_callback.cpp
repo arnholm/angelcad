@@ -6,6 +6,11 @@ using namespace std;
 #include "ce_angelscript/ce_angelscript.h"
 #include "ce_angelscript/add_on/scriptbuilder/scriptbuilder.h"
 
+// This callback will be called for each #include directive encountered by the
+// builder. The callback should call the AddSectionFromFile or AddSectionFromMemory
+// to add the included section to the script. If the include cannot be resolved
+// then the function should return a negative value to abort the compilation.
+
 int as_include_callback(const char* c_include, const char* c_from_section, CScriptBuilder* builder, void* userParam)
 {
    // Determine the path of the current script so that we can resolve relative paths for includes
@@ -22,15 +27,17 @@ int as_include_callback(const char* c_include, const char* c_from_section, CScri
    // we start by assuming this is the full path
    string full_path = include;
 
-   // classify the type of include
-   // ============================
-   // explicit_absolute: starts with '/' or '\\'   :  /this/is/an/explicit/absolute/path
+   // classify the type of include path
+   // =================================
+   // explicit_absolute: starts with '/' or '\\'   :  /this/is/an/explicit/absolute/path  C:\this\is\an\explicit\absolute\path
    // explicit_relative: starts with '.'           :  ./this/is/an/explicit/relative/path
    // implicit_relative: neither of the above      :  this/is/an/implicit/relative/path
 
-   // implicit_relative can be relative to the current script or to the library path possibly passed as "userParam"
+   // implicit_relative can be relative to the current script path or
+   // or relative to the library path possibly passed as "userParam"
 
-   bool path_explicit_absolute = include.find_first_of("/\\") == 0;
+   bool path_explicit_absolute = (include.find_first_of("/\\") == 0)           // linux path or Windows network path \\server\folder
+                              || (include.find_first_of(":") != string::npos); // Windows native path style "C:"
    bool path_explicit_relative = include.find_first_of(".") == 0;
    bool path_implicit_relative = (!path_explicit_absolute) && (!path_explicit_relative);
 
@@ -50,7 +57,7 @@ int as_include_callback(const char* c_include, const char* c_from_section, CScri
       return 0;
    }
 
-   // we fall through here since the file was not found above
+   // if we get here it means the file was not found above
    if(userParam && path_implicit_relative ) {
 
       // the specfied include was implicit relative
@@ -62,7 +69,7 @@ int as_include_callback(const char* c_include, const char* c_from_section, CScri
    }
 
    // we don't pre-check for file existence here,
-   // as we want an error message if the file does not exist
+   // as we want a script error message if the file really does not exist
    int r = builder->AddSectionFromFile(full_path.c_str());
    if(r < 0)return r;
    return 0;

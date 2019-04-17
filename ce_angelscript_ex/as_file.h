@@ -3,6 +3,9 @@
 
 #include <string>
 
+// as_file offers checks for file/directory existance without
+// dependency on external libraries
+
 class as_file {
 public:
    static bool file_exists(const std::string& path);
