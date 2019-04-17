@@ -171,7 +171,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Open...\tCtrl+O"), _("Open AngelCAD source file"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
     Menu1->AppendSeparator();
-    MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Containing Folder..."), _("Open file browser in source file folder"), wxITEM_NORMAL);
+    MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Source Folder..."), _("Open file browser in source file folder"), wxITEM_NORMAL);
     Menu1->Append(MenuItem12);
     MenuItem18 = new wxMenuItem(Menu1, ID_MENUITEM17, _("Open Libraries Folder..."), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(MenuItem18);

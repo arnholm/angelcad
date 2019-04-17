@@ -5,7 +5,6 @@ using namespace std;
 
 #include "ce_angelscript/ce_angelscript.h"
 #include "ce_angelscript/add_on/scriptbuilder/scriptbuilder.h"
-#include <iostream>
 
 int as_include_callback(const char* c_include, const char* c_from_section, CScriptBuilder* builder, void* userParam)
 {
@@ -46,7 +45,6 @@ int as_include_callback(const char* c_include, const char* c_from_section, CScri
    // At this point it can be any of explicit_absolute, explicit_relative or implicit_relative
    // if not found, we silently ignore it at this stage
    if(as_file::file_exists(full_path)) {
-      std::cout << "1 processing include file: " << full_path << std::endl;
       int r = builder->AddSectionFromFile(full_path.c_str());
       if(r < 0)return r;
       return 0;
@@ -65,7 +63,6 @@ int as_include_callback(const char* c_include, const char* c_from_section, CScri
 
    // we don't pre-check for file existence here,
    // as we want an error message if the file does not exist
-   std::cout << "2 processing include file: " << full_path << std::endl;
    int r = builder->AddSectionFromFile(full_path.c_str());
    if(r < 0)return r;
    return 0;

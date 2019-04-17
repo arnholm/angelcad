@@ -156,7 +156,7 @@
 				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM11" variable="MenuItem12" member="yes">
-					<label>Open Containing Folder...</label>
+					<label>Open Source Folder...</label>
 					<help>Open file browser in source file folder</help>
 					<handler function="OnOpenContainingFolder" entry="EVT_MENU" />
 				</object>
