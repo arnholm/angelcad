@@ -159,3 +159,11 @@ wxString AngelCADDoc::GetLicenseUrl() const
 {
    return wxString("https://www.gnu.org/licenses/gpl.html");
 }
+
+wxFileName AngelCADDoc::GetLibraryDir() const
+{
+   wxFileName libdir(wxStandardPaths::Get().GetUserLocalDataDir(),"");
+   libdir.AppendDir("libraries");
+   libdir.Mkdir(wxS_DIR_DEFAULT,wxPATH_MKDIR_FULL);
+   return libdir;
+}

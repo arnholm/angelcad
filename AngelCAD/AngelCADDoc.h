@@ -67,6 +67,9 @@ public:
    // return URL of license info
    wxString GetLicenseUrl() const;
 
+   // Get the root folder for include libraries, create if it does not exist
+   wxFileName GetLibraryDir() const;
+
 protected:
    AngelCADDoc();
 

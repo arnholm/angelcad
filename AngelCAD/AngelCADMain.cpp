@@ -102,6 +102,7 @@ const long AngelCADFrame::ID_PANEL2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM1 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM11 = wxNewId();
+const long AngelCADFrame::ID_MENUITEM17 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM3 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM4 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM5 = wxNewId();
@@ -169,8 +170,12 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem4);
     MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Open...\tCtrl+O"), _("Open AngelCAD source file"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
-    MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Containing Folder"), _("Open file browser in source file folder"), wxITEM_NORMAL);
+    Menu1->AppendSeparator();
+    MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Containing Folder..."), _("Open file browser in source file folder"), wxITEM_NORMAL);
     Menu1->Append(MenuItem12);
+    MenuItem18 = new wxMenuItem(Menu1, ID_MENUITEM17, _("Open Libraries Folder..."), wxEmptyString, wxITEM_NORMAL);
+    Menu1->Append(MenuItem18);
+    Menu1->AppendSeparator();
     MenuItem5 = new wxMenuItem(Menu1, ID_MENUITEM3, _("Save\tCtrl+S"), _("Save current file"), wxITEM_NORMAL);
     Menu1->Append(MenuItem5);
     MenuItem6 = new wxMenuItem(Menu1, ID_MENUITEM4, _("Save As...\tCtrl+Alt+S"), _("Save current file as..."), wxITEM_NORMAL);
@@ -231,6 +236,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileNew);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileOpen);
     Connect(ID_MENUITEM11,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenContainingFolder);
+    Connect(ID_MENUITEM17,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenLibrariesFolder);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileSave);
     Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileSaveAs);
     Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileSaveAll);
@@ -982,4 +988,7 @@ void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
    }
 }
 
-
+void AngelCADFrame::OnOpenLibrariesFolder(wxCommandEvent& event)
+{
+   wxLaunchDefaultBrowser("file:" + DOC()->GetLibraryDir().GetPath());
+}
