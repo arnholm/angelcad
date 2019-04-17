@@ -21,7 +21,6 @@
 #include <wx/filepicker.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
-#include <wx/statline.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 //*)
@@ -51,7 +50,7 @@ public:
    wxFilePickerCtrl* m_file_xcsg;
    wxFilePickerCtrl* m_viewer_dxf;
    wxFilePickerCtrl* m_viewer_stl_amf;
-   wxStaticLine* StaticLine1;
+   wxStaticBoxSizer* StaticBoxSizer2;
    wxTextCtrl* m_text_docurl;
    wxTextCtrl* m_text_outsub;
    //*)
@@ -62,12 +61,11 @@ protected:
    static const long ID_FILEPICKERCTRL1;
    static const long ID_TEXTCTRL1;
    static const long ID_CHECKBOX1;
+   static const long ID_TEXTCTRL2;
    static const long ID_FILEPICKERCTRL2;
    static const long ID_FILEPICKERCTRL5;
    static const long ID_FILEPICKERCTRL6;
    static const long ID_FILEPICKERCTRL4;
-   static const long ID_STATICLINE1;
-   static const long ID_TEXTCTRL2;
    //*)
 
 private:

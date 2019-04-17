@@ -154,11 +154,17 @@
 					<help>Open AngelCAD source file</help>
 					<handler function="OnFileOpen" entry="EVT_MENU" />
 				</object>
+				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM11" variable="MenuItem12" member="yes">
-					<label>Open Containing Folder</label>
+					<label>Open Containing Folder...</label>
 					<help>Open file browser in source file folder</help>
 					<handler function="OnOpenContainingFolder" entry="EVT_MENU" />
 				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM17" variable="MenuItem18" member="yes">
+					<label>Open Libraries Folder...</label>
+					<handler function="OnOpenLibrariesFolder" entry="EVT_MENU" />
+				</object>
+				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM3" variable="MenuItem5" member="yes">
 					<label>Save</label>
 					<accel>Ctrl+S</accel>
