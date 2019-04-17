@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "as_csg.h"
 #include "ce_angelscript_ex/as_factory.h"
 
@@ -182,10 +182,11 @@ bool  as_csg::register_types()
 }
 
 
-size_t as_csg::run_script(const string& input_file, const string& outdir)
+size_t as_csg::run_script(const string& input_file, const string& include_path, const string& outdir)
 {
    m_message_list.clear();
    try {
+      asF()->SetLibraryIncludePath(include_path);
       if(!asF()->RunScriptFile(input_file,outdir,"as_csg")) {
          ostringstream out;
          out << " asINFO: (line 0 , col 0 ) : Script execution failed.";

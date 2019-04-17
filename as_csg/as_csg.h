@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef AS_CSG_H
 #define AS_CSG_H
 
@@ -35,7 +35,7 @@ public:
    bool register_types();
 
    // run_script returns the number of error/warning messages in the message list
-   size_t run_script(const string& input_file, const string& outdir);
+   size_t run_script(const string& input_file, const string& include_path, const string& outdir);
 
    const_iterator message_begin() const { return m_message_list.begin(); }
    const_iterator message_end() const   { return m_message_list.end(); }

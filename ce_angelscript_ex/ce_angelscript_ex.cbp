@@ -5,7 +5,7 @@
 		<Option title="ce_angelscript_ex" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
-		<Option virtualFolders="iostream\;" />
+		<Option virtualFolders="iostream/" />
 		<Build>
 			<Target title="MSVC_Debug">
 				<Option output=".cmp/msvc/ce_angelscript_exd" prefix_auto="1" extension_auto="1" />
@@ -28,6 +28,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -53,6 +54,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -74,6 +76,7 @@
 					<Add option="-fexceptions" />
 					<Add option="-D_DEBUG" />
 					<Add option="-g" />
+					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -94,6 +97,7 @@
 					<Add option="-DNOPCH" />
 					<Add option="-fexceptions" />
 					<Add option="-Os" />
+					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -128,6 +132,10 @@
 		<Unit filename="as_assert.h" />
 		<Unit filename="as_factory.cpp" />
 		<Unit filename="as_factory.h" />
+		<Unit filename="as_file.cpp" />
+		<Unit filename="as_file.h" />
+		<Unit filename="as_include_callback.cpp" />
+		<Unit filename="as_include_callback.h" />
 		<Unit filename="as_reftype.cpp" />
 		<Unit filename="as_reftype.h" />
 		<Unit filename="as_typeid.cpp" />

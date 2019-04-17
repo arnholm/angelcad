@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -40,6 +40,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
 {
   //   kind            shortName           longName                description                                    parameterType          flag(s)
   { wxCMD_LINE_PARAM,  wxT_2("input_file"),  wxT_2("input_file"),  wxT_2("<input_filename>"),                     wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY },
+  { wxCMD_LINE_OPTION, wxT_2("include"),     wxT_2("include"),     wxT_2("optional library include path"),        wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("outsub"),      wxT_2("outsub"),      wxT_2("optional output subdirectory"),         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("doc"),         wxT_2("doc"),         wxT_2("Write 'angelcad.h'"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
@@ -115,12 +116,18 @@ int main(int argc, char **argv)
    CmdLineMap cmdMap;
    ParserToMap(parser,cmdMap);
    bool has_input_file  = cmdMap.find("input_file")  != cmdMap.end();
+   bool has_include     = cmdMap.find("include")  != cmdMap.end();
    bool has_outsub      = cmdMap.find("outsub") != cmdMap.end();
    bool has_refcount    = cmdMap.find("refcount") != cmdMap.end();
    bool has_doc         = cmdMap.find("doc") != cmdMap.end();
    bool has_doxy        = cmdMap.find("doxy") != cmdMap.end();
    bool has_version     = cmdMap.find("version") != cmdMap.end();
    if(has_doxy)has_doc = true;
+
+   string include_path = "";
+   if(has_include) {
+      include_path = cmdMap["include"].ToStdString();
+   }
 
    wxDateTime time_begin = wxDateTime::UNow();
    cout << "as_csg started." << endl;
@@ -163,7 +170,7 @@ int main(int argc, char **argv)
          wxSetWorkingDirectory(fname.GetPath());
          input_file = fname.GetFullName().ToStdString();
 
-         exit_status = parser_csg.run_script(input_file,outsub);
+         exit_status = parser_csg.run_script(input_file,include_path,outsub);
       }
    }
    // write any errors to console

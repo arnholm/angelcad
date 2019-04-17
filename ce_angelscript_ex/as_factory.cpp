@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "as_factory.h"
 #include "ce_angelscript/add_on/scriptbuilder/scriptbuilder.h"
 #include "ce_angelscript/add_on/scripthelper/scripthelper.h"
@@ -30,6 +30,9 @@
 #include <iomanip>
 #include <cstdio>
 #include <cmath>
+
+#include <algorithm>
+#include "as_include_callback.h"
 
 static const double PI = 4.0*atan(1.0);
 static const string endline = "\n";
@@ -228,6 +231,15 @@ as_factory::as_factory()
    m_engine->RegisterGlobalFunction("string GetOutputFullPath(const string &in ext)", asFUNCTION(GetOutputFullPath), asCALL_CDECL); assert( r >= 0 );
 }
 
+void as_factory::SetLibraryIncludePath(const string& path)
+{
+   m_library_path = path;
+   const char c = m_library_path[m_library_path.length()-1];
+   if(c != '/' && c != '\\') m_library_path += '/';
+
+   std::replace(m_library_path.begin(),m_library_path.end(),'\\','/');
+}
+
 bool as_factory::RunScriptFile(const string& path, const string& outsubdir, const string& module_name)
 {
    m_script_path = ""; // don't assign until successful
@@ -237,10 +249,16 @@ bool as_factory::RunScriptFile(const string& path, const string& outsubdir, cons
    // Set the message callback to receive information on errors in human readable form, in case it was switched off before
    int r = m_engine->SetMessageCallback(asFUNCTION(MessageCallback), 0, asCALL_CDECL); assert( r >= 0 );
 
+
    // The CScriptBuilder helper is an add-on that loads the file,
    // performs a pre-processing pass if necessary, and then tells
    // the engine to build a script module.
    CScriptBuilder builder;
+   if(m_library_path.length() > 0) {
+      builder.SetIncludeCallback(as_include_callback,&m_library_path);
+   }
+
+
    r = builder.StartNewModule(m_engine, module_name.c_str());
    if( r < 0 )
    {

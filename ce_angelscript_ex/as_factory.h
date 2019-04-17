@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef as_factory_H
 #define as_factory_H
 
@@ -33,6 +33,9 @@ public:
 
    // access to script engine
    asIScriptEngine*  engine();
+
+   // set the path to the root library folder, set empty path if no library folder to be used
+   void SetLibraryIncludePath(const string& path);
 
    // Load and run a complete script from file. Call in try/catch block
    bool RunScriptFile(const string& path, const string& outsubdir, const string& module_name);
@@ -65,6 +68,7 @@ private:
    as_factory();
    virtual ~as_factory();
 
+   string             m_library_path; // path to library folder or empty string of none
    string             m_script_path;  // path to current script file
    string             m_outsubdir;    // path to script output subdirectory (may be empty)
 

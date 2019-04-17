@@ -680,6 +680,12 @@ void AngelCADFrame::OnCompileAngelScript(wxCommandEvent& event)
 
             // Angelscript compilation
             wxString cmd = "\"" + as_csg.GetFullPath() + "\"  \"" + as_path.GetFullPath() + "\" -outsub=\"" + DOC()->GetOutSubDir().GetFullPath() + "\"";
+
+            wxString include_path = DOC()->GetLibraryDir().GetPath();
+            if(include_path.length() > 0) {
+               cmd +=  " -include=\"" + include_path + "\" ";
+            }
+
             jobs.push_back(std::make_pair(cmd,page));
 
             // submit the jobs in the list
@@ -732,8 +738,14 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
             // create the list of jubs to run (2)
             std::list<ConsolePanel::JobPair> jobs;
 
+
             // Angelscript compilation
             wxString cmd1 = "\"" + as_csg.GetFullPath() + "\"  \"" + as_path.GetFullPath() + "\" -outsub=\"" + DOC()->GetOutSubDir().GetFullPath() + "\"";
+
+            wxString include_path = DOC()->GetLibraryDir().GetPath();
+            if(include_path.length() > 0) {
+               cmd1 +=  " -include=\"" + include_path + "\" ";
+            }
             jobs.push_back(std::make_pair(cmd1,page));
 
             // XCSG compilation
