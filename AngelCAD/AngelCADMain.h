@@ -95,6 +95,7 @@ private:
    void OnViewSTL_AMF_DXF(wxCommandEvent& event);
    void OnOnlineDocumentation(wxCommandEvent& event);
    void OnOpenContainingFolder(wxCommandEvent& event);
+   void OnLicenseSelected(wxCommandEvent& event);
    //*)
 
    //(*Identifiers(AngelCADFrame)
@@ -125,6 +126,7 @@ private:
    static const long ID_MENUITEM9;
    static const long ID_MENUITEM10;
    static const long ID_MENUITEM15;
+   static const long ID_MENUITEM16;
    static const long idMenuAbout;
    static const long ID_STATUSBAR1;
    //*)
@@ -148,6 +150,7 @@ private:
    wxMenuItem* MenuItem13;
    wxMenuItem* MenuItem14;
    wxMenuItem* MenuItem16;
+   wxMenuItem* MenuItem17;
    wxMenuItem* MenuItem3;
    wxMenuItem* MenuItem4;
    wxMenuItem* MenuItem5;

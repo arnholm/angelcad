@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 /***************************************************************
  * Name:      AngelCADMain.cpp
  * Purpose:   Code for Application Frame
@@ -115,6 +115,7 @@ const long AngelCADFrame::ID_MENUITEM12 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM9 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM10 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM15 = wxNewId();
+const long AngelCADFrame::ID_MENUITEM16 = wxNewId();
 const long AngelCADFrame::idMenuAbout = wxNewId();
 const long AngelCADFrame::ID_STATUSBAR1 = wxNewId();
 //*)
@@ -204,6 +205,8 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Menu2 = new wxMenu();
     MenuItem16 = new wxMenuItem(Menu2, ID_MENUITEM15, _("Online documentation...\tShift+F1"), wxEmptyString, wxITEM_NORMAL);
     Menu2->Append(MenuItem16);
+    MenuItem17 = new wxMenuItem(Menu2, ID_MENUITEM16, _("Show License..."), wxEmptyString, wxITEM_NORMAL);
+    Menu2->Append(MenuItem17);
     MenuItem2 = new wxMenuItem(Menu2, idMenuAbout, _("About\tF1"), _("Show info about this application"), wxITEM_NORMAL);
     Menu2->Append(MenuItem2);
     MenuBar1->Append(Menu2, _("Help"));
@@ -240,6 +243,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM9,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnRunOpenSCAD);
     Connect(ID_MENUITEM10,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnSettings);
     Connect(ID_MENUITEM15,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOnlineDocumentation);
+    Connect(ID_MENUITEM16,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnLicenseSelected);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnAbout);
     Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&AngelCADFrame::OnClose);
     //*)
@@ -958,6 +962,11 @@ void AngelCADFrame::OnOnlineDocumentation(wxCommandEvent& event)
    wxLaunchDefaultBrowser(DOC()->GetDocUrl());
 }
 
+void AngelCADFrame::OnLicenseSelected(wxCommandEvent& event)
+{
+   wxLaunchDefaultBrowser(DOC()->GetLicenseUrl());
+}
+
 void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
@@ -972,3 +981,5 @@ void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
       wxMessageBox(message, wxT("No current source file"), wxOK, this);
    }
 }
+
+

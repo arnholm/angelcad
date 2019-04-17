@@ -240,6 +240,10 @@
 					<accel>Shift+F1</accel>
 					<handler function="OnOnlineDocumentation" entry="EVT_MENU" />
 				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM16" variable="MenuItem17" member="yes">
+					<label>Show License...</label>
+					<handler function="OnLicenseSelected" entry="EVT_MENU" />
+				</object>
 				<object class="wxMenuItem" name="idMenuAbout" variable="MenuItem2" member="no">
 					<label>About</label>
 					<accel>F1</accel>

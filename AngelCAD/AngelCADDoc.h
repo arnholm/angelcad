@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef ANGELCADDOC_H
 #define ANGELCADDOC_H
 
@@ -63,6 +63,9 @@ public:
 
    // return he HTML documentation URL
    wxString GetDocUrl() const;
+
+   // return URL of license info
+   wxString GetLicenseUrl() const;
 
 protected:
    AngelCADDoc();
