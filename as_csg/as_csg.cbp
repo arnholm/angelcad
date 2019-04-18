@@ -250,6 +250,18 @@
 		<Unit filename="intersection3d.h">
 			<Option virtualFolder="Boolean/3d/" />
 		</Unit>
+		<Unit filename="line2.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="line2.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="line3.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="line3.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
 		<Unit filename="linear_extrude.cpp">
 			<Option virtualFolder="Boolean/3d/" />
 		</Unit>

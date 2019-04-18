@@ -21,6 +21,8 @@
 #include "pos3.h"
 #include "vec3.h"
 #include "vec2.h"
+#include "line2.h"
+#include "line3.h"
 #include "localsystem3d.h"
 #include "boundingbox.h"
 #include "spline2.h"
@@ -114,6 +116,9 @@ bool  as_csg::register_types()
       // then the operators can ve declared
       pos3::DeclareOperators(engine);
       vec3::DeclareOperators(engine);
+
+      line2::InstallType(engine);
+      line3::InstallType(engine);
 
       localsystem3d::InstallType(engine);
       boundingbox::InstallType(engine);

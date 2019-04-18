@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "as_doc_type.h"
 #include "as_document.h"
 #include "ce_angelscript_ex/as_reftype.h"
@@ -150,7 +150,10 @@ void as_doc_type::write_doc(as_document* doc, const string& type_name, ostream& 
          string sig = *i;
          bool op_boolean = (sig.find("opAdd")!=string::npos) || (sig.find("opSub")!=string::npos) || (sig.find("opAnd")!=string::npos)
                         || (sig.find("write_csg")!=string::npos) || (sig.find("write_xcsg")!=string::npos) ;
-         bool skip = (op_boolean &&  ((type_name!="shape") && (type_name!="solid") && (type_name!="shape2d")));
+         bool skip = (op_boolean &&  ((type_name!="shape") && (type_name!="solid") && (type_name!="shape2d")
+                                      && (type_name!="pos2d") && (type_name!="vec2d") && (type_name!="pos3d") && (type_name!="vec3d")
+                                     )
+                      );
          if(!skip) {
             if(doxy)doxy->write_doc(sig,out);
             else cout << "**   " <<type_name<<"::"<<*i<< endl;

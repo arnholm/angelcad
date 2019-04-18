@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef POSITION3D_H
 #define POSITION3D_H
 
@@ -60,12 +60,14 @@ protected:
    /// \privatesection (hidden in documentation)
 
    static pos3* ctor_xyz(double x, double y, double z) { return new pos3(x,y,z); }
+   static pos3* ctor_copy(const pos3* p) { return new pos3(p->m_pos); }
 
    // ==== SCRIPTING INTERFACE
    // Register scripting constructors
    static void DeclareConstructors(asIScriptEngine* engine)
    {
       int r = DeclareConstructor(engine,"pos3d","pos3d@ pos3d(double x,double y, double z)",asFUNCTION(pos3::ctor_xyz)); as_assert( r >= 0 );
+          r = DeclareConstructor(engine,"pos3d","pos3d@ pos3d(const pos3d@+ other)",asFUNCTION(pos3::ctor_copy)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

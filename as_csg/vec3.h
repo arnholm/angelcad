@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
@@ -63,6 +63,7 @@ protected:
 
    static vec3* ctor_xyz(double x, double y, double z) { return new vec3(x,y,z); }
    static vec3* ctor_p2(const pos3* p1, const pos3* p2) { return new vec3(p1,p2); }
+   static vec3* ctor_copy(const vec3* v) { return new vec3(v->m_vec); }
 
    // ==== SCRIPTING INTERFACE
    // Register scripting constructors
@@ -70,6 +71,7 @@ protected:
    {
       int r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(double x,double y, double z)",asFUNCTION(vec3::ctor_xyz)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(const pos3d@+ p1, const pos3d@+ p2)",asFUNCTION(vec3::ctor_p2)); as_assert( r >= 0 );
+          r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(const vec3d@+ other)",asFUNCTION(vec3::ctor_copy)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type
