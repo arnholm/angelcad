@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,16 +12,18 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef TRANSLATE_H
 #define TRANSLATE_H
 
 #include "tmatrix.h"
+#include "vec3.h"
 
 /// translate generates a translation transformation
 class translate : public tmatrix {
 public:
    translate(double dx, double dy, double dz);
+   translate(const spacemath::vec3d& v);
    virtual ~translate();
 
    double dx() const;
@@ -41,11 +43,13 @@ protected:
 
    // static functions used with scripting constructors
    static translate* ctor_xyz(double dx, double dy, double dz) { return new translate(dx,dy,dz); }
+   static translate* ctor_vec(const vec3* v) { return new translate(v->vec()); }
 
    // Register scripting constructors
    static void DeclareConstructors(asIScriptEngine* engine)
    {
       int r = DeclareConstructor(engine,as_typeid<translate>(),"translate@ translate(double dx, double dy, double dz=0.0)",asFUNCTION(translate::ctor_xyz)); as_assert( r >= 0 );
+          r = DeclareConstructor(engine,as_typeid<translate>(),"translate@ translate(const vec3d@+ v)",asFUNCTION(translate::ctor_vec)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "translate.h"
 
 void translate::InstallType(asIScriptEngine* engine)
@@ -35,6 +35,20 @@ translate::translate(double dx, double dy, double dz)
 , m_dx(dx)
 , m_dy(dy)
 , m_dz(dz)
+{
+   // access the raw matrix
+   HTmatrix& hmat = matrix();
+   // set the translational terms
+   hmat(0,3) = m_dx;
+   hmat(1,3) = m_dy;
+   hmat(2,3) = m_dz;
+}
+
+translate::translate(const spacemath::vec3d& v)
+: tmatrix(as_typeid<translate>())
+, m_dx(v.x())
+, m_dy(v.y())
+, m_dz(v.z())
 {
    // access the raw matrix
    HTmatrix& hmat = matrix();
