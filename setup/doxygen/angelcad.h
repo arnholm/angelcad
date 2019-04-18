@@ -1455,6 +1455,7 @@ public:
 class translate : public tmatrix
 { 
 public: 
+   translate(const vec3d@ v);
    /// constructor
    /*! \param dx translation in x direction
    \param dy translation in y direction
