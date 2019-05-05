@@ -882,6 +882,7 @@ public:
    /*! \param x coordinate
    \param y coordinate */
    pos2d(double x,double y);
+   pos2d(int &in list) {repeat double};
 
    /// distance from other position
    /*! \param pos other position
@@ -916,6 +917,7 @@ public:
    \param y coordinate
    \param z coordinate */
    pos3d(double x,double y, double z);
+   pos3d(int &in list) {repeat double};
 
    /// distance from other position
    /*! \param pos other position
@@ -1641,6 +1643,7 @@ public:
    /*! \param x vector x component
    \param y vector y component*/
    vec2d(double x,double y);
+   vec2d(int &in list) {repeat double};
 
    /// angle between: double rad = v.angle(other);
    /*! \param other vector to compute angle relative to this
@@ -1687,6 +1690,7 @@ public:
    \param y vector y component
    \param z vector z component */
    vec3d(double x,double y, double z);
+   vec3d(int &in list) {repeat double};
 
    /// angle between: double rad = v.angle(other);
    /*! \param other vector to compute angle relative to this
