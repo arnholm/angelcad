@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="ANGELCAD">
-		<Project filename="ce_angelscript/ce_angelscript.cbp" />
-		<Project filename="ce_angelscript_ex/ce_angelscript_ex.cbp">
-			<Depends filename="ce_angelscript/ce_angelscript.cbp" />
-		</Project>
-		<Project filename="as_csg/as_csg.cbp">
-			<Depends filename="ce_angelscript/ce_angelscript.cbp" />
-			<Depends filename="ce_angelscript_ex/ce_angelscript_ex.cbp" />
-		</Project>
+		<Project filename="as_csg/as_csg.cbp" />
 		<Project filename="AngelCAD/AngelCAD.cbp">
 			<Depends filename="as_csg/as_csg.cbp" />
 		</Project>

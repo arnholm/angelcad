@@ -13,6 +13,9 @@ Before building AngelCAD, you must build the following workspaces
 * spacelibs - https://github.com/arnholm/spacelibs
    - spacemath
    - spaceio
+* cpde_syslibs - https://github.com/arnholm/cpde_syslibs
+   - ce_angelscript
+   - ce_angelscript_ex
 * xcsg - https://github.com/arnholm/xcsg
 
 
