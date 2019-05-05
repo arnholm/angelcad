@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "as_reftype.h"
 #include "as_factory.h"
 
@@ -32,6 +32,12 @@ int as_reftype::DeclareConstructor(asIScriptEngine* engine, const std::string& t
 {
    decl_constructors.insert(make_pair(type_name,declaration));
    return engine->RegisterObjectBehaviour(type_name.c_str(), asBEHAVE_FACTORY, declaration.c_str(),funcPointer, asCALL_CDECL);
+}
+
+int as_reftype::DeclareConstructorInitList(asIScriptEngine* engine, const std::string& type_name, const std::string& declaration, const asSFuncPtr& funcPointer)
+{
+   decl_constructors.insert(make_pair(type_name,declaration));
+   return engine->RegisterObjectBehaviour(type_name.c_str(), asBEHAVE_LIST_FACTORY, declaration.c_str(),funcPointer, asCALL_CDECL);
 }
 
 void as_reftype::DeclareMethodsEx(const std::string& type_name, asIScriptEngine* engine)

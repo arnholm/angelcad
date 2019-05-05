@@ -17,6 +17,7 @@
 #define POSITION2D_H
 
 #include "ce_angelscript_ex/as_reftype.h"
+#include "ce_angelscript_ex/as_initializer_vector.h"
 #include "spacemath/pos2d.h"
 class vec2;
 class tmatrix;
@@ -27,6 +28,7 @@ class pos2 : public as_reftype {
 public:
    // constructor
    pos2(double x, double y);
+   pos2(const as_initializer_vector<double>& v);
    pos2(const spacemath::pos2d& pos);
    virtual ~pos2();
 
@@ -59,6 +61,7 @@ protected:
 
    static pos2* ctor_xy(double x, double y) { return new pos2(x,y); }
    static pos2* ctor_copy(const pos2* p) { return new pos2(p->m_pos); }
+   static pos2* ctor_initlist(void* initlist) { return new pos2(as_initializer_vector<double>(2,initlist)); };
 
    // ==== SCRIPTING INTERFACE
    // Register scripting constructors
@@ -66,6 +69,7 @@ protected:
    {
       int r = DeclareConstructor(engine,"pos2d","pos2d@ pos2d(double x,double y)",asFUNCTION(pos2::ctor_xy)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"pos2d","pos2d@ pos2d(const pos2d@+ other)",asFUNCTION(pos2::ctor_copy)); as_assert( r >= 0 );
+          r = DeclareConstructorInitList(engine,"pos2d","pos2d@ pos2d(int &in list) {repeat double}",asFUNCTION(pos2::ctor_initlist)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

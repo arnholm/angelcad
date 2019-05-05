@@ -136,6 +136,8 @@
 		<Unit filename="as_file.h" />
 		<Unit filename="as_include_callback.cpp" />
 		<Unit filename="as_include_callback.h" />
+		<Unit filename="as_initializer_vector.cpp" />
+		<Unit filename="as_initializer_vector.h" />
 		<Unit filename="as_reftype.cpp" />
 		<Unit filename="as_reftype.h" />
 		<Unit filename="as_typeid.cpp" />

@@ -17,6 +17,7 @@
 #define vec2_H
 
 #include "ce_angelscript_ex/as_reftype.h"
+#include "ce_angelscript_ex/as_initializer_vector.h"
 #include "spacemath/vec2d.h"
 #include "spacemath/pos2d.h"
 using spacemath::vec2d;
@@ -30,6 +31,7 @@ public:
    // constructor
    vec2(double x, double y);
    vec2(const pos2* p1, const pos2* p2);
+   vec2(const as_initializer_vector<double>& v);
    vec2(const vec2d& vec);
    virtual ~vec2();
 
@@ -62,6 +64,7 @@ protected:
 
    static vec2* ctor_xy(double x, double y) { return new vec2(x,y); }
    static vec2* ctor_p2(const pos2* p1, const pos2* p2) { return new vec2(p1,p2); }
+   static vec2* ctor_initlist(void* initlist) { return new vec2(as_initializer_vector<double>(2,initlist)); };
    static vec2* ctor_copy(const vec2* v) { return new vec2(v->m_vec); }
 
    // ==== SCRIPTING INTERFACE
@@ -71,6 +74,7 @@ protected:
       int r = DeclareConstructor(engine,"vec2d","vec2d@ vec2d(double x,double y)",asFUNCTION(vec2::ctor_xy)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"vec2d","vec2d@ vec2d(const pos2d@+ p1, const pos2d@+ p2)",asFUNCTION(vec2::ctor_p2)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"vec2d","vec2d@ vec2d(const vec2d@+ other)",asFUNCTION(vec2::ctor_copy)); as_assert( r >= 0 );
+          r = DeclareConstructorInitList(engine,"vec2d","vec2d@ vec2d(int &in list) {repeat double}",asFUNCTION(vec2::ctor_initlist)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "pos3.h"
 #include "vec3.h"
 #include <fstream>
@@ -36,6 +36,13 @@ pos3::pos3(double x, double y, double z)
 : as_reftype("pos3d")
 , m_pos(x,y,z)
 {}
+
+pos3::pos3(const as_initializer_vector<double>& v)
+: as_reftype("pos3d")
+, m_pos(v[0],v[1],v[2])
+{
+   // cout << "pos3d Initlist " << this << " " << m_pos.x() << " " << m_pos.y() << " " << m_pos.z() << endl;
+}
 
 pos3::pos3(const pos3d& pos)
 : as_reftype("pos3d")

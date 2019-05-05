@@ -17,6 +17,7 @@
 #define POSITION3D_H
 
 #include "ce_angelscript_ex/as_reftype.h"
+#include "ce_angelscript_ex/as_initializer_vector.h"
 #include "spacemath/pos3d.h"
 class tmatrix;
 class vec3;
@@ -28,6 +29,7 @@ class pos3 : public as_reftype {
 public:
    // constructor
    pos3(double x, double y, double z);
+   pos3(const as_initializer_vector<double>& v);
    pos3(const pos3d& pos);
    virtual ~pos3();
 
@@ -61,6 +63,7 @@ protected:
 
    static pos3* ctor_xyz(double x, double y, double z) { return new pos3(x,y,z); }
    static pos3* ctor_copy(const pos3* p) { return new pos3(p->m_pos); }
+   static pos3* ctor_initlist(void* initlist) { return new pos3(as_initializer_vector<double>(3,initlist)); };
 
    // ==== SCRIPTING INTERFACE
    // Register scripting constructors
@@ -68,6 +71,7 @@ protected:
    {
       int r = DeclareConstructor(engine,"pos3d","pos3d@ pos3d(double x,double y, double z)",asFUNCTION(pos3::ctor_xyz)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"pos3d","pos3d@ pos3d(const pos3d@+ other)",asFUNCTION(pos3::ctor_copy)); as_assert( r >= 0 );
+          r = DeclareConstructorInitList(engine,"pos3d","pos3d@ pos3d(int &in list) {repeat double}",asFUNCTION(pos3::ctor_initlist)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

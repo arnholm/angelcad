@@ -17,6 +17,7 @@
 #define VECTOR3D_H
 
 #include "ce_angelscript_ex/as_reftype.h"
+#include "ce_angelscript_ex/as_initializer_vector.h"
 #include "spacemath/vec3d.h"
 #include "spacemath/pos3d.h"
 using spacemath::vec3d;
@@ -30,6 +31,7 @@ public:
    // constructor
    vec3(double x, double y, double z);
    vec3(const pos3* p1, const pos3* p2);
+   vec3(const as_initializer_vector<double>& v);
    vec3(const vec3d& vec);
    virtual ~vec3();
 
@@ -63,6 +65,7 @@ protected:
 
    static vec3* ctor_xyz(double x, double y, double z) { return new vec3(x,y,z); }
    static vec3* ctor_p2(const pos3* p1, const pos3* p2) { return new vec3(p1,p2); }
+   static vec3* ctor_initlist(void* initlist) { return new vec3(as_initializer_vector<double>(3,initlist)); };
    static vec3* ctor_copy(const vec3* v) { return new vec3(v->m_vec); }
 
    // ==== SCRIPTING INTERFACE
@@ -72,6 +75,7 @@ protected:
       int r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(double x,double y, double z)",asFUNCTION(vec3::ctor_xyz)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(const pos3d@+ p1, const pos3d@+ p2)",asFUNCTION(vec3::ctor_p2)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,"vec3d","vec3d@ vec3d(const vec3d@+ other)",asFUNCTION(vec3::ctor_copy)); as_assert( r >= 0 );
+          r = DeclareConstructorInitList(engine,"vec3d","vec3d@ vec3d(int &in list) {repeat double}",asFUNCTION(vec3::ctor_initlist)); as_assert( r >= 0 );
    }
 
    // Register scripting member functions, the template parameter signifies the scripting type

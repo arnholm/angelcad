@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef AS_REFTYPE_H
 #define AS_REFTYPE_H
 
@@ -63,6 +63,9 @@ public:
 protected:
    // Declare a scripting constructor. Use asFUNCTION(func) for funcPointer, static T::func is ok
    static int DeclareConstructor(asIScriptEngine* engine, const std::string& type_name, const std::string& declaration, const asSFuncPtr& funcPointer);
+
+   // Declare initalization list construction
+   static int DeclareConstructorInitList(asIScriptEngine* engine, const std::string& type_name, const std::string& declaration, const asSFuncPtr& funcPointer);
 
    // Declare a scripting member function. Use asMETHOD(T,func) for funcPointer.
    // for ordinary member functions, use asCALL_THISCALL, but for operators one must use one of asCALL_CDECL_OBJFIRST, asCALL_CDECL_OBJLAST
