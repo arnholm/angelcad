@@ -35,6 +35,7 @@ typedef map<wxString,wxString> CmdLineMap;    // CmdLineMap
 #include "version.h"
 #include "as_document.h"
 #include "ce_angelscript_ex/as_reftype.h"
+#include "ce_angelscript_ex/as_xml.h"
 
 static const wxCmdLineEntryDesc cmdLineDesc[] =
 {
@@ -151,6 +152,15 @@ int main(int argc, char **argv)
          ofstream doc_out(docfile);
          doc.write_doc(doc_out);
          cout << "Created documentation file: " << docfile << endl;
+
+         string xmlFile = "angelcad.xml";
+         {
+            as_xml xml_doc(asF()->engine());
+            ofstream xml_out(xmlFile);
+            xml_doc.write_xml(xml_out);
+            cout << "Created xml file: " << xmlFile << endl;
+         }
+
       }
 
       as_reftype::decl_end();

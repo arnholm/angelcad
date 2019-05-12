@@ -98,6 +98,7 @@
 					<Add library="spacemathd" />
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
+					<Add library="cf_syslibd" />
 				</Linker>
 			</Target>
 			<Target title="GCC_Release">
@@ -123,6 +124,7 @@
 					<Add library="ce_angelscript" />
 					<Add library="spaceio" />
 					<Add library="spacemath" />
+					<Add library="cf_syslib" />
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
 				</Linker>
