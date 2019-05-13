@@ -75,9 +75,11 @@
 			</Target>
 			<Target title="GCC_Debug">
 				<Option output=".cmp/gcc/bin/Debug/as_csgd" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="/work/cpde_git/open/angelcad/setup/doxygen" />
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="-doc /work/cpde_git/open/angelcad/setup/doxygen/as.doc" />
 				<Compiler>
 					<Add option="-std=c++0x" />
 					<Add option="-g" />

@@ -153,11 +153,15 @@ int main(int argc, char **argv)
          doc.write_doc(doc_out);
          cout << "Created documentation file: " << docfile << endl;
 
-         string xmlFile = "angelcad.xml";
+         const string xmlFile = "test.xml";
          {
-            as_xml xml_doc(asF()->engine());
-            ofstream xml_out(xmlFile);
-            xml_doc.write_xml(xml_out);
+            as_xml xml_doc;
+            ifstream in(xmlFile);
+            xml_doc.read_xml(in);
+            xml_doc.unverify();
+            xml_doc.from_script_engine(asF()->engine());
+            ofstream out("test2.xml");
+            xml_doc.write_xml(out);
             cout << "Created xml file: " << xmlFile << endl;
          }
 
