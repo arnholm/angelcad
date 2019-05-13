@@ -34,6 +34,7 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="ce_angelscript_exd" />
 					<Add library="ce_angelscriptd" />
+					<Add library="cf_syslibd" />
 					<Add library="spaceiod" />
 					<Add library="spacemathd" />
 					<Add library="msvcrtd.lib" />
@@ -64,6 +65,7 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="ce_angelscript_ex" />
 					<Add library="ce_angelscript" />
+					<Add library="cf_syslib" />
 					<Add library="spaceio" />
 					<Add library="spacemath" />
 					<Add library="msvcrt.lib" />
