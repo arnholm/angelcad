@@ -46,6 +46,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("doc"),         wxT_2("doc"),         wxT_2("Write 'angelcad.h'"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("doxy"),        wxT_2("doxy"),        wxT_2("Write 'angelcad.h' with doxygen info"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("h"),           wxT_2("help"),        wxT_2("Command line help"),                    wxCMD_LINE_VAL_NONE,   wxCMD_LINE_OPTION_HELP    },
   { wxCMD_LINE_SWITCH, wxT_2("v"),           wxT_2("version"),     wxT_2("Show version number only"),             wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_NONE,   wxT_2(""),            wxT_2(""),            wxT_2(""),                                     wxCMD_LINE_VAL_NONE  , wxCMD_LINE_PARAM_OPTIONAL }
@@ -122,6 +123,7 @@ int main(int argc, char **argv)
    bool has_refcount    = cmdMap.find("refcount") != cmdMap.end();
    bool has_doc         = cmdMap.find("doc") != cmdMap.end();
    bool has_doxy        = cmdMap.find("doxy") != cmdMap.end();
+   bool has_xmldoc      = cmdMap.find("xmldoc") != cmdMap.end();
    bool has_version     = cmdMap.find("version") != cmdMap.end();
    if(has_doxy)has_doc = true;
 
@@ -152,18 +154,28 @@ int main(int argc, char **argv)
          ofstream doc_out(docfile);
          doc.write_doc(doc_out);
          cout << "Created documentation file: " << docfile << endl;
+      }
+      else if(has_xmldoc) {
 
-         const string xmlFile = "test.xml";
-         {
-            as_xml xml_doc;
-            ifstream in(xmlFile);
+         // generate or opdate XML documentation
+
+         wxFileName xmlFile("angelcad_xmldoc.xml");
+         string xmlpath = xmlFile.GetFullPath().ToStdString();
+         as_xml xml_doc("angelcad");
+         if(xmlFile.Exists()) {
+            // file already exists so readi it in
+            ifstream in(xmlpath);
             xml_doc.read_xml(in);
             xml_doc.unverify();
-            xml_doc.from_script_engine(asF()->engine());
-            ofstream out("test2.xml");
-            xml_doc.write_xml(out);
-            cout << "Created xml file: " << xmlFile << endl;
          }
+
+         // update or create XML doc from script engine data
+         xml_doc.from_script_engine(asF()->engine());
+
+         // export the updated XML file
+         ofstream out(xmlpath);
+         xml_doc.write_xml(out);
+         cout << "Created xml file: " << xmlpath << endl;
 
       }
 
