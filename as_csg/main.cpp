@@ -177,6 +177,9 @@ int main(int argc, char **argv)
          xml_doc.write_xml(out);
          cout << "Created xml file: " << xmlpath << endl;
 
+         ofstream hfile(xml_doc.appnam()+".h");
+         xml_doc.write_header(hfile);
+
       }
 
       as_reftype::decl_end();
