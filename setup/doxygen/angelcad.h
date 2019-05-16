@@ -261,7 +261,8 @@ public:
 
 };
 
-   /// A bounding box representes the range of an object in x,y and z
+   /// bounding box aligned with system axes
+   /*! A bounding box representes the range of an object in x,y and z */
 class boundingbox {
 public:
    /// constructor
@@ -304,7 +305,8 @@ public:
 
 };
 
-   /// A 2d object defined by its radius. Centered on origin.
+   /// circle, centered at origin
+   /*! A 2d object defined by its radius. Centered on origin. */
 class circle : public shape2d {
 public:
    /*!  \param p1 pos2d@
@@ -326,8 +328,9 @@ public:
 
 };
 
-   /// A cone extends in the z-direction.
-   /*! By default the bottom is at origin */
+   /// cone with axis in z-direction, by default extending from origin
+   /*! A cone extends in the z-direction.
+   \n By default the bottom is at origin */
 class cone : public solid {
 public:
    /// constructor
@@ -363,6 +366,7 @@ public:
 
 };
 
+   /// cube, by default in 1st octant with one corner toucing origin
 class cube : public solid {
 public:
    /*!  \param size double
@@ -374,8 +378,9 @@ public:
 
 };
 
-   /// A cuboid is like a cube, but with separate dimensions in x,y and z.
-   /*! By default the cuboid touches the origin, and extends along positive x,y,z. */
+   /// cuboid, by default in 1st octant with one corner toucing origin
+   /*! A cuboid is like a cube, but with separate dimensions in x,y and z.
+   \n By default the cuboid touches the origin, and extends along positive x,y,z. */
 class cuboid : public solid {
 public:
    /// constructor
@@ -399,8 +404,9 @@ public:
 
 };
 
-   /// A cylinder is defined by height and radius.
-   /*! By default the cuboid extends from the origin, in z-direction. */
+   /// cylinder with axis in z-direction, by default extending from origin
+   /*! A cylinder is defined by height and radius.
+   \n By default the cuboid extends from the origin, in z-direction. */
 class cylinder : public solid {
 public:
    /// constructor
@@ -427,8 +433,9 @@ public:
 
 };
 
-   /// difference2d is a 2-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using subtraction operator:
+   /// 2d difference boolean operation
+   /*! difference2d is a 2-dimensional boolean operation. It can be invoked either
+   \n explicitly or using subtraction operator:
    \n explicit: shape2d@ object = difference2d(circle(100),circle(50));
    \n using subtraction operator: shape2d@ object = circle(100) - circle(50); */
 class difference2d : public shape2d {
@@ -440,8 +447,9 @@ public:
 
 };
 
-   /// difference3d is a 3-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using subtraction operator:
+   /// 3d difference boolean operation
+   /*! difference3d is a 3-dimensional boolean operation. It can be invoked either
+   \n explicitly or using subtraction operator:
    \n explicit: solid@ object = difference3d(sphere(100),sphere(50));
    \n using subtraction operator: solid@ object = sphere(100) - sphere(50); */
 class difference3d : public solid {
@@ -453,8 +461,9 @@ public:
 
 };
 
-   /// fill2d is a 2-dimensional boolean operation that removes internal holes
-   /*! in in 2d shapes, but leaves a possibly concave outer contour intact.
+   /// 2d fill operation, filling holes in input shapes
+   /*! fill2d is a 2-dimensional boolean operation that removes internal holes
+   \n in in 2d shapes, but leaves a possibly concave outer contour intact.
    \n fill2d can be invoked either on a single shape2d or an array. */
 class fill2d : public shape2d {
 public:
@@ -467,7 +476,8 @@ public:
 
 };
 
-   /// hmatrix is a transformation expressed as homogenous transformation matrix.
+   /// Homogeneous transformation matrix
+   /*! hmatrix is a transformation expressed as homogenous transformation matrix. */
 class hmatrix : public tmatrix {
 public:
    /*!  \param xvec vec3d@
@@ -484,8 +494,9 @@ public:
 
 };
 
-   /// hull2d is a 2-dimensional boolean operation. It encapsulates
-   /*! the input objects with a convex shape. It can for example be used
+   /// 2d hull operation, enclosing the input shapes
+   /*! hull2d is a 2-dimensional boolean operation. It encapsulates
+   \n the input objects with a convex shape. It can for example be used
    \n to create a rectangle with rounded cornes using 4 circles. */
 class hull2d : public shape2d {
 public:
@@ -520,8 +531,9 @@ public:
 
 };
 
-   /// hull3d is a 3-dimensional boolean operation. It encapsulates
-   /*! the input objects with a convex shape. It can for example be used
+   /// 3d hull operation, enclosing the input solids
+   /*! hull3d is a 3-dimensional boolean operation. It encapsulates
+   \n the input objects with a convex shape. It can for example be used
    \n to create a cuboid with rounded cornes using 8 spheres. */
 class hull3d : public solid {
 public:
@@ -556,8 +568,9 @@ public:
 
 };
 
-   /// intersection2d is a 2-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using & operator:
+   /// 2d intersection boolean operation
+   /*! intersection2d is a 2-dimensional boolean operation. It can be invoked either
+   \n explicitly or using & operator:
    \n explicit: shape2d@ object = intersection2d(circle(100),translate(75,0,0)*circle(50));
    \n using & operator: shape2d@ object = circle(100) & translate(75,0,0)*circle(50); */
 class intersection2d : public shape2d {
@@ -589,8 +602,9 @@ public:
 
 };
 
-   /// intersection3d is a 2-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using & operator:
+   /// 3d intersection boolean operation
+   /*! intersection3d is a 2-dimensional boolean operation. It can be invoked either
+   \n explicitly or using & operator:
    \n explicit: solid@ object = intersection3d(sphere(100),translate(75,0,0)*sphere(50));
    \n using & operator: solid@ object = sphere(100) & translate(75,0,0)*sphere(50); */
 class intersection3d : public solid {
@@ -622,6 +636,7 @@ public:
 
 };
 
+   /// 2d line
 class line2d {
 public:
    /*!  \param p1 pos2d@
@@ -647,6 +662,7 @@ public:
 
 };
 
+   /// 3d line
 class line3d {
 public:
    /*!  \param p1 pos3d@
@@ -672,7 +688,8 @@ public:
 
 };
 
-   /// linear_extrude extrudes a 2d shape in z-direction, creating a solid.
+   /// Extrude 2d shape in z direction into 3d solid
+   /*! linear_extrude extrudes a 2d shape in z-direction, creating a solid. */
 class linear_extrude : public solid {
 public:
    /// constructor
@@ -686,7 +703,8 @@ public:
 
 };
 
-   /// a locsys3d represents local coordinate system directions.
+   /// 3d localsystem
+   /*! a locsys3d represents local coordinate system directions. */
 class locsys3d {
 public:
    /// constructor
@@ -827,8 +845,9 @@ public:
 
 };
 
-   /// minkowski2d is a 2-dimensional boolean operation requiring exactly
-   /*! 2 parameters, a and b. The first parameter (a) is generally the larger
+   /// 2d Minkowski sum operation
+   /*! minkowski2d is a 2-dimensional boolean operation requiring exactly
+   \n 2 parameters, a and b. The first parameter (a) is generally the larger
    \n and can be concave or convex. The second parameter (b) is assumed smaller
    \n and convex (such as a circle). Typical use of the minkowski sum is to
    \n create an object with rounded corners. */
@@ -841,8 +860,9 @@ public:
 
 };
 
-   /// minkowski3d is a 3-dimensional boolean operation requiring exactly
-   /*! 2 parameters, a and b. The first parameter (a) is generally the larger
+   /// 3d Minkowski sum operation
+   /*! minkowski3d is a 3-dimensional boolean operation requiring exactly
+   \n 2 parameters, a and b. The first parameter (a) is generally the larger
    \n and can be concave or convex. The second parameter (b) is assumed smaller
    \n and convex (such as a circle). Typical use of the minkowski sum is to
    \n create an object with rounded edges. */
@@ -854,7 +874,8 @@ public:
 
 };
 
-   /// mirror is a transformation creating mirror images of 2d or 3d objects.
+   /// Mirror transformation around given point
+   /*! mirror is a transformation creating mirror images of 2d or 3d objects. */
 class mirror : public tmatrix {
 public:
    /// constructor, mirror around origin
@@ -882,8 +903,9 @@ public:
 
 };
 
-   /// offset2d is a special 2d operation used for inflating or shrinking a 2d shape,
-   /*! optionally creating rounded corners and chamfers. */
+   /// 2d profile offset
+   /*! offset2d is a special 2d operation used for inflating or shrinking a 2d shape,
+   \n optionally creating rounded corners and chamfers. */
 class offset2d : public shape2d {
 public:
    /// constructor
@@ -901,8 +923,9 @@ public:
 
 };
 
-   /// pface represents a single face of a polyhedron. It contains integer indices
-   /*! referring to the polyhedron vertices. When viewed from outside the polyhedron,
+   /// Polyhedron face
+   /*! pface represents a single face of a polyhedron. It contains integer indices
+   \n referring to the polyhedron vertices. When viewed from outside the polyhedron,
    \n a pface should list its vertices in CCW sequence. */
 class pface {
 public:
@@ -930,7 +953,8 @@ public:
 
 };
 
-   /// a polygon is a 2d object. It is defined by vertex positions listed in CCW sequence.
+   /// polygon, vertices in CCW order
+   /*! a polygon is a 2d object. It is defined by vertex positions listed in CCW sequence. */
 class polygon : public shape2d {
 public:
    /// constructor (triangle), points must be given in CCW order
@@ -987,8 +1011,9 @@ public:
 
 };
 
-   /// a polyhedron is a general 3d object, defined by its vertices and polyhedron faces.
-   /*! It is useful in many contexts. It can be constructed directly or by reference to an input file. */
+   /// Closed polyhedron volume defined by vertices and planar faces
+   /*! a polyhedron is a general 3d object, defined by its vertices and polyhedron faces.
+   \n It is useful in many contexts. It can be constructed directly or by reference to an input file. */
 class polyhedron : public solid {
 public:
    /*!  \param points array@ */
@@ -1045,7 +1070,8 @@ public:
 
 };
 
-   /// a pos2d is a position in 2d space. It is used with 2d objects.
+   /// 2d position coordinates
+   /*! a pos2d is a position in 2d space. It is used with 2d objects. */
 class pos2d {
 public:
    /*!  \param other pos2d@ */
@@ -1095,7 +1121,8 @@ public:
 
 };
 
-   /// a pos3d is a position in 3d space. It is used with 3d objects.
+   /// 3d position coordinates
+   /*! a pos3d is a position in 3d space. It is used with 3d objects. */
 class pos3d {
 public:
    /*!  \param other pos3d@ */
@@ -1150,8 +1177,9 @@ public:
 
 };
 
-   /// a rectangle is a 2d object defined by its extent in x and y. By default it touches the
-   /*! origin and extends along positive x and y. */
+   /// rectangle, by default located in 1st quadrant touching origin
+   /*! a rectangle is a 2d object defined by its extent in x and y. By default it touches the
+   \n origin and extends along positive x and y. */
 class rectangle : public shape2d {
 public:
    /// constructor
@@ -1170,8 +1198,9 @@ public:
 
 };
 
-   /// rotate_extrude allows extruding a 2d shape along a circular path. A positive
-   /*! angle rotates the object around the y axis (CCW direction).
+   /// Extrude 2d shape CCW in XZ plane into 3d solid
+   /*! rotate_extrude allows extruding a 2d shape along a circular path. A positive
+   \n angle rotates the object around the y axis (CCW direction).
    \n solid@ object = rotate_extrude(translate(100,0)*circle(10),deg:60); */
 class rotate_extrude : public solid {
 public:
@@ -1191,7 +1220,8 @@ public:
 
 };
 
-   /// rotate_x is a transformation rotating around the x-axis. Positive angle according to right hand rule.
+   /// Rotation around x
+   /*! rotate_x is a transformation rotating around the x-axis. Positive angle according to right hand rule. */
 class rotate_x : public tmatrix {
 public:
    /// constructor (rotate around x)
@@ -1209,7 +1239,8 @@ public:
 
 };
 
-   /// rotate_y is a transformation rotating around the y-axis. Positive angle according to right hand rule.
+   /// Rotation around y
+   /*! rotate_y is a transformation rotating around the y-axis. Positive angle according to right hand rule. */
 class rotate_y : public tmatrix {
 public:
    /// constructor (rotate around y)
@@ -1227,7 +1258,8 @@ public:
 
 };
 
-   /// rotate_z is a transformation rotating around the z-axis. Positive angle according to right hand rule.
+   /// Rotation around z
+   /*! rotate_z is a transformation rotating around the z-axis. Positive angle according to right hand rule. */
 class rotate_z : public tmatrix {
 public:
    /// constructor (rotate around z)
@@ -1245,7 +1277,8 @@ public:
 
 };
 
-   /// scale is a transformation scaling an object, either uniformly or with different factors in different directions.
+   /// Scaling transformation
+   /*! scale is a transformation scaling an object, either uniformly or with different factors in different directions. */
 class scale : public tmatrix {
 public:
    /// constructor
@@ -1272,6 +1305,7 @@ public:
 
 };
 
+   /// Abstract base for all primitives and booleans
 class shape {
 public:
    /*!  \return boundingbox@ */
@@ -1289,7 +1323,8 @@ public:
 
 };
 
-   /// shape2d is an abstract base class for all 2d objects.
+   /// Abstract base for 2d primitives and booleans
+   /*! shape2d is an abstract base class for all 2d objects. */
 class shape2d : public shape {
 public:
    /// Boolean union operator+ overload
@@ -1313,7 +1348,8 @@ public:
 
 };
 
-   /// solid is an abstract base class for all 3d objects.
+   /// Abstract base for 3d primitives and booleans
+   /*! solid is an abstract base class for all 3d objects. */
 class solid : public shape {
 public:
    /// Boolean union operator+ overload
@@ -1337,7 +1373,8 @@ public:
 
 };
 
-   /// a sphere is a 3d object defined by its radius.
+   /// sphere, centered at origin
+   /*! a sphere is a 3d object defined by its radius. */
 class sphere : public solid {
 public:
    /// constructor
@@ -1354,7 +1391,8 @@ public:
 
 };
 
-   /// a spline2d is a 2d cubic spline curve.
+   /// 2d cubic spline curve
+   /*! a spline2d is a 2d cubic spline curve. */
 class spline2d {
 public:
    /*!  \param points array@ */
@@ -1362,7 +1400,8 @@ public:
 
 };
 
-   /// a spline3d is a 3d cubic spline curve.
+   /// 3d cubic spline curve
+   /*! a spline3d is a 3d cubic spline curve. */
 class spline3d {
 public:
    /*!  \param points array@ */
@@ -1370,7 +1409,8 @@ public:
 
 };
 
-   /// a spline_path defines a cubic spline sweep path.
+   /// spline_path for sweep
+   /*! a spline_path defines a cubic spline sweep path. */
 class spline_path {
 public:
    /*!  \param p array@
@@ -1383,8 +1423,9 @@ public:
 
 };
 
-   /// a square is a 2d quadrilateral with equal dimensions in x and y.
-   /*! By default it touches the origin and extend along positive x and y. */
+   /// square, by default located in 1st quadrant touching origin
+   /*! a square is a 2d quadrilateral with equal dimensions in x and y.
+   \n By default it touches the origin and extend along positive x and y. */
 class square : public shape2d {
 public:
    /// constructor
@@ -1556,7 +1597,8 @@ public:
 
 };
 
-   /// a sweep creates a solid by sweeping a 2d profile along a path curve
+   /// Sweep 2d shape along path curve to create 3d solid
+   /*! a sweep creates a solid by sweeping a 2d profile along a path curve */
 class sweep : public solid {
 public:
    /// constructor
@@ -1566,7 +1608,8 @@ public:
 
 };
 
-   /// a tmatrix an abstract base class for all transformations.
+   /// Abstract base matrix for transformations
+   /*! a tmatrix an abstract base class for all transformations. */
 class tmatrix {
 public:
    /*!  \param obj pos2d@
@@ -1610,8 +1653,9 @@ public:
 
 };
 
-   /// transform_extrude is a special extrision operation, defined by two 2d shapes,
-   /*! representing bottom and top of extrusion. */
+   /// Extrude from botton to top shapes using transform
+   /*! transform_extrude is a special extrision operation, defined by two 2d shapes,
+   \n representing bottom and top of extrusion. */
 class transform_extrude : public solid {
 public:
    /*!  \param bottom shape2d@
@@ -1620,7 +1664,8 @@ public:
 
 };
 
-   /// translate is a transformation translating a 2d or 3d object.
+   /// Translation in x, y and z
+   /*! translate is a transformation translating a 2d or 3d object. */
 class translate : public tmatrix {
 public:
    /*!  \param v vec3d@ */
@@ -1646,8 +1691,9 @@ public:
 
 };
 
-   /// union2d is a 2-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using + operator:
+   /// 2d union boolean operation
+   /*! union2d is a 2-dimensional boolean operation. It can be invoked either
+   \n explicitly or using + operator:
    \n explicit: shape2d@ object = union2d(circle(100),translate(75,0,0)*circle(50));
    \n using & operator: shape2d@ object = circle(100) + translate(75,0,0)*circle(50); */
 class union2d : public shape2d {
@@ -1683,8 +1729,9 @@ public:
 
 };
 
-   /// union3d is a 3-dimensional boolean operation. It can be invoked either
-   /*! explicitly or using + operator:
+   /// 3d union boolean operation
+   /*! union3d is a 3-dimensional boolean operation. It can be invoked either
+   \n explicitly or using + operator:
    \n explicit: solid@ object = union3d(sphere(100),translate(75,0,0)*sphere(50));
    \n using & operator: solid@ object = sphere(100) + translate(75,0,0)*sphere(50); */
 class union3d : public solid {
@@ -1720,7 +1767,8 @@ public:
 
 };
 
-   /// vec2d is a 2-dimensional vector offering useful operations such as dot and cross products.
+   /// 2d direction vector
+   /*! vec2d is a 2-dimensional vector offering useful operations such as dot and cross products. */
 class vec2d {
 public:
    /// constructor
@@ -1784,7 +1832,8 @@ public:
 
 };
 
-   /// vec3d is a 3-dimensional vector offering useful operations such as dot and cross products.
+   /// 3d direction vector
+   /*! vec3d is a 3-dimensional vector offering useful operations such as dot and cross products. */
 class vec3d {
 public:
    /*!  \param p1 pos3d@

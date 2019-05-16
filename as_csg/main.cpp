@@ -163,7 +163,8 @@ int main(int argc, char **argv)
          string xmlpath = xmlFile.GetFullPath().ToStdString();
          as_xml xml_doc("angelcad");
          if(xmlFile.Exists()) {
-            // file already exists so readi it in
+            cout << "Found & read existing file " << xmlFile.GetFullPath().ToStdString() << endl;
+            // file already exists so read it in
             ifstream in(xmlpath);
             xml_doc.read_xml(in);
             xml_doc.unverify();

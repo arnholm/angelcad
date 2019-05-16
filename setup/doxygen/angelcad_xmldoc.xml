@@ -289,6 +289,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="as_reftype">
+		<as_description>
+			<as_line>Astract reference counted type</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
 			<as_return type="int" verified="1"/>
 		</as_member_function>
@@ -298,6 +301,7 @@
 	</as_class>
 	<as_class verified="1" name="boundingbox">
 		<as_description>
+			<as_line>bounding box aligned with system axes</as_line>
 			<as_line>A bounding box representes the range of an object in x,y and z</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="boundingbox@ boundingbox()">
@@ -392,6 +396,7 @@
 	</as_class>
 	<as_class verified="1" name="circle" base="shape2d">
 		<as_description>
+			<as_line>circle, centered at origin</as_line>
 			<as_line>A 2d object defined by its radius. Centered on origin.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="circle@ circle(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3)">
@@ -521,6 +526,7 @@
 	</as_class>
 	<as_class verified="1" name="cone" base="solid">
 		<as_description>
+			<as_line>cone with axis in z-direction, by default extending from origin</as_line>
 			<as_line>A cone extends in the z-direction.</as_line>
 			<as_line>By default the bottom is at origin</as_line>
 		</as_description>
@@ -700,6 +706,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="cube" base="solid">
+		<as_description>
+			<as_line>cube, by default in 1st octant with one corner toucing origin</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="cube@ cube(double size, bool center = false)">
 			<as_parameter verified="1" type="double" name="size"/>
 			<as_parameter verified="1" type="bool" name="center" default="false"/>
@@ -753,6 +762,7 @@
 	</as_class>
 	<as_class verified="1" name="cuboid" base="solid">
 		<as_description>
+			<as_line>cuboid, by default in 1st octant with one corner toucing origin</as_line>
 			<as_line>A cuboid is like a cube, but with separate dimensions in x,y and z.</as_line>
 			<as_line>By default the cuboid touches the origin, and extends along positive x,y,z.</as_line>
 		</as_description>
@@ -903,6 +913,7 @@
 	</as_class>
 	<as_class verified="1" name="cylinder" base="solid">
 		<as_description>
+			<as_line>cylinder with axis in z-direction, by default extending from origin</as_line>
 			<as_line>A cylinder is defined by height and radius.</as_line>
 			<as_line>By default the cuboid extends from the origin, in z-direction.</as_line>
 		</as_description>
@@ -1166,6 +1177,7 @@
 	</as_class>
 	<as_class verified="1" name="difference2d" base="shape2d">
 		<as_description>
+			<as_line>2d difference boolean operation</as_line>
 			<as_line>difference2d is a 2-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using subtraction operator:</as_line>
 			<as_line>explicit: shape2d@ object = difference2d(circle(100),circle(50));</as_line>
@@ -1278,6 +1290,7 @@
 	</as_class>
 	<as_class verified="1" name="difference3d" base="solid">
 		<as_description>
+			<as_line>3d difference boolean operation</as_line>
 			<as_line>difference3d is a 3-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using subtraction operator:</as_line>
 			<as_line>explicit: solid@ object = difference3d(sphere(100),sphere(50));</as_line>
@@ -1390,6 +1403,7 @@
 	</as_class>
 	<as_class verified="1" name="fill2d" base="shape2d">
 		<as_description>
+			<as_line>2d fill operation, filling holes in input shapes</as_line>
 			<as_line>fill2d is a 2-dimensional boolean operation that removes internal holes</as_line>
 			<as_line>in in 2d shapes, but leaves a possibly concave outer contour intact.</as_line>
 			<as_line>fill2d can be invoked either on a single shape2d or an array.</as_line>
@@ -1460,6 +1474,7 @@
 	</as_class>
 	<as_class verified="1" name="hmatrix" base="tmatrix">
 		<as_description>
+			<as_line>Homogeneous transformation matrix</as_line>
 			<as_line>hmatrix is a transformation expressed as homogenous transformation matrix.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="hmatrix@ hmatrix(const vec3d@ xvec, const vec3d@ yvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ))">
@@ -1586,6 +1601,7 @@
 	</as_class>
 	<as_class verified="1" name="hull2d" base="shape2d">
 		<as_description>
+			<as_line>2d hull operation, enclosing the input shapes</as_line>
 			<as_line>hull2d is a 2-dimensional boolean operation. It encapsulates</as_line>
 			<as_line>the input objects with a convex shape. It can for example be used</as_line>
 			<as_line>to create a rectangle with rounded cornes using 4 circles.</as_line>
@@ -1775,6 +1791,7 @@
 	</as_class>
 	<as_class verified="1" name="hull3d" base="solid">
 		<as_description>
+			<as_line>3d hull operation, enclosing the input solids</as_line>
 			<as_line>hull3d is a 3-dimensional boolean operation. It encapsulates</as_line>
 			<as_line>the input objects with a convex shape. It can for example be used</as_line>
 			<as_line>to create a cuboid with rounded cornes using 8 spheres.</as_line>
@@ -1964,6 +1981,7 @@
 	</as_class>
 	<as_class verified="1" name="intersection2d" base="shape2d">
 		<as_description>
+			<as_line>2d intersection boolean operation</as_line>
 			<as_line>intersection2d is a 2-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using &amp; operator:</as_line>
 			<as_line>explicit: shape2d@ object = intersection2d(circle(100),translate(75,0,0)*circle(50));</as_line>
@@ -2086,6 +2104,7 @@
 	</as_class>
 	<as_class verified="1" name="intersection3d" base="solid">
 		<as_description>
+			<as_line>3d intersection boolean operation</as_line>
 			<as_line>intersection3d is a 2-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using &amp; operator:</as_line>
 			<as_line>explicit: solid@ object = intersection3d(sphere(100),translate(75,0,0)*sphere(50));</as_line>
@@ -2207,6 +2226,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="line2d">
+		<as_description>
+			<as_line>2d line</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="line2d@ line2d(const pos2d@ p1, const pos2d@ p2)">
 			<as_parameter verified="1" type="pos2d@" name="p1"/>
 			<as_parameter verified="1" type="pos2d@" name="p2"/>
@@ -2236,6 +2258,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="line3d">
+		<as_description>
+			<as_line>3d line</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="line3d@ line3d(const pos3d@ p1, const pos3d@ p2)">
 			<as_parameter verified="1" type="pos3d@" name="p1"/>
 			<as_parameter verified="1" type="pos3d@" name="p2"/>
@@ -2266,6 +2291,7 @@
 	</as_class>
 	<as_class verified="1" name="linear_extrude" base="solid">
 		<as_description>
+			<as_line>Extrude 2d shape in z direction into 3d solid</as_line>
 			<as_line>linear_extrude extrudes a 2d shape in z-direction, creating a solid.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="linear_extrude@ linear_extrude(const shape2d@ shape, double height)">
@@ -2385,6 +2411,7 @@
 	</as_class>
 	<as_class verified="1" name="locsys3d">
 		<as_description>
+			<as_line>3d localsystem</as_line>
 			<as_line>a locsys3d represents local coordinate system directions.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="locsys3d@ locsys3d(const vec3d@ xvec, const vec3d@ zvec)">
@@ -2569,6 +2596,7 @@
 	</as_class>
 	<as_class verified="1" name="minkowski2d" base="shape2d">
 		<as_description>
+			<as_line>2d Minkowski sum operation</as_line>
 			<as_line>minkowski2d is a 2-dimensional boolean operation requiring exactly</as_line>
 			<as_line>2 parameters, a and b. The first parameter (a) is generally the larger</as_line>
 			<as_line>and can be concave or convex. The second parameter (b) is assumed smaller</as_line>
@@ -2650,6 +2678,7 @@
 	</as_class>
 	<as_class verified="1" name="minkowski3d" base="solid">
 		<as_description>
+			<as_line>3d Minkowski sum operation</as_line>
 			<as_line>minkowski3d is a 3-dimensional boolean operation requiring exactly</as_line>
 			<as_line>2 parameters, a and b. The first parameter (a) is generally the larger</as_line>
 			<as_line>and can be concave or convex. The second parameter (b) is assumed smaller</as_line>
@@ -2720,6 +2749,7 @@
 	</as_class>
 	<as_class verified="1" name="mirror" base="tmatrix">
 		<as_description>
+			<as_line>Mirror transformation around given point</as_line>
 			<as_line>mirror is a transformation creating mirror images of 2d or 3d objects.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="mirror@ mirror(double dx, double dy, double dz)">
@@ -2881,6 +2911,7 @@
 	</as_class>
 	<as_class verified="1" name="offset2d" base="shape2d">
 		<as_description>
+			<as_line>2d profile offset</as_line>
 			<as_line>offset2d is a special 2d operation used for inflating or shrinking a 2d shape,</as_line>
 			<as_line>optionally creating rounded corners and chamfers.</as_line>
 		</as_description>
@@ -3007,6 +3038,7 @@
 	</as_class>
 	<as_class verified="1" name="pface">
 		<as_description>
+			<as_line>Polyhedron face</as_line>
 			<as_line>pface represents a single face of a polyhedron. It contains integer indices</as_line>
 			<as_line>referring to the polyhedron vertices. When viewed from outside the polyhedron,</as_line>
 			<as_line>a pface should list its vertices in CCW sequence.</as_line>
@@ -3097,6 +3129,7 @@
 	</as_class>
 	<as_class verified="1" name="polygon" base="shape2d">
 		<as_description>
+			<as_line>polygon, vertices in CCW order</as_line>
 			<as_line>a polygon is a 2d object. It is defined by vertex positions listed in CCW sequence.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="polygon@ polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3)">
@@ -3317,6 +3350,7 @@
 	</as_class>
 	<as_class verified="1" name="polyhedron" base="solid">
 		<as_description>
+			<as_line>Closed polyhedron volume defined by vertices and planar faces</as_line>
 			<as_line>a polyhedron is a general 3d object, defined by its vertices and polyhedron faces.</as_line>
 			<as_line>It is useful in many contexts. It can be constructed directly or by reference to an input file.</as_line>
 		</as_description>
@@ -3546,6 +3580,7 @@
 	</as_class>
 	<as_class verified="1" name="pos2d">
 		<as_description>
+			<as_line>2d position coordinates</as_line>
 			<as_line>a pos2d is a position in 2d space. It is used with 2d objects.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="pos2d@ pos2d(const pos2d@ other)">
@@ -3641,6 +3676,7 @@
 	</as_class>
 	<as_class verified="1" name="pos3d">
 		<as_description>
+			<as_line>3d position coordinates</as_line>
 			<as_line>a pos3d is a position in 3d space. It is used with 3d objects.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="pos3d@ pos3d(const pos3d@ other)">
@@ -3751,6 +3787,7 @@
 	</as_class>
 	<as_class verified="1" name="rectangle" base="shape2d">
 		<as_description>
+			<as_line>rectangle, by default located in 1st quadrant touching origin</as_line>
 			<as_line>a rectangle is a 2d object defined by its extent in x and y. By default it touches the</as_line>
 			<as_line>origin and extends along positive x and y.</as_line>
 		</as_description>
@@ -3886,6 +3923,7 @@
 	</as_class>
 	<as_class verified="1" name="rotate_extrude" base="solid">
 		<as_description>
+			<as_line>Extrude 2d shape CCW in XZ plane into 3d solid</as_line>
 			<as_line>rotate_extrude allows extruding a 2d shape along a circular path. A positive</as_line>
 			<as_line>angle rotates the object around the y axis (CCW direction).</as_line>
 			<as_line>solid@ object = rotate_extrude(translate(100,0)*circle(10),deg:60);</as_line>
@@ -4022,6 +4060,7 @@
 	</as_class>
 	<as_class verified="1" name="rotate_x" base="tmatrix">
 		<as_description>
+			<as_line>Rotation around x</as_line>
 			<as_line>rotate_x is a transformation rotating around the x-axis. Positive angle according to right hand rule.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="rotate_x@ rotate_x(double deg = 0x7fc00000, double rad = 0x7fc00000)">
@@ -4160,6 +4199,7 @@
 	</as_class>
 	<as_class verified="1" name="rotate_y" base="tmatrix">
 		<as_description>
+			<as_line>Rotation around y</as_line>
 			<as_line>rotate_y is a transformation rotating around the y-axis. Positive angle according to right hand rule.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="rotate_y@ rotate_y(double deg = 0x7fc00000, double rad = 0x7fc00000)">
@@ -4298,6 +4338,7 @@
 	</as_class>
 	<as_class verified="1" name="rotate_z" base="tmatrix">
 		<as_description>
+			<as_line>Rotation around z</as_line>
 			<as_line>rotate_z is a transformation rotating around the z-axis. Positive angle according to right hand rule.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="rotate_z@ rotate_z(double deg = 0x7fc00000, double rad = 0x7fc00000)">
@@ -4436,6 +4477,7 @@
 	</as_class>
 	<as_class verified="1" name="scale" base="tmatrix">
 		<as_description>
+			<as_line>Scaling transformation</as_line>
 			<as_line>scale is a transformation scaling an object, either uniformly or with different factors in different directions.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="scale@ scale(double s)">
@@ -4598,6 +4640,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="shape">
+		<as_description>
+			<as_line>Abstract base for all primitives and booleans</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
 			<as_return type="boundingbox@" verified="1"/>
 		</as_member_function>
@@ -4706,6 +4751,7 @@
 	</as_class>
 	<as_class verified="1" name="shape2d" base="shape">
 		<as_description>
+			<as_line>Abstract base for 2d primitives and booleans</as_line>
 			<as_line>shape2d is an abstract base class for all 2d objects.</as_line>
 		</as_description>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -4830,6 +4876,7 @@
 	</as_class>
 	<as_class verified="1" name="solid" base="shape">
 		<as_description>
+			<as_line>Abstract base for 3d primitives and booleans</as_line>
 			<as_line>solid is an abstract base class for all 3d objects.</as_line>
 		</as_description>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -4966,6 +5013,7 @@
 	</as_class>
 	<as_class verified="1" name="sphere" base="solid">
 		<as_description>
+			<as_line>sphere, centered at origin</as_line>
 			<as_line>a sphere is a 3d object defined by its radius.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="sphere@ sphere(double r)">
@@ -5090,6 +5138,7 @@
 	</as_class>
 	<as_class verified="1" name="spline2d">
 		<as_description>
+			<as_line>2d cubic spline curve</as_line>
 			<as_line>a spline2d is a 2d cubic spline curve.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline2d@ spline2d(pos2d@[]@ points)">
@@ -5111,6 +5160,7 @@
 	</as_class>
 	<as_class verified="1" name="spline3d">
 		<as_description>
+			<as_line>3d cubic spline curve</as_line>
 			<as_line>a spline3d is a 3d cubic spline curve.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline3d@ spline3d(pos3d@[]@ points)">
@@ -5132,6 +5182,7 @@
 	</as_class>
 	<as_class verified="1" name="spline_path">
 		<as_description>
+			<as_line>spline_path for sweep</as_line>
 			<as_line>a spline_path defines a cubic spline sweep path.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline_path@ spline_path(pos3d@[]@ p, vec3d@[]@ v)">
@@ -5158,6 +5209,7 @@
 	</as_class>
 	<as_class verified="1" name="square" base="shape2d">
 		<as_description>
+			<as_line>square, by default located in 1st quadrant touching origin</as_line>
 			<as_line>a square is a 2d quadrilateral with equal dimensions in x and y.</as_line>
 			<as_line>By default it touches the origin and extend along positive x and y.</as_line>
 		</as_description>
@@ -5436,6 +5488,7 @@
 	</as_class>
 	<as_class verified="1" name="sweep" base="solid">
 		<as_description>
+			<as_line>Sweep 2d shape along path curve to create 3d solid</as_line>
 			<as_line>a sweep creates a solid by sweeping a 2d profile along a path curve</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="sweep@ sweep(const shape2d@ shape, const spline_path@ path)">
@@ -5513,6 +5566,7 @@
 	</as_class>
 	<as_class verified="1" name="tmatrix">
 		<as_description>
+			<as_line>Abstract base matrix for transformations</as_line>
 			<as_line>a tmatrix an abstract base class for all transformations.</as_line>
 		</as_description>
 		<as_member_function verified="1" signature="hmatrix@ opCast()" name="opCast">
@@ -5634,6 +5688,7 @@
 	</as_class>
 	<as_class verified="1" name="transform_extrude" base="solid">
 		<as_description>
+			<as_line>Extrude from botton to top shapes using transform</as_line>
 			<as_line>transform_extrude is a special extrision operation, defined by two 2d shapes,</as_line>
 			<as_line>representing bottom and top of extrusion.</as_line>
 		</as_description>
@@ -5733,6 +5788,7 @@
 	</as_class>
 	<as_class verified="1" name="translate" base="tmatrix">
 		<as_description>
+			<as_line>Translation in x, y and z</as_line>
 			<as_line>translate is a transformation translating a 2d or 3d object.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="translate@ translate(const vec3d@ v)">
@@ -5889,6 +5945,7 @@
 	</as_class>
 	<as_class verified="1" name="union2d" base="shape2d">
 		<as_description>
+			<as_line>2d union boolean operation</as_line>
 			<as_line>union2d is a 2-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using + operator:</as_line>
 			<as_line>explicit: shape2d@ object = union2d(circle(100),translate(75,0,0)*circle(50));</as_line>
@@ -6079,6 +6136,7 @@
 	</as_class>
 	<as_class verified="1" name="union3d" base="solid">
 		<as_description>
+			<as_line>3d union boolean operation</as_line>
 			<as_line>union3d is a 3-dimensional boolean operation. It can be invoked either</as_line>
 			<as_line>explicitly or using + operator:</as_line>
 			<as_line>explicit: solid@ object = union3d(sphere(100),translate(75,0,0)*sphere(50));</as_line>
@@ -6390,6 +6448,7 @@
 	</as_class>
 	<as_class verified="1" name="vec2d">
 		<as_description>
+			<as_line>2d direction vector</as_line>
 			<as_line>vec2d is a 2-dimensional vector offering useful operations such as dot and cross products.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="vec2d@ vec2d(const pos2d@ p1, const pos2d@ p2)">
@@ -6538,6 +6597,7 @@
 	</as_class>
 	<as_class verified="1" name="vec3d">
 		<as_description>
+			<as_line>3d direction vector</as_line>
 			<as_line>vec3d is a 3-dimensional vector offering useful operations such as dot and cross products.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="vec3d@ vec3d(const pos3d@ p1, const pos3d@ p2)">
