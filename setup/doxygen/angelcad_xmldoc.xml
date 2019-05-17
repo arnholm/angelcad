@@ -163,6 +163,13 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="array">
+		<as_description>
+			<as_line>Array of values or references</as_line>
+			<as_line>Arrays by examples</as_line>
+			<as_line>array of double values : array&lt;double&gt;</as_line>
+			<as_line>array of pos3d references : array&lt;pos3d@ &gt;, may also be written as pos3d@[]</as_line>
+			<as_line>reference to array of pos3d references : array&lt;pos3d@ &gt;@, may also be written as pos3d@[]@</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="T[]@ array(int&amp;in)">
 			<as_parameter verified="1" type="int" name=""/>
 		</as_constructor>
