@@ -36,6 +36,7 @@ typedef map<wxString,wxString> CmdLineMap;    // CmdLineMap
 #include "as_document.h"
 #include "ce_angelscript_ex/as_reftype.h"
 #include "ce_angelscript_ex/as_xml.h"
+#include "ce_angelscript_ex/as_member_function.h"
 
 static const wxCmdLineEntryDesc cmdLineDesc[] =
 {
@@ -44,9 +45,10 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_OPTION, wxT_2("include"),     wxT_2("include"),     wxT_2("optional library include path"),        wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("outsub"),      wxT_2("outsub"),      wxT_2("optional output subdirectory"),         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_SWITCH, wxT_2("doc"),         wxT_2("doc"),         wxT_2("Write 'angelcad.h'"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_OPTION, wxT_2("doxy"),        wxT_2("doxy"),        wxT_2("Write 'angelcad.h' with doxygen info"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
+//  { wxCMD_LINE_SWITCH, wxT_2("doc"),         wxT_2("doc"),         wxT_2("Write 'angelcad.h'"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
+//  { wxCMD_LINE_OPTION, wxT_2("doxy"),        wxT_2("doxy"),        wxT_2("Write 'angelcad.h' with doxygen info"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation + 'angelcad.h'"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_OPTION, wxT_2("xmltodo"),     wxT_2("xmltodo"),     wxT_2("Add XML_TODO items: -xmltodo=\"level type\" "),      wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("h"),           wxT_2("help"),        wxT_2("Command line help"),                    wxCMD_LINE_VAL_NONE,   wxCMD_LINE_OPTION_HELP    },
   { wxCMD_LINE_SWITCH, wxT_2("v"),           wxT_2("version"),     wxT_2("Show version number only"),             wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_NONE,   wxT_2(""),            wxT_2(""),            wxT_2(""),                                     wxCMD_LINE_VAL_NONE  , wxCMD_LINE_PARAM_OPTIONAL }
@@ -124,6 +126,7 @@ int main(int argc, char **argv)
    bool has_doc         = cmdMap.find("doc") != cmdMap.end();
    bool has_doxy        = cmdMap.find("doxy") != cmdMap.end();
    bool has_xmldoc      = cmdMap.find("xmldoc") != cmdMap.end();
+   bool has_xmltodo     = cmdMap.find("xmltodo") != cmdMap.end();
    bool has_version     = cmdMap.find("version") != cmdMap.end();
    if(has_doxy)has_doc = true;
 
@@ -157,7 +160,7 @@ int main(int argc, char **argv)
       }
       else if(has_xmldoc) {
 
-         // generate or opdate XML documentation
+         // generate or update XML documentation
 
          wxFileName xmlFile("angelcad_xmldoc.xml");
          string xmlpath = xmlFile.GetFullPath().ToStdString();
@@ -173,10 +176,40 @@ int main(int argc, char **argv)
          // update or create XML doc from script engine data
          xml_doc.from_script_engine(asF()->engine());
 
+         if(has_xmltodo) {
+            std::string xmltodo = cmdMap["xmltodo"].ToStdString();
+            size_t ipos = xmltodo.find(',');
+            if(ipos != std::string::npos) xmltodo[ipos]=' ';
+            istringstream in(xmltodo);
+            size_t level=0;
+            std::string class_type;
+            in >> level >> class_type;
+            cout << "XML_TODO="<<level << ' ' << class_type << endl;
+
+            as_member_function::add_export_filter("opImplCast");
+            as_member_function::add_export_filter("opCast");
+            as_member_function::add_export_filter("Type");
+            as_member_function::add_export_filter("Refcount");
+
+            xml_doc.add_xml_todo(level,class_type);
+         }
+
          // export the updated XML file
          ofstream out(xmlpath);
          xml_doc.write_xml(out);
          cout << "Created xml file: " << xmlpath << endl;
+
+         // generate 'angelcad.h' as input to doxygen
+
+         // fix array syntax for these types by installing the basic type subject to replacement
+         // for these types, instances of "type[]" is replaced with "array<type>" in generated header signatures
+         as_xml::add_array_type("shape2d@");
+         as_xml::add_array_type("solid@");
+         as_xml::add_array_type("pos2d@");
+         as_xml::add_array_type("pos3d@");
+         as_xml::add_array_type("vec2d@");
+         as_xml::add_array_type("vec3d@");
+         as_xml::add_array_type("pface@");
 
          ofstream hfile(xml_doc.appnam()+".h");
          xml_doc.write_header(hfile);

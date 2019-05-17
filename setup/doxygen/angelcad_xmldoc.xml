@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <as_xml appnam="angelcad">
 	<as_class verified="1" name="IStream">
+		<as_description>
+			<as_line>Intput stream (usable in console window only)</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="IStream&amp; clearbuffer()" name="clearbuffer">
 			<as_return type="IStream&amp;" verified="1"/>
 		</as_member_function>
@@ -90,6 +93,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="OStream">
+		<as_description>
+			<as_line>Output stream allowing expressions like &quot;cout &lt;&lt; Hello World! &lt;&lt; endl;&quot;</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="OStream&amp; flush()" name="flush">
 			<as_return type="OStream&amp;" verified="1"/>
 		</as_member_function>
@@ -318,9 +324,15 @@
 			</as_description>
 		</as_constructor>
 		<as_member_function verified="1" signature="bool is_empty() const" name="is_empty">
+			<as_description>
+				<as_line>True when no points have been enclosed</as_line>
+			</as_description>
 			<as_return type="bool" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="double diagonal() const" name="diagonal">
+			<as_description>
+				<as_line>Distance between p1 and p2</as_line>
+			</as_description>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="double dx() const" name="dx">
@@ -354,6 +366,9 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
+			<as_description>
+				<as_line>Reference cound for this object</as_line>
+			</as_description>
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ center() const" name="center">
@@ -387,6 +402,9 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="string Type() const" name="Type">
+			<as_description>
+				<as_line>Type string for this object</as_line>
+			</as_description>
 			<as_return type="string" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void enclose(pos3d@ p)" name="enclose">
@@ -407,6 +425,9 @@
 			<as_line>A 2d object defined by its radius. Centered on origin.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="circle@ circle(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3)">
+			<as_description>
+				<as_line>Construct a circle from 3 points on the circumference</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1"/>
 			<as_parameter verified="1" type="pos2d@" name="p2"/>
 			<as_parameter verified="1" type="pos2d@" name="p3"/>
@@ -539,7 +560,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="cone@ cone(double h, double r1, double r2, bool center = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create cone extending in z direction</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="h">
 				<as_description>
@@ -775,7 +796,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="cuboid@ cuboid(double dx, double dy, double dz, bool center = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create cuboid</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="dx">
 				<as_description>
@@ -926,7 +947,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="cylinder@ cylinder(double h, double r, bool center = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create cylinder</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="h">
 				<as_description>
@@ -1192,7 +1213,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="difference2d@ difference2d(shape2d@ incl, shape2d@ excl)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute boolean difference for 2d objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="incl">
 				<as_description>
@@ -1305,7 +1326,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="difference3d@ difference3d(solid@ incl, solid@ excl)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute boolean difference for 3d objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="incl">
 				<as_description>
@@ -1417,7 +1438,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="fill2d@ fill2d(const shape2d@ s1)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Fill internal holes on a 2d object</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -1426,6 +1447,9 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="fill2d@ fill2d(shape2d@[]@ arr)">
+			<as_description>
+				<as_line>Fill internal voids of 2d objects in an array</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -1485,13 +1509,16 @@
 			<as_line>hmatrix is a transformation expressed as homogenous transformation matrix.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="hmatrix@ hmatrix(const vec3d@ xvec, const vec3d@ yvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ))">
+			<as_description>
+				<as_line>Create 4x4 homogenous matrix from x and y direction vectors and an optional origin positio</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="xvec"/>
 			<as_parameter verified="1" type="vec3d@" name="yvec"/>
 			<as_parameter verified="1" type="pos3d@" name="pos" default="pos3d ( 0 , 0 , 0 )"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="hmatrix@ hmatrix(const vec3d@ xvec, const vec3d@ yvec, const vec3d@ zvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ))">
 			<as_description>
-				<as_line>constructor, 4 column values</as_line>
+				<as_line>Create 4x4 homogenous matrix from 3 direction vectors and an optional origin position</as_line>
 			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="xvec">
 				<as_description>
@@ -1615,7 +1642,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="hull2d@ hull2d(const shape2d@ s1, const shape2d@ s2)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d convex hull from 2 shapes</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -1630,7 +1657,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull2d@ hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d convex hull from 3 shapes</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -1650,7 +1677,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull2d@ hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d convex hull from 4 shapes</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -1675,7 +1702,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull2d@ hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4, const shape2d@ s5)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d convex hull from 5 shapes</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -1704,6 +1731,9 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="hull2d@ hull2d(shape2d@[]@ arr)">
+			<as_description>
+				<as_line>Compute 2d convex hull from an array of 2d shapes</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -1805,7 +1835,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="hull3d@ hull3d(const solid@ s1, const solid@ s2)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 3d convex hull from 2 solids</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -1820,7 +1850,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull3d@ hull3d(const solid@ s1, const solid@ s2, const solid@ s3)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 3d convex hull from 3 solids</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -1840,7 +1870,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull3d@ hull3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 3d convex hull from 4 solids</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -1865,7 +1895,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="hull3d@ hull3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4, const solid@ s5)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 3d convex hull from 5 solids</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -1894,6 +1924,9 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="hull3d@ hull3d(solid@[]@ arr)">
+			<as_description>
+				<as_line>Compute 3d convex hull from an array of solids</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -2237,13 +2270,22 @@
 			<as_line>2d line</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="line2d@ line2d(const pos2d@ p1, const pos2d@ p2)">
+			<as_description>
+				<as_line>Construct line segment from p1 to p2</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1"/>
 			<as_parameter verified="1" type="pos2d@" name="p2"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="double length() const" name="length">
+			<as_description>
+				<as_line>Compute length of line segment</as_line>
+			</as_description>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="double project(pos2d@ point) const" name="project">
+			<as_description>
+				<as_line>Project point onto line segment and return line parameter of projetion point</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="point"/>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
@@ -2251,12 +2293,21 @@
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ end1() const" name="end1">
+			<as_description>
+				<as_line>Return 1st end point on line segment</as_line>
+			</as_description>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ end2() const" name="end2">
+			<as_description>
+				<as_line>Return 2nd end point on line segment</as_line>
+			</as_description>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ interpolate(double par) const" name="interpolate">
+			<as_description>
+				<as_line>Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="par"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
@@ -2269,13 +2320,22 @@
 			<as_line>3d line</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="line3d@ line3d(const pos3d@ p1, const pos3d@ p2)">
+			<as_description>
+				<as_line>Construct line segment from p1 to p2</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos3d@" name="p1"/>
 			<as_parameter verified="1" type="pos3d@" name="p2"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="double length() const" name="length">
+			<as_description>
+				<as_line>Compute length of line segment.</as_line>
+			</as_description>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="double project(pos3d@ point) const" name="project">
+			<as_description>
+				<as_line>Project point onto line segment and return line parameter of projetion point</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos3d@" name="point"/>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
@@ -2283,12 +2343,21 @@
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ end1() const" name="end1">
+			<as_description>
+				<as_line>Return 1st end point on line segment.</as_line>
+			</as_description>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ end2() const" name="end2">
+			<as_description>
+				<as_line>Return 2nd end point on line segment.</as_line>
+			</as_description>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ interpolate(double par) const" name="interpolate">
+			<as_description>
+				<as_line>Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="par"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
@@ -2303,7 +2372,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="linear_extrude@ linear_extrude(const shape2d@ shape, double height)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute linear extrusion of 2d shape</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="shape">
 				<as_description>
@@ -2423,7 +2492,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="locsys3d@ locsys3d(const vec3d@ xvec, const vec3d@ zvec)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute local system from local x and z vectors</as_line>
 			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="xvec">
 				<as_description>
@@ -2481,6 +2550,15 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="map">
+		<as_description>
+			<as_line>Template container storing sorted keys and values: map&lt;T_key,T_value&gt;</as_line>
+			<as_line>basic use:</as_line>
+			<as_line>map&lt;int,string&gt; cont;</as_line>
+			<as_line>cont.insert(2,&quot;bb&quot;);</as_line>
+			<as_line>cont.insert(1,&quot;aa&quot;);</as_line>
+			<as_line>cont.insert(3,&quot;cc&quot;);</as_line>
+			<as_line>for(auto it = cont.begin(); it++;) cout &lt;&lt; it.key &lt;&lt; it.value &lt;&lt; endl;</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="map&lt;T_key,T_value&gt;@ map(int&amp;in)">
 			<as_parameter verified="1" type="int" name=""/>
 		</as_constructor>
@@ -2561,6 +2639,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="map_iterator">
+		<as_description>
+			<as_line>Container iterator type for map</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="T_value&amp; current_value()" name="current_value">
 			<as_return type="T_value&amp;" verified="1"/>
 		</as_member_function>
@@ -2612,7 +2693,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="minkowski2d@ minkowski2d(const shape2d@ a, const shape2d@ b)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d minkowski from a and b</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="a">
 				<as_description>
@@ -2689,7 +2770,7 @@
 			<as_line>minkowski3d is a 3-dimensional boolean operation requiring exactly</as_line>
 			<as_line>2 parameters, a and b. The first parameter (a) is generally the larger</as_line>
 			<as_line>and can be concave or convex. The second parameter (b) is assumed smaller</as_line>
-			<as_line>and convex (such as a circle). Typical use of the minkowski sum is to</as_line>
+			<as_line>and convex (such as a sphere). Typical use of the minkowski sum is to</as_line>
 			<as_line>create an object with rounded edges.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="minkowski3d@ minkowski3d(const solid@ a, const solid@ b)">
@@ -2924,7 +3005,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="offset2d@ offset2d(const shape2d@ profile, double r = 0x7fc00000, double delta = 0x7fc00000, bool chamfer = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute 2d offset for a 2d profile</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="profile">
 				<as_description>
@@ -2948,6 +3029,9 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="offset2d@ offset2d(shape2d@[]@ arr, double r = 0x7fc00000, double delta = 0x7fc00000, bool chamfer = false)">
+			<as_description>
+				<as_line>Compute 2d offset for an array of 2d shapes</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 			<as_parameter verified="1" type="double" name="r" default="0x7fc00000"/>
 			<as_parameter verified="1" type="double" name="delta" default="0x7fc00000"/>
@@ -3230,10 +3314,16 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="polygon@ polygon(double r, uint np)">
+			<as_description>
+				<as_line>Create a circular polygon from a radius and np points</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="r"/>
 			<as_parameter verified="1" type="uint" name="np"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="polygon@ polygon(pos2d@[]@ points, bool check = true)">
+			<as_description>
+				<as_line>Create a polygon from an array of points.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="points"/>
 			<as_parameter verified="1" type="bool" name="check" default="true"/>
 		</as_constructor>
@@ -3258,6 +3348,9 @@
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ vertex(uint iv) const" name="vertex">
+			<as_description>
+				<as_line>Return polygon vertex from zero based vertex index iv.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="uint" name="iv"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
@@ -3362,13 +3455,22 @@
 			<as_line>It is useful in many contexts. It can be constructed directly or by reference to an input file.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="polyhedron@ polyhedron(pos3d@[]@ points)">
+			<as_description>
+				<as_line>Construct polyhedron from a point cloud. The result is the convex hull polyhedron.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="points"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="polyhedron@ polyhedron(pos3d@[]@ points, pface@[]@ faces)">
+			<as_description>
+				<as_line>Construct polyhedron from arrays of points and faces. Face normals must point out.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="points"/>
 			<as_parameter verified="1" type="array@" name="faces"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="polyhedron@ polyhedron(string file, int id = - 1)">
+			<as_description>
+				<as_line>Read polyhedron from file (AMF;OBJ or OFF formats)</as_line>
+			</as_description>
 			<as_parameter verified="1" type="string" name="file"/>
 			<as_parameter verified="1" type="int" name="id" default="- 1"/>
 		</as_constructor>
@@ -3555,6 +3657,9 @@
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void verify() const" name="verify">
+			<as_description>
+				<as_line>Verify that the polyhedron is closed and without errors.</as_line>
+			</as_description>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void write_csg(string path)" name="write_csg">
@@ -3591,6 +3696,9 @@
 			<as_line>a pos2d is a position in 2d space. It is used with 2d objects.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="pos2d@ pos2d(const pos2d@ other)">
+			<as_description>
+				<as_line>Construct position as copy of other position</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="other"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="pos2d@ pos2d(double x, double y)">
@@ -3647,26 +3755,44 @@
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opAdd(pos2d@ p1)" name="opAdd">
+			<as_description>
+				<as_line>Add 2 positions, return new position: p = p1 + p2</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opAdd(vec2d@ v1)" name="opAdd">
+			<as_description>
+				<as_line>Add position and vector, return new position: p = p1 + v1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="v1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opAdd_r(vec2d@ v1)" name="opAdd_r">
+			<as_description>
+				<as_line>Add vector and position, return new position: p = v1 + p1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="v1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opMul(double f1)" name="opMul">
+			<as_description>
+				<as_line>Multiply position by factor, return new position: p = p1 * f1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opMul_r(double f1)" name="opMul_r">
+			<as_description>
+				<as_line>Multiply position by factor, return new position: p = f1 * p1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opSub(vec2d@ v1)" name="opSub">
+			<as_description>
+				<as_line>Subtract vector from position, return new position: p = p1 - v1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="v1"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
@@ -3687,6 +3813,9 @@
 			<as_line>a pos3d is a position in 3d space. It is used with 3d objects.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="pos3d@ pos3d(const pos3d@ other)">
+			<as_description>
+				<as_line>Construct position as copy of other position.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos3d@" name="other"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="pos3d@ pos3d(double x, double y, double z)">
@@ -3758,26 +3887,44 @@
 			<as_return type="int" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opAdd(pos3d@ p1)" name="opAdd">
+			<as_description>
+				<as_line>Add 2 positions, return new position: p = p1 + p2.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos3d@" name="p1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opAdd(vec3d@ v1)" name="opAdd">
+			<as_description>
+				<as_line>Add position and vector, return new position: p = p1 + v1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opAdd_r(vec3d@ v1)" name="opAdd_r">
+			<as_description>
+				<as_line>Add vector and position, return new position: p = v1 + p1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opMul(double f1)" name="opMul">
+			<as_description>
+				<as_line>Multiply position by factor, return new position: p = p1 * f1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opMul_r(double f1)" name="opMul_r">
+			<as_description>
+				<as_line>Multiply position by factor, return new position: p = f1 * p1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ opSub(vec3d@ v1)" name="opSub">
+			<as_description>
+				<as_line>Subtract vector from position, return new position: p = p1 - v1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v1"/>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
@@ -3937,7 +4084,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="rotate_extrude@ rotate_extrude(const shape2d@ shape, double deg, double pitch = 0.0)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Construct solid by rotating shape on positive x axis around y axis, counter-clockwise</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="shape">
 				<as_description>
@@ -4651,6 +4798,9 @@
 			<as_line>Abstract base for all primitives and booleans</as_line>
 		</as_description>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
+			<as_description>
+				<as_line>Return bounding box of object</as_line>
+			</as_description>
 			<as_return type="boundingbox@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="circle@ opCast()" name="opCast">
@@ -4735,6 +4885,9 @@
 			<as_return type="sweep@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="tmatrix@ transform() const" name="transform">
+			<as_description>
+				<as_line>Return transformation matrix of object</as_line>
+			</as_description>
 			<as_return type="tmatrix@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="transform_extrude@ opCast()" name="opCast">
@@ -4747,10 +4900,16 @@
 			<as_return type="union3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void write_csg(string path)" name="write_csg">
+			<as_description>
+				<as_line>Write object to OpenSCAD .csg file</as_line>
+			</as_description>
 			<as_parameter verified="1" type="string" name="path"/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void write_xcsg(string path, double secant_tolerance = - 1.0)" name="write_xcsg">
+			<as_description>
+				<as_line>Write object to .xcsg file for processing by xcsg program.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="string" name="path"/>
 			<as_parameter verified="1" type="double" name="secant_tolerance" default="- 1.0"/>
 			<as_return type="void" verified="1"/>
@@ -4817,6 +4976,9 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="shape2d@ opMul(tmatrix@ matrix)" name="opMul">
+			<as_description>
+				<as_line>Transform object by matrix multiplication: shape2d@ o2 = T * o1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="tmatrix@" name="matrix"/>
 			<as_return type="shape2d@" verified="1"/>
 		</as_member_function>
@@ -4951,6 +5113,9 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="solid@ opMul(tmatrix@ matrix)" name="opMul">
+			<as_description>
+				<as_line>Transform object by matrix multiplication: solid@ o2 = T * o1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="tmatrix@" name="matrix"/>
 			<as_return type="solid@" verified="1"/>
 		</as_member_function>
@@ -5149,6 +5314,9 @@
 			<as_line>a spline2d is a 2d cubic spline curve.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline2d@ spline2d(pos2d@[]@ points)">
+			<as_description>
+				<as_line>Compute 2d spline curve from an array of positions on curve.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="points"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
@@ -5171,6 +5339,9 @@
 			<as_line>a spline3d is a 3d cubic spline curve.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline3d@ spline3d(pos3d@[]@ points)">
+			<as_description>
+				<as_line>Compute 3d spline curve from an array of positions on curve</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="points"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
@@ -5193,10 +5364,16 @@
 			<as_line>a spline_path defines a cubic spline sweep path.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="spline_path@ spline_path(pos3d@[]@ p, vec3d@[]@ v)">
+			<as_description>
+				<as_line>Construct path for use with sweep from array of points and the normal directions for each point.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="p"/>
 			<as_parameter verified="1" type="array@" name="v"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="spline_path@ spline_path(pos3d@[]@ p, vec3d@ v)">
+			<as_description>
+				<as_line>Construct path for use with sweep from array of points and a single, common normal direction.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="p"/>
 			<as_parameter verified="1" type="vec3d@" name="v"/>
 		</as_constructor>
@@ -5336,6 +5513,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="string">
+		<as_description>
+			<as_line>String type similar to C++ strings.</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="bool empty() const" name="empty">
 			<as_return type="bool" verified="1"/>
 		</as_member_function>
@@ -5500,7 +5680,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="sweep@ sweep(const shape2d@ shape, const spline_path@ path)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Construct 3d object by sweeping 2d shape along spline path.</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="shape">
 				<as_description>
@@ -5586,6 +5766,9 @@
 			<as_return type="mirror@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos2d@ opMul(pos2d@ obj)" name="opMul">
+			<as_description>
+				<as_line>Multiply a position with transformation and return a new position.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="obj"/>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
@@ -5605,6 +5788,9 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="pos3d@ origin() const" name="origin">
+			<as_description>
+				<as_line>Return origin of transformation (4th column)</as_line>
+			</as_description>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="rotate_x@ opCast()" name="opCast">
@@ -5678,12 +5864,21 @@
 			<as_return type="translate@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ xdir() const" name="xdir">
+			<as_description>
+				<as_line>Return x direction vector</as_line>
+			</as_description>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ ydir() const" name="ydir">
+			<as_description>
+				<as_line>Return y direction vector</as_line>
+			</as_description>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ zdir() const" name="zdir">
+			<as_description>
+				<as_line>Return z direction vector</as_line>
+			</as_description>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void dump() const" name="dump">
@@ -5799,6 +5994,9 @@
 			<as_line>translate is a transformation translating a 2d or 3d object.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="translate@ translate(const vec3d@ v)">
+			<as_description>
+				<as_line>Specify translation as a 3d vector</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="translate@ translate(double dx, double dy, double dz = 0.0)">
@@ -6474,11 +6672,14 @@
 			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="vec2d@ vec2d(const vec2d@ other)">
+			<as_description>
+				<as_line>Construct direction vector from other vector</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="other"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="vec2d@ vec2d(double x, double y)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Construct direction vector from x and y components</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="x">
 				<as_description>
@@ -6580,18 +6781,30 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec2d@ opAdd(vec2d@ v1)" name="opAdd">
+			<as_description>
+				<as_line>Add vector to vector, return new vector: vec2d@ v = v0 + v1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="v1"/>
 			<as_return type="vec2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec2d@ opMul(double f1)" name="opMul">
+			<as_description>
+				<as_line>Multiply vector with factor, return new vector: vec2d@ v = v0 * f1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="vec2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec2d@ opMul_r(double f1)" name="opMul_r">
+			<as_description>
+				<as_line>Multiply vector with factor, return new vector: vec2d@ v = f1 * v0</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="vec2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec2d@ opSub(vec2d@ v1)" name="opSub">
+			<as_description>
+				<as_line>Subtract vector from vector, return new vector: vec2d@ v = v0 - v1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec2d@" name="v1"/>
 			<as_return type="vec2d@" verified="1"/>
 		</as_member_function>
@@ -6608,10 +6821,16 @@
 			<as_line>vec3d is a 3-dimensional vector offering useful operations such as dot and cross products.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="vec3d@ vec3d(const pos3d@ p1, const pos3d@ p2)">
+			<as_description>
+				<as_line>Construct direction vector as direction from p1 to p2</as_line>
+			</as_description>
 			<as_parameter verified="1" type="pos3d@" name="p1"/>
 			<as_parameter verified="1" type="pos3d@" name="p2"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="vec3d@ vec3d(const vec3d@ other)">
+			<as_description>
+				<as_line>Construct direction vector from other vector.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="other"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="vec3d@ vec3d(double x, double y, double z)">
@@ -6733,18 +6952,30 @@
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ opAdd(vec3d@ v1)" name="opAdd">
+			<as_description>
+				<as_line>Add vector to vector, return new vector: vec3d@ v = v0 + v1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v1"/>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ opMul(double f1)" name="opMul">
+			<as_description>
+				<as_line>Multiply vector with factor, return new vector: vec3d@ v = v0 * f1</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ opMul_r(double f1)" name="opMul_r">
+			<as_description>
+				<as_line>Multiply vector with factor, return new vector: vec3d@ v = f1 * v0.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="double" name="f1"/>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="vec3d@ opSub(vec3d@ v1)" name="opSub">
+			<as_description>
+				<as_line>Subtract vector from vector, return new vector: vec3d@ v = v0 - v1.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="v1"/>
 			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>

@@ -1,4 +1,5 @@
 
+/// Intput stream (usable in console window only)
 class IStream {
 public:
    /*!  \return IStream& */
@@ -89,6 +90,7 @@ public:
 
 };
 
+/// Output stream allowing expressions like "cout << Hello World! << endl;"
 class OStream {
 public:
    /*!  \return OStream& */
@@ -274,9 +276,11 @@ public:
    /*! creates an empty/uninitialised bounding box   */
    boundingbox();
 
+   /// True when no points have been enclosed
    /*!  \return bool */
   bool  is_empty() const;
 
+   /// Distance between p1 and p2
    /*!  \return double */
   double  diagonal() const;
 
@@ -314,6 +318,7 @@ public:
 /*! A 2d object defined by its radius. Centered on origin.*/
 class circle : public shape2d {
 public:
+   /// Construct a circle from 3 points on the circumference
    /*!  \param p1 pos2d@
    \n  \param p2 pos2d@
    \n  \param p3 pos2d@ */
@@ -338,7 +343,7 @@ public:
 \n By default the bottom is at origin*/
 class cone : public solid {
 public:
-   /// constructor
+   /// Create cone extending in z direction
    /*!  \param h double, height of cone
    \n  \param r1 double, bottom radius of cone
    \n  \param r2 double, top radius of cone
@@ -388,7 +393,7 @@ public:
 \n By default the cuboid touches the origin, and extends along positive x,y,z.*/
 class cuboid : public solid {
 public:
-   /// constructor
+   /// Create cuboid
    /*!  \param dx double, length in x-drection
    \n  \param dy double, length of y-direction
    \n  \param dz double, length of z-direction
@@ -414,7 +419,7 @@ public:
 \n By default the cuboid extends from the origin, in z-direction.*/
 class cylinder : public solid {
 public:
-   /// constructor
+   /// Create cylinder
    /*!  \param h double, height of cylinder
    \n  \param r double, radius of cylinder
    \n  \param center bool, true if cylinder is centered on origin in z-direction */
@@ -445,7 +450,7 @@ public:
 \n using subtraction operator: shape2d@ object = circle(100) - circle(50);*/
 class difference2d : public shape2d {
 public:
-   /// constructor
+   /// Compute boolean difference for 2d objects
    /*!  \param incl shape2d@, object to be included
    \n  \param excl shape2d@, object to be excluded (subtracted) */
    difference2d(shape2d@ incl, shape2d@ excl);
@@ -459,7 +464,7 @@ public:
 \n using subtraction operator: solid@ object = sphere(100) - sphere(50);*/
 class difference3d : public solid {
 public:
-   /// constructor
+   /// Compute boolean difference for 3d objects
    /*!  \param incl solid@, objects to be included
    \n  \param excl solid@, objects to be excluded (subtracted) */
    difference3d(solid@ incl, solid@ excl);
@@ -472,10 +477,11 @@ public:
 \n fill2d can be invoked either on a single shape2d or an array.*/
 class fill2d : public shape2d {
 public:
-   /// constructor
+   /// Fill internal holes on a 2d object
    /*!  \param s1 shape2d@, 2d shape */
    fill2d(const shape2d@ s1);
 
+   /// Fill internal voids of 2d objects in an array
    /*!  \param arr array@ */
    fill2d(array<shape2d@>@ arr);
 
@@ -485,12 +491,13 @@ public:
 /*! hmatrix is a transformation expressed as homogenous transformation matrix.*/
 class hmatrix : public tmatrix {
 public:
+   /// Create 4x4 homogenous matrix from x and y direction vectors and an optional origin positio
    /*!  \param xvec vec3d@
    \n  \param yvec vec3d@
    \n  \param pos pos3d@ */
    hmatrix(const vec3d@ xvec, const vec3d@ yvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ));
 
-   /// constructor, 4 column values
+   /// Create 4x4 homogenous matrix from 3 direction vectors and an optional origin position
    /*!  \param xvec vec3d@, 1st matrix column
    \n  \param yvec vec3d@, 2nd matrix column
    \n  \param zvec vec3d@, 3rd matrix column
@@ -505,25 +512,25 @@ public:
 \n to create a rectangle with rounded cornes using 4 circles.*/
 class hull2d : public shape2d {
 public:
-   /// constructor
+   /// Compute 2d convex hull from 2 shapes
    /*!  \param s1 shape2d@, shape
    \n  \param s2 shape2d@, shape */
    hull2d(const shape2d@ s1, const shape2d@ s2);
 
-   /// constructor
+   /// Compute 2d convex hull from 3 shapes
    /*!  \param s1 shape2d@, shape
    \n  \param s2 shape2d@, shape
    \n  \param s3 shape2d@, shape */
    hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3);
 
-   /// constructor
+   /// Compute 2d convex hull from 4 shapes
    /*!  \param s1 shape2d@, shape
    \n  \param s2 shape2d@, shape
    \n  \param s3 shape2d@, shape
    \n  \param s4 shape2d@, shape */
    hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4);
 
-   /// constructor
+   /// Compute 2d convex hull from 5 shapes
    /*!  \param s1 shape2d@, shape
    \n  \param s2 shape2d@, shape
    \n  \param s3 shape2d@, shape
@@ -531,6 +538,7 @@ public:
    \n  \param s5 shape2d@, shape */
    hull2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4, const shape2d@ s5);
 
+   /// Compute 2d convex hull from an array of 2d shapes
    /*!  \param arr array@ */
    hull2d(array<shape2d@>@ arr);
 
@@ -542,25 +550,25 @@ public:
 \n to create a cuboid with rounded cornes using 8 spheres.*/
 class hull3d : public solid {
 public:
-   /// constructor
+   /// Compute 3d convex hull from 2 solids
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid */
    hull3d(const solid@ s1, const solid@ s2);
 
-   /// constructor
+   /// Compute 3d convex hull from 3 solids
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid */
    hull3d(const solid@ s1, const solid@ s2, const solid@ s3);
 
-   /// constructor
+   /// Compute 3d convex hull from 4 solids
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid
    \n  \param s4 solid@, solid */
    hull3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4);
 
-   /// constructor
+   /// Compute 3d convex hull from 5 solids
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid
@@ -568,6 +576,7 @@ public:
    \n  \param s5 solid@, solid */
    hull3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4, const solid@ s5);
 
+   /// Compute 3d convex hull from an array of solids
    /*!  \param arr array@ */
    hull3d(array<solid@>@ arr);
 
@@ -644,23 +653,29 @@ public:
 /// 2d line
 class line2d {
 public:
+   /// Construct line segment from p1 to p2
    /*!  \param p1 pos2d@
    \n  \param p2 pos2d@ */
    line2d(const pos2d@ p1, const pos2d@ p2);
 
+   /// Compute length of line segment
    /*!  \return double */
   double  length() const;
 
+   /// Project point onto line segment and return line parameter of projetion point
    /*!  \param point pos2d@
    \n  \return double */
   double  project(pos2d@ point) const;
 
+   /// Return 1st end point on line segment
    /*!  \return pos2d@ */
   pos2d*  end1() const;
 
+   /// Return 2nd end point on line segment
    /*!  \return pos2d@ */
   pos2d*  end2() const;
 
+   /// Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)
    /*!  \param par double
    \n  \return pos2d@ */
   pos2d*  interpolate(double par) const;
@@ -670,23 +685,29 @@ public:
 /// 3d line
 class line3d {
 public:
+   /// Construct line segment from p1 to p2
    /*!  \param p1 pos3d@
    \n  \param p2 pos3d@ */
    line3d(const pos3d@ p1, const pos3d@ p2);
 
+   /// Compute length of line segment.
    /*!  \return double */
   double  length() const;
 
+   /// Project point onto line segment and return line parameter of projetion point
    /*!  \param point pos3d@
    \n  \return double */
   double  project(pos3d@ point) const;
 
+   /// Return 1st end point on line segment.
    /*!  \return pos3d@ */
   pos3d*  end1() const;
 
+   /// Return 2nd end point on line segment.
    /*!  \return pos3d@ */
   pos3d*  end2() const;
 
+   /// Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)
    /*!  \param par double
    \n  \return pos3d@ */
   pos3d*  interpolate(double par) const;
@@ -697,7 +718,7 @@ public:
 /*! linear_extrude extrudes a 2d shape in z-direction, creating a solid.*/
 class linear_extrude : public solid {
 public:
-   /// constructor
+   /// Compute linear extrusion of 2d shape
    /*!  \param shape shape2d@, 2d profile to be extruded
    \n  \param height double, distance in z direction to extrude */
    linear_extrude(const shape2d@ shape, double height);
@@ -712,7 +733,7 @@ public:
 /*! a locsys3d represents local coordinate system directions.*/
 class locsys3d {
 public:
-   /// constructor
+   /// Compute local system from local x and z vectors
    /*!  \param xvec vec3d@, local x-direction vector
    \n  \param zvec vec3d@, local z-direction vector */
    locsys3d(const vec3d@ xvec, const vec3d@ zvec);
@@ -731,6 +752,13 @@ public:
 
 };
 
+/// Template container storing sorted keys and values: map<T_key,T_value>
+/*! basic use:
+\n map<int,string> cont;
+\n cont.insert(2,"bb");
+\n cont.insert(1,"aa");
+\n cont.insert(3,"cc");
+\n for(auto it = cont.begin(); it++;) cout << it.key << it.value << endl;*/
 class map {
 public:
    /*!  \param  int */
@@ -808,6 +836,7 @@ public:
 
 };
 
+/// Container iterator type for map
 class map_iterator {
 public:
    /*!  \return T_value& */
@@ -858,7 +887,7 @@ public:
 \n create an object with rounded corners.*/
 class minkowski2d : public shape2d {
 public:
-   /// constructor
+   /// Compute 2d minkowski from a and b
    /*!  \param a shape2d@, convex/concave object to be modified
    \n  \param b shape2d@, convex 'tool' object */
    minkowski2d(const shape2d@ a, const shape2d@ b);
@@ -869,7 +898,7 @@ public:
 /*! minkowski3d is a 3-dimensional boolean operation requiring exactly
 \n 2 parameters, a and b. The first parameter (a) is generally the larger
 \n and can be concave or convex. The second parameter (b) is assumed smaller
-\n and convex (such as a circle). Typical use of the minkowski sum is to
+\n and convex (such as a sphere). Typical use of the minkowski sum is to
 \n create an object with rounded edges.*/
 class minkowski3d : public solid {
 public:
@@ -913,13 +942,14 @@ public:
 \n optionally creating rounded corners and chamfers.*/
 class offset2d : public shape2d {
 public:
-   /// constructor
+   /// Compute 2d offset for a 2d profile
    /*!  \param profile shape2d@, 2d profile to be offset
    \n  \param r double, radius if rounded offset required (cannot be combined with delta)
    \n  \param delta double, straight offset if shart corners required (cannot be combined with r)
    \n  \param chamfer bool, true if sharp corners to be chamfered (relevant with delta only) */
    offset2d(const shape2d@ profile, double r = 0x7fc00000, double delta = 0x7fc00000, bool chamfer = false);
 
+   /// Compute 2d offset for an array of 2d shapes
    /*!  \param arr array@
    \n  \param r double
    \n  \param delta double
@@ -988,10 +1018,12 @@ public:
    \n  \param nseg uint, number of straight segments for spline */
    polygon(const spline2d@ spline, uint nseg = 30);
 
+   /// Create a circular polygon from a radius and np points
    /*!  \param r double
    \n  \param np uint */
    polygon(double r, uint np);
 
+   /// Create a polygon from an array of points.
    /*!  \param points array@
    \n  \param check bool */
    polygon(array<pos2d@>@ points, bool check = true);
@@ -1006,6 +1038,7 @@ public:
    /*!  \return double */
   double  signed_area() const;
 
+   /// Return polygon vertex from zero based vertex index iv.
    /*!  \param iv uint
    \n  \return pos2d@ */
   pos2d*  vertex(uint iv) const;
@@ -1021,13 +1054,16 @@ public:
 \n It is useful in many contexts. It can be constructed directly or by reference to an input file.*/
 class polyhedron : public solid {
 public:
+   /// Construct polyhedron from a point cloud. The result is the convex hull polyhedron.
    /*!  \param points array@ */
    polyhedron(array<pos3d@>@ points);
 
+   /// Construct polyhedron from arrays of points and faces. Face normals must point out.
    /*!  \param points array@
    \n  \param faces array@ */
    polyhedron(array<pos3d@>@ points, array<pface@>@ faces);
 
+   /// Read polyhedron from file (AMF;OBJ or OFF formats)
    /*!  \param file string
    \n  \param id int */
    polyhedron(string file, int id = - 1);
@@ -1071,6 +1107,7 @@ public:
    \n  \param pos pos3d@, new position of vertex */
   void  set_vertex(uint iv, pos3d@ pos);
 
+   /// Verify that the polyhedron is closed and without errors.
   void  verify() const;
 
 };
@@ -1079,6 +1116,7 @@ public:
 /*! a pos2d is a position in 2d space. It is used with 2d objects.*/
 class pos2d {
 public:
+   /// Construct position as copy of other position
    /*!  \param other pos2d@ */
    pos2d(const pos2d@ other);
 
@@ -1100,26 +1138,32 @@ public:
    /*!  \return double, y coordinate */
   double  y() const;
 
+   /// Add 2 positions, return new position: p = p1 + p2
    /*!  \param p1 pos2d@
    \n  \return pos2d@ */
   pos2d*  opAdd(pos2d@ p1);
 
+   /// Add position and vector, return new position: p = p1 + v1
    /*!  \param v1 vec2d@
    \n  \return pos2d@ */
   pos2d*  opAdd(vec2d@ v1);
 
+   /// Add vector and position, return new position: p = v1 + p1
    /*!  \param v1 vec2d@
    \n  \return pos2d@ */
   pos2d*  opAdd_r(vec2d@ v1);
 
+   /// Multiply position by factor, return new position: p = p1 * f1
    /*!  \param f1 double
    \n  \return pos2d@ */
   pos2d*  opMul(double f1);
 
+   /// Multiply position by factor, return new position: p = f1 * p1
    /*!  \param f1 double
    \n  \return pos2d@ */
   pos2d*  opMul_r(double f1);
 
+   /// Subtract vector from position, return new position: p = p1 - v1
    /*!  \param v1 vec2d@
    \n  \return pos2d@ */
   pos2d*  opSub(vec2d@ v1);
@@ -1130,6 +1174,7 @@ public:
 /*! a pos3d is a position in 3d space. It is used with 3d objects.*/
 class pos3d {
 public:
+   /// Construct position as copy of other position.
    /*!  \param other pos3d@ */
    pos3d(const pos3d@ other);
 
@@ -1156,26 +1201,32 @@ public:
    /*!  \return double, z coordinate */
   double  z() const;
 
+   /// Add 2 positions, return new position: p = p1 + p2.
    /*!  \param p1 pos3d@
    \n  \return pos3d@ */
   pos3d*  opAdd(pos3d@ p1);
 
+   /// Add position and vector, return new position: p = p1 + v1.
    /*!  \param v1 vec3d@
    \n  \return pos3d@ */
   pos3d*  opAdd(vec3d@ v1);
 
+   /// Add vector and position, return new position: p = v1 + p1.
    /*!  \param v1 vec3d@
    \n  \return pos3d@ */
   pos3d*  opAdd_r(vec3d@ v1);
 
+   /// Multiply position by factor, return new position: p = p1 * f1.
    /*!  \param f1 double
    \n  \return pos3d@ */
   pos3d*  opMul(double f1);
 
+   /// Multiply position by factor, return new position: p = f1 * p1.
    /*!  \param f1 double
    \n  \return pos3d@ */
   pos3d*  opMul_r(double f1);
 
+   /// Subtract vector from position, return new position: p = p1 - v1.
    /*!  \param v1 vec3d@
    \n  \return pos3d@ */
   pos3d*  opSub(vec3d@ v1);
@@ -1209,7 +1260,7 @@ public:
 \n solid@ object = rotate_extrude(translate(100,0)*circle(10),deg:60);*/
 class rotate_extrude : public solid {
 public:
-   /// constructor
+   /// Construct solid by rotating shape on positive x axis around y axis, counter-clockwise
    /*!  \param shape shape2d@, 2d profile shape to extrude
    \n  \param deg double, rotation in degrees. Rotation is CCW around y axis.
    \n  \param pitch double, distance to offset profile in y direction for each revolution */
@@ -1313,15 +1364,19 @@ public:
 /// Abstract base for all primitives and booleans
 class shape {
 public:
+   /// Return bounding box of object
    /*!  \return boundingbox@ */
   boundingbox*  box() const;
 
+   /// Return transformation matrix of object
    /*!  \return tmatrix@ */
   tmatrix*  transform() const;
 
+   /// Write object to OpenSCAD .csg file
    /*!  \param path string */
   void  write_csg(string path);
 
+   /// Write object to .xcsg file for processing by xcsg program.
    /*!  \param path string
    \n  \param secant_tolerance double */
   void  write_xcsg(string path, double secant_tolerance = - 1.0);
@@ -1342,6 +1397,7 @@ public:
    \n  \return shape2d@, resulting 2d shape */
   shape2d*  opAnd(shape2d@ b);
 
+   /// Transform object by matrix multiplication: shape2d@ o2 = T * o1
    /*!  \param matrix tmatrix@
    \n  \return shape2d@ */
   shape2d*  opMul(tmatrix@ matrix);
@@ -1367,6 +1423,7 @@ public:
    \n  \return solid@, resulting solid */
   solid*  opAnd(solid@ b);
 
+   /// Transform object by matrix multiplication: solid@ o2 = T * o1
    /*!  \param matrix tmatrix@
    \n  \return solid@ */
   solid*  opMul(tmatrix@ matrix);
@@ -1400,6 +1457,7 @@ public:
 /*! a spline2d is a 2d cubic spline curve.*/
 class spline2d {
 public:
+   /// Compute 2d spline curve from an array of positions on curve.
    /*!  \param points array@ */
    spline2d(array<pos2d@>@ points);
 
@@ -1409,6 +1467,7 @@ public:
 /*! a spline3d is a 3d cubic spline curve.*/
 class spline3d {
 public:
+   /// Compute 3d spline curve from an array of positions on curve
    /*!  \param points array@ */
    spline3d(array<pos3d@>@ points);
 
@@ -1418,10 +1477,12 @@ public:
 /*! a spline_path defines a cubic spline sweep path.*/
 class spline_path {
 public:
+   /// Construct path for use with sweep from array of points and the normal directions for each point.
    /*!  \param p array@
    \n  \param v array@ */
    spline_path(array<pos3d@>@ p, array<vec3d@>@ v);
 
+   /// Construct path for use with sweep from array of points and a single, common normal direction.
    /*!  \param p array@
    \n  \param v vec3d@ */
    spline_path(array<pos3d@>@ p, vec3d@ v);
@@ -1444,6 +1505,7 @@ public:
 
 };
 
+/// String type similar to C++ strings.
 class string {
 public:
    /*!  \return bool */
@@ -1606,7 +1668,7 @@ public:
 /*! a sweep creates a solid by sweeping a 2d profile along a path curve*/
 class sweep : public solid {
 public:
-   /// constructor
+   /// Construct 3d object by sweeping 2d shape along spline path.
    /*!  \param shape shape2d@, 2d profile shape to sweep
    \n  \param path spline_path@, The path cirve to sweep along */
    sweep(const shape2d@ shape, const spline_path@ path);
@@ -1617,6 +1679,7 @@ public:
 /*! a tmatrix an abstract base class for all transformations.*/
 class tmatrix {
 public:
+   /// Multiply a position with transformation and return a new position.
    /*!  \param obj pos2d@
    \n  \return pos2d@ */
   pos2d*  opMul(pos2d@ obj);
@@ -1626,6 +1689,7 @@ public:
    \n  \return pos3d@, transformed position */
   pos3d*  opMul(pos3d@ obj);
 
+   /// Return origin of transformation (4th column)
    /*!  \return pos3d@ */
   pos3d*  origin() const;
 
@@ -1644,12 +1708,15 @@ public:
    \n  \return tmatrix@, resulting matrixt */
   tmatrix*  opMul(const tmatrix@ B);
 
+   /// Return x direction vector
    /*!  \return vec3d@ */
   vec3d*  xdir() const;
 
+   /// Return y direction vector
    /*!  \return vec3d@ */
   vec3d*  ydir() const;
 
+   /// Return z direction vector
    /*!  \return vec3d@ */
   vec3d*  zdir() const;
 
@@ -1673,6 +1740,7 @@ public:
 /*! translate is a transformation translating a 2d or 3d object.*/
 class translate : public tmatrix {
 public:
+   /// Specify translation as a 3d vector
    /*!  \param v vec3d@ */
    translate(const vec3d@ v);
 
@@ -1781,10 +1849,11 @@ public:
    \n  \param p2 pos2d@, vector end position */
    vec2d(const pos2d@ p1, const pos2d@ p2);
 
+   /// Construct direction vector from other vector
    /*!  \param other vec2d@ */
    vec2d(const vec2d@ other);
 
-   /// constructor
+   /// Construct direction vector from x and y components
    /*!  \param x double, vector x component
    \n  \param y double, vector y component */
    vec2d(double x, double y);
@@ -1816,18 +1885,22 @@ public:
    /*!  \return double, vector y component */
   double  y() const;
 
+   /// Add vector to vector, return new vector: vec2d@ v = v0 + v1
    /*!  \param v1 vec2d@
    \n  \return vec2d@ */
   vec2d*  opAdd(vec2d@ v1);
 
+   /// Multiply vector with factor, return new vector: vec2d@ v = v0 * f1
    /*!  \param f1 double
    \n  \return vec2d@ */
   vec2d*  opMul(double f1);
 
+   /// Multiply vector with factor, return new vector: vec2d@ v = f1 * v0
    /*!  \param f1 double
    \n  \return vec2d@ */
   vec2d*  opMul_r(double f1);
 
+   /// Subtract vector from vector, return new vector: vec2d@ v = v0 - v1
    /*!  \param v1 vec2d@
    \n  \return vec2d@ */
   vec2d*  opSub(vec2d@ v1);
@@ -1841,10 +1914,12 @@ public:
 /*! vec3d is a 3-dimensional vector offering useful operations such as dot and cross products.*/
 class vec3d {
 public:
+   /// Construct direction vector as direction from p1 to p2
    /*!  \param p1 pos3d@
    \n  \param p2 pos3d@ */
    vec3d(const pos3d@ p1, const pos3d@ p2);
 
+   /// Construct direction vector from other vector.
    /*!  \param other vec3d@ */
    vec3d(const vec3d@ other);
 
@@ -1885,18 +1960,22 @@ public:
    \n  \return vec3d@, cross product value */
   vec3d*  cross(const vec3d@ other) const;
 
+   /// Add vector to vector, return new vector: vec3d@ v = v0 + v1.
    /*!  \param v1 vec3d@
    \n  \return vec3d@ */
   vec3d*  opAdd(vec3d@ v1);
 
+   /// Multiply vector with factor, return new vector: vec3d@ v = v0 * f1
    /*!  \param f1 double
    \n  \return vec3d@ */
   vec3d*  opMul(double f1);
 
+   /// Multiply vector with factor, return new vector: vec3d@ v = f1 * v0.
    /*!  \param f1 double
    \n  \return vec3d@ */
   vec3d*  opMul_r(double f1);
 
+   /// Subtract vector from vector, return new vector: vec3d@ v = v0 - v1.
    /*!  \param v1 vec3d@
    \n  \return vec3d@ */
   vec3d*  opSub(vec3d@ v1);
