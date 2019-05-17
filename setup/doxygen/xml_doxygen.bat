@@ -14,6 +14,7 @@ REM     to AngelScript reference : "pos2d@ "
 REM
 REM Using http://fart-it.sourceforge.net/
 fart  %CPDE_USR%\doc\AngelCAD\html\*.html " *&#160;" "@&#160;" 
+fart  %CPDE_USR%\doc\AngelCAD\html\*.html ">* " ">@ " 
 REM 
 REM Because of the replace, run hhc.exe again
 echo Generating angelcad.chm (second run)
