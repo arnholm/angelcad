@@ -6,6 +6,8 @@ REM Create/update angelcad_xmldoc.xml and angelcad.h
 as_csg -xmldoc doc.as
 REM
 REM Run doxygen using angelcad.h as input
+for /f "tokens=1* delims=" %%a in ('as_csg --version') do set ANGELCAD_VERSION=%%a
+set GENERATE_HTMLHELP=YES
 doxygen Doxyfile_AngelCAD
 REM
 REM Fix return types 

@@ -5,7 +5,11 @@
 # Create/update angelcad_xmldoc.xml and angelcad.h
 as_csg -xmldoc doc.as
 #
-# Run doxygen using angelcad.h as input
+# Run doxygen using angelcad.h as input, 
+# do not try generating  compiled HTML as there is no 
+# compiler and it disables search in the basic HTML files
+export ANGELCAD_VERSION="`${CPDE_USR}/bin/as_csg --version`"
+export GENERATE_HTMLHELP=NO
 doxygen Doxyfile_AngelCAD
 #
 # Fix return types 
