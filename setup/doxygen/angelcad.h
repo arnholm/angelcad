@@ -90,7 +90,7 @@ public:
 
 };
 
-/// Output stream allowing expressions like "cout << Hello World! << endl;"
+/// Output stream allowing expressions like: cout << "Hello World!" << endl;
 class OStream {
 public:
    /*!  \return OStream& */
@@ -272,8 +272,7 @@ public:
 /*! A bounding box representes the range of an object in x,y and z*/
 class boundingbox {
 public:
-   /// constructor
-   /*! creates an empty/uninitialised bounding box   */
+   /// create an empty/uninitialised bounding box
    boundingbox();
 
    /// True when no points have been enclosed
@@ -324,7 +323,7 @@ public:
    \n  \param p3 pos2d@ */
    circle(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3);
 
-   /// constructor
+   /// Create a circle with a given radius
    /*!  \param r double, radius of circle */
    circle(double r);
 
@@ -394,22 +393,22 @@ public:
 class cuboid : public solid {
 public:
    /// Create cuboid
-   /*!  \param dx double, length in x-drection
-   \n  \param dy double, length of y-direction
-   \n  \param dz double, length of z-direction
+   /*!  \param dx double, extent in x-drection
+   \n  \param dy double, extent of y-direction
+   \n  \param dz double, extent of z-direction
    \n  \param center bool, true if cuboid is centered on origin */
    cuboid(double dx, double dy, double dz, bool center = false);
 
-   /// length in x-drection
-   /*!  \return double, length in x-drection */
+   /// extent in x-drection
+   /*!  \return double, extent in x-drection */
   double  dx() const;
 
-   /// length in y-drection
-   /*!  \return double, length in x-drection */
+   /// extent in y-drection
+   /*!  \return double, extent in y-drection */
   double  dy() const;
 
-   /// length in z-drection
-   /*!  \return double, length in x-drection */
+   /// extent in z-drection
+   /*!  \return double, extent in z-drection */
   double  dz() const;
 
 };
@@ -589,21 +588,25 @@ public:
 \n using & operator: shape2d@ object = circle(100) & translate(75,0,0)*circle(50);*/
 class intersection2d : public shape2d {
 public:
+   /// Compute boolean intersection between 2 objects.
    /*!  \param s1 shape2d@
    \n  \param s2 shape2d@ */
    intersection2d(const shape2d@ s1, const shape2d@ s2);
 
+   /// Compute boolean intersection between 3 objects.
    /*!  \param s1 shape2d@
    \n  \param s2 shape2d@
    \n  \param s3 shape2d@ */
    intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3);
 
+   /// Compute boolean intersection between 4 objects.
    /*!  \param s1 shape2d@
    \n  \param s2 shape2d@
    \n  \param s3 shape2d@
    \n  \param s4 shape2d@ */
    intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4);
 
+   /// Compute boolean intersection between 4 objects.
    /*!  \param s1 shape2d@
    \n  \param s2 shape2d@
    \n  \param s3 shape2d@
@@ -611,6 +614,7 @@ public:
    \n  \param s5 shape2d@ */
    intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4, const shape2d@ s5);
 
+   /// Compute boolean intersection between all objects in the array.
    /*!  \param arr array@ */
    intersection2d(array<shape2d@>@ arr);
 
@@ -623,21 +627,25 @@ public:
 \n using & operator: solid@ object = sphere(100) & translate(75,0,0)*sphere(50);*/
 class intersection3d : public solid {
 public:
+   /// Compute boolean intersection between 2 objects.
    /*!  \param s1 solid@
    \n  \param s2 solid@ */
    intersection3d(const solid@ s1, const solid@ s2);
 
+   /// Compute boolean intersection between 3 objects.
    /*!  \param s1 solid@
    \n  \param s2 solid@
    \n  \param s3 solid@ */
    intersection3d(const solid@ s1, const solid@ s2, const solid@ s3);
 
+   /// Compute boolean intersection between 4 objects.
    /*!  \param s1 solid@
    \n  \param s2 solid@
    \n  \param s3 solid@
    \n  \param s4 solid@ */
    intersection3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4);
 
+   /// Compute boolean intersection between 5 objects.
    /*!  \param s1 solid@
    \n  \param s2 solid@
    \n  \param s3 solid@
@@ -645,6 +653,7 @@ public:
    \n  \param s5 solid@ */
    intersection3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4, const solid@ s5);
 
+   /// Compute boolean intersection between all objects in the array.
    /*!  \param arr array@ */
    intersection3d(array<solid@>@ arr);
 
@@ -902,6 +911,7 @@ public:
 \n create an object with rounded edges.*/
 class minkowski3d : public solid {
 public:
+   /// Compute minkowski sum between a and b
    /*!  \param a solid@
    \n  \param b solid@ */
    minkowski3d(const solid@ a, const solid@ b);
@@ -912,13 +922,13 @@ public:
 /*! mirror is a transformation creating mirror images of 2d or 3d objects.*/
 class mirror : public tmatrix {
 public:
-   /// constructor, mirror around origin
+   /// Create a mirror transformation, mirror around origin
    /*!  \param dx double, x-component of mirror plane normal
    \n  \param dy double, y-component of mirror plane normal
    \n  \param dz double, z-component of mirror plane normal */
    mirror(double dx, double dy, double dz);
 
-   /// constructor, mirror around given point
+   /// Create a mirror transformation, mirror around given point
    /*!  \param normal vec3d@, mirror plane normal vector
    \n  \param point pos3d@, point in mirror plane */
    mirror(vec3d@ normal, pos3d@ point = pos3d ( 0 , 0 , 0 ));
@@ -959,9 +969,8 @@ public:
 };
 
 /// Polyhedron face
-/*! pface represents a single face of a polyhedron. It contains integer indices
-\n referring to the polyhedron vertices. When viewed from outside the polyhedron,
-\n a pface should list its vertices in CCW sequence.*/
+/*! A pface represents a single face of a polyhedron. It contains 0-based indices referring to the polyhedron vertices.
+\n When viewed from outside the polyhedron, a pface must list its vertices in CCW order.*/
 class pface {
 public:
    /// polyhedron face constructor
@@ -992,20 +1001,20 @@ public:
 /*! a polygon is a 2d object. It is defined by vertex positions listed in CCW sequence.*/
 class polygon : public shape2d {
 public:
-   /// constructor (triangle), points must be given in CCW order
+   /// Create triangular polygon, points must be given in CCW order
    /*!  \param p1 pos2d@, position
    \n  \param p2 pos2d@, position
    \n  \param p3 pos2d@, position */
    polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3);
 
-   /// constructor (quadrilateral), points must be given in CCW order
+   /// Create quadrilateral polygon, points must be given in CCW order
    /*!  \param p1 pos2d@, position
    \n  \param p2 pos2d@, position
    \n  \param p3 pos2d@, position
    \n  \param p4 pos2d@, position */
    polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3, const pos2d@ p4);
 
-   /// constructor (pentagon), points must be given in CCW order
+   /// Create 5-sided polygon, points must be given in CCW order
    /*!  \param p1 pos2d@, position
    \n  \param p2 pos2d@, position
    \n  \param p3 pos2d@, position
@@ -1013,7 +1022,7 @@ public:
    \n  \param p5 pos2d@, position */
    polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3, const pos2d@ p4, const pos2d@ p5);
 
-   /// constructor (spline), points must be given in CCW order
+   /// Create polygon from spline curve and number of straight segments, points must be given in CCW order
    /*!  \param spline spline2d@, 2d spline curve defining polygon profile
    \n  \param nseg uint, number of straight segments for spline */
    polygon(const spline2d@ spline, uint nseg = 30);
@@ -1120,7 +1129,7 @@ public:
    /*!  \param other pos2d@ */
    pos2d(const pos2d@ other);
 
-   /// constructor
+   /// Create 2d position from x and y coordinates
    /*!  \param x double, coordinate
    \n  \param y double, coordinate */
    pos2d(double x, double y);
@@ -1178,10 +1187,10 @@ public:
    /*!  \param other pos3d@ */
    pos3d(const pos3d@ other);
 
-   /// constructor
-   /*!  \param x double, coordinate
-   \n  \param y double, coordinate
-   \n  \param z double, coordinate */
+   /// Create 3d position from x,y and z coordinates
+   /*!  \param x double, x coordinate
+   \n  \param y double, y coordinate
+   \n  \param z double, z coordinate */
    pos3d(double x, double y, double z);
 
    /// distance from other position
@@ -1238,7 +1247,7 @@ public:
 \n origin and extends along positive x and y.*/
 class rectangle : public shape2d {
 public:
-   /// constructor
+   /// Create rectangle with extent in x and y
    /*!  \param dx double, extent in x direction
    \n  \param dy double, extent in y direction
    \n  \param center bool, true if rectangle should be centered on origin */
@@ -1280,7 +1289,7 @@ public:
 /*! rotate_x is a transformation rotating around the x-axis. Positive angle according to right hand rule.*/
 class rotate_x : public tmatrix {
 public:
-   /// constructor (rotate around x)
+   /// Create transformation as rotation around x-axis
    /*!  \param deg double, rotation specified in degrees (cannot be combined with rad)
    \n  \param rad double, rotation specified in radians (cannot be combined with deg) */
    rotate_x(double deg = 0x7fc00000, double rad = 0x7fc00000);
@@ -1299,7 +1308,7 @@ public:
 /*! rotate_y is a transformation rotating around the y-axis. Positive angle according to right hand rule.*/
 class rotate_y : public tmatrix {
 public:
-   /// constructor (rotate around y)
+   /// Create transformation as rotation around y-axis
    /*!  \param deg double, rotation specified in degrees (cannot be combined with rad)
    \n  \param rad double, rotation specified in radians (cannot be combined with deg) */
    rotate_y(double deg = 0x7fc00000, double rad = 0x7fc00000);
@@ -1318,7 +1327,7 @@ public:
 /*! rotate_z is a transformation rotating around the z-axis. Positive angle according to right hand rule.*/
 class rotate_z : public tmatrix {
 public:
-   /// constructor (rotate around z)
+   /// Create transformation as rotation around z-axis
    /*!  \param deg double, rotation specified in degrees (cannot be combined with rad)
    \n  \param rad double, rotation specified in radians (cannot be combined with deg) */
    rotate_z(double deg = 0x7fc00000, double rad = 0x7fc00000);
@@ -1337,11 +1346,11 @@ public:
 /*! scale is a transformation scaling an object, either uniformly or with different factors in different directions.*/
 class scale : public tmatrix {
 public:
-   /// constructor
+   /// Create scaling transformation, same scaling in x,y and z
    /*!  \param s double, scale factor in x,y and z */
    scale(double s);
 
-   /// constructor
+   /// Create scaling transformation, individual scaling in x,y and z
    /*!  \param sx double, scale factor in x
    \n  \param sy double, scale factor in y
    \n  \param sz double, scale factor in z */
@@ -1439,7 +1448,7 @@ public:
 /*! a sphere is a 3d object defined by its radius.*/
 class sphere : public solid {
 public:
-   /// constructor
+   /// Create sphere with radius r
    /*!  \param r double, radius */
    sphere(double r);
 
@@ -1494,7 +1503,7 @@ public:
 \n By default it touches the origin and extend along positive x and y.*/
 class square : public shape2d {
 public:
-   /// constructor
+   /// Create square with given side length
    /*!  \param size double, extent in x and y
    \n  \param center bool, true if square to be centered on origon */
    square(double size, bool center = false);
@@ -1726,10 +1735,11 @@ public:
 };
 
 /// Extrude from botton to top shapes using transform
-/*! transform_extrude is a special extrision operation, defined by two 2d shapes,
-\n representing bottom and top of extrusion.*/
+/*! transform_extrude is a special extrusion operation, defined by two 2d shapes, representing bottom and top of extrusion.*/
 class transform_extrude : public solid {
 public:
+   /// Create solid by extruding from bottom to top
+   /*! The top shape should be multiplied with a translation in z-direction   */
    /*!  \param bottom shape2d@
    \n  \param top shape2d@ */
    transform_extrude(const shape2d@ bottom, const shape2d@ top);
@@ -1744,7 +1754,7 @@ public:
    /*!  \param v vec3d@ */
    translate(const vec3d@ v);
 
-   /// constructor
+   /// Create transformation specifying translation in x, y and z
    /*!  \param dx double, translation in x direction
    \n  \param dy double, translation in y direction
    \n  \param dz double, translation in z direction */
@@ -1771,25 +1781,25 @@ public:
 \n using & operator: shape2d@ object = circle(100) + translate(75,0,0)*circle(50);*/
 class union2d : public shape2d {
 public:
-   /// constructor
+   /// Compute union of 2 objects
    /*!  \param s1 shape2d@, 2d shape
    \n  \param s2 shape2d@, 2d shape */
    union2d(const shape2d@ s1, const shape2d@ s2);
 
-   /// constructor
+   /// Compute union of 3 objects
    /*!  \param s1 shape2d@, 2d shape
    \n  \param s2 shape2d@, 2d shape
    \n  \param s3 shape2d@, 2d shape */
    union2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3);
 
-   /// constructor
+   /// Compute union of 4 objects
    /*!  \param s1 shape2d@, 2d shape
    \n  \param s2 shape2d@, 2d shape
    \n  \param s3 shape2d@, 2d shape
    \n  \param s4 shape2d@, 2d shape */
    union2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4);
 
-   /// constructor
+   /// Compute union of 5 objects
    /*!  \param s1 shape2d@, 2d shape
    \n  \param s2 shape2d@, 2d shape
    \n  \param s3 shape2d@, 2d shape
@@ -1809,25 +1819,25 @@ public:
 \n using & operator: solid@ object = sphere(100) + translate(75,0,0)*sphere(50);*/
 class union3d : public solid {
 public:
-   /// constructor
+   /// Compute union of 2 objects
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid */
    union3d(const solid@ s1, const solid@ s2);
 
-   /// constructor
+   /// Compute union of 3 objects
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid */
    union3d(const solid@ s1, const solid@ s2, const solid@ s3);
 
-   /// constructor
+   /// Compute union of 4 objects
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid
    \n  \param s4 solid@, solid */
    union3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4);
 
-   /// constructor
+   /// Compute union of 5 objects
    /*!  \param s1 solid@, solid
    \n  \param s2 solid@, solid
    \n  \param s3 solid@, solid
@@ -1844,7 +1854,7 @@ public:
 /*! vec2d is a 2-dimensional vector offering useful operations such as dot and cross products.*/
 class vec2d {
 public:
-   /// constructor
+   /// Create direction vector from p1 to p2
    /*!  \param p1 pos2d@, vector start position
    \n  \param p2 pos2d@, vector end position */
    vec2d(const pos2d@ p1, const pos2d@ p2);
@@ -1923,7 +1933,7 @@ public:
    /*!  \param other vec3d@ */
    vec3d(const vec3d@ other);
 
-   /// constructor
+   /// Create direction vector from x,y and z components.
    /*!  \param x double, vector x component
    \n  \param y double, vector y component
    \n  \param z double, vector z component */

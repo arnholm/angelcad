@@ -94,7 +94,7 @@
 	</as_class>
 	<as_class verified="1" name="OStream">
 		<as_description>
-			<as_line>Output stream allowing expressions like &quot;cout &lt;&lt; Hello World! &lt;&lt; endl;&quot;</as_line>
+			<as_line>Output stream allowing expressions like: cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;</as_line>
 		</as_description>
 		<as_member_function verified="1" signature="OStream&amp; flush()" name="flush">
 			<as_return type="OStream&amp;" verified="1"/>
@@ -319,8 +319,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="boundingbox@ boundingbox()">
 			<as_description>
-				<as_line>constructor</as_line>
-				<as_line>creates an empty/uninitialised bounding box</as_line>
+				<as_line>create an empty/uninitialised bounding box</as_line>
 			</as_description>
 		</as_constructor>
 		<as_member_function verified="1" signature="bool is_empty() const" name="is_empty">
@@ -434,7 +433,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="circle@ circle(double r)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create a circle with a given radius</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="r">
 				<as_description>
@@ -800,17 +799,17 @@
 			</as_description>
 			<as_parameter verified="1" type="double" name="dx">
 				<as_description>
-					<as_line>length in x-drection</as_line>
+					<as_line>extent in x-drection</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="double" name="dy">
 				<as_description>
-					<as_line>length of y-direction</as_line>
+					<as_line>extent of y-direction</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="double" name="dz">
 				<as_description>
-					<as_line>length of z-direction</as_line>
+					<as_line>extent of z-direction</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="bool" name="center" default="false">
@@ -824,31 +823,31 @@
 		</as_member_function>
 		<as_member_function verified="1" signature="double dx() const" name="dx">
 			<as_description>
-				<as_line>length in x-drection</as_line>
+				<as_line>extent in x-drection</as_line>
 			</as_description>
 			<as_return type="double" verified="1">
 				<as_description>
-					<as_line>length in x-drection</as_line>
+					<as_line>extent in x-drection</as_line>
 				</as_description>
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="double dy() const" name="dy">
 			<as_description>
-				<as_line>length in y-drection</as_line>
+				<as_line>extent in y-drection</as_line>
 			</as_description>
 			<as_return type="double" verified="1">
 				<as_description>
-					<as_line>length in x-drection</as_line>
+					<as_line>extent in y-drection</as_line>
 				</as_description>
 			</as_return>
 		</as_member_function>
 		<as_member_function verified="1" signature="double dz() const" name="dz">
 			<as_description>
-				<as_line>length in z-drection</as_line>
+				<as_line>extent in z-drection</as_line>
 			</as_description>
 			<as_return type="double" verified="1">
 				<as_description>
-					<as_line>length in x-drection</as_line>
+					<as_line>extent in z-drection</as_line>
 				</as_description>
 			</as_return>
 		</as_member_function>
@@ -2028,21 +2027,33 @@
 			<as_line>using &amp; operator: shape2d@ object = circle(100) &amp; translate(75,0,0)*circle(50);</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="intersection2d@ intersection2d(const shape2d@ s1, const shape2d@ s2)">
+			<as_description>
+				<as_line>Compute boolean intersection between 2 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1"/>
 			<as_parameter verified="1" type="shape2d@" name="s2"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection2d@ intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3)">
+			<as_description>
+				<as_line>Compute boolean intersection between 3 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1"/>
 			<as_parameter verified="1" type="shape2d@" name="s2"/>
 			<as_parameter verified="1" type="shape2d@" name="s3"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection2d@ intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4)">
+			<as_description>
+				<as_line>Compute boolean intersection between 4 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1"/>
 			<as_parameter verified="1" type="shape2d@" name="s2"/>
 			<as_parameter verified="1" type="shape2d@" name="s3"/>
 			<as_parameter verified="1" type="shape2d@" name="s4"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection2d@ intersection2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4, const shape2d@ s5)">
+			<as_description>
+				<as_line>Compute boolean intersection between 4 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1"/>
 			<as_parameter verified="1" type="shape2d@" name="s2"/>
 			<as_parameter verified="1" type="shape2d@" name="s3"/>
@@ -2050,6 +2061,9 @@
 			<as_parameter verified="1" type="shape2d@" name="s5"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection2d@ intersection2d(shape2d@[]@ arr)">
+			<as_description>
+				<as_line>Compute boolean intersection between all objects in the array.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -2151,21 +2165,33 @@
 			<as_line>using &amp; operator: solid@ object = sphere(100) &amp; translate(75,0,0)*sphere(50);</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="intersection3d@ intersection3d(const solid@ s1, const solid@ s2)">
+			<as_description>
+				<as_line>Compute boolean intersection between 2 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1"/>
 			<as_parameter verified="1" type="solid@" name="s2"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection3d@ intersection3d(const solid@ s1, const solid@ s2, const solid@ s3)">
+			<as_description>
+				<as_line>Compute boolean intersection between 3 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1"/>
 			<as_parameter verified="1" type="solid@" name="s2"/>
 			<as_parameter verified="1" type="solid@" name="s3"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection3d@ intersection3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4)">
+			<as_description>
+				<as_line>Compute boolean intersection between 4 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1"/>
 			<as_parameter verified="1" type="solid@" name="s2"/>
 			<as_parameter verified="1" type="solid@" name="s3"/>
 			<as_parameter verified="1" type="solid@" name="s4"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection3d@ intersection3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4, const solid@ s5)">
+			<as_description>
+				<as_line>Compute boolean intersection between 5 objects.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1"/>
 			<as_parameter verified="1" type="solid@" name="s2"/>
 			<as_parameter verified="1" type="solid@" name="s3"/>
@@ -2173,6 +2199,9 @@
 			<as_parameter verified="1" type="solid@" name="s5"/>
 		</as_constructor>
 		<as_constructor verified="1" signature="intersection3d@ intersection3d(solid@[]@ arr)">
+			<as_description>
+				<as_line>Compute boolean intersection between all objects in the array.</as_line>
+			</as_description>
 			<as_parameter verified="1" type="array@" name="arr"/>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
@@ -2774,6 +2803,9 @@
 			<as_line>create an object with rounded edges.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="minkowski3d@ minkowski3d(const solid@ a, const solid@ b)">
+			<as_description>
+				<as_line>Compute minkowski sum between a and b</as_line>
+			</as_description>
 			<as_parameter verified="1" type="solid@" name="a"/>
 			<as_parameter verified="1" type="solid@" name="b"/>
 		</as_constructor>
@@ -2842,7 +2874,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="mirror@ mirror(double dx, double dy, double dz)">
 			<as_description>
-				<as_line>constructor, mirror around origin</as_line>
+				<as_line>Create a mirror transformation, mirror around origin</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="dx">
 				<as_description>
@@ -2862,7 +2894,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="mirror@ mirror(vec3d@ normal, pos3d@ point = pos3d ( 0 , 0 , 0 ))">
 			<as_description>
-				<as_line>constructor, mirror around given point</as_line>
+				<as_line>Create a mirror transformation, mirror around given point</as_line>
 			</as_description>
 			<as_parameter verified="1" type="vec3d@" name="normal">
 				<as_description>
@@ -3130,9 +3162,8 @@
 	<as_class verified="1" name="pface">
 		<as_description>
 			<as_line>Polyhedron face</as_line>
-			<as_line>pface represents a single face of a polyhedron. It contains integer indices</as_line>
-			<as_line>referring to the polyhedron vertices. When viewed from outside the polyhedron,</as_line>
-			<as_line>a pface should list its vertices in CCW sequence.</as_line>
+			<as_line>A pface represents a single face of a polyhedron. It contains 0-based indices referring to the polyhedron vertices.</as_line>
+			<as_line>When viewed from outside the polyhedron, a pface must list its vertices in CCW order.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="pface@ pface(uint iv1, uint iv2, uint iv3)">
 			<as_description>
@@ -3225,7 +3256,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="polygon@ polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3)">
 			<as_description>
-				<as_line>constructor (triangle), points must be given in CCW order</as_line>
+				<as_line>Create triangular polygon, points must be given in CCW order</as_line>
 			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1">
 				<as_description>
@@ -3245,7 +3276,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="polygon@ polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3, const pos2d@ p4)">
 			<as_description>
-				<as_line>constructor (quadrilateral), points must be given in CCW order</as_line>
+				<as_line>Create quadrilateral polygon, points must be given in CCW order</as_line>
 			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1">
 				<as_description>
@@ -3270,7 +3301,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="polygon@ polygon(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3, const pos2d@ p4, const pos2d@ p5)">
 			<as_description>
-				<as_line>constructor (pentagon), points must be given in CCW order</as_line>
+				<as_line>Create 5-sided polygon, points must be given in CCW order</as_line>
 			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1">
 				<as_description>
@@ -3300,7 +3331,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="polygon@ polygon(const spline2d@ spline, uint nseg = 30)">
 			<as_description>
-				<as_line>constructor (spline), points must be given in CCW order</as_line>
+				<as_line>Create polygon from spline curve and number of straight segments, points must be given in CCW order</as_line>
 			</as_description>
 			<as_parameter verified="1" type="spline2d@" name="spline">
 				<as_description>
@@ -3703,7 +3734,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="pos2d@ pos2d(double x, double y)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create 2d position from x and y coordinates</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="x">
 				<as_description>
@@ -3820,21 +3851,21 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="pos3d@ pos3d(double x, double y, double z)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create 3d position from x,y and z coordinates</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="x">
 				<as_description>
-					<as_line>coordinate</as_line>
+					<as_line>x coordinate</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="double" name="y">
 				<as_description>
-					<as_line>coordinate</as_line>
+					<as_line>y coordinate</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="double" name="z">
 				<as_description>
-					<as_line>coordinate</as_line>
+					<as_line>z coordinate</as_line>
 				</as_description>
 			</as_parameter>
 		</as_constructor>
@@ -3947,7 +3978,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="rectangle@ rectangle(double dx, double dy, bool center = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create rectangle with extent in x and y</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="dx">
 				<as_description>
@@ -4219,7 +4250,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="rotate_x@ rotate_x(double deg = 0x7fc00000, double rad = 0x7fc00000)">
 			<as_description>
-				<as_line>constructor (rotate around x)</as_line>
+				<as_line>Create transformation as rotation around x-axis</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="deg" default="0x7fc00000">
 				<as_description>
@@ -4358,7 +4389,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="rotate_y@ rotate_y(double deg = 0x7fc00000, double rad = 0x7fc00000)">
 			<as_description>
-				<as_line>constructor (rotate around y)</as_line>
+				<as_line>Create transformation as rotation around y-axis</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="deg" default="0x7fc00000">
 				<as_description>
@@ -4497,7 +4528,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="rotate_z@ rotate_z(double deg = 0x7fc00000, double rad = 0x7fc00000)">
 			<as_description>
-				<as_line>constructor (rotate around z)</as_line>
+				<as_line>Create transformation as rotation around z-axis</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="deg" default="0x7fc00000">
 				<as_description>
@@ -4636,7 +4667,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="scale@ scale(double s)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create scaling transformation, same scaling in x,y and z</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="s">
 				<as_description>
@@ -4646,7 +4677,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="scale@ scale(double sx, double sy, double sz = 1.0)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create scaling transformation, individual scaling in x,y and z</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="sx">
 				<as_description>
@@ -5190,7 +5221,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="sphere@ sphere(double r)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create sphere with radius r</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="r">
 				<as_description>
@@ -5399,7 +5430,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="square@ square(double size, bool center = false)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create square with given side length</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="size">
 				<as_description>
@@ -5891,10 +5922,13 @@
 	<as_class verified="1" name="transform_extrude" base="solid">
 		<as_description>
 			<as_line>Extrude from botton to top shapes using transform</as_line>
-			<as_line>transform_extrude is a special extrision operation, defined by two 2d shapes,</as_line>
-			<as_line>representing bottom and top of extrusion.</as_line>
+			<as_line>transform_extrude is a special extrusion operation, defined by two 2d shapes, representing bottom and top of extrusion.</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="transform_extrude@ transform_extrude(const shape2d@ bottom, const shape2d@ top)">
+			<as_description>
+				<as_line>Create solid by extruding from bottom to top</as_line>
+				<as_line>The top shape should be multiplied with a translation in z-direction</as_line>
+			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="bottom"/>
 			<as_parameter verified="1" type="shape2d@" name="top"/>
 		</as_constructor>
@@ -6001,7 +6035,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="translate@ translate(double dx, double dy, double dz = 0.0)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create transformation specifying translation in x, y and z</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="dx">
 				<as_description>
@@ -6158,7 +6192,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="union2d@ union2d(const shape2d@ s1, const shape2d@ s2)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 2 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -6173,7 +6207,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union2d@ union2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 3 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -6193,7 +6227,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union2d@ union2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 4 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -6218,7 +6252,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union2d@ union2d(const shape2d@ s1, const shape2d@ s2, const shape2d@ s3, const shape2d@ s4, const shape2d@ s5)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 5 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="shape2d@" name="s1">
 				<as_description>
@@ -6349,7 +6383,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="union3d@ union3d(const solid@ s1, const solid@ s2)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 2 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -6364,7 +6398,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union3d@ union3d(const solid@ s1, const solid@ s2, const solid@ s3)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 3 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -6384,7 +6418,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union3d@ union3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 4 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -6409,7 +6443,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="union3d@ union3d(const solid@ s1, const solid@ s2, const solid@ s3, const solid@ s4, const solid@ s5)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Compute union of 5 objects</as_line>
 			</as_description>
 			<as_parameter verified="1" type="solid@" name="s1">
 				<as_description>
@@ -6658,7 +6692,7 @@
 		</as_description>
 		<as_constructor verified="1" signature="vec2d@ vec2d(const pos2d@ p1, const pos2d@ p2)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create direction vector from p1 to p2</as_line>
 			</as_description>
 			<as_parameter verified="1" type="pos2d@" name="p1">
 				<as_description>
@@ -6835,7 +6869,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="vec3d@ vec3d(double x, double y, double z)">
 			<as_description>
-				<as_line>constructor</as_line>
+				<as_line>Create direction vector from x,y and z components.</as_line>
 			</as_description>
 			<as_parameter verified="1" type="double" name="x">
 				<as_description>
