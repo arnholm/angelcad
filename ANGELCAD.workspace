@@ -6,9 +6,11 @@
 			<Depends filename="as_csg/as_csg.cbp" />
 		</Project>
 		<Project filename="AngelView/AngelView.cbp" />
+		<Project filename="polyfix/polyfix.cbp" />
 		<Project filename="BUILD_ALL/BUILD_ALL.cbp">
 			<Depends filename="AngelCAD/AngelCAD.cbp" />
 			<Depends filename="AngelView/AngelView.cbp" />
+			<Depends filename="polyfix/polyfix.cbp" />
 		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
