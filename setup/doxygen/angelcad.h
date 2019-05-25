@@ -318,9 +318,9 @@ public:
 class circle : public shape2d {
 public:
    /// Construct a circle from 3 points on the circumference
-   /*!  \param p1 pos2d@
-   \n  \param p2 pos2d@
-   \n  \param p3 pos2d@ */
+   /*!  \param p1 pos2d@, 1st point on circle circumference
+   \n  \param p2 pos2d@, 2nd point on circle circumference
+   \n  \param p3 pos2d@, 3rd point on circle circumference */
    circle(const pos2d@ p1, const pos2d@ p2, const pos2d@ p3);
 
    /// Create a circle with a given radius
@@ -378,8 +378,8 @@ public:
 /// cube, by default in 1st octant with one corner toucing origin
 class cube : public solid {
 public:
-   /*!  \param size double
-   \n  \param center bool */
+   /*!  \param size double, Extent of cube in all directions
+   \n  \param center bool, true if cube to be centered on origin */
    cube(double size, bool center = false);
 
    /*!  \return double */
@@ -481,7 +481,7 @@ public:
    fill2d(const shape2d@ s1);
 
    /// Fill internal voids of 2d objects in an array
-   /*!  \param arr array@ */
+   /*!  \param arr array@, Array of shapes to be filled */
    fill2d(array<shape2d@>@ arr);
 
 };
@@ -490,10 +490,10 @@ public:
 /*! hmatrix is a transformation expressed as homogenous transformation matrix.*/
 class hmatrix : public tmatrix {
 public:
-   /// Create 4x4 homogenous matrix from x and y direction vectors and an optional origin positio
-   /*!  \param xvec vec3d@
-   \n  \param yvec vec3d@
-   \n  \param pos pos3d@ */
+   /// Create 4x4 homogenous matrix from x and y direction vectors and an optional origin position, z direction is computed.
+   /*!  \param xvec vec3d@, 1st matrix column, local x-direction vector
+   \n  \param yvec vec3d@, 1nd matrix column, local y-direction vector
+   \n  \param pos pos3d@, 4th matrix column, local origin postion */
    hmatrix(const vec3d@ xvec, const vec3d@ yvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ));
 
    /// Create 4x4 homogenous matrix from 3 direction vectors and an optional origin position
@@ -663,8 +663,8 @@ public:
 class line2d {
 public:
    /// Construct line segment from p1 to p2
-   /*!  \param p1 pos2d@
-   \n  \param p2 pos2d@ */
+   /*!  \param p1 pos2d@, Line segment start point, corresponds to parameter=0.0
+   \n  \param p2 pos2d@, Line segment end point, corresponds to parameter=1.0 */
    line2d(const pos2d@ p1, const pos2d@ p2);
 
    /// Compute length of line segment
@@ -672,7 +672,7 @@ public:
   double  length() const;
 
    /// Project point onto line segment and return line parameter of projetion point
-   /*!  \param point pos2d@
+   /*!  \param point pos2d@, Point to be projected onto line
    \n  \return double */
   double  project(pos2d@ point) const;
 
@@ -685,7 +685,7 @@ public:
   pos2d*  end2() const;
 
    /// Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)
-   /*!  \param par double
+   /*!  \param par double, Interpolation parameter value
    \n  \return pos2d@ */
   pos2d*  interpolate(double par) const;
 
@@ -695,16 +695,16 @@ public:
 class line3d {
 public:
    /// Construct line segment from p1 to p2
-   /*!  \param p1 pos3d@
-   \n  \param p2 pos3d@ */
+   /*!  \param p1 pos3d@, start point on line segment, corresponding to parameter=0.0
+   \n  \param p2 pos3d@, end point on line segment, corresponding to parameter=1.0 */
    line3d(const pos3d@ p1, const pos3d@ p2);
 
    /// Compute length of line segment.
    /*!  \return double */
   double  length() const;
 
-   /// Project point onto line segment and return line parameter of projetion point
-   /*!  \param point pos3d@
+   /// Project point onto line and return line parameter of projetion point
+   /*!  \param point pos3d@, Point to be projected onto (infinite) line
    \n  \return double */
   double  project(pos3d@ point) const;
 
@@ -717,7 +717,7 @@ public:
   pos3d*  end2() const;
 
    /// Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)
-   /*!  \param par double
+   /*!  \param par double, Line parameter value
    \n  \return pos3d@ */
   pos3d*  interpolate(double par) const;
 
@@ -955,15 +955,15 @@ public:
    /// Compute 2d offset for a 2d profile
    /*!  \param profile shape2d@, 2d profile to be offset
    \n  \param r double, radius if rounded offset required (cannot be combined with delta)
-   \n  \param delta double, straight offset if shart corners required (cannot be combined with r)
+   \n  \param delta double, straight offset if sharp corners required (cannot be combined with r)
    \n  \param chamfer bool, true if sharp corners to be chamfered (relevant with delta only) */
    offset2d(const shape2d@ profile, double r = 0x7fc00000, double delta = 0x7fc00000, bool chamfer = false);
 
    /// Compute 2d offset for an array of 2d shapes
-   /*!  \param arr array@
-   \n  \param r double
-   \n  \param delta double
-   \n  \param chamfer bool */
+   /*!  \param arr array@, array of 2d shapes to be offset
+   \n  \param r double, radius if rounded offset required (cannot be combined with delta)
+   \n  \param delta double, straight offset if sharp corners required (cannot be combined with r)
+   \n  \param chamfer bool, true if sharp corners to be chamfered (relevant with delta only) */
    offset2d(array<shape2d@>@ arr, double r = 0x7fc00000, double delta = 0x7fc00000, bool chamfer = false);
 
 };
@@ -1072,7 +1072,7 @@ public:
    \n  \param faces array@ */
    polyhedron(array<pos3d@>@ points, array<pface@>@ faces);
 
-   /// Read polyhedron from file (AMF;OBJ or OFF formats)
+   /// Read polyhedron from file (AMF,OBJ or OFF formats)
    /*!  \param file string
    \n  \param id int */
    polyhedron(string file, int id = - 1);
@@ -1738,10 +1738,9 @@ public:
 /*! transform_extrude is a special extrusion operation, defined by two 2d shapes, representing bottom and top of extrusion.*/
 class transform_extrude : public solid {
 public:
-   /// Create solid by extruding from bottom to top
-   /*! The top shape should be multiplied with a translation in z-direction   */
-   /*!  \param bottom shape2d@
-   \n  \param top shape2d@ */
+   /// Create solid by extruding from bottom to top. The top shape should be multiplied with a translation in z-direction
+   /*!  \param bottom shape2d@, The bottom 2d shape in xy-plane
+   \n  \param top shape2d@, The top 2d shape, to be transformed in z direction (e.g. multiply with a translation in z-direction) */
    transform_extrude(const shape2d@ bottom, const shape2d@ top);
 
 };
@@ -1751,7 +1750,7 @@ public:
 class translate : public tmatrix {
 public:
    /// Specify translation as a 3d vector
-   /*!  \param v vec3d@ */
+   /*!  \param v vec3d@, The translation specified as a 3d vector */
    translate(const vec3d@ v);
 
    /// Create transformation specifying translation in x, y and z

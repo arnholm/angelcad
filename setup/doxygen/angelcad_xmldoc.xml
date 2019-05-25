@@ -427,9 +427,21 @@
 			<as_description>
 				<as_line>Construct a circle from 3 points on the circumference</as_line>
 			</as_description>
-			<as_parameter verified="1" type="pos2d@" name="p1"/>
-			<as_parameter verified="1" type="pos2d@" name="p2"/>
-			<as_parameter verified="1" type="pos2d@" name="p3"/>
+			<as_parameter verified="1" type="pos2d@" name="p1">
+				<as_description>
+					<as_line>1st point on circle circumference</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="pos2d@" name="p2">
+				<as_description>
+					<as_line>2nd point on circle circumference</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="pos2d@" name="p3">
+				<as_description>
+					<as_line>3rd point on circle circumference</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="circle@ circle(double r)">
 			<as_description>
@@ -737,8 +749,16 @@
 			<as_line>cube, by default in 1st octant with one corner toucing origin</as_line>
 		</as_description>
 		<as_constructor verified="1" signature="cube@ cube(double size, bool center = false)">
-			<as_parameter verified="1" type="double" name="size"/>
-			<as_parameter verified="1" type="bool" name="center" default="false"/>
+			<as_parameter verified="1" type="double" name="size">
+				<as_description>
+					<as_line>Extent of cube in all directions</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="bool" name="center" default="false">
+				<as_description>
+					<as_line>true if cube to be centered on origin</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
 			<as_return type="boundingbox@" verified="1"/>
@@ -1449,7 +1469,11 @@
 			<as_description>
 				<as_line>Fill internal voids of 2d objects in an array</as_line>
 			</as_description>
-			<as_parameter verified="1" type="array@" name="arr"/>
+			<as_parameter verified="1" type="array@" name="arr">
+				<as_description>
+					<as_line>Array of shapes to be filled</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
 			<as_return type="boundingbox@" verified="1"/>
@@ -1509,11 +1533,23 @@
 		</as_description>
 		<as_constructor verified="1" signature="hmatrix@ hmatrix(const vec3d@ xvec, const vec3d@ yvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ))">
 			<as_description>
-				<as_line>Create 4x4 homogenous matrix from x and y direction vectors and an optional origin positio</as_line>
+				<as_line>Create 4x4 homogenous matrix from x and y direction vectors and an optional origin position, z direction is computed.</as_line>
 			</as_description>
-			<as_parameter verified="1" type="vec3d@" name="xvec"/>
-			<as_parameter verified="1" type="vec3d@" name="yvec"/>
-			<as_parameter verified="1" type="pos3d@" name="pos" default="pos3d ( 0 , 0 , 0 )"/>
+			<as_parameter verified="1" type="vec3d@" name="xvec">
+				<as_description>
+					<as_line>1st matrix column, local x-direction vector</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="vec3d@" name="yvec">
+				<as_description>
+					<as_line>1nd matrix column, local y-direction vector</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="pos3d@" name="pos" default="pos3d ( 0 , 0 , 0 )">
+				<as_description>
+					<as_line>4th matrix column, local origin postion</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="hmatrix@ hmatrix(const vec3d@ xvec, const vec3d@ yvec, const vec3d@ zvec, const pos3d@ pos = pos3d ( 0 , 0 , 0 ))">
 			<as_description>
@@ -2302,8 +2338,16 @@
 			<as_description>
 				<as_line>Construct line segment from p1 to p2</as_line>
 			</as_description>
-			<as_parameter verified="1" type="pos2d@" name="p1"/>
-			<as_parameter verified="1" type="pos2d@" name="p2"/>
+			<as_parameter verified="1" type="pos2d@" name="p1">
+				<as_description>
+					<as_line>Line segment start point, corresponds to parameter=0.0</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="pos2d@" name="p2">
+				<as_description>
+					<as_line>Line segment end point, corresponds to parameter=1.0</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="double length() const" name="length">
 			<as_description>
@@ -2315,7 +2359,11 @@
 			<as_description>
 				<as_line>Project point onto line segment and return line parameter of projetion point</as_line>
 			</as_description>
-			<as_parameter verified="1" type="pos2d@" name="point"/>
+			<as_parameter verified="1" type="pos2d@" name="point">
+				<as_description>
+					<as_line>Point to be projected onto line</as_line>
+				</as_description>
+			</as_parameter>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
@@ -2337,7 +2385,11 @@
 			<as_description>
 				<as_line>Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)</as_line>
 			</as_description>
-			<as_parameter verified="1" type="double" name="par"/>
+			<as_parameter verified="1" type="double" name="par">
+				<as_description>
+					<as_line>Interpolation parameter value</as_line>
+				</as_description>
+			</as_parameter>
 			<as_return type="pos2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="string Type() const" name="Type">
@@ -2352,8 +2404,16 @@
 			<as_description>
 				<as_line>Construct line segment from p1 to p2</as_line>
 			</as_description>
-			<as_parameter verified="1" type="pos3d@" name="p1"/>
-			<as_parameter verified="1" type="pos3d@" name="p2"/>
+			<as_parameter verified="1" type="pos3d@" name="p1">
+				<as_description>
+					<as_line>start point on line segment, corresponding to parameter=0.0</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="pos3d@" name="p2">
+				<as_description>
+					<as_line>end point on line segment, corresponding to parameter=1.0</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="double length() const" name="length">
 			<as_description>
@@ -2363,9 +2423,13 @@
 		</as_member_function>
 		<as_member_function verified="1" signature="double project(pos3d@ point) const" name="project">
 			<as_description>
-				<as_line>Project point onto line segment and return line parameter of projetion point</as_line>
+				<as_line>Project point onto line and return line parameter of projetion point</as_line>
 			</as_description>
-			<as_parameter verified="1" type="pos3d@" name="point"/>
+			<as_parameter verified="1" type="pos3d@" name="point">
+				<as_description>
+					<as_line>Point to be projected onto (infinite) line</as_line>
+				</as_description>
+			</as_parameter>
 			<as_return type="double" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
@@ -2387,7 +2451,11 @@
 			<as_description>
 				<as_line>Compute point on (infinite) line given line segment parameter (0=end1, 1=end2)</as_line>
 			</as_description>
-			<as_parameter verified="1" type="double" name="par"/>
+			<as_parameter verified="1" type="double" name="par">
+				<as_description>
+					<as_line>Line parameter value</as_line>
+				</as_description>
+			</as_parameter>
 			<as_return type="pos3d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="string Type() const" name="Type">
@@ -3051,7 +3119,7 @@
 			</as_parameter>
 			<as_parameter verified="1" type="double" name="delta" default="0x7fc00000">
 				<as_description>
-					<as_line>straight offset if shart corners required (cannot be combined with r)</as_line>
+					<as_line>straight offset if sharp corners required (cannot be combined with r)</as_line>
 				</as_description>
 			</as_parameter>
 			<as_parameter verified="1" type="bool" name="chamfer" default="false">
@@ -3064,10 +3132,26 @@
 			<as_description>
 				<as_line>Compute 2d offset for an array of 2d shapes</as_line>
 			</as_description>
-			<as_parameter verified="1" type="array@" name="arr"/>
-			<as_parameter verified="1" type="double" name="r" default="0x7fc00000"/>
-			<as_parameter verified="1" type="double" name="delta" default="0x7fc00000"/>
-			<as_parameter verified="1" type="bool" name="chamfer" default="false"/>
+			<as_parameter verified="1" type="array@" name="arr">
+				<as_description>
+					<as_line>array of 2d shapes to be offset</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="double" name="r" default="0x7fc00000">
+				<as_description>
+					<as_line>radius if rounded offset required (cannot be combined with delta)</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="double" name="delta" default="0x7fc00000">
+				<as_description>
+					<as_line>straight offset if sharp corners required (cannot be combined with r)</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="bool" name="chamfer" default="false">
+				<as_description>
+					<as_line>true if sharp corners to be chamfered (relevant with delta only)</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
 			<as_return type="boundingbox@" verified="1"/>
@@ -3500,7 +3584,7 @@
 		</as_constructor>
 		<as_constructor verified="1" signature="polyhedron@ polyhedron(string file, int id = - 1)">
 			<as_description>
-				<as_line>Read polyhedron from file (AMF;OBJ or OFF formats)</as_line>
+				<as_line>Read polyhedron from file (AMF,OBJ or OFF formats)</as_line>
 			</as_description>
 			<as_parameter verified="1" type="string" name="file"/>
 			<as_parameter verified="1" type="int" name="id" default="- 1"/>
@@ -5926,11 +6010,18 @@
 		</as_description>
 		<as_constructor verified="1" signature="transform_extrude@ transform_extrude(const shape2d@ bottom, const shape2d@ top)">
 			<as_description>
-				<as_line>Create solid by extruding from bottom to top</as_line>
-				<as_line>The top shape should be multiplied with a translation in z-direction</as_line>
+				<as_line>Create solid by extruding from bottom to top. The top shape should be multiplied with a translation in z-direction</as_line>
 			</as_description>
-			<as_parameter verified="1" type="shape2d@" name="bottom"/>
-			<as_parameter verified="1" type="shape2d@" name="top"/>
+			<as_parameter verified="1" type="shape2d@" name="bottom">
+				<as_description>
+					<as_line>The bottom 2d shape in xy-plane</as_line>
+				</as_description>
+			</as_parameter>
+			<as_parameter verified="1" type="shape2d@" name="top">
+				<as_description>
+					<as_line>The top 2d shape, to be transformed in z direction (e.g. multiply with a translation in z-direction)</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
 			<as_return type="boundingbox@" verified="1"/>
@@ -6031,7 +6122,11 @@
 			<as_description>
 				<as_line>Specify translation as a 3d vector</as_line>
 			</as_description>
-			<as_parameter verified="1" type="vec3d@" name="v"/>
+			<as_parameter verified="1" type="vec3d@" name="v">
+				<as_description>
+					<as_line>The translation specified as a 3d vector</as_line>
+				</as_description>
+			</as_parameter>
 		</as_constructor>
 		<as_constructor verified="1" signature="translate@ translate(double dx, double dy, double dz = 0.0)">
 			<as_description>
