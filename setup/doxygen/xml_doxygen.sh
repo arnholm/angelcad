@@ -16,9 +16,9 @@ doxygen Doxyfile_AngelCAD
 #    from C++ pointer          : "pos2d * "
 #     to AngelScript reference : "pos2d@ "
 #
-#
 rpl  " *&#160;" "@&#160;" $CPDE_USR/doc/AngelCAD/html/*.html
 rpl   ">* " ">@ "  $CPDE_USR/doc/AngelCAD/html/*.html
+#
 echo "==============================="
 echo "AngeCAD documentation complete."
 echo "==============================="

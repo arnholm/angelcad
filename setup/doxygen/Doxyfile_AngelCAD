@@ -823,7 +823,6 @@ FILE_PATTERNS          = *.c \
                          *.vhdl \
                          *.ucf \
                          *.qsf \
-                         *.as \
                          *.js
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
