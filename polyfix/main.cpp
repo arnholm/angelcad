@@ -46,22 +46,23 @@ size_t maxiter     = 10;      // max iterations
 
 static const wxCmdLineEntryDesc cmdLineDesc[] =
 {
-  //   kind           shortName              longName              description                                                    parameterType          flag(s)
-  { wxCMD_LINE_PARAM,  wxT_2("input_file"),  wxT_2("input_file"),  wxT_2("<input_filename>"),                                     wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY  },
-  { wxCMD_LINE_PARAM,  wxT_2("output_file"), wxT_2("output_file"), wxT_2("<output_filename>"),                                    wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("astl"),        wxT_2("astl"),        wxT_2("Save to ASCII STL (def=binary)"),                       wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("verbose"),     wxT_2("verbose"),     wxT_2("Verbose messages"),                                     wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("zip"),         wxT_2("zip"),         wxT_2("Store output in compressed zip file"),                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  //   kind           shortName              longName              description                                                                 parameterType          flag(s)
+  { wxCMD_LINE_PARAM,  wxT_2("input_file"),  wxT_2("input_file"),  wxT_2("<input_filename>"),                                                  wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY  },
+  { wxCMD_LINE_SWITCH, wxT_2("verbose"),     wxT_2("verbose"),     wxT_2("Verbose messages"),                                                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
 
-  { wxCMD_LINE_OPTION, wxT_2("maxiter"),     wxT_2("maxiter"),     wxT_2("[heal]  \tMax iterations (def=10)"),                    wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_OPTION, wxT_2("dtol"),        wxT_2("dtol"),        wxT_2("[heal]  \tDistance tolerance (def=1.0E-2)"),            wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_OPTION, wxT_2("atol"),        wxT_2("atol"),        wxT_2("[heal]  \tArea tolerance (def=1.0E-6)"),                wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("lumps"),       wxT_2("lumps"),       wxT_2("[heal]  \tSplit into lumps (stored only in AMF)"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("nflip"),       wxT_2("nflip"),       wxT_2("[heal]  \tFlip faces with inward normals"),             wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION, wxT_2("maxiter"),     wxT_2("maxiter"),     wxT_2("[heal]  \tMax iterations (def=10)"),                                 wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION, wxT_2("dtol"),        wxT_2("dtol"),        wxT_2("[heal]  \tDistance tolerance (def=1.0E-2)"),                         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION, wxT_2("atol"),        wxT_2("atol"),        wxT_2("[heal]  \tArea tolerance (def=1.0E-6)"),                             wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH, wxT_2("lumps"),       wxT_2("lumps"),       wxT_2("[heal]  \tSplit into lumps (not supported for stl output)"),         wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH, wxT_2("nflip"),       wxT_2("nflip"),       wxT_2("[heal]  \tFlip faces with inward normals (experimental)"),           wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
 
-  { wxCMD_LINE_OPTION, wxT_2("remesh"),      wxT_2("remesh"),      wxT_2("[remesh]\tRemesh surfaces to given edge length (set dtol=~1.E-6)"),       wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH, wxT_2("noaflip"),     wxT_2("noaflip"),     wxT_2("[remesh]\tDo not perform aspect ratio edge flipping"),  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_NONE,   wxT_2(""),            wxT_2(""),            wxT_2(""),                                                     wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  }
+  { wxCMD_LINE_OPTION, wxT_2("remesh"),      wxT_2("remesh"),      wxT_2("[remesh]\tHeal & remesh surfaces to given edge length (set dtol to small value ~1.E-6)"),  wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+ // { wxCMD_LINE_SWITCH, wxT_2("noaflip"),     wxT_2("noaflip"),     wxT_2("[remesh]\tDo not perform aspect ratio edge flipping"),               wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+
+  { wxCMD_LINE_SWITCH, wxT_2("overwrite"),   wxT_2("overwrite"),   wxT_2("[output]\tallow file overwrite, including input file."),             wxCMD_LINE_VAL_NONE, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION, wxT_2("out"),         wxT_2("out"),         wxT_2("[output]\toutput filename/format (.obj, .off, .amf, .stl, .astl)"),  wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH, wxT_2("zip"),         wxT_2("zip"),         wxT_2("[output]\tsave output also to compressed zip file"),                 wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_NONE,   wxT_2(""),            wxT_2(""),            wxT_2(""),                                                                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  }
 };
 
 void ParserToMap(wxCmdLineParser& parser, CmdLineMap& cmdMap)
@@ -122,21 +123,14 @@ int main(int argc, char **argv)
    }
    cout << endl;
 
-
    try {
 
-
-      string out_ext         = "stl";
       bool   stl_binary      = true;
       bool   remesh          = false;
       double remesh_edge_len = 40;
 
       wxFileName fname_in    = cmdMap[wxT("input_file")];
 
-      if(cmdMap.find("astl") != cmdMap.end()) {
-         out_ext    = "stl";
-         stl_binary = false;
-      }
       bool verbose       = (cmdMap.find("verbose") != cmdMap.end());
       bool lump_analysis = (cmdMap.find("lumps") != cmdMap.end());
       bool flip_faces    = (cmdMap.find("nflip") != cmdMap.end());
@@ -145,14 +139,53 @@ int main(int argc, char **argv)
       }
       bool aspect_flip   = (cmdMap.find("noaflip") == cmdMap.end());
       bool zip_compress  = (cmdMap.find("zip") != cmdMap.end());
+      bool overwrite     = (cmdMap.find("overwrite") != cmdMap.end());
 
-      // set the default output_file_name
-      wxFileName fname_out   = fname_in;
-      fname_out.SetName(fname_out.GetName()+"_polyfix");
-      fname_out.SetExt(out_ext);
-      auto it_out = cmdMap.find("output_file");
+      // define the candidate output_file_name
+      wxFileName fname_out;
+      auto it_out = cmdMap.find("out");
       if(it_out != cmdMap.end()) {
+
+         // output file name was specified
          fname_out = it_out->second;
+         if(fname_out.GetFullPath().Length() == 0) {
+            cout << "Error : Either skip the -out=filename option or specify a filename/extension." << endl;
+            return 1;
+         }
+
+         // allow for specifying name+extension or only extension like this
+         //     -out=test.obj  : use given file name and extension
+         //     -out=*.obj     : same name as input file, but given extension (one of the allowed)
+         //  or -out=.obj      : same name as input file, but given extension (one of the allowed)
+         //  or -out=obj       : same name as input file, but given extension (one of the allowed)
+
+         wxString out_name = fname_out.GetName();
+         if(wxNOT_FOUND != out_name.Find('*'))  {
+            // output filename contains wildcard, so use input file name
+            fname_out.SetName(fname_in.GetName());
+         }
+         else if(out_name.Length()==0) {
+           fname_out.SetName(fname_in.GetName());
+         }
+         else if(out_name[0]=='.') {
+            fname_out.SetExt(out_name.Mid(1));
+            fname_out.SetName(fname_in.GetName());
+         }
+         else if(fname_out.GetExt() == "") {
+            fname_out.SetExt(out_name);
+            fname_out.SetName(fname_in.GetName());
+         }
+
+         // if output format is "astl" it means ascii stl
+         if(fname_out.GetExt().Lower() == "astl") {
+            fname_out.SetExt("stl");
+            stl_binary = false;
+            cout << "Output is ASCII stl: "<< fname_out.GetFullPath().ToStdString() << endl;
+         }
+      }
+      else {
+         // output filename not specified, set to same name as input
+         fname_out = fname_in;
       }
 
       // switch on compression if output file type is zip
@@ -160,7 +193,6 @@ int main(int argc, char **argv)
       std::transform(ext.begin(),ext.end(),ext.begin(),::tolower);
       if(ext == "zip") {
          zip_compress = true;
-         fname_out.SetExt("stl");
       }
 
       std::string input_file = fname_in.GetFullPath().ToStdString();
@@ -203,7 +235,22 @@ int main(int argc, char **argv)
       else if(spaceio::stl_io::is_stl(input_file)) polyset = spaceio::stl_io::read(input_file);
       else if(spaceio::off_io::is_off(input_file)) polyset = spaceio::off_io::read(input_file);
       else if(spaceio::obj_io::is_obj(input_file)) polyset = spaceio::obj_io::read(input_file);
-      else throw logic_error("File type not supported: " + input_file);
+      else throw logic_error("Input file type not supported: " + input_file);
+
+
+      std::string target_file = fname_out.GetFullPath().ToStdString();
+      bool out_ok=false;
+           if(spaceio::amf_io::is_amf(target_file)) out_ok=true;
+      else if(spaceio::off_io::is_off(target_file)) out_ok=true;
+      else if(spaceio::obj_io::is_obj(target_file)) out_ok=true;
+      else if(spaceio::stl_io::is_stl(target_file)) out_ok=true;
+
+      if(!out_ok) {
+         cout << "ERROR: output file format not supported: " << target_file << endl;
+         return 1;
+      }
+
+
 
       std::vector<std::string> warning_summary(polyset->size());
 
@@ -257,12 +304,27 @@ int main(int argc, char **argv)
 
       cout << endl;
       cout << endl << "Writing: ";
-      std::string target_file = fname_out.GetFullPath().ToStdString();
+
+      // make sure there is no overwrite
+      if(!overwrite) {
+         size_t index=0;
+         wxString base_name = fname_out.GetName();
+         while(fname_out.Exists()) {
+            fname_out.SetName(base_name+'_'+std::to_string(++index));
+         }
+      }
+
+      target_file = fname_out.GetFullPath().ToStdString();
            if(spaceio::amf_io::is_amf(target_file)) target_file = spaceio::amf_io::write(polyset,fname_out.GetFullPath().ToStdString());
       else if(spaceio::off_io::is_off(target_file)) target_file = spaceio::off_io::write(polyset,fname_out.GetFullPath().ToStdString());
       else if(spaceio::obj_io::is_obj(target_file)) target_file = spaceio::obj_io::write(polyset,fname_out.GetFullPath().ToStdString());
-      else                                          target_file = spaceio::stl_io::write(polyset,fname_out.GetFullPath().ToStdString(),stl_binary);
+      else if(spaceio::stl_io::is_stl(target_file)) target_file = spaceio::stl_io::write(polyset,fname_out.GetFullPath().ToStdString(),stl_binary);
+      else {
+         cout << "ERROR: output file format  not supported: " << target_file << endl;
+         return 1;
+      }
 
+      cout << target_file;
       if(zip_compress) {
 
          // create a zip file with just the single file
@@ -270,14 +332,14 @@ int main(int argc, char **argv)
          zipname.SetExt("zip");
          wxZipFile zipfile(zipname);
 
-         bool remove_original = true;
+         bool remove_original = false;
          bool full_path = false;
          zipfile.AddFileEntry(target_file,full_path,remove_original);
 
          // set the new target name
          target_file = zipfile.FileName().GetFullPath().ToStdString();
+         cout << " >> " << target_file;
       }
-      cout << target_file;
       cout << endl;
    }
    catch(std::exception& ex) {
