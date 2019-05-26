@@ -33,7 +33,6 @@ typedef map<wxString,wxString> CmdLineMap;    // CmdLineMap
 
 #include "as_csg.h"
 #include "version.h"
-#include "as_document.h"
 #include "ce_angelscript_ex/as_reftype.h"
 #include "ce_angelscript_ex/as_xml.h"
 #include "ce_angelscript_ex/as_member_function.h"
@@ -44,9 +43,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_PARAM,  wxT_2("input_file"),  wxT_2("input_file"),  wxT_2("<input_filename>"),                     wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY },
   { wxCMD_LINE_OPTION, wxT_2("include"),     wxT_2("include"),     wxT_2("optional library include path"),        wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("outsub"),      wxT_2("outsub"),      wxT_2("optional output subdirectory"),         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-//  { wxCMD_LINE_SWITCH, wxT_2("doc"),         wxT_2("doc"),         wxT_2("Write 'angelcad.h'"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-//  { wxCMD_LINE_OPTION, wxT_2("doxy"),        wxT_2("doxy"),        wxT_2("Write 'angelcad.h' with doxygen info"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+//  { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation + 'angelcad.h'"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("xmltodo"),     wxT_2("xmltodo"),     wxT_2("Add XML_TODO items: -xmltodo=\"level type\" "),      wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("h"),           wxT_2("help"),        wxT_2("Command line help"),                    wxCMD_LINE_VAL_NONE,   wxCMD_LINE_OPTION_HELP    },
@@ -123,12 +120,10 @@ int main(int argc, char **argv)
    bool has_include     = cmdMap.find("include")  != cmdMap.end();
    bool has_outsub      = cmdMap.find("outsub") != cmdMap.end();
    bool has_refcount    = cmdMap.find("refcount") != cmdMap.end();
-   bool has_doc         = cmdMap.find("doc") != cmdMap.end();
-   bool has_doxy        = cmdMap.find("doxy") != cmdMap.end();
    bool has_xmldoc      = cmdMap.find("xmldoc") != cmdMap.end();
    bool has_xmltodo     = cmdMap.find("xmltodo") != cmdMap.end();
    bool has_version     = cmdMap.find("version") != cmdMap.end();
-   if(has_doxy)has_doc = true;
+   if(has_xmltodo)has_xmldoc= true;
 
    string include_path = "";
    if(has_include) {
@@ -146,19 +141,7 @@ int main(int argc, char **argv)
    as_csg parser_csg;
    if(parser_csg.register_types()) {
 
-      if(has_doc) {
-         as_document doc(asF()->engine());
-
-         if(has_doxy) {
-            doc.read_doxy(cmdMap["doxy"].ToStdString());
-         }
-
-         string docfile = "angelcad.h";
-         ofstream doc_out(docfile);
-         doc.write_doc(doc_out);
-         cout << "Created documentation file: " << docfile << endl;
-      }
-      else if(has_xmldoc) {
+      if(has_xmldoc) {
 
          // generate or update XML documentation
 

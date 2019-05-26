@@ -5,7 +5,7 @@
 		<Option title="as_csg" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
-		<Option virtualFolders="utilities/;Boolean/2d/;Boolean/3d/;shapes/2d/;Transforms/base/;Transforms/;shapes/;aaa/;shapes/3d/;aaa_document/;utilities/noscript/" />
+		<Option virtualFolders="utilities/;Boolean/2d/;Boolean/3d/;shapes/2d/;Transforms/base/;Transforms/;shapes/;aaa/;shapes/3d/;utilities/noscript/" />
 		<Build>
 			<Target title="MSVC_Debug">
 				<Option output=".cmp/msvc/bin/Debug/as_csgd" prefix_auto="1" extension_auto="1" />
@@ -153,24 +153,6 @@
 		</Unit>
 		<Unit filename="as_csg.h">
 			<Option virtualFolder="aaa/" />
-		</Unit>
-		<Unit filename="as_doc_type.cpp">
-			<Option virtualFolder="aaa_document/" />
-		</Unit>
-		<Unit filename="as_doc_type.h">
-			<Option virtualFolder="aaa_document/" />
-		</Unit>
-		<Unit filename="as_doc_type_doxy.cpp">
-			<Option virtualFolder="aaa_document/" />
-		</Unit>
-		<Unit filename="as_doc_type_doxy.h">
-			<Option virtualFolder="aaa_document/" />
-		</Unit>
-		<Unit filename="as_document.cpp">
-			<Option virtualFolder="aaa_document/" />
-		</Unit>
-		<Unit filename="as_document.h">
-			<Option virtualFolder="aaa_document/" />
 		</Unit>
 		<Unit filename="boundingbox.cpp">
 			<Option virtualFolder="utilities/" />
