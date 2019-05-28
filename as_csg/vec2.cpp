@@ -38,7 +38,7 @@ vec2::vec2(double x, double y)
 {}
 
 vec2::vec2(const as_initializer_vector<double>& v)
-: as_reftype("pos2d")
+: as_reftype("vec2d")
 , m_vec(v[0],v[1])
 {
    // cout << "vec2 Initlist " << this << " " << m_vec.x() << " " << m_vec.y() << endl;

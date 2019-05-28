@@ -38,7 +38,7 @@ vec3::vec3(double x, double y, double z)
 {}
 
 vec3::vec3(const as_initializer_vector<double>& v)
-: as_reftype("pos2d")
+: as_reftype("vec3d")
 , m_vec(v[0],v[1],v[2])
 {
    // cout << "vec3 Initlist " << this << " " << m_vec.x() << " " << m_vec.y() << " " << m_vec.z() << endl;
