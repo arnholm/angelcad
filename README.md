@@ -7,7 +7,7 @@ Relevant user documentation and other useful resources are found [here](https://
 
 AngelCAD build system is based on [Code::Blocks](http://codeblocks.org/) and CPDE as described in [cpde_utils](https://github.com/arnholm/cpde_utils). To build AngelCAD it is required to install Code::Blocks and configure it as documented. On Linux, the g++ compiler is used. On Windows, MSVC2013 or newer is required (the free 'express' versions of MSVC are ok).
 
-Furthermore, CPDE required building and configuring the following 3rd party libraries 
+Furthermore, CPDE requires building and configuring the following 3rd party libraries 
 
 | Library                             | Description/Comments |
 | ----------------------------------- | -------------------- |
