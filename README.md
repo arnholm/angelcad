@@ -1,21 +1,35 @@
 ### User documentation ###
 
-https://arnholm.github.io/angelcad-docs/
+Relevant user documentation and other useful resources are found [here](https://arnholm.github.io/angelcad-docs/). Pre-built binaries of AngelCAD are found [here](https://github.com/arnholm/angelcad/releases).
 
 
-### Dependencies ###
+### Building AngelCAD ###
 
-AngelCAD build system is based on Code::Blocks
-as described in https://github.com/arnholm/cpde_utils
+AngelCAD build system is based on [Code::Blocks](http://codeblocks.org/) and CPDE as described in [cpde_utils](https://github.com/arnholm/cpde_utils). To build AngelCAD it is required to install Code::Blocks and configure it as documented. On Linux, the g++ compiler is used. On Windows, MSVC2013 or newer is required (the free 'express' versions of MSVC are ok).
 
-Before building AngelCAD, you must build the following workspaces
+Furthermore, CPDE required building and configuring the following 3rd party libraries 
 
-* spacelibs - https://github.com/arnholm/spacelibs
-   - spacemath
-   - spaceio
-* cpde_syslibs - https://github.com/arnholm/cpde_syslibs
-   - ce_angelscript
-   - ce_angelscript_ex
-* xcsg - https://github.com/arnholm/xcsg
+| Library                             | Description/Comments |
+| ----------------------------------- | -------------------- |
+| [wxWidgets](http://wxwidgets.org/)  | Static library build, see instructions |
+| [boost](https://www.boost.org/)  | boost_system, boost_filesystem, boost_thread |
+| [msgpack](https://msgpack.org/) | C/C++ version. Not strictly required of AngelCAD but recommended |
+
+For more detailed detailed build instructions see [here](https://github.com/arnholm/cpde_utils/tree/master/doc/)
+
+
+## libraries required ##
+
+Before building AngelCAD, you must build the following workspaces, containing libraries used
+
+| Workspace                           | Libraries required by AngelCAD |
+| ----------------------------------- | -------------------- |
+| [cpde_syslibs](https://github.com/arnholm/cpde_syslibs/)  | cf_syslib, ce_angelscript, ce_angelscript_ex |
+| [spacelibs](https://github.com/arnholm/spacelibs/)  | spacemath, spaceio, polyhealer |
+
+
+## xcsg ##
+
+AngelCAD uses the [xcsg](https://github.com/arnholm/xcsg) application as the boolean engine. Build it or install a [prebuilt binary of xcsg](https://github.com/arnholm/xcsg/releases)
 
 
