@@ -13,7 +13,7 @@ Furthermore, CPDE requires building and configuring the following 3rd party libr
 | ----------------------------------- | -------------------- |
 | [wxWidgets](http://wxwidgets.org/)  | Static library build, see instructions |
 | [boost](https://www.boost.org/)  | boost_system, boost_filesystem, boost_thread |
-| [msgpack](https://msgpack.org/) | C/C++ version. Not strictly required of AngelCAD but recommended |
+| [msgpack](https://msgpack.org/) | C/C++ version. Not strictly required for AngelCAD build, but recommended |
 
 For more detailed detailed build instructions see [here](https://github.com/arnholm/cpde_utils/tree/master/doc/)
 
