@@ -51,6 +51,7 @@ Source: "{#CPDE_USR}\bin\as_csg.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\xcsg.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\AngelView.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\polyfix.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#CPDE_USR}\bin\cf_syslib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\spaceio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\spacemath.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\polyhealer.dll"; DestDir: "{app}"; Flags: ignoreversion

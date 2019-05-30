@@ -27,6 +27,7 @@ f 755 root sys ${bindir}/angelcad ${CPDE_USR}/bin/angelcad
 f 755 root sys ${bindir}/angelview ${CPDE_USR}/bin/angelview
 f 755 root sys ${bindir}/as_csg ${CPDE_USR}/bin/as_csg
 f 755 root sys ${bindir}/polyfix ${CPDE_USR}/bin/polyfix
+f 755 root sys ${libdir}/libcf_syslib.so ${CPDE_USR}/bin/libcf_syslib.so
 f 755 root sys ${libdir}/libspaceio.so ${CPDE_USR}/bin/libspaceio.so
 f 755 root sys ${libdir}/libspacemath.so ${CPDE_USR}/bin/libspacemath.so
 f 755 root sys ${libdir}/libpolyhealer.so ${CPDE_USR}/bin/libpolyhealer.so
