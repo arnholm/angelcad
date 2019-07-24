@@ -26,6 +26,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --libs`" />
@@ -57,6 +58,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --libs`" />
@@ -93,6 +95,7 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
 					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static --debug`" />
@@ -121,6 +124,7 @@
 					<Add option="-DNOPCH" />
 					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
 					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static`" />
@@ -324,6 +328,12 @@
 		</Unit>
 		<Unit filename="pos3.h">
 			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="projection2d.cpp">
+			<Option virtualFolder="Boolean/2d/" />
+		</Unit>
+		<Unit filename="projection2d.h">
+			<Option virtualFolder="Boolean/2d/" />
 		</Unit>
 		<Unit filename="rectangle.cpp">
 			<Option virtualFolder="shapes/2d/" />

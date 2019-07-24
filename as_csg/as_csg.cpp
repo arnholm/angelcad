@@ -46,6 +46,7 @@
 #include "fill2d.h"
 #include "offset2d.h"
 #include "minkowski2d.h"
+#include "projection2d.h"
 
 // 3d primitives
 #include "cone.h"
@@ -164,6 +165,7 @@ bool  as_csg::register_types()
       sweep::InstallType(engine);
       offset2d::InstallType(engine);
       minkowski2d::InstallType(engine);
+      projection2d::InstallType(engine);
 
       // 3d boolean operations
       union3d::InstallType(engine);

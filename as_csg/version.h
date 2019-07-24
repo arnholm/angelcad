@@ -16,6 +16,6 @@
 #ifndef AS_CSG_VERSION_H
 #define AS_CSG_VERSION_H
 
-#define AS_CSG_version "v1.3-01"
+#define AS_CSG_version "v1.3-02"
 
 #endif // AS_CSG_VERSION_H
