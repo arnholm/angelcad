@@ -8,9 +8,7 @@ projection2d::projection2d(const solid* s)
 {}
 
 projection2d::~projection2d()
-{
-   //dtor
-}
+{}
 
 
 void projection2d::InstallType(asIScriptEngine* engine)
@@ -50,6 +48,17 @@ bbox3d projection2d::get_box() const
 string projection2d::openscad_csg() const
 {
    return "projection()";
+}
+
+void projection2d::populate_tree(node_csg* node)
+{
+   node_csg* this_node = new node_csg(this);
+   node->push_back(this_node);
+
+   for(size_t i=0;i<m_shapes.size(); i++) {
+      solid* s = m_shapes[i];
+      if(s)s->populate_tree(this_node);
+   }
 }
 
 

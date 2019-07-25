@@ -25,8 +25,10 @@ public:
    // return bounding box
    virtual bbox3d get_box() const;
 
-
 protected:
+   /// \privatesection (hidden in documentation)
+
+   virtual void populate_tree(node_csg* node) ;
 
    static projection2d* ctor_s(const solid* s) { return new projection2d(s); }
 
