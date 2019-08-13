@@ -16,9 +16,17 @@ doxygen Doxyfile_AngelCAD
 #    from C++ pointer          : "pos2d * "
 #     to AngelScript reference : "pos2d@ "
 #
-rpl  " *&#160;" "@&#160;" $CPDE_USR/doc/AngelCAD/html/*.html
-rpl   ">* " ">@ "  $CPDE_USR/doc/AngelCAD/html/*.html
+html_dir="$CPDE_USR/doc/AngelCAD/html"
+rpl  " *&#160;" "@&#160;" $html_dir/*.html
+rpl   ">* " ">@ "  $html_dir/*.html
 #
-echo "==============================="
-echo "AngeCAD documentation complete."
-echo "==============================="
+html_index="$html_dir/index.html"
+echo "======================================="
+echo "AngeCAD documentation complete         "
+echo "   to open   : xdg-open $html_index    "
+echo "   or run as : xml_doxygen.sh open     "
+echo "======================================="
+if [[ "$1" == "open" ]]
+then
+    xdg-open "$html_index"
+fi
