@@ -127,6 +127,8 @@ public:
 
 };
 
+/// Input stream (usable in console window only). Provides "cin" input stream.
+/*! Example use: int i=0; cin >> i;*/
 class as_istream {
 public:
    /*!  \param v bool
@@ -163,6 +165,7 @@ public:
 
 };
 
+/// Output stream allowing expressions like: cout << "Hello World!" << endl;
 class as_ostream {
 public:
    /*!  \param v bool

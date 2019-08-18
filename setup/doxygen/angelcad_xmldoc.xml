@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <as_xml appnam="angelcad">
 	<as_class verified="1" name="aatc_funcpointer">
+		<as_description>
+			<as_line>Dummy description</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="aatc_funcpointer@ aatc_funcpointer()"/>
 		<as_member_function verified="1" signature="bool Set(string)" name="Set">
 			<as_parameter verified="1" type="string" name=""/>
@@ -174,6 +177,10 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="as_istream">
+		<as_description>
+			<as_line>Input stream (usable in console window only). Provides &quot;cin&quot; input stream.</as_line>
+			<as_line>Example use: int i=0; cin &gt;&gt; i;</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="as_istream&amp; opShr(bool&amp;out v)" name="opShr">
 			<as_parameter verified="1" type="bool" name="v"/>
 			<as_return type="as_istream&amp;@" verified="1"/>
@@ -208,6 +215,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="as_ostream">
+		<as_description>
+			<as_line>Output stream allowing expressions like: cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="as_ostream&amp; opShl(bool v)" name="opShl">
 			<as_parameter verified="1" type="bool" name="v"/>
 			<as_return type="as_ostream&amp;@" verified="1"/>
@@ -1047,6 +1057,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="dictionary">
+		<as_description>
+			<as_line>AngelScript dictionary add-on</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="dictionary@ dictionary()"/>
 		<as_member_function verified="1" signature="bool delete(const string&amp;in)" name="delete">
 			<as_parameter verified="1" type="const string&amp;" name=""/>
@@ -1123,6 +1136,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="dictionaryValue">
+		<as_description>
+			<as_line>AngeScript dictionary add_on</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="dictionaryValue&amp; opAssign(const ?&amp;in)" name="opAssign">
 			<as_return type="dictionaryValue&amp;" verified="1"/>
 		</as_member_function>
@@ -6683,6 +6699,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="unordered_map">
+		<as_description>
+			<as_line>Container similar to C++ std::unordered_map</as_line>
+		</as_description>
 		<as_constructor verified="1" signature="unordered_map&lt;T_key,T_value&gt;@ unordered_map(int&amp;in)">
 			<as_parameter verified="1" type="int" name=""/>
 		</as_constructor>
@@ -6763,6 +6782,9 @@
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="unordered_map_iterator">
+		<as_description>
+			<as_line>iterator calss for unordered_map</as_line>
+		</as_description>
 		<as_member_function verified="1" signature="T_value&amp; current_value()" name="current_value">
 			<as_return type="T_value&amp;" verified="1"/>
 		</as_member_function>
