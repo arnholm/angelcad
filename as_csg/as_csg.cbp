@@ -83,7 +83,7 @@
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="-doc /work/cpde_git/open/angelcad/setup/doxygen/as.doc" />
+				<Option parameters="-xmldoc -xmltodo=1 /work/cpde_git/open/angelcad/setup/doxygen/as.doc" />
 				<Compiler>
 					<Add option="-std=c++0x" />
 					<Add option="-g" />
