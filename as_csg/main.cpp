@@ -45,7 +45,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_OPTION, wxT_2("outsub"),      wxT_2("outsub"),      wxT_2("optional output subdirectory"),         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
 //  { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation + 'angelcad.h'"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_OPTION, wxT_2("xmltodo"),     wxT_2("xmltodo"),     wxT_2("Add XML_TODO items: -xmltodo=\"level type\" "),      wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_OPTION, wxT_2("xmltodo"),     wxT_2("xmltodo"),     wxT_2("Add XML_TODO items: -xmltodo=\"level *\" "),      wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("h"),           wxT_2("help"),        wxT_2("Command line help"),                    wxCMD_LINE_VAL_NONE,   wxCMD_LINE_OPTION_HELP    },
   { wxCMD_LINE_SWITCH, wxT_2("v"),           wxT_2("version"),     wxT_2("Show version number only"),             wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_NONE,   wxT_2(""),            wxT_2(""),            wxT_2(""),                                     wxCMD_LINE_VAL_NONE  , wxCMD_LINE_PARAM_OPTIONAL }
