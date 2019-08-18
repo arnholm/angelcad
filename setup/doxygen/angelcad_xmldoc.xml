@@ -1,159 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <as_xml appnam="angelcad">
-	<as_class verified="1" name="IStream">
-		<as_description>
-			<as_line>Intput stream (usable in console window only)</as_line>
-		</as_description>
-		<as_member_function verified="1" signature="IStream&amp; clearbuffer()" name="clearbuffer">
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; getline(string&amp;out szString)" name="getline">
-			<as_parameter verified="1" type="string&amp;" name="szString"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; getline(string&amp;out szString, const string&amp;in szDelim)" name="getline">
-			<as_parameter verified="1" type="string&amp;" name="szString"/>
-			<as_parameter verified="1" type="const string&amp;" name="szDelim"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; ignore(int64 n = 1, const string&amp;in szDelim = EOF)" name="ignore">
-			<as_parameter verified="1" type="int64" name="n" default="1"/>
-			<as_parameter verified="1" type="const string&amp;" name="szDelim" default="EOF"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(bool&amp;out fValue)" name="opShr">
-			<as_parameter verified="1" type="bool" name="fValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(double&amp;out flValue)" name="opShr">
-			<as_parameter verified="1" type="double" name="flValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(float&amp;out flValue)" name="opShr">
-			<as_parameter verified="1" type="float" name="flValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(int&amp;out iValue)" name="opShr">
-			<as_parameter verified="1" type="int" name="iValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(int16&amp;out iValue)" name="opShr">
-			<as_parameter verified="1" type="int16" name="iValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(int64&amp;out iValue)" name="opShr">
-			<as_parameter verified="1" type="int64" name="iValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(string&amp;out szString)" name="opShr">
-			<as_parameter verified="1" type="string&amp;" name="szString"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(uint&amp;out uiValue)" name="opShr">
-			<as_parameter verified="1" type="uint" name="uiValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(uint16&amp;out uiValue)" name="opShr">
-			<as_parameter verified="1" type="uint16" name="uiValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; opShr(uint64&amp;out uiValue)" name="opShr">
-			<as_parameter verified="1" type="uint64" name="uiValue"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; seekg(int64 iOffset, seekdir way)" name="seekg">
-			<as_parameter verified="1" type="int64" name="iOffset"/>
-			<as_parameter verified="1" type="seekdir" name="way"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="IStream&amp; seekg(int64 iPos)" name="seekg">
-			<as_parameter verified="1" type="int64" name="iPos"/>
-			<as_return type="IStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool bad() const" name="bad">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool eof() const" name="eof">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool fail() const" name="fail">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool good() const" name="good">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool opImplConv() const" name="opImplConv">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="int64 tellg() const" name="tellg">
-			<as_return type="int64" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="void clear()" name="clear">
-			<as_return type="void" verified="1"/>
-		</as_member_function>
-	</as_class>
-	<as_class verified="1" name="OStream">
-		<as_description>
-			<as_line>Output stream allowing expressions like: cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;</as_line>
-		</as_description>
-		<as_member_function verified="1" signature="OStream&amp; flush()" name="flush">
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(bool fValue)" name="opShl">
-			<as_parameter verified="1" type="bool" name="fValue"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(const string&amp;in szString)" name="opShl">
-			<as_parameter verified="1" type="const string&amp;" name="szString"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(double flValue)" name="opShl">
-			<as_parameter verified="1" type="double" name="flValue"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(float flValue)" name="opShl">
-			<as_parameter verified="1" type="float" name="flValue"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(int64 iValue)" name="opShl">
-			<as_parameter verified="1" type="int64" name="iValue"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; opShl(uint64 uiValue)" name="opShl">
-			<as_parameter verified="1" type="uint64" name="uiValue"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; seekp(int64 iOffset, seekdir way)" name="seekp">
-			<as_parameter verified="1" type="int64" name="iOffset"/>
-			<as_parameter verified="1" type="seekdir" name="way"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="OStream&amp; seekp(int64 iPos)" name="seekp">
-			<as_parameter verified="1" type="int64" name="iPos"/>
-			<as_return type="OStream&amp;" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool bad() const" name="bad">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool eof() const" name="eof">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool fail() const" name="fail">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool good() const" name="good">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="bool opImplConv() const" name="opImplConv">
-			<as_return type="bool" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="int64 tellp() const" name="tellp">
-			<as_return type="int64" verified="1"/>
-		</as_member_function>
-		<as_member_function verified="1" signature="void clear()" name="clear">
-			<as_return type="void" verified="1"/>
-		</as_member_function>
-	</as_class>
 	<as_class verified="1" name="aatc_funcpointer">
 		<as_constructor verified="1" signature="aatc_funcpointer@ aatc_funcpointer()"/>
 		<as_member_function verified="1" signature="bool Set(string)" name="Set">
@@ -228,8 +74,8 @@
 			<as_parameter verified="1" type="const T&amp;" name="value"/>
 			<as_return type="int" verified="1"/>
 		</as_member_function>
-		<as_member_function verified="1" signature="uint get_length() const" name="get_length">
-			<as_return type="uint" verified="1"/>
+		<as_member_function verified="0" signature="uint get_length() const" name="get_length">
+			<as_return type="uint" verified="0"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="uint length() const" name="length">
 			<as_return type="uint" verified="1"/>
@@ -241,14 +87,29 @@
 			<as_parameter verified="1" type="uint" name=""/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
-		<as_member_function verified="1" signature="void insert(uint, const T&amp;in)" name="insert">
-			<as_parameter verified="1" type="uint" name=""/>
-			<as_parameter verified="1" type="const T&amp;" name=""/>
+		<as_member_function verified="0" signature="void insert(uint, const T&amp;in)" name="insert">
+			<as_parameter verified="0" type="uint" name=""/>
+			<as_parameter verified="0" type="const T&amp;" name=""/>
+			<as_return type="void" verified="0"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void insert(uint index, const T&amp;in value)" name="insert">
+			<as_parameter verified="1" type="uint" name="index"/>
+			<as_parameter verified="1" type="const T&amp;" name="value"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void insert(uint index, const T[]&amp;inout arr)" name="insert">
+			<as_parameter verified="1" type="uint" name="index"/>
+			<as_parameter verified="1" type="const array&amp;@" name="arr"/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void insertAt(uint index, const T&amp;in value)" name="insertAt">
 			<as_parameter verified="1" type="uint" name="index"/>
 			<as_parameter verified="1" type="const T&amp;" name="value"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void insertAt(uint index, const T[]&amp;inout arr)" name="insertAt">
+			<as_parameter verified="1" type="uint" name="index"/>
+			<as_parameter verified="1" type="const array&amp;@" name="arr"/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void insertLast(const T&amp;in value)" name="insertLast">
@@ -269,6 +130,11 @@
 		<as_member_function verified="1" signature="void removeLast()" name="removeLast">
 			<as_return type="void" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="void removeRange(uint start, uint count)" name="removeRange">
+			<as_parameter verified="1" type="uint" name="start"/>
+			<as_parameter verified="1" type="uint" name="count"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="void reserve(uint length)" name="reserve">
 			<as_parameter verified="1" type="uint" name="length"/>
 			<as_return type="void" verified="1"/>
@@ -280,8 +146,14 @@
 		<as_member_function verified="1" signature="void reverse()" name="reverse">
 			<as_return type="void" verified="1"/>
 		</as_member_function>
-		<as_member_function verified="1" signature="void set_length(uint)" name="set_length">
-			<as_parameter verified="1" type="uint" name=""/>
+		<as_member_function verified="0" signature="void set_length(uint)" name="set_length">
+			<as_parameter verified="0" type="uint" name=""/>
+			<as_return type="void" verified="0"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void sort(array::less&amp;in, uint startAt = 0, uint count = uint ( - 1 ))" name="sort">
+			<as_parameter verified="1" type="less&amp;@" name=""/>
+			<as_parameter verified="1" type="uint" name="startAt" default="0"/>
+			<as_parameter verified="1" type="uint" name="count" default="uint ( - 1 )"/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="void sortAsc()" name="sortAsc">
@@ -299,6 +171,66 @@
 			<as_parameter verified="1" type="uint" name="startAt"/>
 			<as_parameter verified="1" type="uint" name="count"/>
 			<as_return type="void" verified="1"/>
+		</as_member_function>
+	</as_class>
+	<as_class verified="1" name="as_istream">
+		<as_member_function verified="1" signature="as_istream&amp; opShr(bool&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="bool" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(double&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="double" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(float&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="float" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(int&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="int" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(int64&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="int64" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(string&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="string&amp;" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(uint&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="uint" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_istream&amp; opShr(uint64&amp;out v)" name="opShr">
+			<as_parameter verified="1" type="uint64" name="v"/>
+			<as_return type="as_istream&amp;@" verified="1"/>
+		</as_member_function>
+	</as_class>
+	<as_class verified="1" name="as_ostream">
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(bool v)" name="opShl">
+			<as_parameter verified="1" type="bool" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(const string&amp;in v)" name="opShl">
+			<as_parameter verified="1" type="const string&amp;" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(double v)" name="opShl">
+			<as_parameter verified="1" type="double" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(float v)" name="opShl">
+			<as_parameter verified="1" type="float" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(int64 v)" name="opShl">
+			<as_parameter verified="1" type="int64" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="as_ostream&amp; opShl(uint64 v)" name="opShl">
+			<as_parameter verified="1" type="uint64" name="v"/>
+			<as_return type="as_ostream&amp;@" verified="1"/>
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="as_reftype">
@@ -1207,6 +1139,10 @@
 			<as_return type="dictionaryValue&amp;" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="dictionaryValue&amp; opHndlAssign(const ?&amp;in)" name="opHndlAssign">
+			<as_return type="dictionaryValue&amp;" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="dictionaryValue&amp; opHndlAssign(const dictionaryValue&amp;in)" name="opHndlAssign">
+			<as_parameter verified="1" type="const dictionaryValue&amp;" name=""/>
 			<as_return type="dictionaryValue&amp;" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="double opConv()" name="opConv">
@@ -4054,6 +3990,57 @@
 			</as_return>
 		</as_member_function>
 	</as_class>
+	<as_class verified="1" name="projection2d" base="shape2d">
+		<as_description>
+			<as_line>Project from 3d to 2d</as_line>
+		</as_description>
+		<as_constructor verified="1" signature="projection2d@ projection2d(const solid@ s)">
+			<as_parameter verified="1" type="solid@" name="s"/>
+		</as_constructor>
+		<as_member_function verified="1" signature="boundingbox@ box() const" name="box">
+			<as_return type="boundingbox@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape2d@ opAdd(shape2d@ b)" name="opAdd">
+			<as_parameter verified="1" type="shape2d@" name="b"/>
+			<as_return type="shape2d@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape2d@ opAnd(shape2d@ b)" name="opAnd">
+			<as_parameter verified="1" type="shape2d@" name="b"/>
+			<as_return type="shape2d@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape2d@ opImplCast()" name="opImplCast">
+			<as_return type="shape2d@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape2d@ opMul(tmatrix@ matrix)" name="opMul">
+			<as_parameter verified="1" type="tmatrix@" name="matrix"/>
+			<as_return type="shape2d@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape2d@ opSub(shape2d@ b)" name="opSub">
+			<as_parameter verified="1" type="shape2d@" name="b"/>
+			<as_return type="shape2d@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="shape@ opImplCast()" name="opImplCast">
+			<as_return type="shape@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="string Type() const" name="Type">
+			<as_return type="string" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="tmatrix@ transform() const" name="transform">
+			<as_return type="tmatrix@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void write_csg(string path)" name="write_csg">
+			<as_parameter verified="1" type="string" name="path"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void write_xcsg(string path, double secant_tolerance = - 1.0)" name="write_xcsg">
+			<as_parameter verified="1" type="string" name="path"/>
+			<as_parameter verified="1" type="double" name="secant_tolerance" default="- 1.0"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
+	</as_class>
 	<as_class verified="1" name="rectangle" base="shape2d">
 		<as_description>
 			<as_line>rectangle, by default located in 1st quadrant touching origin</as_line>
@@ -4975,6 +4962,9 @@
 		<as_member_function verified="1" signature="polyhedron@ opCast()" name="opCast">
 			<as_return type="polyhedron@" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="projection2d@ opCast()" name="opCast">
+			<as_return type="projection2d@" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="rectangle@ opCast()" name="opCast">
 			<as_return type="rectangle@" verified="1"/>
 		</as_member_function>
@@ -5064,6 +5054,9 @@
 		</as_member_function>
 		<as_member_function verified="1" signature="polygon@ opCast()" name="opCast">
 			<as_return type="polygon@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="projection2d@ opCast()" name="opCast">
+			<as_return type="projection2d@" verified="1"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="rectangle@ opCast()" name="opCast">
 			<as_return type="rectangle@" verified="1"/>
@@ -5655,7 +5648,27 @@
 			<as_parameter verified="1" type="uint" name="start" default="0"/>
 			<as_return type="int" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="int findFirstNotOf(const string&amp;in, uint start = 0) const" name="findFirstNotOf">
+			<as_parameter verified="1" type="const string&amp;" name=""/>
+			<as_parameter verified="1" type="uint" name="start" default="0"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int findFirstOf(const string&amp;in, uint start = 0) const" name="findFirstOf">
+			<as_parameter verified="1" type="const string&amp;" name=""/>
+			<as_parameter verified="1" type="uint" name="start" default="0"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="int findLast(const string&amp;in, int start = - 1) const" name="findLast">
+			<as_parameter verified="1" type="const string&amp;" name=""/>
+			<as_parameter verified="1" type="int" name="start" default="- 1"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int findLastNotOf(const string&amp;in, int start = - 1) const" name="findLastNotOf">
+			<as_parameter verified="1" type="const string&amp;" name=""/>
+			<as_parameter verified="1" type="int" name="start" default="- 1"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int findLastOf(const string&amp;in, int start = - 1) const" name="findLastOf">
 			<as_parameter verified="1" type="const string&amp;" name=""/>
 			<as_parameter verified="1" type="int" name="start" default="- 1"/>
 			<as_return type="int" verified="1"/>
@@ -5770,8 +5783,8 @@
 			<as_parameter verified="1" type="uint" name=""/>
 			<as_return type="uint8" verified="1"/>
 		</as_member_function>
-		<as_member_function verified="1" signature="uint get_length() const" name="get_length">
-			<as_return type="uint" verified="1"/>
+		<as_member_function verified="0" signature="uint get_length() const" name="get_length">
+			<as_return type="uint" verified="0"/>
 		</as_member_function>
 		<as_member_function verified="1" signature="uint length() const" name="length">
 			<as_return type="uint" verified="1"/>
@@ -5779,13 +5792,23 @@
 		<as_member_function verified="1" signature="uint size() const" name="size">
 			<as_return type="uint" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="void erase(uint pos, int count = - 1)" name="erase">
+			<as_parameter verified="1" type="uint" name="pos"/>
+			<as_parameter verified="1" type="int" name="count" default="- 1"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="void insert(uint pos, const string&amp;in other)" name="insert">
+			<as_parameter verified="1" type="uint" name="pos"/>
+			<as_parameter verified="1" type="const string&amp;" name="other"/>
+			<as_return type="void" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="void resize(uint)" name="resize">
 			<as_parameter verified="1" type="uint" name=""/>
 			<as_return type="void" verified="1"/>
 		</as_member_function>
-		<as_member_function verified="1" signature="void set_length(uint)" name="set_length">
-			<as_parameter verified="1" type="uint" name=""/>
-			<as_return type="void" verified="1"/>
+		<as_member_function verified="0" signature="void set_length(uint)" name="set_length">
+			<as_parameter verified="0" type="uint" name=""/>
+			<as_return type="void" verified="0"/>
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="sweep" base="solid">

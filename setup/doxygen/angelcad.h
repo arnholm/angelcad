@@ -1,156 +1,4 @@
 
-/// Intput stream (usable in console window only)
-class IStream {
-public:
-   /*!  \return IStream& */
-  IStream&  clearbuffer();
-
-   /*!  \param szString string&
-   \n  \return IStream& */
-  IStream&  getline(string&out szString);
-
-   /*!  \param szString string&
-   \n  \param szDelim const string&
-   \n  \return IStream& */
-  IStream&  getline(string&out szString, const string&in szDelim);
-
-   /*!  \param n int64
-   \n  \param szDelim const string&
-   \n  \return IStream& */
-  IStream&  ignore(int64 n = 1, const string&in szDelim = EOF);
-
-   /*!  \param fValue bool
-   \n  \return IStream& */
-  IStream&  opShr(bool&out fValue);
-
-   /*!  \param flValue double
-   \n  \return IStream& */
-  IStream&  opShr(double&out flValue);
-
-   /*!  \param flValue float
-   \n  \return IStream& */
-  IStream&  opShr(float&out flValue);
-
-   /*!  \param iValue int
-   \n  \return IStream& */
-  IStream&  opShr(int&out iValue);
-
-   /*!  \param iValue int16
-   \n  \return IStream& */
-  IStream&  opShr(int16&out iValue);
-
-   /*!  \param iValue int64
-   \n  \return IStream& */
-  IStream&  opShr(int64&out iValue);
-
-   /*!  \param szString string&
-   \n  \return IStream& */
-  IStream&  opShr(string&out szString);
-
-   /*!  \param uiValue uint
-   \n  \return IStream& */
-  IStream&  opShr(uint&out uiValue);
-
-   /*!  \param uiValue uint16
-   \n  \return IStream& */
-  IStream&  opShr(uint16&out uiValue);
-
-   /*!  \param uiValue uint64
-   \n  \return IStream& */
-  IStream&  opShr(uint64&out uiValue);
-
-   /*!  \param iOffset int64
-   \n  \param way seekdir
-   \n  \return IStream& */
-  IStream&  seekg(int64 iOffset, seekdir way);
-
-   /*!  \param iPos int64
-   \n  \return IStream& */
-  IStream&  seekg(int64 iPos);
-
-   /*!  \return bool */
-  bool  bad() const;
-
-   /*!  \return bool */
-  bool  eof() const;
-
-   /*!  \return bool */
-  bool  fail() const;
-
-   /*!  \return bool */
-  bool  good() const;
-
-   /*!  \return bool */
-  bool  opImplConv() const;
-
-   /*!  \return int64 */
-  int64  tellg() const;
-
-  void  clear();
-
-};
-
-/// Output stream allowing expressions like: cout << "Hello World!" << endl;
-class OStream {
-public:
-   /*!  \return OStream& */
-  OStream&  flush();
-
-   /*!  \param fValue bool
-   \n  \return OStream& */
-  OStream&  opShl(bool fValue);
-
-   /*!  \param szString const string&
-   \n  \return OStream& */
-  OStream&  opShl(const string&in szString);
-
-   /*!  \param flValue double
-   \n  \return OStream& */
-  OStream&  opShl(double flValue);
-
-   /*!  \param flValue float
-   \n  \return OStream& */
-  OStream&  opShl(float flValue);
-
-   /*!  \param iValue int64
-   \n  \return OStream& */
-  OStream&  opShl(int64 iValue);
-
-   /*!  \param uiValue uint64
-   \n  \return OStream& */
-  OStream&  opShl(uint64 uiValue);
-
-   /*!  \param iOffset int64
-   \n  \param way seekdir
-   \n  \return OStream& */
-  OStream&  seekp(int64 iOffset, seekdir way);
-
-   /*!  \param iPos int64
-   \n  \return OStream& */
-  OStream&  seekp(int64 iPos);
-
-   /*!  \return bool */
-  bool  bad() const;
-
-   /*!  \return bool */
-  bool  eof() const;
-
-   /*!  \return bool */
-  bool  fail() const;
-
-   /*!  \return bool */
-  bool  good() const;
-
-   /*!  \return bool */
-  bool  opImplConv() const;
-
-   /*!  \return int64 */
-  int64  tellp() const;
-
-  void  clear();
-
-};
-
 /// Array of values or references
 /*! Arrays by examples
 \n array of double values : array<double>
@@ -211,9 +59,6 @@ public:
   int  findByRef(uint startAt, const T&in value) const;
 
    /*!  \return uint */
-  uint  get_length() const;
-
-   /*!  \return uint */
   uint  length() const;
 
    /*!  \return uint */
@@ -222,13 +67,21 @@ public:
    /*!  \param  uint */
   void  erase(uint);
 
-   /*!  \param  uint
-   \n  \param  const T& */
-  void  insert(uint, const T&in);
+   /*!  \param index uint
+   \n  \param value const T& */
+  void  insert(uint index, const T&in value);
+
+   /*!  \param index uint
+   \n  \param arr const array&@ */
+  void  insert(uint index, const T[]&inout arr);
 
    /*!  \param index uint
    \n  \param value const T& */
   void  insertAt(uint index, const T&in value);
+
+   /*!  \param index uint
+   \n  \param arr const array&@ */
+  void  insertAt(uint index, const T[]&inout arr);
 
    /*!  \param value const T& */
   void  insertLast(const T&in value);
@@ -243,6 +96,10 @@ public:
 
   void  removeLast();
 
+   /*!  \param start uint
+   \n  \param count uint */
+  void  removeRange(uint start, uint count);
+
    /*!  \param length uint */
   void  reserve(uint length);
 
@@ -251,8 +108,10 @@ public:
 
   void  reverse();
 
-   /*!  \param  uint */
-  void  set_length(uint);
+   /*!  \param  less&@
+   \n  \param startAt uint
+   \n  \param count uint */
+  void  sort(array::less&in, uint startAt = 0, uint count = uint ( - 1 ));
 
   void  sortAsc();
 
@@ -265,6 +124,70 @@ public:
    /*!  \param startAt uint
    \n  \param count uint */
   void  sortDesc(uint startAt, uint count);
+
+};
+
+class as_istream {
+public:
+   /*!  \param v bool
+   \n  \return as_istream&@ */
+  as_istream&  opShr(bool&out v);
+
+   /*!  \param v double
+   \n  \return as_istream&@ */
+  as_istream&  opShr(double&out v);
+
+   /*!  \param v float
+   \n  \return as_istream&@ */
+  as_istream&  opShr(float&out v);
+
+   /*!  \param v int
+   \n  \return as_istream&@ */
+  as_istream&  opShr(int&out v);
+
+   /*!  \param v int64
+   \n  \return as_istream&@ */
+  as_istream&  opShr(int64&out v);
+
+   /*!  \param v string&
+   \n  \return as_istream&@ */
+  as_istream&  opShr(string&out v);
+
+   /*!  \param v uint
+   \n  \return as_istream&@ */
+  as_istream&  opShr(uint&out v);
+
+   /*!  \param v uint64
+   \n  \return as_istream&@ */
+  as_istream&  opShr(uint64&out v);
+
+};
+
+class as_ostream {
+public:
+   /*!  \param v bool
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(bool v);
+
+   /*!  \param v const string&
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(const string&in v);
+
+   /*!  \param v double
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(double v);
+
+   /*!  \param v float
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(float v);
+
+   /*!  \param v int64
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(int64 v);
+
+   /*!  \param v uint64
+   \n  \return as_ostream&@ */
+  as_ostream&  opShl(uint64 v);
 
 };
 
@@ -1242,6 +1165,14 @@ public:
 
 };
 
+/// Project from 3d to 2d
+class projection2d : public shape2d {
+public:
+   /*!  \param s solid@ */
+   projection2d(const solid@ s);
+
+};
+
 /// rectangle, by default located in 1st quadrant touching origin
 /*! a rectangle is a 2d object defined by its extent in x and y. By default it touches the
 \n origin and extends along positive x and y.*/
@@ -1542,9 +1473,29 @@ public:
   int  findFirst(const string&in, uint start = 0) const;
 
    /*!  \param  const string&
+   \n  \param start uint
+   \n  \return int */
+  int  findFirstNotOf(const string&in, uint start = 0) const;
+
+   /*!  \param  const string&
+   \n  \param start uint
+   \n  \return int */
+  int  findFirstOf(const string&in, uint start = 0) const;
+
+   /*!  \param  const string&
    \n  \param start int
    \n  \return int */
   int  findLast(const string&in, int start = - 1) const;
+
+   /*!  \param  const string&
+   \n  \param start int
+   \n  \return int */
+  int  findLastNotOf(const string&in, int start = - 1) const;
+
+   /*!  \param  const string&
+   \n  \param start int
+   \n  \return int */
+  int  findLastOf(const string&in, int start = - 1) const;
 
    /*!  \param  const string&
    \n  \return int */
@@ -1657,19 +1608,21 @@ public:
   uint8&  opIndex(uint);
 
    /*!  \return uint */
-  uint  get_length() const;
-
-   /*!  \return uint */
   uint  length() const;
 
    /*!  \return uint */
   uint  size() const;
 
-   /*!  \param  uint */
-  void  resize(uint);
+   /*!  \param pos uint
+   \n  \param count int */
+  void  erase(uint pos, int count = - 1);
+
+   /*!  \param pos uint
+   \n  \param other const string& */
+  void  insert(uint pos, const string&in other);
 
    /*!  \param  uint */
-  void  set_length(uint);
+  void  resize(uint);
 
 };
 
