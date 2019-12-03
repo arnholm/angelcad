@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,12 +12,14 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "polyhedron.h"
 #include "ce_angelscript_ex/as_vector.h"
 #include <wx/filename.h>
 
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 #include "spaceio/amf_io.h"
 #include "spaceio/obj_io.h"
@@ -70,11 +72,19 @@ polyhedron::polyhedron(const CScriptArray* points, const CScriptArray* faces)
 
    for(size_t ivert=0;ivert<vertices.size();ivert++) {
       pos3* pos = vertices[ivert];
+      if(!pos) {
+         string message = "polyhedron exception: NULL element detected in polyhedron points, index=" + std::to_string(ivert);
+         throw logic_error(message);
+      }
       vert.push_back(*pos);
    }
 
    for(size_t iface=0;iface<polyhedron_faces.size();iface++) {
       polyhedron_face* face = polyhedron_faces[iface];
+      if(!face) {
+         string message = "polyhedron exception: NULL element detected in polyhedron faces, index=" + std::to_string(iface);
+         throw logic_error(message);
+      }
       pfaces.push_back(face->nodes());
    }
 
@@ -89,7 +99,7 @@ polyhedron::polyhedron(const string& file, int id)
    wxString ext = fname.GetExt();
    ext.MakeLower();
 
-   if( (ext!="amf") && (ext!="obj") && (ext!="off") ) {
+   if( (ext!="amf") && (ext!="obj") && (ext!="off")  && (ext!="xyz")) {
       string message = "polyhedron exception: The file type '"+fname.GetExt().ToStdString()+"' is not supported. Supported: amf/obj/off ";
       throw logic_error(message);
    }
@@ -118,6 +128,19 @@ polyhedron::polyhedron(const string& file, int id)
    else if (ext == "off") {
       polyset = spaceio::off_io::read(file);
       m_poly = (*polyset)[0];
+   }
+   else if (ext == "xyz") {
+      vtx_vec   vert;
+      vert.reserve(1024);
+      std::ifstream in(file);
+      string line;
+      while(std::getline(in,line)) {
+         std::istringstream ins(line);
+         double x,y,z;
+         ins >> x >> y >> z;
+         vert.push_back(spacemath::pos3d(x,y,z));
+      }
+      m_poly = std::make_shared<spacemath::polyhedron3d>(spacemath::polyhedron3d(vert));
    }
 }
 

@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "polygon.h"
 #include <sstream>
 #include "ce_angelscript_ex/as_vector.h"
@@ -52,6 +52,10 @@ polygon::polygon(const CScriptArray* points, bool check)
    }
    for(size_t i=0; i<other.size(); i++) {
       pos2* pnt = other[i];
+      if(!pnt) {
+         string message = "polygon exception: NULL element detected in polygon points, index=" + std::to_string(i);
+         throw logic_error(message);
+      }
       m_vert.push_back(pos2d(pnt->x(),pnt->y()));
    }
 
