@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "spline3.h"
 #include <sstream>
 #include "ce_angelscript_ex/as_vector.h"
@@ -29,7 +29,7 @@ void spline3::InstallType(asIScriptEngine* engine)
    DeclareConstructors(engine);
 
    // Inherit any methods + declare the unique spline3 methods
-   spline3::DeclareMethodsEx("spline3d",engine);
+   DeclareMethods<spline3>(engine);
 }
 
 as_reftype* spline3::clone_scoped()
