@@ -299,6 +299,12 @@
 		<Unit filename="offset2d.h">
 			<Option virtualFolder="Boolean/2d/" />
 		</Unit>
+		<Unit filename="pointcloud.cpp">
+			<Option virtualFolder="utilities/" />
+		</Unit>
+		<Unit filename="pointcloud.h">
+			<Option virtualFolder="utilities/" />
+		</Unit>
 		<Unit filename="polygon.cpp">
 			<Option virtualFolder="shapes/2d/" />
 		</Unit>
@@ -495,9 +501,6 @@
 			<Option virtualFolder="utilities/noscript/" />
 		</Unit>
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

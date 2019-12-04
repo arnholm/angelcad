@@ -99,7 +99,7 @@ polyhedron::polyhedron(const string& file, int id)
    wxString ext = fname.GetExt();
    ext.MakeLower();
 
-   if( (ext!="amf") && (ext!="obj") && (ext!="off")  && (ext!="xyz")) {
+   if( (ext!="amf") && (ext!="obj") && (ext!="off") ) {
       string message = "polyhedron exception: The file type '"+fname.GetExt().ToStdString()+"' is not supported. Supported: amf/obj/off ";
       throw logic_error(message);
    }
@@ -128,19 +128,6 @@ polyhedron::polyhedron(const string& file, int id)
    else if (ext == "off") {
       polyset = spaceio::off_io::read(file);
       m_poly = (*polyset)[0];
-   }
-   else if (ext == "xyz") {
-      vtx_vec   vert;
-      vert.reserve(1024);
-      std::ifstream in(file);
-      string line;
-      while(std::getline(in,line)) {
-         std::istringstream ins(line);
-         double x,y,z;
-         ins >> x >> y >> z;
-         vert.push_back(spacemath::pos3d(x,y,z));
-      }
-      m_poly = std::make_shared<spacemath::polyhedron3d>(spacemath::polyhedron3d(vert));
    }
 }
 

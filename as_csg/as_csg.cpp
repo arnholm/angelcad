@@ -31,6 +31,7 @@
 //#include "loft3d.h"
 #include "polyhedron_face.h"
 //#include "image2d.h"
+#include "pointcloud.h"
 
 // 2d primitives
 #include "circle.h"
@@ -55,7 +56,7 @@
 #include "cuboid.h"
 #include "sphere.h"
 #include "polyhedron.h"
-#include "tin_model.h"
+//#include "tin_model.h"
 
 // 3d booleans
 #include "difference3d.h"
@@ -129,6 +130,7 @@ bool  as_csg::register_types()
 //      image2d::InstallType(engine);  // image used by loft3d and must be installed first
 //      loft3d::InstallType(engine);
       polyhedron_face::InstallType(engine);
+      pointcloud::InstallType(engine);
 
       // 2d primitives
       shape2d::InstallType(engine);
