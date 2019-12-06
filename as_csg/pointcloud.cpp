@@ -90,7 +90,7 @@ pointcloud::pointcloud(const string& file, int skip_lines, int xtok, int ytok, i
    tmp_pos.reserve(1024);
 
    // read the file line by line
-   size_t line_number=0;
+   int line_number=0;
    std::string line;
    while(std::getline(in,line)) {
 
@@ -100,7 +100,7 @@ pointcloud::pointcloud(const string& file, int skip_lines, int xtok, int ytok, i
       if(line_number > skip_lines) {
          vector<string> tokens;
          tokenize(line,delimiters,tokens);
-         size_t ntok = tokens.size();
+         int ntok = static_cast<int>(tokens.size());
          if(ntok > 0) {
             // it is possible to read a subset of coordinates, the others will default to zero
             bool read_x = xtok<ntok && xtok>=0;
