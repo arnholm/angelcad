@@ -72,7 +72,7 @@
 				<Option output=".cmp/gcc/bin/Debug/polyfixd" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Compiler>
 					<Add option="-std=c++0x" />
 					<Add option="-g" />
@@ -96,7 +96,7 @@
 				<Option output=".cmp/gcc/bin/Release/polyfix" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-Os" />

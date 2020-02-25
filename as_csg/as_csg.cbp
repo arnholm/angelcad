@@ -82,7 +82,7 @@
 				<Option working_dir="/work/cpde_git/open/angelcad/setup/doxygen" />
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Option parameters="-xmldoc -xmltodo=1 /work/cpde_git/open/angelcad/setup/doxygen/as.doc" />
 				<Compiler>
 					<Add option="-std=c++0x" />
@@ -112,7 +112,7 @@
 				<Option output=".cmp/gcc/bin/Release/as_csg" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-Os" />

@@ -72,7 +72,7 @@
 				<Option output=".cmp/gcc/angelcadd" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="0" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-std=c++0x" />
@@ -97,7 +97,7 @@
 				<Option output=".cmp/gcc/angelcad" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Release/" />
 				<Option type="0" />
-				<Option compiler="gcc" />
+				<Option compiler="gcc_generic" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-Os" />
