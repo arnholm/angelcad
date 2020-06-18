@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,9 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
+#include <stdexcept>
+
 #include "wxProcessExecute.h"
 #if defined(__WXMSW__)
       // wxSIGTERM fails on windows, must use wxSIGKILL http://trac.wxwidgets.org/ticket/15356
