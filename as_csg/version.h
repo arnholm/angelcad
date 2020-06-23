@@ -1,3 +1,6 @@
+#ifndef HEADER_9509C8D2C0F0ECEF
+#define HEADER_9509C8D2C0F0ECEF
+
 // BeginLicense:
 // Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
@@ -16,6 +19,8 @@
 #ifndef AS_CSG_VERSION_H
 #define AS_CSG_VERSION_H
 
-#define AS_CSG_version "v1.3-02"
+#define AS_CSG_version "v1.4-00"
 
 #endif // AS_CSG_VERSION_H
+#endif // header guard 
+
