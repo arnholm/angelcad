@@ -16,6 +16,7 @@ using namespace std;
 #include "dxfdom/dxfroot.h"
 #include "dxfdom/dxfprofile.h"
 #include "dxfdom/dxfprofileexport.h"
+#include "as_csg/version.h"
 
 #include <map>
 using namespace std;
@@ -49,6 +50,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_OPTION,  wxT_2("scale"),   wxT_2("scale"),    wxT_2("Coordinate scale factor [1.0]"),             wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
   { wxCMD_LINE_OPTION,  wxT_2("sectol"),  wxT_2("sectol"),   wxT_2("Secant tolerance [0.1*scale]"),              wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
   { wxCMD_LINE_OPTION,  wxT_2("layers"),  wxT_2("layers"),   wxT_2("Select from given DXF layer(s) only, separated by commas"),   wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("v"),       wxT_2("version"),  wxT_2("Show version number only"),                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_NONE,    wxT_2(""),        wxT_2(""),         wxT_2(""),                                                           wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  }
 };
 
@@ -82,6 +84,17 @@ void ParserToMap(wxCmdLineParser& parser, CmdLineMap& cmdMap)
 
 int main(int argc, char **argv)
 {
+   // detect if -v option is provided before asking wxWidgets to parse, as this is a special case
+   for(int i=1; i<argc; i++) {
+      string arg(argv[i]);
+      std::transform(arg.begin(),arg.end(),arg.begin(),::tolower);
+      if(arg == "-v" || arg=="--version") {
+         string version(AS_CSG_version);
+         cout << version.substr(1) << endl;
+         return 0;
+      }
+   }
+
    // initialise wxWidgets library
    wxInitializer initializer(argc,argv);
 
