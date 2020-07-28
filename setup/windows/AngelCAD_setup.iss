@@ -14,7 +14,7 @@
 
 #include "..\..\as_csg\version.h"
 
-#define CPDE_USR "E:\cpde3\usr"
+#define CPDE_USR "D:\cpde_usr"
 
 
 [Setup]
