@@ -14,7 +14,7 @@
 
 #include "..\..\as_csg\version.h"
 
-#define CPDE_USR "E:\cpde3\usr"
+#define CPDE_USR "D:\cpde_usr"
 
 
 [Setup]
@@ -51,10 +51,12 @@ Source: "{#CPDE_USR}\bin\as_csg.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\xcsg.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\AngelView.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\polyfix.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#CPDE_USR}\bin\dxfread.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\cf_syslib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\spaceio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\spacemath.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CPDE_USR}\bin\polyhealer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#CPDE_USR}\bin\dxfdom.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; Source: "..\testing\samples_basic\*.as"; DestDir: "{app}\samples_basic"; Flags: ignoreversion 
 ; Source: "{#CPDE_USR}\doc\{#MyAppName}\html\{#MyAppName}.chm"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

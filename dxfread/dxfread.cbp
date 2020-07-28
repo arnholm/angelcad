@@ -2,18 +2,17 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="polyfix" />
+		<Option title="dxfread" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
 		<Build>
 			<Target title="MSVC_Debug">
-				<Option output=".cmp/msvc/bin/Debug/polyfixd" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Debug/dxfreadd" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="msvc" />
 				<Compiler>
 					<Add option="/MDd" />
-					<Add option="/EHs" />
 					<Add option="/GF" />
 					<Add option="/Od" />
 					<Add option="/W3" />
@@ -30,20 +29,18 @@
 					<Add option="/NODEFAULTLIB:libcmt.lib" />
 					<Add option="/NODEFAULTLIB:msvcrt.lib" />
 					<Add option="/INCREMENTAL:NO" />
-					<Add library="polyhealerd" />
-					<Add library="spaceiod" />
-					<Add library="spacemathd" />
 					<Add library="msvcrtd.lib" />
+					<Add library="dxfdomd" />
+					<Add library="spaceiod" />
 				</Linker>
 			</Target>
 			<Target title="MSVC_Release">
-				<Option output=".cmp/msvc/bin/Release/polyfix" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Release/dxfread" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="msvc" />
 				<Compiler>
 					<Add option="/MD" />
-					<Add option="/EHs" />
 					<Add option="/GF" />
 					<Add option="/Ox" />
 					<Add option="/W3" />
@@ -58,65 +55,64 @@
 					<Add option="/NODEFAULTLIB:libcmtd.lib" />
 					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
 					<Add option="/INCREMENTAL:NO" />
-					<Add library="polyhealer" />
-					<Add library="spaceio" />
-					<Add library="spacemath" />
 					<Add library="msvcrt.lib" />
+					<Add library="dxfdom" />
+					<Add library="spaceio" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="$(CPDE_USR)\bin\cpde_usr -bin -xi -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Add after="$(CPDE_USR)/bin/cpde_usr -bin -xi -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 			<Target title="GCC_Debug">
-				<Option output=".cmp/gcc/bin/Debug/polyfixd" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/gcc/bin/Debug/dxfreadd" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc_generic" />
+				<Option compiler="gcc" />
+				<Option parameters="/work/DATA/openscad_testdata/dxf/ellipse-reverse.dxf -xml -as  " />
 				<Compiler>
 					<Add option="-std=c++0x" />
-					<Add option="-g" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
 					<Add option="-fexceptions" />
+					<Add option="-g" />
 					<Add option="`$(#wx.config) --cxxflags --debug`" />
 					<Add option="-DNOPCH" />
 					<Add option="-D_DEBUG" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static --debug`" />
-					<Add library="polyhealerd" />
-					<Add library="spacemathd" />
+					<Add library="dxfdomd" />
 					<Add library="spaceiod" />
-					<Add library="boost_filesystem" />
-					<Add library="boost_system" />
 				</Linker>
 			</Target>
 			<Target title="GCC_Release">
-				<Option output=".cmp/gcc/bin/Release/polyfix" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/gcc/bin/Release/dxfread" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/gcc/obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc_generic" />
+				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-Os" />
 					<Add option="-std=c++0x" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
 					<Add option="-fexceptions" />
+					<Add option="-Os" />
 					<Add option="`$(#wx.config) --cxxflags`" />
 					<Add option="-DNOPCH" />
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
+					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static`" />
-					<Add library="polyhealer" />
-					<Add library="spacemath" />
+					<Add library="dxfdom" />
 					<Add library="spaceio" />
-					<Add library="boost_filesystem" />
-					<Add library="boost_system" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
+					<Add after="# upx $(TARGET_OUTPUT_FILE)" />
 					<Add after="$(CPDE_USR)/bin/cpde_usr -bin -xi -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
 					<Mode after="always" />
 				</ExtraCommands>
@@ -125,14 +121,13 @@
 		<Compiler>
 			<Add directory="$(CPDE_USR)/include" />
 			<Add directory="$(#boost.include)" />
+			<Add directory="$(#msgpack.include)" />
 		</Compiler>
 		<Linker>
 			<Add directory="$(CPDE_USR)/lib" />
 			<Add directory="$(#boost.lib)" />
 		</Linker>
 		<Unit filename="main.cpp" />
-		<Unit filename="wxZipFile.cpp" />
-		<Unit filename="wxZipFile.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
