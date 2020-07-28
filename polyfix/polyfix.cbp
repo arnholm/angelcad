@@ -134,9 +134,6 @@
 		<Unit filename="wxZipFile.cpp" />
 		<Unit filename="wxZipFile.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

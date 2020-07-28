@@ -25,7 +25,20 @@ Before building AngelCAD, you must build the following workspaces, containing li
 | Workspace                           | Libraries required by AngelCAD |
 | ----------------------------------- | -------------------- |
 | [cpde_syslibs](https://github.com/arnholm/cpde_syslibs/)  | cf_syslib, ce_angelscript, ce_angelscript_ex |
-| [spacelibs](https://github.com/arnholm/spacelibs/)  | spacemath, spaceio, polyhealer |
+| [spacelibs](https://github.com/arnholm/spacelibs/)  | spacemath, spaceio, polyhealer, dxfdom |
+
+
+## Applications included ##
+
+The following applications are included in the build
+
+| Application                         | Description |
+| ----------------------------------- | -------------------- |
+| as_csg    | AngelCAD script compiler |
+| AngelCAD  | AngelCAD GUI editor/IDE |
+| AngelView | AngelCAD 3d file viewer |
+| polyfix   | command line 3d file repair utility |
+| dxfread   | command line DXF file reader |
 
 
 ## xcsg ##

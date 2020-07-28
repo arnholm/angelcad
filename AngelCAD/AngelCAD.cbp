@@ -224,8 +224,6 @@
 		<Unit filename="wxsmith/SettingsExternalFiles.wxs" />
 		<Unit filename="wxsmith/SettingsFileFormats.wxs" />
 		<Extensions>
-			<code_completion />
-			<envvars />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="AngelCADApp.cpp" main="AngelCADFrame" init_handlers="necessary" language="CPP" />
 				<resources>
@@ -237,7 +235,6 @@
 					<wxDialog wxs="wxsmith/SettingsDialog.wxs" src="SettingsDialog.cpp" hdr="SettingsDialog.h" fwddecl="0" i18n="1" name="SettingsDialog" language="CPP" />
 				</resources>
 			</wxsmith>
-			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
