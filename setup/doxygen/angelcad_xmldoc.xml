@@ -3285,6 +3285,44 @@
 			</as_return>
 		</as_member_function>
 	</as_class>
+	<as_class verified="1" name="pointcloud">
+		<as_description>
+			<as_line>pointcloud, contains pos3d@ cloud</as_line>
+		</as_description>
+		<as_constructor verified="1" signature="pointcloud@ pointcloud(pos3d@[]@ points)">
+			<as_parameter verified="1" type="array@" name="points"/>
+		</as_constructor>
+		<as_constructor verified="0" signature="pointcloud@ pointcloud(string file, int skip_lines = 0, int xtok = 0, int ytok = 1, int ztok = 2, string delimiters = &apos; ,;	
+&apos;)">
+			<as_parameter verified="0" type="string" name="file"/>
+			<as_parameter verified="0" type="int" name="skip_lines" default="0"/>
+			<as_parameter verified="0" type="int" name="xtok" default="0"/>
+			<as_parameter verified="0" type="int" name="ytok" default="1"/>
+			<as_parameter verified="0" type="int" name="ztok" default="2"/>
+			<as_parameter verified="0" type="string" name="delimiters" default="&apos; ,;	
+&apos;"/>
+		</as_constructor>
+		<as_constructor verified="1" signature="pointcloud@ pointcloud(string file, int skip_lines = 0, int xtok = 0, int ytok = 1, int ztok = 2, string delimiters = &apos; ,;	&apos;)">
+			<as_parameter verified="1" type="string" name="file"/>
+			<as_parameter verified="1" type="int" name="skip_lines" default="0"/>
+			<as_parameter verified="1" type="int" name="xtok" default="0"/>
+			<as_parameter verified="1" type="int" name="ytok" default="1"/>
+			<as_parameter verified="1" type="int" name="ztok" default="2"/>
+			<as_parameter verified="1" type="string" name="delimiters" default="&apos; ,;	&apos;"/>
+		</as_constructor>
+		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="pos3d@[]@ points_array() const" name="points_array">
+			<as_return type="array@" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="string Type() const" name="Type">
+			<as_return type="string" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="uint size() const" name="size">
+			<as_return type="uint" verified="1"/>
+		</as_member_function>
+	</as_class>
 	<as_class verified="1" name="polygon" base="shape2d">
 		<as_description>
 			<as_line>polygon, vertices in CCW order</as_line>
@@ -5446,6 +5484,10 @@
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
 			<as_return type="int" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="pos2d@ pos(double t) const" name="pos">
+			<as_parameter verified="1" type="double" name="t"/>
+			<as_return type="pos2d@" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="string Type() const" name="Type">
 			<as_description>
 				<as_line>class type string</as_line>
@@ -5455,6 +5497,10 @@
 					<as_line>string containing type name</as_line>
 				</as_description>
 			</as_return>
+		</as_member_function>
+		<as_member_function verified="1" signature="vec2d@ dir(double t) const" name="dir">
+			<as_parameter verified="1" type="double" name="t"/>
+			<as_return type="vec2d@" verified="1"/>
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="spline3d">
@@ -5471,6 +5517,10 @@
 		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
 			<as_return type="int" verified="1"/>
 		</as_member_function>
+		<as_member_function verified="1" signature="pos3d@ pos(double t) const" name="pos">
+			<as_parameter verified="1" type="double" name="t"/>
+			<as_return type="pos3d@" verified="1"/>
+		</as_member_function>
 		<as_member_function verified="1" signature="string Type() const" name="Type">
 			<as_description>
 				<as_line>class type string</as_line>
@@ -5480,6 +5530,10 @@
 					<as_line>string containing type name</as_line>
 				</as_description>
 			</as_return>
+		</as_member_function>
+		<as_member_function verified="1" signature="vec3d@ dir(double t) const" name="dir">
+			<as_parameter verified="1" type="double" name="t"/>
+			<as_return type="vec3d@" verified="1"/>
 		</as_member_function>
 	</as_class>
 	<as_class verified="1" name="spline_path">

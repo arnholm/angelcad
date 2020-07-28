@@ -923,6 +923,28 @@ public:
 
 };
 
+/// pointcloud, contains pos3d@ cloud
+class pointcloud {
+public:
+   /*!  \param points array@ */
+   pointcloud(array<pos3d@>@ points);
+
+   /*!  \param file string
+   \n  \param skip_lines int
+   \n  \param xtok int
+   \n  \param ytok int
+   \n  \param ztok int
+   \n  \param delimiters string */
+   pointcloud(string file, int skip_lines = 0, int xtok = 0, int ytok = 1, int ztok = 2, string delimiters = ' ,;	');
+
+   /*!  \return array@ */
+  pos3d*[]@  points_array() const;
+
+   /*!  \return uint */
+  uint  size() const;
+
+};
+
 /// polygon, vertices in CCW order
 /*! a polygon is a 2d object. It is defined by vertex positions listed in CCW sequence.*/
 class polygon : public shape2d {
@@ -1404,6 +1426,14 @@ public:
    /*!  \param points array@ */
    spline2d(array<pos2d@>@ points);
 
+   /*!  \param t double
+   \n  \return pos2d@ */
+  pos2d*  pos(double t) const;
+
+   /*!  \param t double
+   \n  \return vec2d@ */
+  vec2d*  dir(double t) const;
+
 };
 
 /// 3d cubic spline curve
@@ -1413,6 +1443,14 @@ public:
    /// Compute 3d spline curve from an array of positions on curve
    /*!  \param points array@ */
    spline3d(array<pos3d@>@ points);
+
+   /*!  \param t double
+   \n  \return pos3d@ */
+  pos3d*  pos(double t) const;
+
+   /*!  \param t double
+   \n  \return vec3d@ */
+  vec3d*  dir(double t) const;
 
 };
 
