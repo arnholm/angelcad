@@ -62,12 +62,12 @@ polygon::polygon(const CScriptArray* points, bool check)
    if(check) {
       spacemath::polygon2d poly2d(m_vert);
       if(!(poly2d.area() > 0)) {
-         string message = "polygon exception: The polygon specified has zero area";
+         string message = "polygon exception: The polygon starting at ("+std::to_string(m_vert[0].x())+','+ std::to_string(m_vert[0].y()) +") has zero area";
          throw logic_error(message);
       }
 
       if(poly2d.is_self_interesecting(epspnt,epspar)) {
-         string message = "polygon exception: The polygon is self-intersecting";
+         string message = "polygon exception: The polygon starting at ("+std::to_string(m_vert[0].x())+','+ std::to_string(m_vert[0].y()) +") is self-intersecting";
          throw logic_error(message);
       }
    }
@@ -90,12 +90,12 @@ polygon::polygon(const ::spline2* spline, int nseg)
    spacemath::polygon2d poly2d(m_vert);
 
    if(!(poly2d.area() > 0)) {
-      string message = "polygon exception: The polygon specified has zero area";
+      string message = "polygon exception: The polygon starting at ("+std::to_string(m_vert[0].x())+','+ std::to_string(m_vert[0].y()) +") has zero area";
       throw logic_error(message);
    }
 
    if(poly2d.is_self_interesecting(epspnt,epspar)) {
-      string message = "polygon exception: The polygon is self-intersecting";
+      string message = "polygon exception: The polygon starting at ("+std::to_string(m_vert[0].x())+','+ std::to_string(m_vert[0].y()) +") is self-intersecting";
       throw logic_error(message);
    }
 }
@@ -139,7 +139,7 @@ polygon::polygon(const pos2* p1, const pos2* p2, const pos2* p3, const pos2* p4,
    }
 
    if(poly2d.is_self_interesecting(epspnt,epspar)) {
-      string message = "polygon exception: The polygon is self-intersecting";
+      string message = "polygon exception: The polygon starting at ("+std::to_string(m_vert[0].x())+','+ std::to_string(m_vert[0].y()) +") is self-intersecting";
       throw logic_error(message);
    }
 }
