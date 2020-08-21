@@ -102,6 +102,9 @@ bool  as_csg::register_types()
       solid::DeclareType<solid>(engine,"Abstract base for 3d primitives and booleans");
       tmatrix::DeclareType<tmatrix>(engine,"Abstract base matrix for transformations");
 
+      // add support for script arguments
+      asF()->RegisterGlobalGetArgs();
+
       // 2d and 3d utilities
       pos2::InstallType(engine);
       vec2::InstallType(engine);

@@ -43,6 +43,7 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
   { wxCMD_LINE_PARAM,  wxT_2("input_file"),  wxT_2("input_file"),  wxT_2("<input_filename>"),                     wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY },
   { wxCMD_LINE_OPTION, wxT_2("include"),     wxT_2("include"),     wxT_2("optional library include path"),        wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("outsub"),      wxT_2("outsub"),      wxT_2("optional output subdirectory"),         wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_OPTION, wxT_2("args"),        wxT_2("args"),        wxT_2("Script arguments, e.g: -args=\"number=2;e=2.71\""),    wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
 //  { wxCMD_LINE_SWITCH, wxT_2("r"),           wxT_2("refcount"),    wxT_2("Reference count logging"),              wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_SWITCH, wxT_2("xmldoc"),      wxT_2("xmldoc"),      wxT_2("Create/update XML documentation + 'angelcad.h'"),      wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
   { wxCMD_LINE_OPTION, wxT_2("xmltodo"),     wxT_2("xmltodo"),     wxT_2("Add XML_TODO items: -xmltodo=\"level *\" "),      wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL },
@@ -123,11 +124,17 @@ int main(int argc, char **argv)
    bool has_xmldoc      = cmdMap.find("xmldoc") != cmdMap.end();
    bool has_xmltodo     = cmdMap.find("xmltodo") != cmdMap.end();
    bool has_version     = cmdMap.find("version") != cmdMap.end();
+   bool has_args        = cmdMap.find("args") != cmdMap.end();
    if(has_xmltodo)has_xmldoc= true;
 
    string include_path = "";
    if(has_include) {
       include_path = cmdMap["include"].ToStdString();
+   }
+
+   std::string as_args;
+   if(has_args) {
+      as_args = cmdMap["args"].ToStdString();
    }
 
    wxDateTime time_begin = wxDateTime::UNow();
@@ -140,6 +147,11 @@ int main(int argc, char **argv)
 
    as_csg parser_csg;
    if(parser_csg.register_types()) {
+
+      if(has_args) {
+         // parse input arguments to script
+         asF()->get_args_impl()->parse(as_args);
+      }
 
       if(has_xmldoc) {
 
