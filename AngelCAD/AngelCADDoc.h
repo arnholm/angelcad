@@ -70,6 +70,12 @@ public:
    // Get the root folder for include libraries, create if it does not exist
    wxFileName GetLibraryDir() const;
 
+   // define the script arguments
+   void SetArguments(wxString args) { m_args = args; }
+
+   // return script arguments
+   wxString GetArguments() const { return m_args; }
+
 protected:
    AngelCADDoc();
 
@@ -78,6 +84,7 @@ private:
    std::map<wxString,bool>                   m_formats;    // <format,true>, XSCG save formats
    wxString                                  m_savedir;    // path to directory where last .as file was saved
    wxString                                  m_docurl;     // HTML documentation URL
+   wxString                                  m_args;       // script arguments
 
 private:
    static AngelCADDoc* m_self;

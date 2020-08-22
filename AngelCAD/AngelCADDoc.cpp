@@ -112,6 +112,7 @@ void AngelCADDoc::RestoreConfig(ConfigSaveRestore& config_helper)
    config_helper.SaveRestoreFormats(m_formats,save);
    config_helper.SaveRestoreSaveDir(m_savedir,save);
    config_helper.SaveRestoreDocURL(m_docurl,save);
+   config_helper.SaveRestoreArguments(m_args,save);
    int i = 0;
 }
 
@@ -123,6 +124,7 @@ void AngelCADDoc::SaveConfig(ConfigSaveRestore& config_helper)
    config_helper.SaveRestoreFormats(m_formats,save);
    config_helper.SaveRestoreSaveDir(m_savedir,save);
    config_helper.SaveRestoreDocURL(m_docurl,save);
+   config_helper.SaveRestoreArguments(m_args,save);
 }
 
 wxString AngelCADDoc::GetXcsgFormatOptionString()

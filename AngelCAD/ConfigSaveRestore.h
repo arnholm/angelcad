@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef CONFIGSAVERESTORE_H
 #define CONFIGSAVERESTORE_H
 
@@ -34,6 +34,7 @@ public:
    void SaveRestoreFormats(std::map<wxString,bool>& formats, bool save);
    void SaveRestoreSaveDir(wxString& savedir, bool save);
    void SaveRestoreDocURL(wxString& url, bool save);
+   void SaveRestoreArguments(wxString& args, bool save);
 
    static wxFileName DefaultOpenScadPath();
    static wxFileName DefaultDxfViewerPath();

@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "ConfigSaveRestore.h"
 #include "wxConfigPath.h"
 #include "wx/stdpaths.h"
@@ -141,6 +141,18 @@ void ConfigSaveRestore::SaveRestoreSaveDir(wxString& savedir, bool save)
     else {
        wxString config_string;
        if(m_config->Read("SAVEDIR",&config_string,savedir)) savedir = config_string;
+    }
+}
+
+void ConfigSaveRestore::SaveRestoreArguments(wxString& args, bool save)
+{
+    wxConfigPath path(m_config,"/External");
+    if(save) {
+       m_config->Write("ARGUMENTS",args);
+    }
+    else {
+       wxString config_string;
+       if(m_config->Read("ARGUMENTS",&config_string,args)) args = config_string;
     }
 }
 

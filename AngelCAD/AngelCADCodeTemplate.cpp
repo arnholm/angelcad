@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "AngelCADCodeTemplate.h"
 
 AngelCADCodeTemplate::AngelCADCodeTemplate()
@@ -63,16 +63,21 @@ wxString AngelCADCodeTemplate::GetCSGText()
 }
 */
 
+
+
 wxString AngelCADCodeTemplate::GetCSGText()
 {
    wxString text;
 
    text += "// AngelCAD code.\n";
    text += "\n";
-   text += "shape@ main_shape()\n";
+   text += "shape@ main_shape(as_args@ args)\n";
    text += "{\n";
+   text += "   // get script argument, set as e.g. 'd=150' in args field\n";
+   text += "   // defaults to 100 if not specified\n";
+   text += "   double d = args.get_unsigned_double(\"d\",100);\n";
+   text += "   \n";
    text += "   // create cube & sphere in default positions\n";
-   text += "   double d = 100;\n";
    text += "   solid@ mycub = cube(size:d);\n";
    text += "   solid@ mysph = sphere(r:d*0.8);\n";
    text += "\n";
@@ -82,7 +87,7 @@ wxString AngelCADCodeTemplate::GetCSGText()
    text += "\n";
    text += "void main()\n";
    text += "{\n";
-   text += "   shape@ obj = main_shape();\n";
+   text += "   shape@ obj = main_shape(GetArgs());\n";
    text += "   obj.write_xcsg(GetInputFullPath(),secant_tolerance:-1.0);\n";
    text += "}\n";
    return text;

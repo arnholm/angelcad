@@ -35,6 +35,7 @@
 #include <wx/menu.h>
 #include <wx/panel.h>
 #include <wx/statusbr.h>
+#include <wx/textctrl.h>
 //*)
 
 class ConsolePanel;
@@ -97,6 +98,7 @@ private:
    void OnOpenContainingFolder(wxCommandEvent& event);
    void OnLicenseSelected(wxCommandEvent& event);
    void OnOpenLibrariesFolder(wxCommandEvent& event);
+   void OnAuiToolBarItemCutTextClick(wxCommandEvent& event);
    //*)
 
    //(*Identifiers(AngelCADFrame)
@@ -109,6 +111,9 @@ private:
    static const long ID_AUITOOLBARITEM6;
    static const long ID_AUITOOLBARITEM7;
    static const long ID_AUITOOLBARITEM8;
+   static const long ID_AUITOOLBARLABEL1;
+   static const long ID_AUITOOLBARITEM5;
+   static const long ID_TEXTCTRL1;
    static const long ID_AUITOOLBAR1;
    static const long ID_PANEL2;
    static const long ID_MENUITEM2;
@@ -162,6 +167,7 @@ private:
    wxMenuItem* MenuItem8;
    wxMenuItem* MenuItem9;
    wxStatusBar* m_statusbar;
+   wxTextCtrl* m_args_ctrl;
    //*)
 
 DECLARE_EVENT_TABLE()

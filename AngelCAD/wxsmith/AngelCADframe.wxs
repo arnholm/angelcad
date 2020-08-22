@@ -110,6 +110,32 @@
 						</object>
 						<label>Item label</label>
 					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarSeparator" />
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarLabel" name="ID_AUITOOLBARLABEL1" />
+						<label>args:</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxAuiToolBarItem" name="ID_AUITOOLBARITEM5" variable="AuiToolBarItemCutText" member="yes">
+							<bitmap stock_id="wxART_CUT" stock_client="wxART_BUTTON" />
+							<shorthelp>Clear script arguments</shorthelp>
+							<longhelp>Clear script arguments</longhelp>
+							<handler function="OnAuiToolBarItemCutTextClick" entry="EVT_TOOL" />
+						</object>
+						<label>Item label</label>
+					</object>
+					<object class="AuiToolBarItem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="m_args_ctrl" member="yes">
+							<pos>272,8</pos>
+							<size>500,-1</size>
+							<help>Clear Script arguments</help>
+							<style>wxBORDER_NONE</style>
+						</object>
+						<label>Item label</label>
+					</object>
 				</object>
 				<name>ToolBarPane</name>
 				<standardpanetype>Toolbar</standardpanetype>

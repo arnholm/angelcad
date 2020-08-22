@@ -97,6 +97,9 @@ const long AngelCADFrame::ID_AUITOOLBARITEM4 = wxNewId();
 const long AngelCADFrame::ID_AUITOOLBARITEM6 = wxNewId();
 const long AngelCADFrame::ID_AUITOOLBARITEM7 = wxNewId();
 const long AngelCADFrame::ID_AUITOOLBARITEM8 = wxNewId();
+const long AngelCADFrame::ID_AUITOOLBARLABEL1 = wxNewId();
+const long AngelCADFrame::ID_AUITOOLBARITEM5 = wxNewId();
+const long AngelCADFrame::ID_TEXTCTRL1 = wxNewId();
 const long AngelCADFrame::ID_AUITOOLBAR1 = wxNewId();
 const long AngelCADFrame::ID_PANEL2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM2 = wxNewId();
@@ -152,6 +155,8 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     m_console = new ConsolePanel(this, ID_PANEL1, wxDefaultPosition, wxSize(-1,150), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
     AuiManager1->AddPane(m_console, wxAuiPaneInfo().Name(_T("Console")).DefaultPane().Caption(_("Console")).CaptionVisible().CloseButton(false).Bottom().TopDockable(false).LeftDockable(false).RightDockable(false).Floatable(false).BestSize(wxSize(-1,150)).Movable(false));
     AuiToolBar1 = new wxAuiToolBar(this, ID_AUITOOLBAR1, wxDefaultPosition, wxDefaultSize, wxAUI_TB_DEFAULT_STYLE);
+    m_args_ctrl = new wxTextCtrl(AuiToolBar1, ID_TEXTCTRL1, wxEmptyString, wxPoint(272,8), wxSize(500,-1), wxBORDER_NONE, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    m_args_ctrl->SetHelpText(_("Clear Script arguments"));
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM2, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_NEW")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("New source file"), _("New source file"), NULL);
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM1, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_FILE_OPEN")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Open existing source file"), _("Open existing source file"), NULL);
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM3, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_FILE_SAVE")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Save current source file"), _("Save current source file"), NULL);
@@ -159,6 +164,10 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM6, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_GO_FORWARD")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Build current file"), _("Build current file"), NULL);
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM7, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_KILL")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Stop current build"), _("Stop current build"), NULL);
     AuiToolBar1->AddTool(ID_AUITOOLBARITEM8, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxSTD_CUBE")),wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("View model"), _("View model"), NULL);
+    AuiToolBar1->AddSeparator();
+    AuiToolBar1->AddLabel(ID_AUITOOLBARLABEL1, _("args:"));
+    AuiToolBar1->AddTool(ID_AUITOOLBARITEM5, _("Item label"), wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_CUT")),wxART_BUTTON), wxNullBitmap, wxITEM_NORMAL, _("Clear script arguments"), _("Clear script arguments"), NULL);
+    AuiToolBar1->AddControl(m_args_ctrl, _("Item label"));
     AuiToolBar1->Realize();
     AuiManager1->AddPane(AuiToolBar1, wxAuiPaneInfo().Name(_T("ToolBarPane")).ToolbarPane().Caption(_("Pane caption")).Layer(10).Top().Resizable().Gripper());
     m_find_replace = new FindReplacePanel(this, ID_PANEL2, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL2"));
@@ -233,6 +242,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_AUITOOLBARITEM6,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnBuildCurrentFile);
     Connect(ID_AUITOOLBARITEM7,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnKillProcess);
     Connect(ID_AUITOOLBARITEM8,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnViewSTL_AMF_DXF);
+    Connect(ID_AUITOOLBARITEM5,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnAuiToolBarItemCutTextClick);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileNew);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileOpen);
     Connect(ID_MENUITEM11,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenContainingFolder);
@@ -265,6 +275,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
 
     ConfigSaveRestore helper(this,m_config);
     DOC()->RestoreConfig(helper);
+    m_args_ctrl->ChangeValue(DOC()->GetArguments());
 
     wxIconBundle icons;
     icons.AddIcon(wxIcon(angel_16x16_xpm));
@@ -347,6 +358,7 @@ void AngelCADFrame::OnClose(wxCloseEvent& event)
    }
 
    ConfigSaveRestore helper(this,m_config);
+   DOC()->SetArguments(m_args_ctrl->GetValue());
    DOC()->SaveConfig(helper);
 
    event.Skip();
@@ -724,6 +736,8 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
 
             wxFileName as_path(page->FileName());
             wxFileName xcsg_path(DOC()->GetXcsgFileName(as_path));
+
+/*
             if(xcsg_path.Exists()) {
                wxDateTime as_time   = as_path.GetModificationTime();
                wxDateTime xcsg_time = xcsg_path.GetModificationTime();
@@ -733,7 +747,7 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
                    if (answer != wxYES) return;
                }
             }
-
+*/
 
             // create the list of jubs to run (2)
             std::list<ConsolePanel::JobPair> jobs;
@@ -746,6 +760,12 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
             if(include_path.length() > 0) {
                cmd1 +=  " -include=\"" + include_path + "\" ";
             }
+
+            wxString args = m_args_ctrl->GetLineText(0);
+            if(args.length() > 0) {
+               cmd1 +=  " -args=\"" + args + "\" ";
+            }
+
             jobs.push_back(std::make_pair(cmd1,page));
 
             // XCSG compilation
@@ -1003,4 +1023,9 @@ void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
 void AngelCADFrame::OnOpenLibrariesFolder(wxCommandEvent& event)
 {
    wxLaunchDefaultBrowser("file:" + DOC()->GetLibraryDir().GetPath());
+}
+
+void AngelCADFrame::OnAuiToolBarItemCutTextClick(wxCommandEvent& event)
+{
+   m_args_ctrl->SetValue("");
 }
