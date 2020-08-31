@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "rotate_extrude.h"
 #include "xcsg_vector.h"
 
@@ -55,7 +55,7 @@ const shape2d* rotate_extrude::shape() const
 
 void rotate_extrude::populate_tree(node_csg* node)
 {
-   node_csg* this_node = new node_csg(this,false);
+   node_csg* this_node = new node_csg(this);
    node->push_back(this_node);
 
    m_shapes[0]->populate_tree(this_node);
@@ -67,7 +67,7 @@ rotate_extrude::~rotate_extrude()
 string rotate_extrude::openscad_csg() const
 {
    ostringstream out;
-   out << setprecision(12) << "rotate([-90,0,0]) rotate_extrude( angle=" << -180.*m_angle/pi << ", pitch="<< m_pitch <<")";
+   out << setprecision(12) << "multmatrix([[1,0,0,0],[0,0,-1,0],[0,-1,0,0],[0,0,0,1]]) rotate_extrude( angle=" << -180.*m_angle/pi << ", pitch="<< m_pitch <<")";
 
    return out.str();
 }

@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "linear_extrude.h"
 #include "xcsg_vector.h"
 
@@ -56,7 +56,7 @@ double linear_extrude::height() const
 
 void linear_extrude::populate_tree(node_csg* node)
 {
-   node_csg* this_node = new node_csg(this,false);
+   node_csg* this_node = new node_csg(this);
    node->push_back(this_node);
 
    m_shapes[0]->populate_tree(this_node);
