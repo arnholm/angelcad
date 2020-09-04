@@ -844,20 +844,17 @@ bool AngelCADFrame::TargetUpToDate(AngelCADEditor* page, const wxFileName& sourc
    target_millis  = 0;
 
    wxString ext = target.GetExt();
-   // is this a current target format?
-   if(DOC()->GetFileFormatFlag(ext)) {
 
-      // does the file exist?
-      if(target.Exists()) {
-         wxDateTime target_time = target.GetModificationTime();
-         double target_jdn = target_time.GetJDN();
-         if(target_jdn >= source_jdn) {
+   // does the file exist?
+   if(target.Exists()) {
+      wxDateTime target_time = target.GetModificationTime();
+      double target_jdn = target_time.GetJDN();
+      if(target_jdn >= source_jdn) {
 
-             // number of milliseconds since Jan 1, 1970 UTC.
-             target_millis = target_time.GetValue();
-             // m_console->AppendText(wxString::Format("target %lld  %s ",target_millis,target.GetFullPath()));
-             return true;
-         }
+          // number of milliseconds since Jan 1, 1970 UTC.
+          target_millis = target_time.GetValue();
+          // m_console->AppendText(wxString::Format("target %lld  %s ",target_millis,target.GetFullPath()));
+          return true;
       }
    }
    return false;
