@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "shape.h"
 #include <fstream>
 #include <iostream>
@@ -70,7 +70,7 @@ void shape::write_csg(const string& file_path)
 
    ofstream out(path);
    out << "// This file was created using AngelCAD (as_csg) " << AS_CSG_version << endl;
-   out << "// Copyright(C) 2015-2018 Carsten Arnholm, http://arnholm.org/ " << endl;
+   out << "// Copyright(C) 2015-2020 Carsten Arnholm, http://arnholm.org/ " << endl;
    out << "// Open it with OpenSCAD for display or further processing " << endl;
    out << "$fn = 60;" << endl;
    out << "$fa = 6.0;" << endl;

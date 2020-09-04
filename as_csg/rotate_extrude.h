@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef ROTATE_EXTRUDE_H
 #define ROTATE_EXTRUDE_H
 
@@ -20,6 +20,8 @@
 #include "shape2d.h"
 #include "shape2d_vector.h"
 #include "tmatrix.h"
+class union3d;
+#include <memory>
 
 /// rotate_extrude provides straight extrusion from 2d shapes to 3d objects
 class rotate_extrude : public solid {
@@ -83,6 +85,7 @@ private:
   shape2d_vector  m_shapes; // we use a vector here because it knows how to manage references/cloning
   double          m_angle;  // angle stored in radians internally
   double          m_pitch;
+  std::shared_ptr<union3d>  m_union;  // only used with CSG output
 };
 
 #endif // UNION3D_H

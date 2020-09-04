@@ -16,6 +16,8 @@
 #include "rotate_extrude.h"
 #include "xcsg_vector.h"
 
+#include "union3d.h"
+
 static const double pi=4.0*atan(1.0);
 
 void rotate_extrude::InstallType(asIScriptEngine* engine)
@@ -55,9 +57,34 @@ const shape2d* rotate_extrude::shape() const
 
 void rotate_extrude::populate_tree(node_csg* node)
 {
-   node_csg* this_node = new node_csg(this);
-   node->push_back(this_node);
+   // we insert a union3d at this level so we have a place to
+   // assign the extra rotation matrix required to un-do the
+   // implicit x-axis rotation in OpenSCADs rotate_extrude
 
+   // by making m_union a shared pointer owned by this rotate_extrude object
+   // we effectively guarantee that they have shared lifetimes and thus avoid
+   // scripting memory leaks that would otherwise occur
+   m_union = std::make_shared<union3d>(this,nullptr);
+   HTmatrix t;  // identity matrix
+
+   // rotate +90 degrees around x to compensate for
+   // OpenSCADs implicit -90 degree rotation
+   t(1,1) =  0.0;
+   t(1,2) = -1.0;
+   t(2,1) = -1.0;
+   t(2,2) =  0.0;
+   m_union->set_transform(t);
+
+   // create a union3d node in the CSG tree
+   // its sole purpose is to hold an extra transformation matrix
+   node_csg* union_node = new node_csg(m_union.get());
+   node->push_back(union_node);
+
+   // this_node is a rotate_extrude node in the CSG tree under the union3d node
+   node_csg* this_node = new node_csg(this);
+   union_node->push_back(this_node);
+
+   // then add the children under this node
    m_shapes[0]->populate_tree(this_node);
 }
 
@@ -67,7 +94,9 @@ rotate_extrude::~rotate_extrude()
 string rotate_extrude::openscad_csg() const
 {
    ostringstream out;
-   out << setprecision(12) << "multmatrix([[1,0,0,0],[0,0,-1,0],[0,-1,0,0],[0,0,0,1]]) rotate_extrude( angle=" << -180.*m_angle/pi << ", pitch="<< m_pitch <<")";
+   // OpenSCAD is confused about the meaning of the right hand rule,
+   // we must provide a negative angle in degrees to give it what it wants
+   out << setprecision(12) << " rotate_extrude( angle=" << -180.*m_angle/pi << ", pitch="<< m_pitch <<")";
 
    return out.str();
 }

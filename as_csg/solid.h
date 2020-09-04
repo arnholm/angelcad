@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef SOLID_H
 #define SOLID_H
 
@@ -40,6 +40,9 @@ public:
 
    // return transformation matrix
    HTmatrix get_transform() const;
+
+   // assign transformmation matrix directly
+   void set_transform(const HTmatrix& matrix) { m_transform = matrix; }
 
    // get the openscad csg string for this type
    virtual string openscad_csg() const = 0;
