@@ -1079,5 +1079,7 @@ bool AngelCADFrame::DoImportDXF(const wxString& dxf_file)
    else {
       wxString message = "An AngelCAD source file must be selected to define the target folder";
       wxMessageBox(message, wxT("No current source file"), wxOK, this);
+      return false;
    }
+   return true;
 }
