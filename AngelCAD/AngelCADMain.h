@@ -62,6 +62,8 @@ private:
    void init();
    bool DoSourceFileNew();
 
+   bool DoImportDXF(const wxString& as_path);
+
    bool is_file_open(const wxString& as_path);
 
    bool DoFileSave(AngelCADEditor* page = 0, bool warn_for_unmodified = true);
@@ -99,6 +101,7 @@ private:
    void OnLicenseSelected(wxCommandEvent& event);
    void OnOpenLibrariesFolder(wxCommandEvent& event);
    void OnAuiToolBarItemCutTextClick(wxCommandEvent& event);
+   void OnImportDXF(wxCommandEvent& event);
    //*)
 
    //(*Identifiers(AngelCADFrame)
@@ -118,6 +121,7 @@ private:
    static const long ID_PANEL2;
    static const long ID_MENUITEM2;
    static const long ID_MENUITEM1;
+   static const long ID_MENUITEM18;
    static const long ID_MENUITEM11;
    static const long ID_MENUITEM17;
    static const long ID_MENUITEM3;
@@ -159,6 +163,7 @@ private:
    wxMenuItem* MenuItem16;
    wxMenuItem* MenuItem17;
    wxMenuItem* MenuItem18;
+   wxMenuItem* MenuItem19;
    wxMenuItem* MenuItem3;
    wxMenuItem* MenuItem4;
    wxMenuItem* MenuItem5;

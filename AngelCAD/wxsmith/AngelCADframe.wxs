@@ -180,6 +180,11 @@
 					<help>Open AngelCAD source file</help>
 					<handler function="OnFileOpen" entry="EVT_MENU" />
 				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM18" variable="MenuItem19" member="yes">
+					<label>Import 2d DXF,,,</label>
+					<help>Import 2d DXF</help>
+					<handler function="OnImportDXF" entry="EVT_MENU" />
+				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM11" variable="MenuItem12" member="yes">
 					<label>Open Source Folder...</label>

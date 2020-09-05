@@ -225,7 +225,7 @@ int main(int argc, char **argv)
             }
          }
 
-         cout << " Wrote " << nfiles << " profile file(s)" << endl;
+         cout << " Wrote " << nfiles << " file(s)" << endl;
          if(prof->size() == 0) {
             cout << " Warning: Computed profile contains no loops, only XML can be exported. Check layer name if specified." << endl;
          }

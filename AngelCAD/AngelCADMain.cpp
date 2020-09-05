@@ -104,6 +104,7 @@ const long AngelCADFrame::ID_AUITOOLBAR1 = wxNewId();
 const long AngelCADFrame::ID_PANEL2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM1 = wxNewId();
+const long AngelCADFrame::ID_MENUITEM18 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM11 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM17 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM3 = wxNewId();
@@ -179,6 +180,8 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem4);
     MenuItem3 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Open...\tCtrl+O"), _("Open AngelCAD source file"), wxITEM_NORMAL);
     Menu1->Append(MenuItem3);
+    MenuItem19 = new wxMenuItem(Menu1, ID_MENUITEM18, _("Import 2d DXF,,,"), _("Import 2d DXF"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem19);
     Menu1->AppendSeparator();
     MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Source Folder..."), _("Open file browser in source file folder"), wxITEM_NORMAL);
     Menu1->Append(MenuItem12);
@@ -245,6 +248,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_AUITOOLBARITEM5,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnAuiToolBarItemCutTextClick);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileNew);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileOpen);
+    Connect(ID_MENUITEM18,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnImportDXF);
     Connect(ID_MENUITEM11,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenContainingFolder);
     Connect(ID_MENUITEM17,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenLibrariesFolder);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileSave);
@@ -541,6 +545,18 @@ void AngelCADFrame::OnFileOpen(wxCommandEvent& event)
 
       dlg.GetPaths(paths);
       DoSourceFileOpen(paths[0]);
+   }
+}
+
+void AngelCADFrame::OnImportDXF(wxCommandEvent& event)
+{
+   wxString default_dir = DOC()->GetSaveDir();
+   wxFileDialog dlg(this,wxT("DXF file"),default_dir,wxT(""),wxT("DXF file (*.dxf)|*.dxf;*.DXF|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+   if(dlg.ShowModal() == wxID_OK) {
+      wxArrayString paths;
+      dlg.GetPaths(paths);
+
+      DoImportDXF(paths[0]);
    }
 }
 
@@ -1025,4 +1041,43 @@ void AngelCADFrame::OnOpenLibrariesFolder(wxCommandEvent& event)
 void AngelCADFrame::OnAuiToolBarItemCutTextClick(wxCommandEvent& event)
 {
    m_args_ctrl->SetValue("");
+}
+
+
+bool AngelCADFrame::DoImportDXF(const wxString& dxf_file)
+{
+   if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
+
+      // check existence of executables
+      wxFileName dxfreader = DOC()->GetConfigFilePath(ConfigEnums::DXFREADER);
+      wxString dxfreader_message;
+
+      if( ExecutableCheck(dxfreader,dxfreader_message) ) {
+
+         wxFileName as_path(page->FileName());
+         wxFileName dxf_path(dxf_file);
+         if(as_path.GetPath() != dxf_path.GetPath()) {
+
+            // copy the DXF file into the source directory if it does not exist
+            wxFileName org_dxf_path(dxf_path);
+            dxf_path = wxFileName(as_path.GetPath(),dxf_path.GetName(),dxf_path.GetExt());
+            if(!dxf_path.Exists()) wxCopyFile(org_dxf_path.GetFullPath(),dxf_path.GetFullPath());
+         }
+
+         // create the list of jubs to run (2)
+         std::list<ConsolePanel::JobPair> jobs;
+
+         // dxfreader job
+         wxString cmd1 = "\"" + dxfreader.GetFullPath() + "\" -asfunc \"" + dxf_path.GetFullPath() + "\"";
+         jobs.push_back(std::make_pair(cmd1,page));
+
+         // submit the jobs in the list
+         m_console->Execute(jobs);
+      }
+
+   }
+   else {
+      wxString message = "An AngelCAD source file must be selected to define the target folder";
+      wxMessageBox(message, wxT("No current source file"), wxOK, this);
+   }
 }
