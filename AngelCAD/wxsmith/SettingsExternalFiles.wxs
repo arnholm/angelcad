@@ -142,7 +142,7 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxStaticBoxSizer" variable="StaticBoxSizer3" member="no">
-					<label>File viewers</label>
+					<label>Miscellaneous</label>
 					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
 						<object class="wxBoxSizer" variable="BoxSizer7" member="no">
@@ -168,6 +168,32 @@
 						</object>
 						<flag>wxEXPAND</flag>
 						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer9" member="no">
+							<object class="sizeritem">
+								<object class="wxStaticText" name="wxID_ANY" variable="StaticText8" member="no">
+									<label>DXF reader</label>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>4</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL3" variable="m_reader_dxf" member="yes">
+									<message>Select DXF viewer executable</message>
+									<wildcard></wildcard>
+									<style>wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL</style>
+									<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>4</border>
+								<option>3</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxBoxSizer" variable="BoxSizer8" member="no">
@@ -198,7 +224,7 @@
 						<object class="wxBoxSizer" variable="BoxSizer5" member="no">
 							<object class="sizeritem">
 								<object class="wxStaticText" name="wxID_ANY" variable="StaticText4" member="no">
-									<label>OpenSCAD CSG Viewer</label>
+									<label>OpenSCAD</label>
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>4</border>

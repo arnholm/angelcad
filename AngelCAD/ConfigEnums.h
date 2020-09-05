@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #ifndef CONFIGENUMS_H
 #define CONFIGENUMS_H
 
@@ -25,7 +25,8 @@ public:
       XCSG,       // xcsg executable
       OPENSCAD,   // OpenSCAD executable
       STLAMFVIEW, // STL/AMF viewer executable
-      DXFVIEW     // DXF viewer executable
+      DXFVIEW,    // DXF viewer executable
+      DXFREADER   // DXF reader executable
    };
 
 };

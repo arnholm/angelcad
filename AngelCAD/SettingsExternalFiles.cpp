@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller 
+// Part of: angelcad - script based 3D solid modeller
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //
@@ -12,7 +12,7 @@
 // INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE.
 // EndLicense:
-   
+
 #include "SettingsExternalFiles.h"
 #include "AngelCADDoc.h"
 
@@ -28,6 +28,7 @@ const long SettingsExternalFiles::ID_CHECKBOX1 = wxNewId();
 const long SettingsExternalFiles::ID_TEXTCTRL2 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL2 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL5 = wxNewId();
+const long SettingsExternalFiles::ID_FILEPICKERCTRL3 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL6 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL4 = wxNewId();
 //*)
@@ -48,6 +49,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
+	wxBoxSizer* BoxSizer9;
 	wxStaticBoxSizer* StaticBoxSizer1;
 	wxStaticBoxSizer* StaticBoxSizer3;
 	wxStaticText* StaticText1;
@@ -57,6 +59,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	wxStaticText* StaticText5;
 	wxStaticText* StaticText6;
 	wxStaticText* StaticText7;
+	wxStaticText* StaticText8;
 
 	Create(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -94,13 +97,19 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	StaticBoxSizer2->Add(BoxSizer3, 0, wxEXPAND, 5);
 	BoxSizer1->Add(StaticBoxSizer2, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(100,5,1, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	StaticBoxSizer3 = new wxStaticBoxSizer(wxVERTICAL, this, _("File viewers"));
+	StaticBoxSizer3 = new wxStaticBoxSizer(wxVERTICAL, this, _("Miscellaneous"));
 	BoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	StaticText6 = new wxStaticText(this, wxID_ANY, _("STL/AMF/OFF/OBJ viewer"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer7->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	m_viewer_stl_amf = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL5, wxEmptyString, _("Select STL/AMF viewer executable"), _T("angelview*"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_FILEPICKERCTRL5"));
 	BoxSizer7->Add(m_viewer_stl_amf, 3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	StaticBoxSizer3->Add(BoxSizer7, 0, wxEXPAND, 5);
+	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
+	StaticText8 = new wxStaticText(this, wxID_ANY, _("DXF reader"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer9->Add(StaticText8, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
+	m_reader_dxf = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL3, wxEmptyString, _("Select DXF viewer executable"), wxEmptyString, wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_FILEPICKERCTRL3"));
+	BoxSizer9->Add(m_reader_dxf, 3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
+	StaticBoxSizer3->Add(BoxSizer9, 1, wxEXPAND, 5);
 	BoxSizer8 = new wxBoxSizer(wxHORIZONTAL);
 	StaticText7 = new wxStaticText(this, wxID_ANY, _("DXF viewer"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer8->Add(StaticText7, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
@@ -108,7 +117,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	BoxSizer8->Add(m_viewer_dxf, 3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	StaticBoxSizer3->Add(BoxSizer8, 0, wxEXPAND, 5);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
-	StaticText4 = new wxStaticText(this, wxID_ANY, _("OpenSCAD CSG Viewer"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	StaticText4 = new wxStaticText(this, wxID_ANY, _("OpenSCAD"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer5->Add(StaticText4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	m_file_openscad = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL4, wxEmptyString, _("Select OpenSCAD executable"), _T("openscad*"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_FILEPICKERCTRL4"));
 	BoxSizer5->Add(m_file_openscad, 3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
@@ -124,6 +133,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SettingsExternalFiles::OnText);
 	Connect(ID_FILEPICKERCTRL2,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	Connect(ID_FILEPICKERCTRL5,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
+	Connect(ID_FILEPICKERCTRL3,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	Connect(ID_FILEPICKERCTRL6,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	Connect(ID_FILEPICKERCTRL4,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	//*)
@@ -144,6 +154,7 @@ wxFileName SettingsExternalFiles::GetFilePath(ConfigEnums::ExtFile file)
       case ConfigEnums::OPENSCAD:    { return m_file_openscad->GetFileName(); break; }
       case ConfigEnums::STLAMFVIEW:  { return m_viewer_stl_amf->GetFileName(); break; }
       case ConfigEnums::DXFVIEW:     { return m_viewer_dxf->GetFileName(); break; }
+      case ConfigEnums::DXFREADER:   { return m_reader_dxf->GetFileName(); break; }
       default: { throw std::logic_error("SettingsExternalFiles: unhandled parameter"); }
    };
 
@@ -165,6 +176,7 @@ void SettingsExternalFiles::InitPage()
    m_file_openscad->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::OPENSCAD).GetFullPath());
    m_viewer_stl_amf->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::STLAMFVIEW).GetFullPath());
    m_viewer_dxf->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::DXFVIEW).GetFullPath());
+   m_reader_dxf->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::DXFREADER).GetFullPath());
 
    if(m_text_outsub->GetValue() == "."){
       m_nosubdir->SetValue(true);
@@ -185,6 +197,7 @@ void SettingsExternalFiles::ApplyPage()
    DOC()->SetConfigFilePath(ConfigEnums::OPENSCAD,GetFilePath(ConfigEnums::OPENSCAD));
    DOC()->SetConfigFilePath(ConfigEnums::STLAMFVIEW,GetFilePath(ConfigEnums::STLAMFVIEW));
    DOC()->SetConfigFilePath(ConfigEnums::DXFVIEW,GetFilePath(ConfigEnums::DXFVIEW));
+   DOC()->SetConfigFilePath(ConfigEnums::DXFREADER,GetFilePath(ConfigEnums::DXFREADER));
 
    DOC()->SetDocUrl(m_text_docurl->GetValue());
 }

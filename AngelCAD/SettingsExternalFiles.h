@@ -48,6 +48,7 @@ public:
    wxFilePickerCtrl* m_file_as_csg;
    wxFilePickerCtrl* m_file_openscad;
    wxFilePickerCtrl* m_file_xcsg;
+   wxFilePickerCtrl* m_reader_dxf;
    wxFilePickerCtrl* m_viewer_dxf;
    wxFilePickerCtrl* m_viewer_stl_amf;
    wxStaticBoxSizer* StaticBoxSizer2;
@@ -64,6 +65,7 @@ protected:
    static const long ID_TEXTCTRL2;
    static const long ID_FILEPICKERCTRL2;
    static const long ID_FILEPICKERCTRL5;
+   static const long ID_FILEPICKERCTRL3;
    static const long ID_FILEPICKERCTRL6;
    static const long ID_FILEPICKERCTRL4;
    //*)
