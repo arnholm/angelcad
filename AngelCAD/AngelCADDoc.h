@@ -49,6 +49,15 @@ public:
    // set boolean for stl, amf etc
    void SetFileFormatFlag(wxString format, bool enabled);
 
+   // define the export directory
+   void SetExportDir(std::pair<bool,wxString>& dir);
+
+   // Get export dir
+   std::pair<bool,wxString> GetExportDir() const;
+
+   // create options string for xcsg based on current settings
+   wxString GetExportOptionString();
+
    // create options string for xcsg based on current settings
    wxString GetXcsgFormatOptionString();
 
@@ -85,6 +94,7 @@ private:
    wxString                                  m_savedir;    // path to directory where last .as file was saved
    wxString                                  m_docurl;     // HTML documentation URL
    wxString                                  m_args;       // script arguments
+   std::pair<bool,wxString>                  m_export_dir; // export directory <enable,dir>
 
 private:
    static AngelCADDoc* m_self;

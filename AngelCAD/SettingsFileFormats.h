@@ -18,6 +18,7 @@
 
 //(*Headers(SettingsFileFormats)
 #include <wx/checkbox.h>
+#include <wx/filepicker.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
 //*)
@@ -40,10 +41,12 @@ public:
    wxCheckBox* m_amf;
    wxCheckBox* m_csg;
    wxCheckBox* m_dxf;
+   wxCheckBox* m_enable_export_dir;
    wxCheckBox* m_obj;
    wxCheckBox* m_off;
    wxCheckBox* m_stl;
    wxCheckBox* m_svg;
+   wxDirPickerCtrl* m_export_dir;
    //*)
 
 protected:
@@ -56,12 +59,15 @@ protected:
    static const long ID_CHECKBOX6;
    static const long ID_CHECKBOX7;
    static const long ID_CHECKBOX5;
+   static const long ID_CHECKBOX8;
+   static const long ID_DIRPICKERCTRL1;
    //*)
 
 private:
 
    //(*Handlers(SettingsFileFormats)
    void OnCheckClick(wxCommandEvent& event);
+   void OnExportDirChanged(wxFileDirPickerEvent& event);
    //*)
 
    DECLARE_EVENT_TABLE()

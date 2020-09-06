@@ -786,7 +786,8 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
 
             // XCSG compilation
             wxString options = DOC()->GetXcsgFormatOptionString();
-            wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + xcsg_path.GetFullPath() + "\"";
+            wxString export_options = DOC()->GetExportOptionString();
+            wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + xcsg_path.GetFullPath() + "\" "+export_options;
             jobs.push_back(std::make_pair(cmd2,page));
 
             // submit the jobs in the list

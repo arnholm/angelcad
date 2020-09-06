@@ -20,6 +20,7 @@
 AngelCADDoc* AngelCADDoc::m_self;
 
 AngelCADDoc::AngelCADDoc()
+: m_export_dir(false,"")
 {
    m_self = this;
 
@@ -111,6 +112,7 @@ void AngelCADDoc::RestoreConfig(ConfigSaveRestore& config_helper)
    config_helper.SaveRestoreWindowSize(save);
    config_helper.SaveRestoreExternalFiles(m_file_paths,save);
    config_helper.SaveRestoreFormats(m_formats,save);
+   config_helper.SaveRestoreExportDir(m_export_dir,save);
    config_helper.SaveRestoreSaveDir(m_savedir,save);
    config_helper.SaveRestoreDocURL(m_docurl,save);
    config_helper.SaveRestoreArguments(m_args,save);
@@ -123,6 +125,7 @@ void AngelCADDoc::SaveConfig(ConfigSaveRestore& config_helper)
    config_helper.SaveRestoreWindowSize(save);
    config_helper.SaveRestoreExternalFiles(m_file_paths,save);
    config_helper.SaveRestoreFormats(m_formats,save);
+   config_helper.SaveRestoreExportDir(m_export_dir,save);
    config_helper.SaveRestoreSaveDir(m_savedir,save);
    config_helper.SaveRestoreDocURL(m_docurl,save);
    config_helper.SaveRestoreArguments(m_args,save);
@@ -138,6 +141,7 @@ wxString AngelCADDoc::GetXcsgFormatOptionString()
    return options;
 }
 
+
 void AngelCADDoc::SetSaveDir(wxString savedir)
 {
    m_savedir = savedir;
@@ -146,6 +150,27 @@ void AngelCADDoc::SetSaveDir(wxString savedir)
 wxString AngelCADDoc::GetSaveDir() const
 {
    return m_savedir;
+}
+
+void AngelCADDoc::SetExportDir(std::pair<bool,wxString>& dir)
+{
+   m_export_dir = dir;
+}
+
+std::pair<bool,wxString> AngelCADDoc::GetExportDir() const
+{
+   return m_export_dir;
+}
+
+wxString AngelCADDoc::GetExportOptionString()
+{
+   wxString options;
+
+   if(m_export_dir.first && m_export_dir.second.Length()>0) {
+      options = " --export_dir=\""+m_export_dir.second+"\"";
+   }
+
+   return options;
 }
 
 void AngelCADDoc::SetDocUrl(wxString url)

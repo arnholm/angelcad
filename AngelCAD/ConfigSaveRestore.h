@@ -32,6 +32,7 @@ public:
    void SaveRestoreWindowSize(bool save);
    void SaveRestoreExternalFiles(std::map<ConfigEnums::ExtFile,wxFileName>& file_paths, bool save);
    void SaveRestoreFormats(std::map<wxString,bool>& formats, bool save);
+   void SaveRestoreExportDir(std::pair<bool,wxString>& dir, bool save);
    void SaveRestoreSaveDir(wxString& savedir, bool save);
    void SaveRestoreDocURL(wxString& url, bool save);
    void SaveRestoreArguments(wxString& args, bool save);

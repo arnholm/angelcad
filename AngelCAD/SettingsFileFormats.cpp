@@ -29,6 +29,8 @@ const long SettingsFileFormats::ID_CHECKBOX4 = wxNewId();
 const long SettingsFileFormats::ID_CHECKBOX6 = wxNewId();
 const long SettingsFileFormats::ID_CHECKBOX7 = wxNewId();
 const long SettingsFileFormats::ID_CHECKBOX5 = wxNewId();
+const long SettingsFileFormats::ID_CHECKBOX8 = wxNewId();
+const long SettingsFileFormats::ID_DIRPICKERCTRL1 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(SettingsFileFormats,wxPanel)
@@ -40,6 +42,8 @@ SettingsFileFormats::SettingsFileFormats(wxWindow* parent,wxWindowID id, const w
 {
 	//(*Initialize(SettingsFileFormats)
 	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
+	wxStaticBoxSizer* StaticBoxSizer1;
 
 	Create(parent, id, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("id"));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -65,6 +69,16 @@ SettingsFileFormats::SettingsFileFormats(wxWindow* parent,wxWindowID id, const w
 	m_csg = new wxCheckBox(this, ID_CHECKBOX5, _("CSG - OpenSCAD Constructive Solid Geometry"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX5"));
 	m_csg->SetValue(false);
 	BoxSizer1->Add(m_csg, 0, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(-1,-1,1, wxALL|wxEXPAND, 5);
+	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, this, _("Export output files to directory"));
+	m_enable_export_dir = new wxCheckBox(this, ID_CHECKBOX8, _("Enable"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX8"));
+	m_enable_export_dir->SetValue(false);
+	StaticBoxSizer1->Add(m_enable_export_dir, 1, wxALL|wxEXPAND, 5);
+	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+	m_export_dir = new wxDirPickerCtrl(this, ID_DIRPICKERCTRL1, wxEmptyString, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDIRP_DIR_MUST_EXIST|wxDIRP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_DIRPICKERCTRL1"));
+	BoxSizer2->Add(m_export_dir, 1, wxALL|wxEXPAND, 5);
+	StaticBoxSizer1->Add(BoxSizer2, 0, wxEXPAND, 5);
+	BoxSizer1->Add(StaticBoxSizer1, 0, wxTOP|wxBOTTOM|wxEXPAND, 5);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
@@ -76,6 +90,8 @@ SettingsFileFormats::SettingsFileFormats(wxWindow* parent,wxWindowID id, const w
 	Connect(ID_CHECKBOX6,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&SettingsFileFormats::OnCheckClick);
 	Connect(ID_CHECKBOX7,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&SettingsFileFormats::OnCheckClick);
 	Connect(ID_CHECKBOX5,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&SettingsFileFormats::OnCheckClick);
+	Connect(ID_CHECKBOX8,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&SettingsFileFormats::OnCheckClick);
+	Connect(ID_DIRPICKERCTRL1,wxEVT_COMMAND_DIRPICKER_CHANGED,(wxObjectEventFunction)&SettingsFileFormats::OnExportDirChanged);
 	//*)
 }
 
@@ -94,6 +110,10 @@ void SettingsFileFormats::InitPage()
    m_dxf->SetValue(DOC()->GetFileFormatFlag("dxf"));
    m_svg->SetValue(DOC()->GetFileFormatFlag("svg"));
    m_csg->SetValue(DOC()->GetFileFormatFlag("csg"));
+
+   std::pair<bool,wxString> exp_dir = DOC()->GetExportDir();
+   m_enable_export_dir->SetValue(exp_dir.first);
+   m_export_dir->SetPath(exp_dir.second);
 }
 
 void SettingsFileFormats::ApplyPage()
@@ -105,10 +125,19 @@ void SettingsFileFormats::ApplyPage()
    DOC()->SetFileFormatFlag("dxf",m_dxf->GetValue());
    DOC()->SetFileFormatFlag("svg",m_svg->GetValue());
    DOC()->SetFileFormatFlag("csg",m_csg->GetValue());
+
+   auto exp_dir = std::make_pair(m_enable_export_dir->GetValue(),m_export_dir->GetPath());
+   DOC()->SetExportDir(exp_dir);
 }
 
 
 void SettingsFileFormats::OnCheckClick(wxCommandEvent& event)
 {
+   ApplyPage();
+}
+
+void SettingsFileFormats::OnExportDirChanged(wxFileDirPickerEvent& event)
+{
+   m_enable_export_dir->SetValue( (m_export_dir->GetPath().Length() > 0)? true : false);
    ApplyPage();
 }

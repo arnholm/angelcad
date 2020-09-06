@@ -90,7 +90,22 @@ void ConfigSaveRestore::SaveRestoreFormats(std::map<wxString,bool>& formats, boo
           formats[fp.first] = value;
        }
     }
+}
 
+void ConfigSaveRestore::SaveRestoreExportDir(std::pair<bool,wxString>& dir, bool save)
+{
+   wxConfigPath path(m_config,"/Formats");
+   if(save) {
+      m_config->Write("enable_export_dir",dir.first);
+      m_config->Write("export_dir",dir.second);
+   }
+   else {
+      bool enable = dir.first;
+      if(m_config->Read("enable_export_dir",&enable,dir.first)) dir.first = enable;
+
+      wxString config_string = dir.second;
+      if(m_config->Read("export_dir",&config_string,dir.second)) dir.second = config_string;
+   }
 }
 
 void ConfigSaveRestore::SaveRestoreExternalFiles(std::map<ConfigEnums::ExtFile,wxFileName>& file_paths,bool save)
