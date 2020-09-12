@@ -539,7 +539,7 @@ void AngelCADFrame::OnFileNew(wxCommandEvent& event)
 void AngelCADFrame::OnFileOpen(wxCommandEvent& event)
 {
    wxString default_dir = DOC()->GetSaveDir();
-   wxFileDialog dlg(this,wxT("AngelCAD source file"),default_dir,wxT(""),wxT("AngelCAD source file (*.as)|*.as|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+   wxFileDialog dlg(this,wxT("AngelCAD source file"),default_dir,wxT(""),wxT("AngelCAD source file (*.as)|*.as|OpenSCAD source file (*.scad)|*.scad|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST);
    if(dlg.ShowModal() == wxID_OK) {
       wxArrayString paths;
 
@@ -737,6 +737,21 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
 
+      wxFileName path(page->FileName());
+      wxString ext = path.GetExt().MakeLower();
+      if(ext == "as") DoBuildAngelCAD();
+      else if(ext == "scad") DoBuildOpenSCAD();
+   }
+}
+
+void AngelCADFrame::DoBuildAngelCAD()
+{
+   if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
+
+      wxFileName as_path(page->FileName());
+      wxString ext = as_path.GetExt().MakeLower();
+      if(ext != "as")return;
+
       bool can_execute = true;
 
       // save all pages in case of multifile project where an include file has been edited, but not saved
@@ -750,7 +765,6 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
 
          if( ExecutableCheck(as_csg,as_csg_message) &&  ExecutableCheck(xcsg,xcsg_message) ) {
 
-            wxFileName as_path(page->FileName());
             wxFileName xcsg_path(DOC()->GetXcsgFileName(as_path));
 
 /*
@@ -806,8 +820,68 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
          m_console->AppendText("Compilation cancelled by user.");
       }
    }
+
 }
 
+void AngelCADFrame::DoBuildOpenSCAD()
+{
+   if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
+
+      wxFileName source_path(page->FileName());
+      wxString ext = source_path.GetExt().MakeLower();
+      if(ext != "scad")return;
+
+      bool can_execute = true;
+
+      // save all pages in case of multifile project where an include file has been edited, but not saved
+      DoFileSaveAll();
+
+      if(can_execute) {
+         // check existence of executables
+         wxFileName scad = DOC()->GetConfigFilePath(ConfigEnums::OPENSCAD);
+         wxFileName xcsg = DOC()->GetConfigFilePath(ConfigEnums::XCSG);
+         wxString scad_message,xcsg_message;
+
+         if( ExecutableCheck(scad,scad_message) &&  ExecutableCheck(xcsg,xcsg_message) ) {
+
+            // set the output format for OpenSCAD to be *.csg
+            wxFileName csg_path(DOC()->GetXcsgFileName(source_path));
+            csg_path.SetExt("csg");
+
+            // we have to make the output directory because openscad won't do it
+            if(!wxFileName::Exists(csg_path.GetPath()))wxMkdir(csg_path.GetPath());
+
+            // create the list of jubs to run (2)
+            std::list<ConsolePanel::JobPair> jobs;
+
+            // OpenSCAD compilation to *.csg
+            wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";
+
+            jobs.push_back(std::make_pair(cmd1,page));
+
+            // XCSG compilation, using *.csg as input
+            wxString options = DOC()->GetXcsgFormatOptionString();
+            wxString export_options = DOC()->GetExportOptionString();
+            wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + csg_path.GetFullPath() + "\" "+export_options;
+            jobs.push_back(std::make_pair(cmd2,page));
+
+            // submit the jobs in the list
+            m_console->Execute(jobs);
+         }
+         else {
+            wxString message = scad_message +'\n' + xcsg_message;
+            wxMessageBox(message, wxT("OpenSCAD and/or xcsg could not execute"), wxOK, this);
+
+            SettingsDialog dlg(this);
+            dlg.SetInitialPage(SettingsDialog::ExternalFiles);
+            dlg.ShowModal();
+         }
+      }
+      else {
+         m_console->AppendText("Compilation cancelled by user.");
+      }
+   }
+}
 
 void AngelCADFrame::OnKillProcess(wxCommandEvent& event)
 {

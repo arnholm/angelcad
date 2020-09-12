@@ -70,10 +70,11 @@ private:
    bool DoFileSaveAs(AngelCADEditor* page = 0);
    bool DoFileSaveAll();
 
+   void DoBuildAngelCAD();
+   void DoBuildOpenSCAD();
+
    void AddFileToHistory(wxFileName filename);
-
    bool TargetUpToDate(AngelCADEditor* page, const wxFileName& source,const wxFileName& target, wxLongLong& target_millis);
-
    bool ExecutableCheck(const wxFileName& exec, wxString& message);
 
    //(*Handlers(AngelCADFrame)
