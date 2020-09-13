@@ -280,6 +280,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     ConfigSaveRestore helper(this,m_config);
     DOC()->RestoreConfig(helper);
     m_args_ctrl->ChangeValue(DOC()->GetArguments());
+    DOC()->GetFilesOpen(m_files_open,m_files_index);
 
     wxIconBundle icons;
     icons.AddIcon(wxIcon(angel_16x16_xpm));
@@ -289,7 +290,52 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
 
     SetTitle("[AngelCAD] " + wxString::Format(wxT(AS_CSG_version)));
 
-    init();
+}
+
+void AngelCADFrame::AddStartupFile(wxFileName& fname)
+{
+   // this is typically called from AngelCADApp
+   // to provide a command line file name
+
+   fname.Normalize();
+   wxString fullpath = fname.GetFullPath();
+   if(!fname.Exists()) {
+      wxMessageBox(fullpath, wxT("File does not exist"), wxOK, this);
+   }
+
+   bool found = false;
+   if(fullpath.Length() > 0) {
+      for(size_t i=0; i<m_files_open.size(); i++){
+         if(fullpath == m_files_open[i].GetFullPath()) {
+            m_files_index = i;
+            found = true;
+         }
+      }
+      if(!found) {
+         m_files_open.push_back(fname);
+         m_files_index = m_files_open.size()-1;
+      }
+   }
+}
+
+void AngelCADFrame::OnMainEventLoopEnter()
+{
+   // called from AngelCADApp when the main event loop has started
+
+   // we can now open editor windows that watch for file modifications
+   // these watchers require the main event loop to run
+
+   if(m_files_open.size() > 0) {
+
+      for(auto file : m_files_open)  {
+         if(file.Exists()) DoSourceFileOpen(file.GetFullPath());
+      }
+      if(m_files_index < m_files_open.size())SelectFile(m_files_open[m_files_index].GetFullPath());
+   }
+   else {
+      // probably a new user
+      DoSourceFileNew();
+   }
 }
 
 AngelCADFrame::~AngelCADFrame()
@@ -305,30 +351,11 @@ AngelCADFrame::~AngelCADFrame()
 }
 
 
-void AngelCADFrame::init()
-{
-   if(m_mru.GetCount() > 0) {
-
-      // just restore the most recent in the history
-      for(size_t i=0; i<m_mru.GetCount();i++) {
-         wxString as_file(m_mru.GetHistoryFile(i));
-         if (!as_file.empty()) {
-            wxFileName fname(as_file);
-            if(fname.Exists()) {
-               if(DoSourceFileOpen(as_file)) return;
-            }
-         }
-      }
-   }
-   else {
-
-      // probably a new user
-      DoSourceFileNew();
-   }
-}
-
 void AngelCADFrame::AddFileToHistory(wxFileName filename)
 {
+   // it looks like sorting like below does not work
+   // sorting seems to be dependent on tab order
+
    for(size_t i=0; i<m_mru.GetCount();i++) {
       wxFileName fname(m_mru.GetHistoryFile(i));
 
@@ -342,10 +369,25 @@ void AngelCADFrame::AddFileToHistory(wxFileName filename)
    m_mru.AddFileToHistory(filename.GetFullPath());
 }
 
+void AngelCADFrame::RemoveFileFromHistory(wxFileName filename)
+{
+   for(size_t i=0; i<m_mru.GetCount();i++) {
+      wxFileName fname(m_mru.GetHistoryFile(i));
+
+      // if the file is already there, remove and and
+      // add it again to promote it to the top
+      if(fname == filename){
+         m_mru.RemoveFileFromHistory(i);
+         break;
+      }
+   }
+}
+
 void AngelCADFrame::OnClose(wxCloseEvent& event)
 {
    m_console->KillJobs();
 
+   std::vector<wxFileName> files_open;
    for(size_t ipage=0; ipage<AuiNotebook1->GetPageCount(); ipage++) {
       AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetPage(ipage));
       if(page->IsModified()) {
@@ -355,13 +397,13 @@ void AngelCADFrame::OnClose(wxCloseEvent& event)
             DoFileSave(page,warn_for_unmodified);
          }
       }
-      else {
-         // make sure the last file we looked at is on the top of the list
-         AddFileToHistory(page->FileName());
-      }
+
+      files_open.push_back(page->FileName());
    }
+   int index = AuiNotebook1->GetSelection();
 
    ConfigSaveRestore helper(this,m_config);
+   DOC()->SetFilesOpen(files_open,index);
    DOC()->SetArguments(m_args_ctrl->GetValue());
    DOC()->SaveConfig(helper);
 
@@ -383,7 +425,7 @@ void AngelCADFrame::OnAbout(wxCommandEvent& event)
 }
 
 
-bool AngelCADFrame::is_file_open(const wxString& as_path)
+bool AngelCADFrame::SelectFile(const wxString& as_path)
 {
    for(size_t ipage=0; ipage<AuiNotebook1->GetPageCount(); ipage++) {
       AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetPage(ipage));
@@ -399,7 +441,7 @@ bool AngelCADFrame::is_file_open(const wxString& as_path)
 
 bool AngelCADFrame::DoSourceFileOpen(const wxString& as_path, bool close_all_others)
 {
-   if(!is_file_open(as_path)) {
+   if(!SelectFile(as_path)) {
 
       wxFileName fname(as_path);
       try{
@@ -415,7 +457,7 @@ bool AngelCADFrame::DoSourceFileOpen(const wxString& as_path, bool close_all_oth
             m_statusbar->SetStatusText(page->FileName().GetFullPath()+ " - Modified: " + dtmod.FormatISODate() + " " + dtmod.FormatISOTime());
             SetTitle(page->FileName().GetFullPath() +" - AngelCAD " + wxString::Format(wxT(AS_CSG_version)));
 
-            if(fname.GetExt() == "as") {
+            if(fname.GetExt() == "as" || fname.GetExt() == "scad") {
                AddFileToHistory(fname);
 
                DOC()->SetSaveDir(fname.GetPath());
@@ -424,7 +466,7 @@ bool AngelCADFrame::DoSourceFileOpen(const wxString& as_path, bool close_all_oth
          }
       }
       catch(std::exception ex) {
-         wxMessageBox(ex.what(), wxT("Exception during AngelCAD source file load"));
+         wxMessageBox(ex.what(), wxT("Exception during source file load"));
       }
 
       // file failed to load, remove from history
@@ -469,6 +511,7 @@ void AngelCADFrame::OnAuiNotebookPageChanged(wxAuiNotebookEvent& event)
       if(fname.Exists()) {
          wxDateTime dtmod = page->FileName().GetModificationTime();
          m_statusbar->SetStatusText(page->FileName().GetFullPath()+ " - Modified: " + dtmod.FormatISODate() + " " + dtmod.FormatISOTime());
+         AddFileToHistory(fname);
       }
       else  {
          m_statusbar->SetStatusText(page->FileName().GetFullPath() + " - File has not been saved");
@@ -485,6 +528,7 @@ void AngelCADFrame::OnAuiNotebookPageClose(wxAuiNotebookEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage()))  {
       if(page->IsModified()) {
+
           wxString message = "The file has been modified, do you want to save the changes?";
           int answer = wxMessageBox(message, wxT("Please Confirm"), wxYES_NO | wxCANCEL, this);
           if (answer == wxYES) {

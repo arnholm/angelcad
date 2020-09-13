@@ -28,6 +28,7 @@
 #include <wx/docview.h>
 #include <wx/config.h>
 #include <wx/filename.h>
+#include <vector>
 
 //(*Headers(AngelCADFrame)
 #include <wx/aui/aui.h>
@@ -43,6 +44,7 @@ class AngelCADEditor;
 class FindReplacePanel;
 
 class AngelCADFrame: public wxFrame {
+   friend class AngelCADDropTarget;
 public:
 
    static AngelCADFrame* singleton() { return m_self; }
@@ -55,16 +57,19 @@ public:
    bool Replace(const wxString& newtxt);
    int  ReplaceAll(const wxString& txt, const wxString& newtxt);
 
-   bool DoSourceFileOpen(const wxString& as_path, bool close_all_others = false);
+   void AddStartupFile(wxFileName& fname);
+
+   // called from AngelCADApp when the main event loop has started
+   void OnMainEventLoopEnter();
 
 private:
+   bool DoSourceFileOpen(const wxString& as_path, bool close_all_others = false);
 
-   void init();
    bool DoSourceFileNew();
 
    bool DoImportDXF(const wxString& as_path);
 
-   bool is_file_open(const wxString& as_path);
+   bool SelectFile(const wxString& as_path);
 
    bool DoFileSave(AngelCADEditor* page = 0, bool warn_for_unmodified = true);
    bool DoFileSaveAs(AngelCADEditor* page = 0);
@@ -74,6 +79,7 @@ private:
    void DoBuildOpenSCAD();
 
    void AddFileToHistory(wxFileName filename);
+   void RemoveFileFromHistory(wxFileName filename);
    bool TargetUpToDate(AngelCADEditor* page, const wxFileName& source,const wxFileName& target, wxLongLong& target_millis);
    bool ExecutableCheck(const wxFileName& exec, wxString& message);
 
@@ -182,6 +188,9 @@ private:
    static AngelCADFrame* m_self;
    wxConfig*             m_config;
    wxFileHistory         m_mru;
+
+   std::vector<wxFileName>  m_files_open;  // open files at end of session
+   size_t                   m_files_index; // index into m_files_open indicating active file
 };
 
 #endif // ANGELCADMAIN_H

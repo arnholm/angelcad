@@ -16,6 +16,7 @@
 #include "ConfigSaveRestore.h"
 #include "wxConfigPath.h"
 #include "wx/stdpaths.h"
+#include <algorithm>
 
 ConfigSaveRestore::ConfigSaveRestore(wxFrame* window, wxConfig* config)
 : m_window(window)
@@ -147,6 +148,37 @@ void ConfigSaveRestore::SaveRestoreDocURL(wxString& url, bool save)
          url = config_string;
        }
     }
+}
+
+void ConfigSaveRestore::SaveRestoreFiles(std::vector<wxFileName>& files_open, size_t& index, bool save)
+{
+   const size_t max_files = 10;
+   wxConfigPath path(m_config,"/OpenFiles");
+   if(save) {
+      size_t nfiles  = std::min(files_open.size(),max_files);
+      size_t index_f = std::min(index,max_files-1);
+      for(size_t i=0; i<nfiles; i++) {
+         wxString file_key = wxString::Format("OpenFile%d",(int)i);
+         m_config->Write(file_key,files_open[i].GetFullPath());
+      }
+      m_config->Write("ActiveFile",(long)index_f);
+   }
+   else {
+      for(size_t i=0; i<max_files; i++) {
+         wxString file_key = wxString::Format("OpenFile%d",(int)i);
+         wxString config_string;
+         if(m_config->Read(file_key,&config_string,"")) {
+           if(config_string.Length() > 0) {
+              files_open.push_back(wxFileName(config_string));
+           }
+         }
+      }
+      long config_index = 0;
+      m_config->Read("ActiveFile",&config_index,config_index);
+      index = config_index;
+      if(index >= files_open.size()) index = 0;
+   }
+
 }
 
 void ConfigSaveRestore::SaveRestoreSaveDir(wxString& savedir, bool save)

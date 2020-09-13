@@ -17,6 +17,7 @@
 #define ANGELCADDOC_H
 
 #include <map>
+#include <vector>
 #include <wx/string.h>
 #include <wx/filename.h>
 
@@ -85,6 +86,8 @@ public:
    // return script arguments
    wxString GetArguments() const { return m_args; }
 
+   void SetFilesOpen(const std::vector<wxFileName>& files_open, size_t index ) { m_files_open  = files_open;  m_files_index = index;  }
+   void GetFilesOpen(std::vector<wxFileName>& files_open, size_t& index ) { files_open = m_files_open;  index = m_files_index;  }
 protected:
    AngelCADDoc();
 
@@ -95,6 +98,9 @@ private:
    wxString                                  m_docurl;     // HTML documentation URL
    wxString                                  m_args;       // script arguments
    std::pair<bool,wxString>                  m_export_dir; // export directory <enable,dir>
+
+   std::vector<wxFileName>                   m_files_open;  // open files at end of session
+   size_t                                    m_files_index; // index into m_files_open indicating active file
 
 private:
    static AngelCADDoc* m_self;

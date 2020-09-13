@@ -15,7 +15,7 @@
 
 #include "AngelCADEditor.h"
 #include <wx/log.h>
-
+#include <wx/msgdlg.h>
 #include "AngelCADDropTarget.h"
 
 wxBEGIN_EVENT_TABLE(AngelCADEditor, wxStyledTextCtrl)
@@ -23,6 +23,7 @@ wxBEGIN_EVENT_TABLE(AngelCADEditor, wxStyledTextCtrl)
     EVT_STC_CHANGE(wxID_ANY, AngelCADEditor::OnChange)
     EVT_STC_CHARADDED(wxID_ANY, AngelCADEditor::OnCharAdded)
     EVT_STC_UPDATEUI(wxID_ANY, AngelCADEditor::OnUpdateUI)
+    EVT_FSWATCHER(wxID_ANY,AngelCADEditor::OnFileEvent)
 wxEND_EVENT_TABLE()
 
 AngelCADEditor::AngelCADEditor(wxWindow* parent, wxWindowID id, const wxPoint& pos,const wxSize& size,long style, const wxString& name)
@@ -282,12 +283,67 @@ void AngelCADEditor::HighlightBraces()
 bool AngelCADEditor::OpenFile(const wxFileName& fname)
 {
    m_fname = "";
+   m_fs_watcher = nullptr;
+   m_fs_jdn     = 0;
    if(LoadFile(fname.GetFullPath())) {
       m_fname = fname;
+      m_fs_watcher = std::make_shared<wxFileSystemWatcher>();
+      m_fs_watcher->SetOwner(this);
+      m_fs_watcher->Add(m_fname.GetPath(),wxFSW_EVENT_MODIFY);
+      wxDateTime dtmod = m_fname.GetModificationTime();
+      m_fs_jdn = dtmod.GetJDN();
       return true;
    }
    return false;
 }
+
+
+void AngelCADEditor::OnFileEvent(wxFileSystemWatcherEvent& event)
+{
+   if(event.GetChangeType() == wxFSW_EVENT_MODIFY) {
+
+      // we received a file system event for the folder,
+      // but we do not know for sure if the file we are viewing was changed,
+      // it could be some other file in the same folder.
+      // Therefore we check the modification time for our file now and compare
+      if(m_fname.Exists()) {
+         double jdn = m_fname.GetModificationTime().GetJDN();
+         if( m_fs_jdn < jdn) {
+
+            // sleep 1.5 second hoping the file write completes (other process)
+            wxMilliSleep(1500);
+
+            bool reload = true;
+            if(IsModified()) {
+               // the editor contents has been modified
+               wxString message = m_fname.GetFullPath().ToStdString() + "\n"
+                                + wxString("\nThis file has been modified by another program.")
+                                + wxString("\nDo you want to reload it and lose the changes made in AngelCAD?");
+               reload = false;
+               if(wxYES == wxMessageBox( message, wxT("Reload?"), wxYES_NO | wxICON_WARNING, this)) {
+                  reload = true;
+               }
+            }
+
+            // even if the editor was modified and the user said NO to reload and lose local changes,
+            // we update the editor JDN date, to prevent more questions
+
+            m_fs_jdn = jdn;
+
+            // add 2 seconds as protection in case we get several watcher events in successiom
+            m_fs_jdn += 2.0/86400.0;
+
+            if(reload) {
+
+               // ok, we must refresh the file
+               // reload the editor contents from the external file
+               LoadFile(m_fname.GetFullPath());
+            }
+         }
+      }
+   }
+}
+
 
 wxFileName AngelCADEditor::FileName() const
 {
@@ -298,6 +354,11 @@ bool AngelCADEditor::SaveFileAs(const wxFileName& fname)
 {
    if(SaveFile(fname.GetFullPath())) {
       m_fname = fname;
+      m_fs_watcher = std::make_shared<wxFileSystemWatcher>();
+      m_fs_watcher->SetOwner(this);
+      m_fs_watcher->Add(m_fname.GetPath(),wxFSW_EVENT_MODIFY);
+      wxDateTime dtmod = m_fname.GetModificationTime();
+      m_fs_jdn = dtmod.GetJDN();
       return true;
    }
    return false;

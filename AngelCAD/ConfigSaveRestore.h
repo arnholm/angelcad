@@ -17,6 +17,7 @@
 #define CONFIGSAVERESTORE_H
 
 #include <map>
+#include <vector>
 #include <wx/config.h>
 #include <wx/string.h>
 #include <wx/filename.h>
@@ -36,6 +37,7 @@ public:
    void SaveRestoreSaveDir(wxString& savedir, bool save);
    void SaveRestoreDocURL(wxString& url, bool save);
    void SaveRestoreArguments(wxString& args, bool save);
+   void SaveRestoreFiles(std::vector<wxFileName>& files_open, size_t& index, bool save);
 
    static wxFileName DefaultOpenScadPath();
    static wxFileName DefaultDxfViewerPath();

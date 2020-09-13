@@ -18,6 +18,8 @@
 
 #include <wx/stc/stc.h>
 #include <wx/filename.h>
+#include <wx/fswatcher.h>
+#include <memory>
 
 class AngelCADEditor : public wxStyledTextCtrl
 {
@@ -68,6 +70,7 @@ protected:
    void OnChange(wxStyledTextEvent&);
    void OnCharAdded(wxStyledTextEvent&);
    void OnUpdateUI(wxStyledTextEvent&);
+   void OnFileEvent(wxFileSystemWatcherEvent& event);
 
    virtual bool SetFont(const wxFont& font);
 
@@ -80,6 +83,9 @@ private:
    size_t     m_indent;  // number of spaces for one indent level
    wxFileName m_fname;
    find_item  m_find;
+
+   std::shared_ptr<wxFileSystemWatcher> m_fs_watcher;  // watches for external modification of file
+   double                               m_fs_jdn;      // last modification time of file (JDN)
 };
 
 #endif // AngelCADEDITOR_H

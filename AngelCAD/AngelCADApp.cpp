@@ -24,6 +24,7 @@
 
 #include "AngelCADApp.h"
 #include "AngelCADDoc.h"
+#include <wx/evtloop.h>
 
 //(*AppHeaders
 #include "AngelCADMain.h"
@@ -90,13 +91,24 @@ bool AngelCADApp::OnInit()
    }
    //*)
 
-   // open database, if any
-   auto i = m_CmdMap.find("input_file");
-   if(i != m_CmdMap.end()) AngelCADFrame::singleton()->DoSourceFileOpen(i->second,true);
-
    return wxsOK;
 }
 
+// this function is called whenever an event loop is activated
+void AngelCADApp::OnEventLoopEnter(wxEventLoopBase* loop)
+{
+   if(loop->IsMain()) {
+      // this means the application main loop has been activated
+
+      // open input file, if any
+      auto i = m_CmdMap.find("input_file");
+      if(i != m_CmdMap.end()) {
+         wxFileName fname(i->second);
+         AngelCADFrame::singleton()->AddStartupFile(fname);
+      }
+      AngelCADFrame::singleton()->OnMainEventLoopEnter();
+   }
+}
 
 AngelCADApp::~AngelCADApp()
 {

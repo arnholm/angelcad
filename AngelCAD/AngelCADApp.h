@@ -40,6 +40,9 @@ public:
    virtual void OnInitCmdLine(wxCmdLineParser& parser);
    virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
 
+   // OnEventLoopEnter is called whenever an event loop is activated
+   virtual void OnEventLoopEnter(wxEventLoopBase* loop);
+
 private:
    AngelCADDoc* m_doc;
    CmdLineMap   m_CmdMap;
