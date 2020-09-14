@@ -157,9 +157,10 @@ void ConfigSaveRestore::SaveRestoreFiles(std::vector<wxFileName>& files_open, si
    if(save) {
       size_t nfiles  = std::min(files_open.size(),max_files);
       size_t index_f = std::min(index,max_files-1);
-      for(size_t i=0; i<nfiles; i++) {
+      for(size_t i=0; i<max_files; i++) {
          wxString file_key = wxString::Format("OpenFile%d",(int)i);
-         m_config->Write(file_key,files_open[i].GetFullPath());
+         wxString file_path = (i<nfiles)? files_open[i].GetFullPath() : "";
+         m_config->Write(file_key,file_path);
       }
       m_config->Write("ActiveFile",(long)index_f);
    }
