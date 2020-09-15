@@ -325,17 +325,34 @@ void AngelCADFrame::OnMainEventLoopEnter()
    // we can now open editor windows that watch for file modifications
    // these watchers require the main event loop to run
 
+   bool open_new = true;
+
    if(m_files_open.size() > 0) {
 
       for(auto file : m_files_open)  {
          if(file.Exists()) DoSourceFileOpen(file.GetFullPath());
+         open_new = false;
       }
       if(m_files_index < m_files_open.size())SelectFile(m_files_open[m_files_index].GetFullPath());
    }
    else {
-      // probably a new user
-      DoSourceFileNew();
+
+      // no previous files recorded as open, but this
+      // might be a user of an older version of AngelCAD
+      // and if so there might be files in the file history.
+      // Open the most recent one that exists
+      for(size_t i=0; i<m_mru.GetCount(); i++) {
+         wxFileName file(m_mru.GetHistoryFile(i));
+         if(file.Exists()) {
+            DoSourceFileOpen(file.GetFullPath());
+            open_new = false;
+            break;
+         }
+      }
    }
+
+   // No file was opened, probably a new user
+   if(open_new) DoSourceFileNew();
 }
 
 AngelCADFrame::~AngelCADFrame()
@@ -672,9 +689,12 @@ bool AngelCADFrame::DoFileSaveAs(AngelCADEditor* page)
 
             if(page->SaveFileAs(path)) {
                AuiNotebook1->SetPageText(index,path.GetFullName());
+
+               SetTitle(path.GetFullPath() +" - AngelCAD " + wxString::Format(wxT(AS_CSG_version)));
+               wxDateTime dtmod = path.GetModificationTime();
+               m_statusbar->SetStatusText(path.GetFullPath()+ " - Modified: " + dtmod.FormatISODate() + " " + dtmod.FormatISOTime());
                AddFileToHistory(path);
 
-               m_console->AppendText("Saved file " + path.GetFullPath());
                DOC()->SetSaveDir(path.GetPath());
                return true;
             }
@@ -781,6 +801,7 @@ void AngelCADFrame::OnBuildCurrentFile(wxCommandEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
 
+      DoFileSaveAll();
       wxFileName path(page->FileName());
       wxString ext = path.GetExt().MakeLower();
       if(ext == "as") DoBuildAngelCAD();

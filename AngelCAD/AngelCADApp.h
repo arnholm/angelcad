@@ -46,6 +46,7 @@ public:
 private:
    AngelCADDoc* m_doc;
    CmdLineMap   m_CmdMap;
+   size_t       m_main_counter;
 };
 
 #endif // ANGELCADAPP_H

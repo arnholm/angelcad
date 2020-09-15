@@ -76,6 +76,7 @@ IMPLEMENT_APP(AngelCADApp);
 bool AngelCADApp::OnInit()
 {
    m_doc = new AngelCADDoc();
+   m_main_counter = 0;
 
    // must call OnInit to trigger command line
    if (!wxApp::OnInit()) return false;
@@ -100,13 +101,21 @@ void AngelCADApp::OnEventLoopEnter(wxEventLoopBase* loop)
    if(loop->IsMain()) {
       // this means the application main loop has been activated
 
-      // open input file, if any
-      auto i = m_CmdMap.find("input_file");
-      if(i != m_CmdMap.end()) {
-         wxFileName fname(i->second);
-         AngelCADFrame::singleton()->AddStartupFile(fname);
+      // note that this can happen several times during execution
+      // so we add protection using the counter to ensure the startup
+      // procedure is done only once
+
+      if(m_main_counter++ == 0) {
+
+         // open input file, if any
+         auto i = m_CmdMap.find("input_file");
+         if(i != m_CmdMap.end()) {
+            wxFileName fname(i->second);
+            AngelCADFrame::singleton()->AddStartupFile(fname);
+         }
+         AngelCADFrame::singleton()->OnMainEventLoopEnter();
       }
-      AngelCADFrame::singleton()->OnMainEventLoopEnter();
+
    }
 }
 
