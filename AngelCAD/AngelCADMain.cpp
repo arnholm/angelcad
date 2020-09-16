@@ -746,6 +746,14 @@ void AngelCADFrame::OnCompileAngelScript(wxCommandEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
 
+      wxFileName path(page->FileName());
+      wxString ext = path.GetExt().MakeLower();
+      if(ext != "as") {
+         wxString message = "Please use Build (F6) for other source types than AngelCAD";
+         int answer = wxMessageBox(message, wxT("File is not AngelCAD source file"), wxOK, this);
+         return;
+      }
+
       bool can_execute = true;
       if(page->IsModified())  can_execute = DoFileSave(page);
 
@@ -756,6 +764,7 @@ void AngelCADFrame::OnCompileAngelScript(wxCommandEvent& event)
          if(ExecutableCheck(as_csg,message)) {
 
             wxFileName as_path(page->FileName());
+/*
             wxFileName xcsg_path(DOC()->GetXcsgFileName(as_path));
             if(xcsg_path.Exists()) {
                wxDateTime as_time   = as_path.GetModificationTime();
@@ -766,7 +775,7 @@ void AngelCADFrame::OnCompileAngelScript(wxCommandEvent& event)
                    if (answer != wxYES) return;
                }
             }
-
+*/
             // create the list of jubs to run (1)
             std::list<ConsolePanel::JobPair> jobs;
 
