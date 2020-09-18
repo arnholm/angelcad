@@ -45,7 +45,7 @@ FindReplacePanel::FindReplacePanel(wxWindow* parent,wxWindowID id, const wxPoint
 	Create(parent, id, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("id"));
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Find - F3"));
-	m_findTextCtrl = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+	m_findTextCtrl = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	StaticBoxSizer1->Add(m_findTextCtrl, 2, wxRIGHT|wxALIGN_TOP, 5);
 	FindRevButton = new wxButton(this, ID_BUTTON1, _("<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	FindRevButton->SetToolTip(_("Find Previous"));
@@ -57,7 +57,7 @@ FindReplacePanel::FindReplacePanel(wxWindow* parent,wxWindowID id, const wxPoint
 	StaticBoxSizer1->Add(FindFwdButton, 0, wxALIGN_TOP, 5);
 	BoxSizer1->Add(StaticBoxSizer1, 1, wxLEFT|wxRIGHT|wxEXPAND, 5);
 	StaticBoxSizer2 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Replace with"));
-	m_replaceTxtCtrl = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+	m_replaceTxtCtrl = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, wxDefaultValidator, _T("ID_TEXTCTRL2"));
 	StaticBoxSizer2->Add(m_replaceTxtCtrl, 2, wxRIGHT|wxALIGN_TOP, 5);
 	ReplaceButton = new wxButton(this, ID_BUTTON3, _("Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
 	ReplaceButton->SetToolTip(_("Replace one"));
@@ -72,8 +72,10 @@ FindReplacePanel::FindReplacePanel(wxWindow* parent,wxWindowID id, const wxPoint
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
+	Connect(ID_TEXTCTRL1,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&FindReplacePanel::OnFindFwdButtonClick);
 	Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&FindReplacePanel::OnFindRevButtonClick);
 	Connect(ID_FIND_FWD_BUTTON,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&FindReplacePanel::OnFindFwdButtonClick);
+	Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&FindReplacePanel::OnReplaceButtonClick);
 	Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&FindReplacePanel::OnReplaceButtonClick);
 	Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&FindReplacePanel::OnReplaceAllButtonClick);
 	//*)
