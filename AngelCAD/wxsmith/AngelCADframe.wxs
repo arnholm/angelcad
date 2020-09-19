@@ -10,6 +10,7 @@
 					<handler function="OnAuiNotebookPageClose" entry="EVT_AUINOTEBOOK_PAGE_CLOSE" />
 					<handler function="OnAuiNotebookPageClosed" entry="EVT_AUINOTEBOOK_PAGE_CLOSED" />
 					<handler function="OnAuiNotebookPageChanged" entry="EVT_AUINOTEBOOK_PAGE_CHANGED" />
+					<handler function="OnAuiNotebook1TabRightDown" entry="EVT_AUINOTEBOOK_TAB_RIGHT_DOWN" />
 				</object>
 				<name>PaneName</name>
 				<standardpanetype>Center</standardpanetype>

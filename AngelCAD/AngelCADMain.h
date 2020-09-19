@@ -83,6 +83,9 @@ private:
    bool TargetUpToDate(AngelCADEditor* page, const wxFileName& source,const wxFileName& target, wxLongLong& target_millis);
    bool ExecutableCheck(const wxFileName& exec, wxString& message);
 
+   static const long ID_POPUP_CLOSE_ALL_BUT_THIS;
+   void OnPopupClick(wxCommandEvent &evt);
+
    //(*Handlers(AngelCADFrame)
    void OnQuit(wxCommandEvent& event);
    void OnAbout(wxCommandEvent& event);
@@ -109,6 +112,7 @@ private:
    void OnOpenLibrariesFolder(wxCommandEvent& event);
    void OnAuiToolBarItemCutTextClick(wxCommandEvent& event);
    void OnImportDXF(wxCommandEvent& event);
+   void OnAuiNotebook1TabRightDown(wxAuiNotebookEvent& event);
    //*)
 
    //(*Identifiers(AngelCADFrame)
@@ -191,6 +195,9 @@ private:
 
    std::vector<wxFileName>  m_files_open;  // open files at end of session
    size_t                   m_files_index; // index into m_files_open indicating active file
+
+
+   int                    m_popup_page;
 };
 
 #endif // ANGELCADMAIN_H

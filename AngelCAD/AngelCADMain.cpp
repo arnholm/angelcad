@@ -125,6 +125,8 @@ const long AngelCADFrame::idMenuAbout = wxNewId();
 const long AngelCADFrame::ID_STATUSBAR1 = wxNewId();
 //*)
 
+const long AngelCADFrame::ID_POPUP_CLOSE_ALL_BUT_THIS = wxNewId();
+
 BEGIN_EVENT_TABLE(AngelCADFrame,wxFrame)
     //(*EventTable(AngelCADFrame)
     //*)
@@ -136,6 +138,7 @@ AngelCADFrame* AngelCADFrame::m_self=0;
 
 AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
 : m_config(0)
+, m_popup_page(-1)
 {
     m_self = this;
 
@@ -238,6 +241,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_AUINOTEBOOK1,wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE,(wxObjectEventFunction)&AngelCADFrame::OnAuiNotebookPageClose);
     Connect(ID_AUINOTEBOOK1,wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED,(wxObjectEventFunction)&AngelCADFrame::OnAuiNotebookPageClosed);
     Connect(ID_AUINOTEBOOK1,wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,(wxObjectEventFunction)&AngelCADFrame::OnAuiNotebookPageChanged);
+    Connect(ID_AUINOTEBOOK1,wxEVT_COMMAND_AUINOTEBOOK_TAB_RIGHT_DOWN,(wxObjectEventFunction)&AngelCADFrame::OnAuiNotebook1TabRightDown);
     Connect(ID_AUITOOLBARITEM2,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnFileNew);
     Connect(ID_AUITOOLBARITEM1,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnFileOpen);
     Connect(ID_AUITOOLBARITEM3,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelCADFrame::OnFileSave);
@@ -1231,4 +1235,38 @@ bool AngelCADFrame::DoImportDXF(const wxString& dxf_file)
       return false;
    }
    return true;
+}
+
+void AngelCADFrame::OnAuiNotebook1TabRightDown(wxAuiNotebookEvent& event)
+{
+   // Save the page index pointed to (not necessarily the same as current selection)
+   m_popup_page = event.GetSelection();
+
+   // Create popup menu and connect it to an event handler
+   wxMenu popup;
+   popup.Append(ID_POPUP_CLOSE_ALL_BUT_THIS,"Save && close all but this");
+   popup.Connect(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(AngelCADFrame::OnPopupClick), NULL, this);
+
+   // show the popup menu
+   PopupMenu(&popup);
+}
+
+void AngelCADFrame::OnPopupClick(wxCommandEvent &evt)
+{
+ 	if(evt.GetId() == ID_POPUP_CLOSE_ALL_BUT_THIS) {
+
+      if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetPage(m_popup_page))) {
+
+         // Remove current page without deleting it
+         AuiNotebook1->RemovePage(m_popup_page);
+
+         // save & close remaining files
+         DoFileSaveAll();
+         AuiNotebook1->DeleteAllPages();
+
+         // add back the page we just removed
+         wxString page_title = page->FileName().GetFullName();
+         AuiNotebook1->AddPage(page,page_title,true);
+      }
+   }
 }
