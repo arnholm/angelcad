@@ -1076,7 +1076,7 @@ void AngelCADFrame::OnViewSTL_AMF_DXF(wxCommandEvent& event)
 
          if(default_svg_viewer) {
             wxString path = "file:" + target_file.GetFullPath();
-            wxLaunchDefaultBrowser(path);
+            wxLaunchDefaultApplication(path);
          }
          else {
 
@@ -1178,7 +1178,7 @@ void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
 
       // using a "file:" prefix and a local path will launch the user's file browser
       wxString path = "file:" + source.GetPath();
-      wxLaunchDefaultBrowser(path);
+      wxLaunchDefaultApplication(path);
    }
    else {
       wxString message = "The containing folder is defined only when a source file is open.";
@@ -1188,7 +1188,7 @@ void AngelCADFrame::OnOpenContainingFolder(wxCommandEvent& event)
 
 void AngelCADFrame::OnOpenLibrariesFolder(wxCommandEvent& event)
 {
-   wxLaunchDefaultBrowser("file:" + DOC()->GetLibraryDir().GetPath());
+   wxLaunchDefaultApplication("file:" + DOC()->GetLibraryDir().GetPath());
 }
 
 void AngelCADFrame::OnAuiToolBarItemCutTextClick(wxCommandEvent& event)
