@@ -307,11 +307,14 @@ void AngelCADEditor::OnFileEvent(wxFileSystemWatcherEvent& event)
       // it could be some other file in the same folder.
       // Therefore we check the modification time for our file now and compare
       if(m_fname.Exists()) {
+
+         // sleep a while hoping the file write completes (other process)
+         // before reading the file modification time
+         wxMilliSleep(1000);
+
          double jdn = m_fname.GetModificationTime().GetJDN();
          if( m_fs_jdn < jdn) {
 
-            // sleep 2.1 second hoping the file write completes (other process)
-            wxMilliSleep(2100);
 
             bool reload = true;
             if(IsModified()) {
