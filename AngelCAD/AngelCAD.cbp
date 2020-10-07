@@ -34,6 +34,7 @@
 					<Add option="/NODEFAULTLIB:msvcrt.lib" />
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="msvcrtd.lib" />
+					<Add library="ce_angelscript_exd" />
 				</Linker>
 			</Target>
 			<Target title="MSVC_Release">
@@ -61,6 +62,7 @@
 					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="msvcrt.lib" />
+					<Add library="ce_angelscript_ex" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="mt.exe /nologo /manifest $(TARGET_OUTPUT_FILE).manifest /outputresource:$(TARGET_OUTPUT_FILE);1" />
@@ -91,6 +93,7 @@
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
 					<Add library="boost_thread" />
+					<Add library="ce_angelscript_exd" />
 				</Linker>
 			</Target>
 			<Target title="GCC_Release">
@@ -115,6 +118,7 @@
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
 					<Add library="boost_thread" />
+					<Add library="ce_angelscript_ex" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />

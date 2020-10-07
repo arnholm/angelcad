@@ -38,7 +38,7 @@
 #include "AngelCADCodeTemplate.h"
 #include "AngelCADDropTarget.h"
 
-
+#include "ce_angelscript_ex/as_args_impl.h"
 #include "ConsolePanel.h"
 
 #include <stdexcept>
@@ -940,6 +940,22 @@ void AngelCADFrame::DoBuildOpenSCAD()
             // XCSG compilation, using *.csg as input
             wxString options = DOC()->GetXcsgFormatOptionString();
             wxString export_options = DOC()->GetExportOptionString();
+
+            // check for secant_tolerance parameter
+            wxString args = m_args_ctrl->GetLineText(0);
+            if(args.length() > 0) {
+               as_args_impl parser;
+               parser.parse(args.ToStdString());
+               if(parser.has_argument("secant_tolerance")) {
+                  double secant_tolerance = parser.get_double("secant_tolerance");
+                  options += wxString::Format(" --sec_tol=%f",secant_tolerance);
+               }
+               else if(parser.has_argument("sec_tol")) {
+                  double secant_tolerance = parser.get_double("sec_tol");
+                  options += wxString::Format(" --sec_tol=%f",secant_tolerance);
+               }
+            }
+
             wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + csg_path.GetFullPath() + "\" "+export_options;
             jobs.push_back(std::make_pair(cmd2,page));
 
