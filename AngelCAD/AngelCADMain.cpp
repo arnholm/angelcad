@@ -205,7 +205,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem1);
     MenuBar1->Append(Menu1, _("&File"));
     Menu3 = new wxMenu();
-    MenuItem8 = new wxMenuItem(Menu3, ID_MENUITEM6, _("Find/Replace...\tF3"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu3, ID_MENUITEM6, _("Find/Replace...\tCtrl+F"), wxEmptyString, wxITEM_NORMAL);
     Menu3->Append(MenuItem8);
     MenuBar1->Append(Menu3, _("Search"));
     Menu4 = new wxMenu();

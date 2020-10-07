@@ -44,7 +44,7 @@ FindReplacePanel::FindReplacePanel(wxWindow* parent,wxWindowID id, const wxPoint
 
 	Create(parent, id, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("id"));
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
-	StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Find - F3"));
+	StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Find"));
 	m_findTextCtrl = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	StaticBoxSizer1->Add(m_findTextCtrl, 2, wxRIGHT|wxALIGN_TOP, 5);
 	FindRevButton = new wxButton(this, ID_BUTTON1, _("<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));

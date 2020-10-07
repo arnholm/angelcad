@@ -4,7 +4,7 @@
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
 				<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
-					<label>Find - F3</label>
+					<label>Find</label>
 					<object class="sizeritem">
 						<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="m_findTextCtrl" member="yes">
 							<style>wxTE_PROCESS_ENTER</style>

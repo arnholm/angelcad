@@ -233,7 +233,7 @@
 				<label>Search</label>
 				<object class="wxMenuItem" name="ID_MENUITEM6" variable="MenuItem8" member="yes">
 					<label>Find/Replace...</label>
-					<accel>F3</accel>
+					<accel>Ctrl+F</accel>
 					<handler function="OnFindReplace" entry="EVT_MENU" />
 				</object>
 			</object>
