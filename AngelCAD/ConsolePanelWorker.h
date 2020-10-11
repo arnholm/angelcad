@@ -33,8 +33,8 @@ public:
    ConsolePanelWorker(wxWindow* parent,                     // the parent wiondow starting the worker
                       ts_queue<wxString>* to_worker,        // messages to worker from application
                       ts_queue<ConsoleText>* from_worker,   // messages to application from worker
-                      wxInputStream* stdout,                //
-                      wxInputStream* stderr                 //
+                      wxInputStream* std_out,                //
+                      wxInputStream* std_err                 //
                       );
    virtual ~ConsolePanelWorker();
 
@@ -51,8 +51,8 @@ private:
    wxWindow*              m_parent;
    ts_queue<wxString>*    m_to_worker;
    ts_queue<ConsoleText>* m_from_worker;
-   wxInputStream*         m_stdout;     // stream corresponding to the standard output stream of the subprocess.
-   wxInputStream*         m_stderr;     // stream corresponding to the standard error output stream of the subprocess.
+   wxInputStream*         m_std_out;     // stream corresponding to the standard output stream of the subprocess.
+   wxInputStream*         m_std_err;     // stream corresponding to the standard error output stream of the subprocess.
 };
 
 #endif // CONSOLEPANELWORKER_H

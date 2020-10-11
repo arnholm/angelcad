@@ -19,14 +19,14 @@
 ConsolePanelWorker::ConsolePanelWorker(wxWindow* parent,
                                        ts_queue<wxString>*    to_worker,     // messages to worker from application
                                        ts_queue<ConsoleText>* from_worker,   // messages to application from worker
-                                       wxInputStream* stdout,
-                                       wxInputStream* stderr
+                                       wxInputStream* std_out,
+                                       wxInputStream* std_err
                                       )
 : m_parent(parent)
 , m_to_worker(to_worker)
 , m_from_worker(from_worker)
-, m_stdout(stdout)
-, m_stderr(stderr)
+, m_std_out(std_out)
+, m_std_err(std_err)
 {}
 
 ConsolePanelWorker::~ConsolePanelWorker()
@@ -60,8 +60,8 @@ void ConsolePanelWorker::run()
    try{
       int retval = 1;  // "Start next Job"
 
-      wxTextInputStream stdout(*m_stdout);
-      while(!m_stdout->Eof()) {
+      wxTextInputStream std_out(*m_std_out);
+      while(!m_std_out->Eof()) {
 
          // check if there was a message from the application
          wxString msg_from_app;
@@ -69,8 +69,8 @@ void ConsolePanelWorker::run()
 
             if(msg_from_app == "END_PROCESS") {
                // empty the buffer
-               while(!m_stdout->Eof()) {
-                  wxString line = stdout.ReadLine();
+               while(!m_std_out->Eof()) {
+                  wxString line = std_out.ReadLine();
                   AppendText(line);
                }
                break;
@@ -78,28 +78,28 @@ void ConsolePanelWorker::run()
          }
 
          // if we reached the end of the input, we exit in a different way
-         if(m_stdout->Eof()) {
+         if(m_std_out->Eof()) {
             break;
          }
 
          // read line by line and add to our text control
-         wxString line = stdout.ReadLine();
+         wxString line = std_out.ReadLine();
          AppendText(line);
       }
 
-      // if the subprocess wrote to stderr, we output those messages as well
+      // if the subprocess wrote to std_err, we output those messages as well
       // and consider it an error situation
-      wxTextInputStream stderr(*m_stderr);
-      while(!m_stderr->Eof()) {
-         if(m_stderr->Eof()) {
+      wxTextInputStream std_err(*m_std_err);
+      while(!m_std_err->Eof()) {
+         if(m_std_err->Eof()) {
             break;
          }
-         wxString line = stderr.ReadLine();
+         wxString line = std_err.ReadLine();
          if(line.length() > 0) {
             AppendText(line);
             // this is an error situation
 
-            // However, OpenSCAD writes "ECHO:" to stderr, even if there is no error
+            // However, OpenSCAD writes "ECHO:" to std_err, even if there is no error
             // so in this special case we cancel the error and continue
             if(line.find("ECHO:")       != static_cast<size_t>(wxNOT_FOUND))      retval =  1;  // no error
             else if(line.find("DEPRECATED:") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
