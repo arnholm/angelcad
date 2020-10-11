@@ -132,7 +132,8 @@ void ConsolePanel::Execute(const wxString& cmd, AngelCADEditor* page)
 
       // process started
       // get the input stream from redirection
-      wxInputStream* wxistr = m_process.GetInputStream();
+      wxInputStream* stdout = m_process.GetInputStream();
+      wxInputStream* stderr = m_process.GetErrorStream();
 
       // empty the queues
       ConsoleText from_txt;
@@ -145,7 +146,7 @@ void ConsolePanel::Execute(const wxString& cmd, AngelCADEditor* page)
       // in which case a message will be sent to the thread to tell it to exit
       // and a wxTrheadEvent will be issued in return to signal it did complete, see OnThreadUpdate below
 
-      boost::thread(ConsolePanelWorker(this,&m_to_worker,&m_from_worker,wxistr));
+      boost::thread(ConsolePanelWorker(this,&m_to_worker,&m_from_worker,stdout,stderr));
 
    }
    else {

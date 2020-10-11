@@ -662,7 +662,7 @@ bool AngelCADFrame::DoFileSave(AngelCADEditor* page, bool warn_for_unmodified )
             wxMessageBox(message, wxT("Please Confirm"), wxOK, this);
          }
          else {
-            m_console->AppendText("The file was not modified: " + path);
+            // m_console->AppendText("The file was not modified: " + path);
          }
       }
    }
@@ -931,6 +931,11 @@ void AngelCADFrame::DoBuildOpenSCAD()
 
             // create the list of jubs to run (2)
             std::list<ConsolePanel::JobPair> jobs;
+
+            // remove existing .csg in case it already exists
+            if(csg_path.Exists()) {
+               wxRemoveFile(csg_path.GetFullPath());
+            }
 
             // OpenSCAD compilation to *.csg
             wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";

@@ -30,10 +30,11 @@ class wxTextCtrl;
 
 class ConsolePanelWorker {
 public:
-   ConsolePanelWorker(wxWindow* parent,                          // the parent wiondow starting the worker
+   ConsolePanelWorker(wxWindow* parent,                     // the parent wiondow starting the worker
                       ts_queue<wxString>* to_worker,        // messages to worker from application
                       ts_queue<ConsoleText>* from_worker,   // messages to application from worker
-                      wxInputStream* msg                         // redirection stream
+                      wxInputStream* stdout,                //
+                      wxInputStream* stderr                 //
                       );
    virtual ~ConsolePanelWorker();
 
@@ -47,10 +48,11 @@ protected:
    void AppendText(const wxString& txt);
 
 private:
-   wxWindow*                   m_parent;
+   wxWindow*              m_parent;
    ts_queue<wxString>*    m_to_worker;
    ts_queue<ConsoleText>* m_from_worker;
-   wxInputStream*              m_msg;
+   wxInputStream*         m_stdout;     // stream corresponding to the standard output stream of the subprocess.
+   wxInputStream*         m_stderr;     // stream corresponding to the standard error output stream of the subprocess.
 };
 
 #endif // CONSOLEPANELWORKER_H
