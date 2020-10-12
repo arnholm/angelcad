@@ -107,6 +107,9 @@ void ConsolePanelWorker::run()
          }
       }
 
+      // add a blank line for readability
+      AppendText("  ");
+
       // signal to the gui that the worker thread is done.
       // Queue the event so the GUI can catch it
       wxThreadEvent* event = new wxThreadEvent();
