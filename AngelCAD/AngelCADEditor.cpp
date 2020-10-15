@@ -310,11 +310,11 @@ void AngelCADEditor::OnFileEvent(wxFileSystemWatcherEvent& event)
 
          // sleep a while hoping the file write completes (other process)
          // before reading the file modification time
-         wxMilliSleep(1000);
+         // Note: Too long sleeps here will slow down the GUI
+         wxMilliSleep(100);
 
          double jdn = m_fname.GetModificationTime().GetJDN();
          if( m_fs_jdn < jdn) {
-
 
             bool reload = true;
             if(IsModified()) {
