@@ -26,7 +26,8 @@ public:
       OPENSCAD,   // OpenSCAD executable
       STLAMFVIEW, // STL/AMF viewer executable
       DXFVIEW,    // DXF viewer executable
-      DXFREADER   // DXF reader executable
+      DXFREADER,  // DXF reader executable
+      POLYFIX     // polyfix executable
    };
 
 };

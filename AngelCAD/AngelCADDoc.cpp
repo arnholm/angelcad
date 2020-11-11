@@ -42,6 +42,7 @@ AngelCADDoc::AngelCADDoc()
    m_file_paths[ConfigEnums::STLAMFVIEW] = wxFileName(exec_path.GetPath(),"angelview",exec_path.GetExt());
    m_file_paths[ConfigEnums::DXFVIEW]    = ConfigSaveRestore::DefaultDxfViewerPath();
    m_file_paths[ConfigEnums::DXFREADER]  = wxFileName(exec_path.GetPath(),"dxfread",exec_path.GetExt());
+   m_file_paths[ConfigEnums::POLYFIX]    = wxFileName(exec_path.GetPath(),"polyfix",exec_path.GetExt());
 
    m_docurl = ConfigSaveRestore::DefaultDocUrl();
 }

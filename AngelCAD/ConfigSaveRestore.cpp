@@ -120,6 +120,7 @@ void ConfigSaveRestore::SaveRestoreExternalFiles(std::map<ConfigEnums::ExtFile,w
       m_config->Write("STLAMFVIEW", file_paths[ConfigEnums::STLAMFVIEW].GetFullPath());
       m_config->Write("DXFVIEW",    file_paths[ConfigEnums::DXFVIEW].GetFullPath());
       m_config->Write("DXFREADER",  file_paths[ConfigEnums::DXFREADER].GetFullPath());
+      m_config->Write("POLYFIX",    file_paths[ConfigEnums::POLYFIX].GetFullPath());
    }
    else {
 
@@ -133,6 +134,7 @@ void ConfigSaveRestore::SaveRestoreExternalFiles(std::map<ConfigEnums::ExtFile,w
       if(m_config->Read("STLAMFVIEW",&config_string)) file_paths[ConfigEnums::STLAMFVIEW] = config_string;
       if(m_config->Read("DXFVIEW",&config_string))    file_paths[ConfigEnums::DXFVIEW] = config_string;
       if(m_config->Read("DXFREADER",&config_string))  file_paths[ConfigEnums::DXFREADER] = config_string;
+      if(m_config->Read("POLYFIX",&config_string))    file_paths[ConfigEnums::POLYFIX] = config_string;
     }
 }
 
