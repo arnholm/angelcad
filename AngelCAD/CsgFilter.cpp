@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <list>
 #include <cstdlib>
+#include <algorithm>
 #include <set>
 #include <wx/string.h>
 #include <wx/utils.h>
@@ -30,9 +31,6 @@ void CsgFilter::run(AngelCADEditor* page )
 
    std::set<wxString> tmp_files;
 
-   std::ofstream dbg("/work/cpde_git/dbg.txt");
-//   dbg << m_csg.GetFullPath().ToStdString() << std::endl;
-
    // we have to make sure the csg file is closed
    wxMilliSleep(200);
 
@@ -43,10 +41,7 @@ void CsgFilter::run(AngelCADEditor* page )
    std::ifstream in(m_csg.GetFullPath().ToStdString());
    if(in.is_open()) {
 
-
       std::ofstream out(out_csg.GetFullPath().ToStdString());
-
-  //    dbg << "OPEN" << std::endl;
 
       // read the file line by line
       std::string line;
@@ -86,26 +81,27 @@ void CsgFilter::run(AngelCADEditor* page )
                   fname.SetExt("off");
                   cmd += "\" -overwrite -out=\""+fname.GetFullPath() + "\"";
 
-             //     dbg << cmd.ToStdString() << std::endl;
-
                   // run polyfix to create OFF
                   std::list<ConsolePanel::JobPair> job;
                   job.push_back(std::make_pair(cmd,page));
                   m_console->Execute(job);
 
+                  // make some time available for the OFF file to close
+                  wxMilliSleep(200);
+
                   // read the file and put it in the tmp_files set
                   pvec = spaceio::off_io::read(fname.GetFullPath().ToStdString());
-             //     tmp_files.insert(fname.GetFullPath());
+                  tmp_files.insert(fname.GetFullPath());
                }
                else if(ext == "off" ) {
                   pvec = spaceio::off_io::read(fname.GetFullPath().ToStdString());
                }
 
                it = m_files.insert(std::make_pair(filename,poly_string(pvec))).first;
-
             }
 
-            out << it->second << std::endl;
+            // output the substitute statement
+            out << line.substr(0,imp) << ' ' << it->second << std::endl;
          }
          else {
             // not an import statement
@@ -117,20 +113,16 @@ void CsgFilter::run(AngelCADEditor* page )
    in.close();
 
 
-//   if(m_files.size() > 0) {
+  if(m_files.size() > 0) {
       // we did find import statements
-   wxMilliSleep(200);
-   wxRemoveFile(m_csg.GetFullPath());
-   wxMilliSleep(200);
-   wxCopyFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
-   wxMilliSleep(200);
-   wxRemoveFile(out_csg.GetFullPath());
-
-   dbg << "cp " << out_csg.GetFullPath() << " " << m_csg.GetFullPath() << std::endl;
-//   }
+      wxMilliSleep(200);
+//      wxRemoveFile(m_csg.GetFullPath());
+      wxCopyFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
+      wxRemoveFile(out_csg.GetFullPath());
+  }
 
    // delete any temporary files we created
-//   for(auto f : tmp_files)  wxRemoveFile(f);
+   for(auto f : tmp_files)  wxRemoveFile(f);
 }
 
 
@@ -156,7 +148,11 @@ std::string CsgFilter::poly_string(std::shared_ptr<ph3d_vector> pvec)
    out << " ], ";// << endl;
    out << "faces=[ ";
       for(size_t iface=0; iface<nface; iface++) {
-         const pface& face = poly->face(iface);
+         pface face = poly->face(iface);
+
+         // OpenSCAD uses reverse face ordering, so we reverse it here
+         std::reverse(face.begin(),face.end());
+
          size_t nv = face.size();
          if(iface > 0) out << ',';
          out << '[';

@@ -967,11 +967,12 @@ void AngelCADFrame::DoBuildOpenSCAD()
                }
             }
 
+            std::list<ConsolePanel::JobPair> jobs2;
             wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + csg_path.GetFullPath() + "\" "+export_options;
-            jobs.push_back(std::make_pair(cmd2,page));
+            jobs2.push_back(std::make_pair(cmd2,page));
 
             // submit the jobs in the list
-            m_console->Execute(jobs);
+            m_console->Execute(jobs2);
          }
          else {
             wxString message = scad_message +'\n' + xcsg_message;

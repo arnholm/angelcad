@@ -36,6 +36,8 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="msvcrtd.lib" />
 					<Add library="ce_angelscript_exd" />
+					<Add library="spaceiod" />
+					<Add library="spacemathd" />
 				</Linker>
 			</Target>
 			<Target title="MSVC_Release">
@@ -65,6 +67,8 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="msvcrt.lib" />
 					<Add library="ce_angelscript_ex" />
+					<Add library="spaceio" />
+					<Add library="spacemath" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="mt.exe /nologo /manifest $(TARGET_OUTPUT_FILE).manifest /outputresource:$(TARGET_OUTPUT_FILE);1" />
@@ -238,6 +242,11 @@
 		<Unit filename="wxsmith/SettingsExternalFiles.wxs" />
 		<Unit filename="wxsmith/SettingsFileFormats.wxs" />
 		<Extensions>
+			<debugger>
+				<remote_debugging>
+					<options conn_type="0" serial_baud="" />
+				</remote_debugging>
+			</debugger>
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="AngelCADApp.cpp" main="AngelCADFrame" init_handlers="necessary" language="CPP" />
 				<resources>
@@ -249,13 +258,6 @@
 					<wxDialog wxs="wxsmith/SettingsDialog.wxs" src="SettingsDialog.cpp" hdr="SettingsDialog.h" fwddecl="0" i18n="1" name="SettingsDialog" language="CPP" />
 				</resources>
 			</wxsmith>
-			<envvars />
-			<code_completion />
-			<debugger>
-				<remote_debugging>
-					<options conn_type="0" serial_baud="" />
-				</remote_debugging>
-			</debugger>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
