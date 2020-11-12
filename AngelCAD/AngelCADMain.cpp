@@ -40,6 +40,7 @@
 
 #include "ce_angelscript_ex/as_args_impl.h"
 #include "ConsolePanel.h"
+#include "CsgFilter.h"
 
 #include <stdexcept>
 #include <memory>
@@ -917,6 +918,7 @@ void AngelCADFrame::DoBuildOpenSCAD()
       if(can_execute) {
          // check existence of executables
          wxFileName scad = DOC()->GetConfigFilePath(ConfigEnums::OPENSCAD);
+         wxFileName pfix = DOC()->GetConfigFilePath(ConfigEnums::POLYFIX);
          wxFileName xcsg = DOC()->GetConfigFilePath(ConfigEnums::XCSG);
          wxString scad_message,xcsg_message;
 
@@ -939,8 +941,12 @@ void AngelCADFrame::DoBuildOpenSCAD()
 
             // OpenSCAD compilation to *.csg
             wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";
-
             jobs.push_back(std::make_pair(cmd1,page));
+            m_console->Execute(jobs);
+
+            // the csg file now exists
+            CsgFilter filter(m_console,csg_path);
+            filter.run(page);
 
             // XCSG compilation, using *.csg as input
             wxString options = DOC()->GetXcsgFormatOptionString();
