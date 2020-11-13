@@ -178,14 +178,17 @@ int main(int argc, char **argv)
          }
          else if(out_name.Length()==0) {
            fname_out.SetName(fname_in.GetName());
+           fname_out.SetPath(fname_in.GetPath());
          }
          else if(out_name[0]=='.') {
             fname_out.SetExt(out_name.Mid(1));
             fname_out.SetName(fname_in.GetName());
+            fname_out.SetPath(fname_in.GetPath());
          }
          else if(fname_out.GetExt() == "") {
             fname_out.SetExt(out_name);
             fname_out.SetName(fname_in.GetName());
+            fname_out.SetPath(fname_in.GetPath());
          }
 
          // if output format is "astl" it means ascii stl
