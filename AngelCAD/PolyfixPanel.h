@@ -53,19 +53,36 @@ protected:
 private:
 
    //(*Handlers(PolyfixPanel)
-   void OnCheckBoxClick(wxCommandEvent& event);
    void OnChoiceSelect(wxCommandEvent& event);
    void OnDtolText(wxCommandEvent& event);
    void OnAtolText(wxCommandEvent& event);
    void OnRemeshText(wxCommandEvent& event);
+   void OnDtolCheck(wxCommandEvent& event);
+   void OnAtolCheck(wxCommandEvent& event);
+   void OnLumpsCheck(wxCommandEvent& event);
+   void OnFlipCheck(wxCommandEvent& event);
+   void OnRemeshCheck(wxCommandEvent& event);
+   void OnOverwriteCheck(wxCommandEvent& event);
+   void OnOutCheck(wxCommandEvent& event);
    //*)
 
    DECLARE_EVENT_TABLE()
 
+   bool     m_dtol_checked;
    wxString m_dtol;
+
+   bool     m_atol_checked;
    wxString m_atol;
+
+   bool     m_remesh_checked;
    wxString m_remesh;
+
+   bool     m_out_checked;
    wxString m_out;
+
+   bool     m_flip_checked;
+   bool     m_overwrite_checked;
+   bool     m_lumps_checked;
 };
 
 #endif

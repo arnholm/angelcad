@@ -29,6 +29,7 @@ static size_t icount=0;
 
 PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
+
 	//(*Initialize(PolyfixPanel)
 	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer2;
@@ -102,13 +103,16 @@ PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
-	Connect(ID_CHECKBOX1,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_CHECKBOX1,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnDtolCheck);
 	Connect(ID_TEXTCTRL1,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnDtolText);
-	Connect(ID_CHECKBOX4,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_CHECKBOX4,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnAtolCheck);
 	Connect(ID_TEXTCTRL3,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnAtolText);
-	Connect(ID_CHECKBOX3,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_CHECKBOX5,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnLumpsCheck);
+	Connect(ID_CHECKBOX2,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnFlipCheck);
+	Connect(ID_CHECKBOX3,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnRemeshCheck);
 	Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnRemeshText);
-	Connect(ID_CHECKBOX7,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_CHECKBOX6,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnOverwriteCheck);
+	Connect(ID_CHECKBOX7,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnOutCheck);
 	Connect(ID_CHOICE1,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&PolyfixPanel::OnChoiceSelect);
 	//*)
 
@@ -116,15 +120,23 @@ PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 
 	// WORK_AROUND:
 	// see https://forums.wxwidgets.org/viewtopic.php?t=43131
-	// The choice control does not really work under MSW when used in a
-	// dialog extra panel, so we keep the selected value in a separate variable
-	// and also capture user changes in a choice event
+	// The controls do not really work under MSW when used in a
+	// dialog extra panel, so we keep the values in separate
+	// variables and capture user changes in events
 
    m_out    = m_out_choice->GetStringSelection();
 
    m_dtol   = m_dtol_ctrl->GetLabelText();
    m_atol   = m_atol_ctrl->GetLabelText();
    m_remesh = m_remesh_ctrl->GetLabelText();
+
+   m_dtol_checked      = m_dtol_check->IsChecked();
+   m_atol_checked      = m_atol_check->IsChecked();
+   m_remesh_checked    = m_remesh_check->IsChecked();
+   m_out_checked       = m_out_check->IsChecked();
+   m_flip_checked      = m_flip_check->IsChecked();
+   m_overwrite_checked = m_overwrite_check->IsChecked();
+   m_lumps_checked     = m_lumps_check->IsChecked();
 
 }
 
@@ -135,44 +147,35 @@ PolyfixPanel::~PolyfixPanel()
 }
 
 
-void PolyfixPanel::OnCheckBoxClick(wxCommandEvent& event)
-{
-   m_dtol_ctrl->Enable(m_dtol_check->IsChecked());
-   m_atol_ctrl->Enable(m_atol_check->IsChecked());
-   m_remesh_ctrl->Enable(m_remesh_check->IsChecked());
-   m_out_choice->Enable(m_out_check->IsChecked());
-}
-
-
 wxString PolyfixPanel::GetOptions()
 {
    wxString options;
    std::ostringstream out;
-   if(m_dtol_check->IsChecked()) {
+   if(m_dtol_checked) {
       double dtol=-1.0;
       if(m_dtol.ToCDouble(&dtol)) {
          out << " -dtol="<<dtol;
       }
    }
 
-   if(m_atol_check->IsChecked()) {
+   if(m_atol_checked) {
       double atol=-1.0;
       if(m_atol.ToCDouble(&atol)) {
          out << " -atol="<<atol;
       }
    }
 
-   if(m_lumps_check->IsChecked()) out << " -lumps";
-   if(m_flip_check->IsChecked()) out << " -nflip";
-   if(m_remesh_check->IsChecked()) {
+   if(m_lumps_checked) out << " -lumps";
+   if(m_flip_checked) out << " -nflip";
+   if(m_remesh_checked) {
       double dist=-1.0;
       if(m_remesh.ToCDouble(&dist)) {
          out << " -remesh="<<dist;
       }
    }
 
-   if(m_overwrite_check->IsChecked()) out << " -overwrite";
-   if(m_out_check->IsChecked()) {
+   if(m_overwrite_checked) out << " -overwrite";
+   if(m_out_checked) {
       out << " -out=" << m_out.ToStdString();
    }
 
@@ -201,3 +204,41 @@ void PolyfixPanel::OnRemeshText(wxCommandEvent& event)
    m_remesh = event.GetString();
 }
 
+void PolyfixPanel::OnDtolCheck(wxCommandEvent& event)
+{
+   m_dtol_checked = event.IsChecked();
+   m_dtol_ctrl->Enable(m_dtol_checked);
+}
+
+void PolyfixPanel::OnAtolCheck(wxCommandEvent& event)
+{
+   m_atol_checked = event.IsChecked();
+   m_atol_ctrl->Enable(m_atol_checked);
+}
+
+void PolyfixPanel::OnLumpsCheck(wxCommandEvent& event)
+{
+   m_lumps_checked = event.IsChecked();
+}
+
+void PolyfixPanel::OnFlipCheck(wxCommandEvent& event)
+{
+   m_flip_checked = event.IsChecked();
+}
+
+void PolyfixPanel::OnRemeshCheck(wxCommandEvent& event)
+{
+   m_remesh_checked = event.IsChecked();
+   m_remesh_ctrl->Enable(m_remesh_checked);
+}
+
+void PolyfixPanel::OnOverwriteCheck(wxCommandEvent& event)
+{
+   m_overwrite_checked = event.IsChecked();
+}
+
+void PolyfixPanel::OnOutCheck(wxCommandEvent& event)
+{
+   m_out_checked = event.IsChecked();
+   m_out_choice->Enable(m_out_checked);
+}

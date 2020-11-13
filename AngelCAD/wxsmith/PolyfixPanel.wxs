@@ -12,7 +12,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_dtol_check" member="yes">
 									<label>Distance tolerance [mm] (-dtol)</label>
-									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+									<handler function="OnDtolCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -24,6 +24,7 @@
 									<size>100,-1</size>
 									<enabled>0</enabled>
 									<style>wxTE_RIGHT</style>
+									<handler function="OnDtolText" entry="EVT_TEXT" />
 								</object>
 								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -38,7 +39,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX4" variable="m_atol_check" member="yes">
 									<label>Area tolerance [mm^2] (-atol)</label>
-									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+									<handler function="OnAtolCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -50,6 +51,7 @@
 									<size>100,-1</size>
 									<enabled>0</enabled>
 									<style>wxTE_RIGHT</style>
+									<handler function="OnAtolText" entry="EVT_TEXT" />
 								</object>
 								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -64,6 +66,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX5" variable="m_lumps_check" member="yes">
 									<label>Split into lumps (-lumps)</label>
+									<handler function="OnLumpsCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -79,6 +82,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX2" variable="m_flip_check" member="yes">
 									<label>Flip inward faces (-nflip)</label>
+									<handler function="OnFlipCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -103,7 +107,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX3" variable="m_remesh_check" member="yes">
 									<label>Remesh [mm] (-remesh)</label>
-									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+									<handler function="OnRemeshCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -115,6 +119,7 @@
 									<size>100,-1</size>
 									<enabled>0</enabled>
 									<style>wxTE_RIGHT</style>
+									<handler function="OnRemeshText" entry="EVT_TEXT" />
 								</object>
 								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -128,6 +133,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX6" variable="m_overwrite_check" member="yes">
 									<label>Overwrite input file (-overwrite)</label>
+									<handler function="OnOverwriteCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
@@ -142,7 +148,7 @@
 							<object class="sizeritem">
 								<object class="wxCheckBox" name="ID_CHECKBOX7" variable="m_out_check" member="yes">
 									<label>Output type (-out)</label>
-									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+									<handler function="OnOutCheck" entry="EVT_CHECKBOX" />
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>
