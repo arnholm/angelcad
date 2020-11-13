@@ -605,7 +605,7 @@ void AngelCADFrame::OnFileNew(wxCommandEvent& event)
 void AngelCADFrame::OnFileOpen(wxCommandEvent& event)
 {
    wxString default_dir = DOC()->GetSaveDir();
-   wxFileDialog dlg(this,wxT("AngelCAD source file"),default_dir,wxT(""),wxT("AngelCAD source file (*.as)|*.as|OpenSCAD source file (*.scad)|*.scad|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+   wxFileDialog dlg(this,wxT("Open source file"),default_dir,wxT(""),wxT("AngelCAD/OpenSCAD source files (*.as;*.scad)|*.as;*.scad|AngelCAD source file (*.as)|*.as|OpenSCAD source file (*.scad)|*.scad|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST);
    if(dlg.ShowModal() == wxID_OK) {
       wxArrayString paths;
 
