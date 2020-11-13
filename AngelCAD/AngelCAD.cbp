@@ -195,6 +195,8 @@
 		<Unit filename="CsgFilter.h" />
 		<Unit filename="FindReplacePanel.cpp" />
 		<Unit filename="FindReplacePanel.h" />
+		<Unit filename="PolyfixPanel.cpp" />
+		<Unit filename="PolyfixPanel.h" />
 		<Unit filename="SettingsDialog.cpp">
 			<Option virtualFolder="ConfigGUI/" />
 		</Unit>
@@ -238,6 +240,7 @@
 		<Unit filename="wxsmith/AngelCADframe.wxs" />
 		<Unit filename="wxsmith/ConsolePanel.wxs" />
 		<Unit filename="wxsmith/FindReplacePanel.wxs" />
+		<Unit filename="wxsmith/PolyfixPanel.wxs" />
 		<Unit filename="wxsmith/SettingsDialog.wxs" />
 		<Unit filename="wxsmith/SettingsExternalFiles.wxs" />
 		<Unit filename="wxsmith/SettingsFileFormats.wxs" />
@@ -256,6 +259,7 @@
 					<wxPanel wxs="wxsmith/SettingsExternalFiles.wxs" src="SettingsExternalFiles.cpp" hdr="SettingsExternalFiles.h" fwddecl="0" i18n="1" name="SettingsExternalFiles" language="CPP" />
 					<wxPanel wxs="wxsmith/SettingsFileFormats.wxs" src="SettingsFileFormats.cpp" hdr="SettingsFileFormats.h" fwddecl="0" i18n="1" name="SettingsFileFormats" language="CPP" />
 					<wxDialog wxs="wxsmith/SettingsDialog.wxs" src="SettingsDialog.cpp" hdr="SettingsDialog.h" fwddecl="0" i18n="1" name="SettingsDialog" language="CPP" />
+					<wxPanel wxs="wxsmith/PolyfixPanel.wxs" src="PolyfixPanel.cpp" hdr="PolyfixPanel.h" fwddecl="0" i18n="1" name="PolyfixPanel" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

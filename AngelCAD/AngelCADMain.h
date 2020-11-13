@@ -113,6 +113,7 @@ private:
    void OnAuiToolBarItemCutTextClick(wxCommandEvent& event);
    void OnImportDXF(wxCommandEvent& event);
    void OnAuiNotebook1TabRightDown(wxAuiNotebookEvent& event);
+   void OnRepairMeshFile(wxCommandEvent& event);
    //*)
 
    //(*Identifiers(AngelCADFrame)
@@ -133,6 +134,7 @@ private:
    static const long ID_MENUITEM2;
    static const long ID_MENUITEM1;
    static const long ID_MENUITEM18;
+   static const long ID_MENUITEM19;
    static const long ID_MENUITEM11;
    static const long ID_MENUITEM17;
    static const long ID_MENUITEM3;
@@ -175,6 +177,7 @@ private:
    wxMenuItem* MenuItem17;
    wxMenuItem* MenuItem18;
    wxMenuItem* MenuItem19;
+   wxMenuItem* MenuItem20;
    wxMenuItem* MenuItem3;
    wxMenuItem* MenuItem4;
    wxMenuItem* MenuItem5;

@@ -41,6 +41,7 @@
 #include "ce_angelscript_ex/as_args_impl.h"
 #include "ConsolePanel.h"
 #include "CsgFilter.h"
+#include "PolyfixPanel.h"
 
 #include <stdexcept>
 #include <memory>
@@ -106,6 +107,7 @@ const long AngelCADFrame::ID_PANEL2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM2 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM1 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM18 = wxNewId();
+const long AngelCADFrame::ID_MENUITEM19 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM11 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM17 = wxNewId();
 const long AngelCADFrame::ID_MENUITEM3 = wxNewId();
@@ -186,6 +188,8 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem3);
     MenuItem19 = new wxMenuItem(Menu1, ID_MENUITEM18, _("Import 2d DXF,,,"), _("Import 2d DXF"), wxITEM_NORMAL);
     Menu1->Append(MenuItem19);
+    MenuItem20 = new wxMenuItem(Menu1, ID_MENUITEM19, _("Repair Mesh file(s)..."), _("Repair Mesh file(s)"), wxITEM_NORMAL);
+    Menu1->Append(MenuItem20);
     Menu1->AppendSeparator();
     MenuItem12 = new wxMenuItem(Menu1, ID_MENUITEM11, _("Open Source Folder..."), _("Open file browser in source file folder"), wxITEM_NORMAL);
     Menu1->Append(MenuItem12);
@@ -254,6 +258,7 @@ AngelCADFrame::AngelCADFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileNew);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileOpen);
     Connect(ID_MENUITEM18,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnImportDXF);
+    Connect(ID_MENUITEM19,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnRepairMeshFile);
     Connect(ID_MENUITEM11,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenContainingFolder);
     Connect(ID_MENUITEM17,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnOpenLibrariesFolder);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelCADFrame::OnFileSave);
@@ -1298,6 +1303,50 @@ void AngelCADFrame::OnPopupClick(wxCommandEvent &evt)
          // add back the page we just removed
          wxString page_title = page->FileName().GetFullName();
          AuiNotebook1->AddPage(page,page_title,true);
+      }
+   }
+}
+
+void AngelCADFrame::OnRepairMeshFile(wxCommandEvent& event)
+{
+   if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
+
+
+      wxString working_dir = wxFileName::GetCwd();
+
+      wxFileName pfix = DOC()->GetConfigFilePath(ConfigEnums::POLYFIX);
+      pfix.Normalize();
+      if(!pfix.Exists()) {
+         wxString message = "The polyfix application is not properly configured, see Tools->Settings->External Files";
+         wxMessageBox(message, wxT("Polyfix not found"), wxOK, this);
+         return;
+      }
+
+
+      wxString default_dir = DOC()->GetSaveDir();
+      wxFileDialog dlg(this,wxT("Select surface mesh file"),default_dir,"",wxT("STL/AMF/OBJ/OFF files (*.stl;*.amf;*.obj;*.off)|*.stl;*.amf;*.obj;*.off|STL file (*.stl)|*.stl|AMF Files (*.amf)|*.amf|OBJ Files (*.obj)|*.obj|OFF Files (*.off)|*.off|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST|wxFD_MULTIPLE);
+      dlg.SetExtraControlCreator(&PolyfixPanel::CreatePanel);
+      if(dlg.ShowModal() == wxID_OK) {
+
+         PolyfixPanel* extra = static_cast<PolyfixPanel*>(dlg.GetExtraControl());
+         wxString options = extra->GetOptions();
+
+         wxArrayString paths;
+         dlg.GetPaths(paths);
+         size_t nfiles = paths.GetCount();
+
+         std::list<ConsolePanel::JobPair> jobs;
+         for(size_t i=0; i<nfiles; i++) {
+
+            wxFileName mesh_file(paths[i]);
+
+            // dxfreader job
+            wxString cmd = "\"" + pfix.GetFullPath() +"\" " + options + " \"" +mesh_file.GetFullPath() + "\"";
+            jobs.push_back(std::make_pair(cmd,page));
+         }
+
+         // submit the jobs in the list
+         m_console->Execute(jobs);
       }
    }
 }

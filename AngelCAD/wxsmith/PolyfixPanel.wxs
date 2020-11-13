@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxPanel" name="PolyfixPanel">
+		<id_arg>0</id_arg>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
+					<label>Heal</label>
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_dtol_check" member="yes">
+									<label>Distance tolerance [mm] (-dtol)</label>
+									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>3</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="m_dtol_ctrl" member="yes">
+									<value>1.0E-2</value>
+									<size>100,-1</size>
+									<enabled>0</enabled>
+									<style>wxTE_RIGHT</style>
+								</object>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer6" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX4" variable="m_atol_check" member="yes">
+									<label>Area tolerance [mm^2] (-atol)</label>
+									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>3</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="m_atol_ctrl" member="yes">
+									<value>1.0E-6</value>
+									<size>100,-1</size>
+									<enabled>0</enabled>
+									<style>wxTE_RIGHT</style>
+								</object>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer7" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX5" variable="m_lumps_check" member="yes">
+									<label>Split into lumps (-lumps)</label>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>2</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX2" variable="m_flip_check" member="yes">
+									<label>Flip inward faces (-nflip)</label>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>2</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxTOP|wxBOTTOM|wxLEFT|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticBoxSizer" variable="StaticBoxSizer2" member="no">
+					<label>Output</label>
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX3" variable="m_remesh_check" member="yes">
+									<label>Remesh [mm] (-remesh)</label>
+									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>2</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="m_remesh_ctrl" member="yes">
+									<value>2.0</value>
+									<size>100,-1</size>
+									<enabled>0</enabled>
+									<style>wxTE_RIGHT</style>
+								</object>
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX6" variable="m_overwrite_check" member="yes">
+									<label>Overwrite input file (-overwrite)</label>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>3</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer8" member="no">
+							<object class="sizeritem">
+								<object class="wxCheckBox" name="ID_CHECKBOX7" variable="m_out_check" member="yes">
+									<label>Output type (-out)</label>
+									<handler function="OnCheckBoxClick" entry="EVT_CHECKBOX" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>2</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxChoice" name="ID_CHOICE1" variable="m_out_choice" member="yes">
+									<content>
+										<item>OBJ</item>
+										<item>OFF</item>
+										<item>AMF</item>
+										<item>STL</item>
+										<item>ASTL</item>
+									</content>
+									<selection>1</selection>
+									<handler function="OnChoiceSelect" entry="EVT_CHOICE" />
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+								<option>1</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

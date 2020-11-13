@@ -186,6 +186,11 @@
 					<help>Import 2d DXF</help>
 					<handler function="OnImportDXF" entry="EVT_MENU" />
 				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM19" variable="MenuItem20" member="yes">
+					<label>Repair Mesh file(s)...</label>
+					<help>Repair Mesh file(s)</help>
+					<handler function="OnRepairMeshFile" entry="EVT_MENU" />
+				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM11" variable="MenuItem12" member="yes">
 					<label>Open Source Folder...</label>
