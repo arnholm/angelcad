@@ -943,10 +943,13 @@ void AngelCADFrame::DoBuildOpenSCAD()
             wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";
             jobs.push_back(std::make_pair(cmd1,page));
             m_console->Execute(jobs);
+            m_console->DisplayTextFromWorker();
 
             // the csg file now exists
-            CsgFilter filter(m_console,csg_path);
-            filter.run(page);
+            if(pfix.Exists()) {
+               CsgFilter filter(m_console,csg_path);
+               filter.run(page);
+            }
 
             // XCSG compilation, using *.csg as input
             wxString options = DOC()->GetXcsgFormatOptionString();
@@ -972,7 +975,7 @@ void AngelCADFrame::DoBuildOpenSCAD()
             jobs2.push_back(std::make_pair(cmd2,page));
 
             // submit the jobs in the list
-            m_console->Execute(jobs2);
+            m_console->Execute(jobs2,false);
          }
          else {
             wxString message = scad_message +'\n' + xcsg_message;

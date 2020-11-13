@@ -86,9 +86,9 @@ void ConsolePanel::AppendText(const wxString& text, int status)
    m_txtctrl->AppendText(text+'\n');
 }
 
-void ConsolePanel::Execute(const std::list<JobPair>& jobs)
+void ConsolePanel::Execute(const std::list<JobPair>& jobs, bool clear_console)
 {
-   Clear();
+   if(clear_console)Clear();
 
    // establish the list of jobs, and start executing the first job
    m_jobs = jobs;

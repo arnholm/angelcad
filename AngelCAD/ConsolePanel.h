@@ -48,7 +48,7 @@ public:
    bool is_busy() const { return m_is_busy; }
 
    // execute the list of jobs in sequence
-   void Execute(const std::list<JobPair>& jobs);
+   void Execute(const std::list<JobPair>& jobs, bool clear_console=true);
 
    // kill running jobs
    void KillJobs();
@@ -57,8 +57,8 @@ public:
    wxTextCtrl* m_txtctrl;
    //*)
 
-protected:
    void DisplayTextFromWorker();
+protected:
    void StartNextJob();
    void TerminateJobs();
 
