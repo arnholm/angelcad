@@ -103,8 +103,11 @@ PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	BoxSizer1->SetSizeHints(this);
 
 	Connect(ID_CHECKBOX1,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_TEXTCTRL1,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnDtolText);
 	Connect(ID_CHECKBOX4,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_TEXTCTRL3,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnAtolText);
 	Connect(ID_CHECKBOX3,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
+	Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&PolyfixPanel::OnRemeshText);
 	Connect(ID_CHECKBOX7,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&PolyfixPanel::OnCheckBoxClick);
 	Connect(ID_CHOICE1,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&PolyfixPanel::OnChoiceSelect);
 	//*)
@@ -117,7 +120,12 @@ PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	// dialog extra panel, so we keep the selected value in a separate variable
 	// and also capture user changes in a choice event
 
-   m_out = m_out_choice->GetStringSelection();
+   m_out    = m_out_choice->GetStringSelection();
+
+   m_dtol   = m_dtol_ctrl->GetLabelText();
+   m_atol   = m_atol_ctrl->GetLabelText();
+   m_remesh = m_remesh_ctrl->GetLabelText();
+
 }
 
 PolyfixPanel::~PolyfixPanel()
@@ -142,14 +150,14 @@ wxString PolyfixPanel::GetOptions()
    std::ostringstream out;
    if(m_dtol_check->IsChecked()) {
       double dtol=-1.0;
-      if(m_dtol_ctrl->GetLabelText().ToCDouble(&dtol)) {
+      if(m_dtol.ToCDouble(&dtol)) {
          out << " -dtol="<<dtol;
       }
    }
 
    if(m_atol_check->IsChecked()) {
       double atol=-1.0;
-      if(m_atol_ctrl->GetLabelText().ToCDouble(&atol)) {
+      if(m_atol.ToCDouble(&atol)) {
          out << " -atol="<<atol;
       }
    }
@@ -158,15 +166,13 @@ wxString PolyfixPanel::GetOptions()
    if(m_flip_check->IsChecked()) out << " -nflip";
    if(m_remesh_check->IsChecked()) {
       double dist=-1.0;
-      if(m_remesh_ctrl->GetLabelText().ToCDouble(&dist)) {
+      if(m_remesh.ToCDouble(&dist)) {
          out << " -remesh="<<dist;
       }
    }
 
    if(m_overwrite_check->IsChecked()) out << " -overwrite";
    if(m_out_check->IsChecked()) {
-      int isel = m_out_choice->GetSelection();
-      wxString sel = m_out_choice->GetStringSelection();
       out << " -out=" << m_out.ToStdString();
    }
 
@@ -177,5 +183,21 @@ wxString PolyfixPanel::GetOptions()
 
 void PolyfixPanel::OnChoiceSelect(wxCommandEvent& event)
 {
-   m_out = m_out_choice->GetStringSelection();
+   m_out    = event.GetString();
 }
+
+void PolyfixPanel::OnDtolText(wxCommandEvent& event)
+{
+   m_dtol   = event.GetString();
+}
+
+void PolyfixPanel::OnAtolText(wxCommandEvent& event)
+{
+   m_atol   = event.GetString();
+}
+
+void PolyfixPanel::OnRemeshText(wxCommandEvent& event)
+{
+   m_remesh = event.GetString();
+}
+

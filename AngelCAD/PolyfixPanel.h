@@ -55,10 +55,16 @@ private:
    //(*Handlers(PolyfixPanel)
    void OnCheckBoxClick(wxCommandEvent& event);
    void OnChoiceSelect(wxCommandEvent& event);
+   void OnDtolText(wxCommandEvent& event);
+   void OnAtolText(wxCommandEvent& event);
+   void OnRemeshText(wxCommandEvent& event);
    //*)
 
    DECLARE_EVENT_TABLE()
 
+   wxString m_dtol;
+   wxString m_atol;
+   wxString m_remesh;
    wxString m_out;
 };
 
