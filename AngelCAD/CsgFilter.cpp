@@ -151,7 +151,10 @@ void CsgFilter::run(AngelCADEditor* page )
       wxMilliSleep(200);
       wxRenameFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
    }
-
+   else {
+      wxMilliSleep(200);
+      wxRemoveFile(out_csg.GetFullPath());
+   }
 
    // flush messages
    m_console->DisplayTextFromWorker();
