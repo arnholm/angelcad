@@ -1311,31 +1311,36 @@ void AngelCADFrame::OnRepairMeshFile(wxCommandEvent& event)
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
 
-
       wxString working_dir = wxFileName::GetCwd();
 
       wxFileName pfix = DOC()->GetConfigFilePath(ConfigEnums::POLYFIX);
       pfix.Normalize();
-      if(!pfix.Exists()) {
-         wxString message = "The polyfix application is not properly configured, see Tools->Settings->External Files";
-         wxMessageBox(message, wxT("Polyfix not found"), wxOK, this);
-         return;
+      wxString message;
+      if(!ExecutableCheck(pfix,message)){
+         wxMessageBox(message, wxT("polyfix could not execute"), wxOK, this);
+
+         SettingsDialog dlg(this);
+         dlg.SetInitialPage(SettingsDialog::ExternalFiles);
+         dlg.ShowModal();
+         pfix = DOC()->GetConfigFilePath(ConfigEnums::POLYFIX);
       }
 
-
+      // select the mesh files. Multiple selection allowed
       wxString default_dir = DOC()->GetSaveDir();
       wxFileDialog dlg(this,wxT("Select surface mesh file"),default_dir,"",wxT("STL/AMF/OBJ/OFF files (*.stl;*.amf;*.obj;*.off)|*.stl;*.amf;*.obj;*.off|STL file (*.stl)|*.stl|AMF Files (*.amf)|*.amf|OBJ Files (*.obj)|*.obj|OFF Files (*.off)|*.off|All files (*.*)|*.*"),wxFD_OPEN|wxFD_FILE_MUST_EXIST|wxFD_MULTIPLE);
       dlg.SetExtraControlCreator(&PolyfixPanel::CreatePanel);
       if(dlg.ShowModal() == wxID_OK) {
 
+         // get access to the extra data and extract polyfix command line options
          PolyfixPanel* extra = static_cast<PolyfixPanel*>(dlg.GetExtraControl());
          wxString options = extra->GetOptions();
+
+         // create list of polyfix runs to execute
+         std::list<ConsolePanel::JobPair> jobs;
 
          wxArrayString paths;
          dlg.GetPaths(paths);
          size_t nfiles = paths.GetCount();
-
-         std::list<ConsolePanel::JobPair> jobs;
          for(size_t i=0; i<nfiles; i++) {
 
             wxFileName mesh_file(paths[i]);
