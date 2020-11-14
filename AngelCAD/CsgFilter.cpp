@@ -153,7 +153,7 @@ void CsgFilter::run(AngelCADEditor* page )
    }
    else {
       wxMilliSleep(200);
-      wxRemoveFile(out_csg.GetFullPath());
+      if(out_csg.Exists())wxRemoveFile(out_csg.GetFullPath());
    }
 
    // flush messages
