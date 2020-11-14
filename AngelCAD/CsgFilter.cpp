@@ -149,10 +149,8 @@ void CsgFilter::run(AngelCADEditor* page )
    if(m_files.size() > 0 && out_csg.Exists()) {
       // we did find import statements, so we use the filtered .csg
       wxMilliSleep(200);
-      wxCopyFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
+      wxRenameFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
    }
-
-   if(out_csg.Exists()) wxRemoveFile(out_csg.GetFullPath());
 
 
    // flush messages
@@ -174,7 +172,7 @@ std::string CsgFilter::poly_string(std::shared_ptr<ph3d_vector> pvec)
    if(pvec && pvec->size()>0) {
       std::shared_ptr<polyhedron3d> poly = (*pvec)[0];
 
-      int prec = 8;
+      int prec = 9;
 
       std::ostringstream out;
       size_t nvert = poly->vertex_size();
@@ -192,7 +190,7 @@ std::string CsgFilter::poly_string(std::shared_ptr<ph3d_vector> pvec)
          for(size_t iface=0; iface<nface; iface++) {
             pface face = poly->face(iface);
 
-            // OpenSCAD uses reverse face ordering, so we reverse it here
+            // OpenSCAD uses reverse face vertex ordering, so we reverse it here
             std::reverse(face.begin(),face.end());
 
             size_t nv = face.size();
