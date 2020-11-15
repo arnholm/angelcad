@@ -176,6 +176,66 @@
 			<as_return type="void" verified="1"/>
 		</as_member_function>
 	</as_class>
+	<as_class verified="1" name="as_args">
+		<as_description>
+			<as_line>Script input arguments</as_line>
+		</as_description>
+		<as_member_function verified="1" signature="bool has_argument(string arg) const" name="has_argument">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="bool" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="double get_double(string arg) const" name="get_double">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="double" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="double get_double(string arg, double def) const" name="get_double">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_parameter verified="1" type="double" name="def"/>
+			<as_return type="double" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="double get_unsigned_double(string arg) const" name="get_unsigned_double">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="double" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="double get_unsigned_double(string arg, double def) const" name="get_unsigned_double">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_parameter verified="1" type="double" name="def"/>
+			<as_return type="double" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int Refcount() const" name="Refcount">
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int get_int(string arg) const" name="get_int">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="int get_int(string arg, int def) const" name="get_int">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_parameter verified="1" type="int" name="def"/>
+			<as_return type="int" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="string Type() const" name="Type">
+			<as_return type="string" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="string get_string(string arg) const" name="get_string">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="string" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="string get_string(string arg, string def) const" name="get_string">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_parameter verified="1" type="string" name="def"/>
+			<as_return type="string" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="uint get_uint(string arg) const" name="get_uint">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_return type="uint" verified="1"/>
+		</as_member_function>
+		<as_member_function verified="1" signature="uint get_uint(string arg, uint def) const" name="get_uint">
+			<as_parameter verified="1" type="string" name="arg"/>
+			<as_parameter verified="1" type="uint" name="def"/>
+			<as_return type="uint" verified="1"/>
+		</as_member_function>
+	</as_class>
 	<as_class verified="1" name="as_istream">
 		<as_description>
 			<as_line>Input stream (usable in console window only). Provides &quot;cin&quot; input stream.</as_line>

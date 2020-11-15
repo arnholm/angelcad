@@ -127,6 +127,60 @@ public:
 
 };
 
+/// Script input arguments
+class as_args {
+public:
+   /*!  \param arg string
+   \n  \return bool */
+  bool  has_argument(string arg) const;
+
+   /*!  \param arg string
+   \n  \return double */
+  double  get_double(string arg) const;
+
+   /*!  \param arg string
+   \n  \param def double
+   \n  \return double */
+  double  get_double(string arg, double def) const;
+
+   /*!  \param arg string
+   \n  \return double */
+  double  get_unsigned_double(string arg) const;
+
+   /*!  \param arg string
+   \n  \param def double
+   \n  \return double */
+  double  get_unsigned_double(string arg, double def) const;
+
+   /*!  \param arg string
+   \n  \return int */
+  int  get_int(string arg) const;
+
+   /*!  \param arg string
+   \n  \param def int
+   \n  \return int */
+  int  get_int(string arg, int def) const;
+
+   /*!  \param arg string
+   \n  \return string */
+  string  get_string(string arg) const;
+
+   /*!  \param arg string
+   \n  \param def string
+   \n  \return string */
+  string  get_string(string arg, string def) const;
+
+   /*!  \param arg string
+   \n  \return uint */
+  uint  get_uint(string arg) const;
+
+   /*!  \param arg string
+   \n  \param def uint
+   \n  \return uint */
+  uint  get_uint(string arg, uint def) const;
+
+};
+
 /// Input stream (usable in console window only). Provides "cin" input stream.
 /*! Example use: int i=0; cin >> i;*/
 class as_istream {
