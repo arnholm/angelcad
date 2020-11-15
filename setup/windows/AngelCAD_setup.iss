@@ -64,7 +64,7 @@ Source: "{#CPDE_USR}\bin\dxfdom.dll"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{#AngelView}"; Filename: "{app}\{#AngelViewExeName}"; 
-Name: "{group}\{#CSGProfile}"; Filename: "{app}\{#CSGProfileExeName}"; 
+; Name: "{group}\{#CSGProfile}"; Filename: "{app}\{#CSGProfileExeName}"; 
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
