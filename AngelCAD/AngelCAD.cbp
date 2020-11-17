@@ -237,6 +237,12 @@
 		<Unit filename="wxProcessExecute.h">
 			<Option virtualFolder="ExternalProcess/" />
 		</Unit>
+		<Unit filename="wxProcessSync.cpp">
+			<Option virtualFolder="ExternalProcess/" />
+		</Unit>
+		<Unit filename="wxProcessSync.h">
+			<Option virtualFolder="ExternalProcess/" />
+		</Unit>
 		<Unit filename="wxsmith/AngelCADframe.wxs" />
 		<Unit filename="wxsmith/ConsolePanel.wxs" />
 		<Unit filename="wxsmith/FindReplacePanel.wxs" />
