@@ -42,6 +42,7 @@
 #include "ConsolePanel.h"
 #include "CsgFilter.h"
 #include "PolyfixPanel.h"
+#include "wxProcessSync.h"
 
 #include <stdexcept>
 #include <memory>
@@ -911,6 +912,8 @@ void AngelCADFrame::DoBuildOpenSCAD()
 {
    if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
 
+      m_console->Clear();
+
       wxFileName source_path(page->FileName());
       wxString ext = source_path.GetExt().MakeLower();
       if(ext != "scad")return;
@@ -946,9 +949,13 @@ void AngelCADFrame::DoBuildOpenSCAD()
 
             // OpenSCAD compilation to *.csg
             wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";
+/*
             jobs.push_back(std::make_pair(cmd1,page));
             m_console->Execute(jobs);
             m_console->DisplayTextFromWorker();
+*/
+            wxProcessSync openscad;
+            openscad.Execute(m_console,cmd1,source_path.GetPath());
 
             // the csg file now exists
             if(pfix.Exists()) {
@@ -1345,7 +1352,7 @@ void AngelCADFrame::OnRepairMeshFile(wxCommandEvent& event)
 
             wxFileName mesh_file(paths[i]);
 
-            // dxfreader job
+            // polyfix job
             wxString cmd = "\"" + pfix.GetFullPath() +"\" " + options + " \"" +mesh_file.GetFullPath() + "\"";
             jobs.push_back(std::make_pair(cmd,page));
          }

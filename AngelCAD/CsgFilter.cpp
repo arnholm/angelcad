@@ -11,7 +11,7 @@
 #include <wx/utils.h>
 #include <wx/filefn.h>   // File Functions
 #include "spaceio/off_io.h"
-
+#include "wxProcessSync.h"
 #include "AngelCADDoc.h"
 
 CsgFilter::CsgFilter(ConsolePanel* console, const wxFileName& csg)
@@ -35,9 +35,6 @@ void CsgFilter::run(AngelCADEditor* page )
 
    // temporary files we create here are recorded and erased at the end
    std::set<wxString> tmp_files;
-
-   // Pause to make sure the csg file is closed
-   wxMilliSleep(200);
 
    // temporary file name of filtered output csg
    wxFileName out_csg(m_csg);
@@ -98,13 +95,9 @@ void CsgFilter::run(AngelCADEditor* page )
                         fname.SetExt("off");
                         cmd += "\" -overwrite -out=\""+fname.GetFullPath() + "\"";
 
-                        // run polyfix to create OFF
-                        std::list<ConsolePanel::JobPair> job;
-                        job.push_back(std::make_pair(cmd,page));
-                        m_console->Execute(job,false);
-
-                        // make some time available for the OFF file to close
-                        wxMilliSleep(200);
+                        // run polyfix synchronously to create OFF
+                        wxProcessSync polyfix;
+                        polyfix.Execute(m_console,cmd,scad_path.GetPath());
 
                         // read the file and put it in the tmp_files set
                         pvec = spaceio::off_io::read(fname.GetFullPath().ToStdString());
@@ -135,10 +128,11 @@ void CsgFilter::run(AngelCADEditor* page )
             }
          }
       }
-      catch(std::exception& ) {
+      catch(std::exception& ex) {
          // something bad happened here,
          // we just clear the files buffer and give up silently
          // so that we use the original .csg input file instead
+         std::string msg = ex.what();
          m_files.clear();
       }
    }
