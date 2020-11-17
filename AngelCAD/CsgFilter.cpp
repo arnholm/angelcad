@@ -142,11 +142,9 @@ void CsgFilter::run(AngelCADEditor* page )
 
    if(m_files.size() > 0 && out_csg.Exists()) {
       // we did find import statements, so we use the filtered .csg
-      wxMilliSleep(200);
       wxRenameFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
    }
    else {
-      wxMilliSleep(200);
       if(out_csg.Exists())wxRemoveFile(out_csg.GetFullPath());
    }
 
