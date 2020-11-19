@@ -4,7 +4,7 @@ $appdir=/usr/share/applications
 $bindir=${instdir}/bin
 $libdir=${instdir}/lib
 %product angelcad
-%copyright 2016-2017 Carsten Arnholm.
+%copyright 2016-2020 Carsten Arnholm.
 %vendor Carsten Arnholm
 %description AngelCAD is a script-based CAD application for creating 
 %description solid objects using Constructive Solid Geometry (CSG)
