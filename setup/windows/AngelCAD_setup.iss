@@ -5,8 +5,8 @@
 #define AngelView "AngelView"
 #define CSGProfile "CSGProfile"
 ; #define MyAppVersion "1.5"
-#define MyAppPublisher "ABmesh"
-#define MyAppURL "http://abmesh.com/"
+#define MyAppPublisher "Carsten Arnholm"
+#define MyAppURL "https://github.com/arnholm/"
 
 #define MyAppExeName "AngelCAD.exe"
 #define AngelViewExeName "AngelView.exe"
