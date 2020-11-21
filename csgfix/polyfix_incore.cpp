@@ -1,12 +1,12 @@
-#include "polyfix.h"
+#include "polyfix_incore.h"
 #include "polyhealer/polyhealer.h"
 
-polyfix::polyfix( std::ostream& out
-                , std::shared_ptr<ph3d_vector> polyset
-                , size_t maxiter
-                , double dist_tol
-                , double area_tol
-                )
+polyfix_incore::polyfix_incore( std::ostream& out
+                              , std::shared_ptr<ph3d_vector> polyset
+                              , size_t maxiter
+                              , double dist_tol
+                              , double area_tol
+                              )
 : m_out(out)
 , m_polyset(polyset)
 , m_maxiter(maxiter)
@@ -14,10 +14,10 @@ polyfix::polyfix( std::ostream& out
 , m_area_tol(area_tol)
 {}
 
-polyfix::~polyfix()
+polyfix_incore::~polyfix_incore()
 {}
 
-bool polyfix::run()
+bool polyfix_incore::run()
 {
    bool verbose = false;
 

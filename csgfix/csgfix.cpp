@@ -1,7 +1,7 @@
 #include "csgfix.h"
 #include "spaceio/off_io.h"
 #include "spaceio/stl_io.h"
-#include "polyfix.h"
+#include "polyfix_incore.h"
 
 #include <string>
 #include <sstream>
@@ -91,8 +91,8 @@ void csgfix::run()
                         // read the file
                         pvec = spaceio::stl_io::read(fname.GetFullPath().ToStdString());
 
-                        // run polyfix, it will modify pvec if possible
-                        polyfix fix(m_out,pvec,m_maxiter,m_dist_tol,m_area_tol);
+                        // run polyfix_incore, it will modify pvec if possible
+                        polyfix_incore fix(m_out,pvec,m_maxiter,m_dist_tol,m_area_tol);
                         if(!fix.run()) {
                            m_out << std::endl << "WARNING: failed to heal " << fname.GetFullPath().ToStdString() << std::endl;
                         }

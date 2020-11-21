@@ -1,20 +1,20 @@
-#ifndef POLYFIX_H
-#define POLYFIX_H
+#ifndef polyfix_incore_H
+#define polyfix_incore_H
 
 #include "spacemath/polyhedron3d.h"
 #include <ostream>
 
-// this class is a limited in-core variant of the polyfix application.
+// this class is a limited in-core variant of the polyfix_incore application.
 // This version designed to be used in prefiltering of .csg files
-class polyfix {
+class polyfix_incore {
 public:
-   polyfix( std::ostream& out
+   polyfix_incore( std::ostream& out
           , std::shared_ptr<ph3d_vector> polyset
           , size_t maxiter
           , double dist_tol
           , double area_tol
           );
-   virtual ~polyfix();
+   virtual ~polyfix_incore();
 
    bool run();
 
@@ -26,4 +26,4 @@ private:
    double                       m_area_tol;
 };
 
-#endif // POLYFIX_H
+#endif // polyfix_incore_H
