@@ -42,9 +42,8 @@ bool polyfix_incore::run()
       m_out << std::endl << "Summary: ";
       for(size_t ipoly=0; ipoly<m_polyset->size(); ipoly++) {
          std::shared_ptr<polyhedron3d> poly = (*m_polyset)[ipoly];
-         m_out << std::endl << blanks << "polyhedron " << ipoly <<": vertices=" << poly->vertex_size() << " faces="<<poly->face_size();
+         m_out << std::endl << blanks << "polyhedron " << ipoly <<": vertices=" << poly->vertex_size() << " faces="<<poly->face_size() << " : " << warning_summary[ipoly];
       }
-
       m_out << std::endl;
    }
    catch(std::exception& ex) {
