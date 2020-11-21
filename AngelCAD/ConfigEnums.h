@@ -27,7 +27,8 @@ public:
       STLAMFVIEW, // STL/AMF viewer executable
       DXFVIEW,    // DXF viewer executable
       DXFREADER,  // DXF reader executable
-      POLYFIX     // polyfix executable
+      POLYFIX,    // polyfix executable
+      CSGFIX      // csgfix executable
    };
 
 };

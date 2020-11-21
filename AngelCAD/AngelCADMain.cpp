@@ -925,21 +925,23 @@ void AngelCADFrame::DoBuildOpenSCAD()
 
       if(can_execute) {
          // check existence of executables
-         wxFileName scad = DOC()->GetConfigFilePath(ConfigEnums::OPENSCAD);
-         wxFileName pfix = DOC()->GetConfigFilePath(ConfigEnums::POLYFIX);
-         wxFileName xcsg = DOC()->GetConfigFilePath(ConfigEnums::XCSG);
-         wxString scad_message,xcsg_message;
+         wxFileName scad   = DOC()->GetConfigFilePath(ConfigEnums::OPENSCAD);
+         wxFileName csgfix = DOC()->GetConfigFilePath(ConfigEnums::CSGFIX);
+         wxFileName xcsg   = DOC()->GetConfigFilePath(ConfigEnums::XCSG);
+         wxString scad_message,csgfix_message, xcsg_message;
 
-         if( ExecutableCheck(scad,scad_message) &&  ExecutableCheck(xcsg,xcsg_message) ) {
+         if( ExecutableCheck(scad,scad_message)
+         &&  ExecutableCheck(csgfix,csgfix_message)
+         &&  ExecutableCheck(xcsg,xcsg_message) ) {
 
             // set the output format for OpenSCAD to be *.csg
             wxFileName csg_path(DOC()->GetXcsgFileName(source_path));
             csg_path.SetExt("csg");
 
-            // we have to make the output directory because openscad won't do it
+            // we have to create the output directory because openscad won't do it
             if(!wxFileName::Exists(csg_path.GetPath()))wxMkdir(csg_path.GetPath());
 
-            // create the list of jubs to run (2)
+            // create the list of jubs to run (3)
             std::list<ConsolePanel::JobPair> jobs;
 
             // remove existing .csg in case it already exists
@@ -949,19 +951,11 @@ void AngelCADFrame::DoBuildOpenSCAD()
 
             // OpenSCAD compilation to *.csg
             wxString cmd1 = "\"" + scad.GetFullPath() + "\"  \"" + source_path.GetFullPath() + "\" --o=\"" + csg_path.GetFullPath() + "\"";
-/*
             jobs.push_back(std::make_pair(cmd1,page));
-            m_console->Execute(jobs);
-            m_console->DisplayTextFromWorker();
-*/
-            wxProcessSync openscad;
-            openscad.Execute(m_console,cmd1,source_path.GetPath());
 
-            // the csg file now exists
-            if(pfix.Exists()) {
-               CsgFilter filter(m_console,csg_path);
-               filter.run(page);
-            }
+            // csgfix compilation to *.csg
+            wxString cmd2 = "\"" + csgfix.GetFullPath() + "\"  \"-scad=" + source_path.GetFullPath() + "\" -csg=\"" + csg_path.GetFullPath() + "\"";
+            jobs.push_back(std::make_pair(cmd2,page));
 
             // XCSG compilation, using *.csg as input
             wxString options = DOC()->GetXcsgFormatOptionString();
@@ -981,13 +975,11 @@ void AngelCADFrame::DoBuildOpenSCAD()
                   options += wxString::Format(" --sec_tol=%f",secant_tolerance);
                }
             }
-
-            std::list<ConsolePanel::JobPair> jobs2;
-            wxString cmd2 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + csg_path.GetFullPath() + "\" "+export_options;
-            jobs2.push_back(std::make_pair(cmd2,page));
+            wxString cmd3 = "\"" + xcsg.GetFullPath() + "\"" + options + " \"" + csg_path.GetFullPath() + "\" "+export_options;
+            jobs.push_back(std::make_pair(cmd3,page));
 
             // submit the jobs in the list
-            m_console->Execute(jobs2,false);
+            m_console->Execute(jobs,false);
          }
          else {
             wxString message = scad_message +'\n' + xcsg_message;
@@ -1003,6 +995,7 @@ void AngelCADFrame::DoBuildOpenSCAD()
       }
    }
 }
+
 
 void AngelCADFrame::OnKillProcess(wxCommandEvent& event)
 {

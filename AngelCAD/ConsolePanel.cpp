@@ -78,7 +78,7 @@ void ConsolePanel::AppendText(const wxString& text, int status)
       switch(status) {
          case 0:  { m_txtctrl->SetDefaultStyle(wxTextAttr(*wxBLACK)); break; }
          case 1:  { m_txtctrl->SetDefaultStyle(wxTextAttr(*wxBLUE)); break; }
-         case 2:  { m_txtctrl->SetDefaultStyle(wxTextAttr(*wxRED)); break; }
+         case 2:  { m_txtctrl->SetDefaultStyle(wxTextAttr(*wxRED)); m_error_count++; break; }
          default: { m_txtctrl->SetDefaultStyle(wxTextAttr(*wxBLACK)); }
       };
       m_prev_status = status;
@@ -93,6 +93,7 @@ void ConsolePanel::Execute(const std::list<JobPair>& jobs, bool clear_console)
    // establish the list of jobs, and start executing the first job
    m_jobs = jobs;
    if(m_jobs.size() > 0) {
+      m_error_count = 0;
 
       m_is_busy = true;
       // pull the job from the list, start it, and remove from list
@@ -127,7 +128,6 @@ void ConsolePanel::Execute(const wxString& cmd, AngelCADEditor* page)
       AppendText(wxString::Format("%ld > ",pid)+ cmd);
 
       m_page        = page;
-      m_error_count = 0;
       m_prev_status = -1;
 
       // process started
@@ -235,6 +235,8 @@ void ConsolePanel::StartNextJob()
          // no more jobs
          m_is_busy = false;
          m_process.ClearPid();
+
+         AppendText("Build completed! Press F7 to view.",0);
       }
    }
    else {
@@ -254,9 +256,12 @@ void ConsolePanel::OnThreadUpdate(wxThreadEvent& evt)
 {
    int retval = evt.GetInt();
    switch(retval) {
-      case -1:  { TerminateJobs(); break; }
+      case -1:  { TerminateJobs();
+                  m_error_count++;
+                  AppendText("ERRORS found: Build stopped. Please correct and try again.",2);
+                  break; }
       case  0:  { DisplayTextFromWorker(); break; }
       case  1:  { StartNextJob(); break; }
-      default:  { TerminateJobs(); }
+      default:  { TerminateJobs();  }
    };
 }

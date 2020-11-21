@@ -47,7 +47,7 @@ void csgfix::run()
       try {
          // open the output (filtered) csg
          std::ofstream out(out_csg.GetFullPath().ToStdString());
-
+         m_out << " " << std::endl;
          // read the input csg line by line
          std::string line;
          while(std::getline(in,line)) {
@@ -85,6 +85,8 @@ void csgfix::run()
 
                      wxString ext = fname.GetExt().MakeLower();
                      if(ext == "stl") {
+
+                        m_out << "csgfix processing " << fname.GetFullPath().ToStdString() << std::endl;
 
                         // read the file
                         pvec = spaceio::stl_io::read(fname.GetFullPath().ToStdString());

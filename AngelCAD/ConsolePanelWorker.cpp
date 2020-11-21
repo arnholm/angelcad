@@ -45,6 +45,9 @@ void ConsolePanelWorker::AppendText(const wxString& txt)
    else if(txt.Find("asWARN") != wxNOT_FOUND) {
       m_from_worker->enqueue(ConsoleText(1,txt));
    }
+   else if(txt.Find("exception:") != wxNOT_FOUND) {
+      m_from_worker->enqueue(ConsoleText(2,txt));
+   }
    else {
       m_from_worker->enqueue(ConsoleText(0,txt));
    }
@@ -103,12 +106,13 @@ void ConsolePanelWorker::run()
             // so in this special case we cancel the error and continue
             if(line.find("ECHO:")       != static_cast<size_t>(wxNOT_FOUND))      retval =  1;  // no error
             else if(line.find("DEPRECATED:") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
+            else if(line.find("UNEXPECTED face loop") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
             else                                                                  retval = -1;  // error
          }
       }
 
       // add a blank line for readability
-      AppendText("  ");
+      // AppendText("  ");
 
       // signal to the gui that the worker thread is done.
       // Queue the event so the GUI can catch it

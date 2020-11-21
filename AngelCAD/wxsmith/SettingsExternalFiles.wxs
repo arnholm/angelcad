@@ -97,7 +97,6 @@
 			<object class="spacer">
 				<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
-				<option>1</option>
 				<size>100,5</size>
 			</object>
 			<object class="sizeritem">
@@ -135,7 +134,6 @@
 			<object class="spacer">
 				<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
-				<option>1</option>
 				<size>100,5</size>
 			</object>
 			<object class="sizeritem">
@@ -253,6 +251,31 @@
 								<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL7" variable="m_file_polyfix" member="yes">
 									<message>Select OpenSCAD executable</message>
 									<wildcard>polyfix*</wildcard>
+									<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
+								</object>
+								<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
+								<border>4</border>
+								<option>3</option>
+							</object>
+						</object>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer11" member="no">
+							<object class="sizeritem">
+								<object class="wxStaticText" name="wxID_ANY" variable="StaticText10" member="no">
+									<label>csgfix</label>
+								</object>
+								<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>4</border>
+								<option>1</option>
+							</object>
+							<object class="sizeritem">
+								<object class="wxFilePickerCtrl" name="ID_FILEPICKERCTRL8" variable="m_file_csgfix" member="yes">
+									<message>Select OpenSCAD executable</message>
+									<wildcard>csgfix*</wildcard>
 									<handler function="OnFileChanged" entry="EVT_FILEPICKER_CHANGED" />
 								</object>
 								<flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>

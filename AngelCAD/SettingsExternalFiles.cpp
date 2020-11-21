@@ -32,6 +32,7 @@ const long SettingsExternalFiles::ID_FILEPICKERCTRL3 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL6 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL4 = wxNewId();
 const long SettingsExternalFiles::ID_FILEPICKERCTRL7 = wxNewId();
+const long SettingsExternalFiles::ID_FILEPICKERCTRL8 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(SettingsExternalFiles,wxPanel)
@@ -43,6 +44,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 {
 	//(*Initialize(SettingsExternalFiles)
 	wxBoxSizer* BoxSizer10;
+	wxBoxSizer* BoxSizer11;
 	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer3;
@@ -54,6 +56,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	wxBoxSizer* BoxSizer9;
 	wxStaticBoxSizer* StaticBoxSizer1;
 	wxStaticBoxSizer* StaticBoxSizer3;
+	wxStaticText* StaticText10;
 	wxStaticText* StaticText1;
 	wxStaticText* StaticText2;
 	wxStaticText* StaticText3;
@@ -90,7 +93,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	BoxSizer4->Add(m_text_docurl, 3, wxTOP|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	StaticBoxSizer1->Add(BoxSizer4, 0, wxEXPAND, 5);
 	BoxSizer1->Add(StaticBoxSizer1, 0, wxALL|wxEXPAND, 5);
-	BoxSizer1->Add(100,5,1, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer1->Add(100,5,0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticBoxSizer2 = new wxStaticBoxSizer(wxVERTICAL, this, _("Constructive Solid Geometry engine"));
 	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
 	StaticText2 = new wxStaticText(this, wxID_ANY, _("xcsg compiler (for *.xcsg)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -99,7 +102,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	BoxSizer3->Add(m_file_xcsg, 3, wxTOP|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
 	StaticBoxSizer2->Add(BoxSizer3, 0, wxEXPAND, 5);
 	BoxSizer1->Add(StaticBoxSizer2, 0, wxALL|wxEXPAND, 5);
-	BoxSizer1->Add(100,5,1, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer1->Add(100,5,0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticBoxSizer3 = new wxStaticBoxSizer(wxVERTICAL, this, _("Miscellaneous"));
 	BoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	StaticText6 = new wxStaticText(this, wxID_ANY, _("STL/AMF/OFF/OBJ viewer"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -131,6 +134,12 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	m_file_polyfix = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL7, wxEmptyString, _("Select OpenSCAD executable"), _T("polyfix*"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_FILEPICKERCTRL7"));
 	BoxSizer10->Add(m_file_polyfix, 3, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 4);
 	StaticBoxSizer3->Add(BoxSizer10, 1, wxEXPAND, 5);
+	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
+	StaticText10 = new wxStaticText(this, wxID_ANY, _("csgfix"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer11->Add(StaticText10, 1, wxTOP|wxLEFT|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
+	m_file_csgfix = new wxFilePickerCtrl(this, ID_FILEPICKERCTRL8, wxEmptyString, _("Select OpenSCAD executable"), _T("csgfix*"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL, wxDefaultValidator, _T("ID_FILEPICKERCTRL8"));
+	BoxSizer11->Add(m_file_csgfix, 3, wxTOP|wxLEFT|wxRIGHT|wxEXPAND, 4);
+	StaticBoxSizer3->Add(BoxSizer11, 1, wxEXPAND, 5);
 	BoxSizer1->Add(StaticBoxSizer3, 0, wxALL|wxEXPAND, 5);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
@@ -146,6 +155,7 @@ SettingsExternalFiles::SettingsExternalFiles(wxWindow* parent,wxWindowID id, con
 	Connect(ID_FILEPICKERCTRL6,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	Connect(ID_FILEPICKERCTRL4,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	Connect(ID_FILEPICKERCTRL7,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
+	Connect(ID_FILEPICKERCTRL8,wxEVT_COMMAND_FILEPICKER_CHANGED,(wxObjectEventFunction)&SettingsExternalFiles::OnFileChanged);
 	//*)
 }
 
@@ -166,6 +176,7 @@ wxFileName SettingsExternalFiles::GetFilePath(ConfigEnums::ExtFile file)
       case ConfigEnums::DXFVIEW:     { return m_viewer_dxf->GetFileName(); break; }
       case ConfigEnums::DXFREADER:   { return m_reader_dxf->GetFileName(); break; }
       case ConfigEnums::POLYFIX:     { return m_file_polyfix->GetFileName(); break; }
+      case ConfigEnums::CSGFIX:      { return m_file_csgfix->GetFileName(); break; }
       default: { throw std::logic_error("SettingsExternalFiles: unhandled parameter"); }
    };
 
@@ -189,6 +200,7 @@ void SettingsExternalFiles::InitPage()
    m_viewer_dxf->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::DXFVIEW).GetFullPath());
    m_reader_dxf->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::DXFREADER).GetFullPath());
    m_file_polyfix->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::POLYFIX).GetFullPath());
+   m_file_csgfix->SetFileName(DOC()->GetConfigFilePath(ConfigEnums::CSGFIX).GetFullPath());
 
    if(m_text_outsub->GetValue() == "."){
       m_nosubdir->SetValue(true);
@@ -211,6 +223,7 @@ void SettingsExternalFiles::ApplyPage()
    DOC()->SetConfigFilePath(ConfigEnums::DXFVIEW,GetFilePath(ConfigEnums::DXFVIEW));
    DOC()->SetConfigFilePath(ConfigEnums::DXFREADER,GetFilePath(ConfigEnums::DXFREADER));
    DOC()->SetConfigFilePath(ConfigEnums::POLYFIX,GetFilePath(ConfigEnums::POLYFIX));
+   DOC()->SetConfigFilePath(ConfigEnums::CSGFIX,GetFilePath(ConfigEnums::CSGFIX));
 
    DOC()->SetDocUrl(m_text_docurl->GetValue());
 }

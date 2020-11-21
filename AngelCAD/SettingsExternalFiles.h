@@ -46,6 +46,7 @@ public:
    //(*Declarations(SettingsExternalFiles)
    wxCheckBox* m_nosubdir;
    wxFilePickerCtrl* m_file_as_csg;
+   wxFilePickerCtrl* m_file_csgfix;
    wxFilePickerCtrl* m_file_openscad;
    wxFilePickerCtrl* m_file_polyfix;
    wxFilePickerCtrl* m_file_xcsg;
@@ -70,6 +71,7 @@ protected:
    static const long ID_FILEPICKERCTRL6;
    static const long ID_FILEPICKERCTRL4;
    static const long ID_FILEPICKERCTRL7;
+   static const long ID_FILEPICKERCTRL8;
    //*)
 
 private:

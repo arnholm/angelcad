@@ -43,7 +43,7 @@ SettingsDialog::SettingsDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	SetClientSize(wxDefaultSize);
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxSize(800,500), wxAUI_NB_DEFAULT_STYLE);
+	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxSize(800,550), wxAUI_NB_DEFAULT_STYLE);
 	Panel1 = new SettingsFileFormats(AuiNotebook1, ID_PANEL1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL1"));
 	Panel2 = new SettingsExternalFiles(AuiNotebook1, ID_PANEL2, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL2"));
 	AuiNotebook1->AddPage(Panel1, _("Output File Formats"));

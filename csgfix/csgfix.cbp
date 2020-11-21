@@ -30,7 +30,7 @@
 					<Add option="/NODEFAULTLIB:libcmt.lib" />
 					<Add option="/NODEFAULTLIB:msvcrt.lib" />
 					<Add option="/INCREMENTAL:NO" />
-					<Add library="polyhealer" />
+					<Add library="polyhealerd" />
 					<Add library="spacemathd" />
 					<Add library="spaceiod" />
 					<Add library="msvcrtd.lib" />
