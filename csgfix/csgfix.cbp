@@ -131,17 +131,15 @@
 		<Unit filename="csgfix.cpp" />
 		<Unit filename="csgfix.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="polyfix.cpp" />
-		<Unit filename="polyfix.h" />
+		<Unit filename="polyfix_incore.cpp" />
+		<Unit filename="polyfix_incore.h" />
 		<Extensions>
-			<lib_finder disable_auto="1" />
-			<envvars />
-			<code_completion />
 			<debugger>
 				<remote_debugging>
 					<options conn_type="0" serial_baud="" />
 				</remote_debugging>
 			</debugger>
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
