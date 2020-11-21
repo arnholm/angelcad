@@ -8,16 +8,18 @@
 		<Project filename="dxfread/dxfread.cbp">
 			<Depends filename="as_csg/as_csg.cbp" />
 		</Project>
+		<Project filename="csgfix/csgfix.cbp" />
 		<Project filename="AngelCAD/AngelCAD.cbp">
 			<Depends filename="dxfread/dxfread.cbp" />
 			<Depends filename="as_csg/as_csg.cbp" />
 		</Project>
 		<Project filename="AngelView/AngelView.cbp" />
 		<Project filename="BUILD_ALL/BUILD_ALL.cbp">
-			<Depends filename="AngelCAD/AngelCAD.cbp" />
-			<Depends filename="AngelView/AngelView.cbp" />
 			<Depends filename="polyfix/polyfix.cbp" />
 			<Depends filename="dxfread/dxfread.cbp" />
+			<Depends filename="csgfix/csgfix.cbp" />
+			<Depends filename="AngelCAD/AngelCAD.cbp" />
+			<Depends filename="AngelView/AngelView.cbp" />
 		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
