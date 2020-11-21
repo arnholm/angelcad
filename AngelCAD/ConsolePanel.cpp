@@ -109,6 +109,7 @@ void ConsolePanel::KillJobs()
    if(pid1 > 0) {
       AppendText(wxString::Format("Stopping process %ld",pid1));
       m_jobs.clear();
+      m_error_count = 1; // set error count so we dont get a "build complete" message
       long pid2 = m_process.KillJob();
       if(pid1 == pid2) AppendText(wxString::Format("Process %ld stopped OK",pid2));
       else             AppendText(wxString::Format("Process %ld could not be stopped: %ld",pid1,pid2));
