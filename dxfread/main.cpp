@@ -41,17 +41,18 @@ static const wxCmdLineEntryDesc cmdLineDesc[] =
 {
   //   kind           shortName      longName         description                                               parameterType          flag(s)
   { wxCMD_LINE_PARAM,   wxT_2("dxfpath"), wxT_2("dxfpath"),  wxT_2("[path to DXF file]"),                        wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY  },
-  { wxCMD_LINE_SWITCH,  wxT_2("xml"),     wxT_2("xml"),      wxT_2("Export as XML, interpreted entities only"),  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("xraw"),    wxT_2("xraw"),     wxT_2("Export as XML, interpreted + raw DXF data"), wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("as"),      wxT_2("as"),       wxT_2("Export as AngelCAD *.as"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("asfunc"),  wxT_2("asfunc"),   wxT_2("Export as AngelCAD *.as function only"),     wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("scad"),    wxT_2("scad"),     wxT_2("Export as OpenSCAD *.scad"),                 wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("p2d"),     wxT_2("p2d"),      wxT_2("Export as profile *.p2d"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_OPTION,  wxT_2("scale"),   wxT_2("scale"),    wxT_2("Coordinate scale factor [1.0]"),             wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_OPTION,  wxT_2("sectol"),  wxT_2("sectol"),   wxT_2("Secant tolerance [0.1*scale]"),              wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_OPTION,  wxT_2("layers"),  wxT_2("layers"),   wxT_2("Select from given DXF layer(s) only, separated by commas"),   wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
-  { wxCMD_LINE_SWITCH,  wxT_2("v"),       wxT_2("version"),  wxT_2("Show version number only"),                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
-  { wxCMD_LINE_NONE,    wxT_2(""),        wxT_2(""),         wxT_2(""),                                                           wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  }
+  { wxCMD_LINE_SWITCH,  wxT_2("xml"),        wxT_2("xml"),        wxT_2("Export as XML, interpreted entities only"),  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("xraw"),       wxT_2("xraw"),       wxT_2("Export as XML, interpreted + raw DXF data"), wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("as"),         wxT_2("as"),         wxT_2("Export as AngelCAD *.as"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("asfunc"),     wxT_2("asfunc"),     wxT_2("Export as AngelCAD *.as function only"),     wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("scad"),       wxT_2("scad"),       wxT_2("Export as OpenSCAD *.scad"),                 wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("p2d"),        wxT_2("p2d"),        wxT_2("Export as profile *.p2d"),                   wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("auto_close"), wxT_2("auto_close"), wxT_2("Auto-close open loops"),                     wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION,  wxT_2("scale"),      wxT_2("scale"),      wxT_2("Coordinate scale factor [1.0]"),             wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION,  wxT_2("sectol"),     wxT_2("sectol"),     wxT_2("Secant tolerance [0.1*scale]"),              wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_OPTION,  wxT_2("layers"),     wxT_2("layers"),     wxT_2("Select from given DXF layer(s) only, separated by commas"),   wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
+  { wxCMD_LINE_SWITCH,  wxT_2("v"),          wxT_2("version"),    wxT_2("Show version number only"),                  wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL },
+  { wxCMD_LINE_NONE,    wxT_2(""),           wxT_2(""),           wxT_2(""),                                                           wxCMD_LINE_VAL_NONE,   wxCMD_LINE_PARAM_OPTIONAL  }
 };
 
 // sample command line params: --project=cpde_export  --target=W32_Debug --tdir=w32\bin\Debug\
@@ -148,12 +149,13 @@ int main(int argc, char **argv)
       }
    }
 
-   bool include_raw = cmdMap.find("xraw")    != cmdMap.end();
-   bool export_xml  = (cmdMap.find("xml")    != cmdMap.end()) || include_raw;
-   bool export_as   = (cmdMap.find("as")     != cmdMap.end()) || (cmdMap.find("asfunc")   != cmdMap.end());
-   bool func_only   = (cmdMap.find("asfunc") != cmdMap.end());
-   bool export_scad = (cmdMap.find("scad")   != cmdMap.end());
-   bool export_p2d  = (cmdMap.find("p2d")    != cmdMap.end());
+   bool include_raw = cmdMap.find("xraw")        != cmdMap.end();
+   bool export_xml  = (cmdMap.find("xml")        != cmdMap.end()) || include_raw;
+   bool export_as   = (cmdMap.find("as")         != cmdMap.end()) || (cmdMap.find("asfunc")   != cmdMap.end());
+   bool func_only   = (cmdMap.find("asfunc")     != cmdMap.end());
+   bool export_scad = (cmdMap.find("scad")       != cmdMap.end());
+   bool export_p2d  = (cmdMap.find("p2d")        != cmdMap.end());
+   bool auto_close  = (cmdMap.find("auto_close") != cmdMap.end());
 
 
    for(size_t i=0; i<nfiles; i++) {
@@ -174,6 +176,7 @@ int main(int argc, char **argv)
          double epspnt = 1.0E-3*scale_factor;
          bool keep_case = false;
          dxfxmloptions opt(include_raw,scale_factor,sectol,epspnt,layers,keep_case);
+         opt.set_auto_close(auto_close);
 
          ifstream in(path);
          shared_ptr<dxfroot> root = make_shared<dxfroot>(in,opt);
