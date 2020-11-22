@@ -1,5 +1,5 @@
-#ifndef polyfix_incore_H
-#define polyfix_incore_H
+#ifndef POLYFIX_INCORE_H
+#define POLYFIX_INCORE_H
 
 #include "spacemath/polyhedron3d.h"
 #include <ostream>
@@ -26,4 +26,4 @@ private:
    double                       m_area_tol;
 };
 
-#endif // polyfix_incore_H
+#endif // POLYFIX_INCORE_H

@@ -2,11 +2,33 @@
 #include "spaceio/off_io.h"
 #include "spaceio/stl_io.h"
 #include "polyfix_incore.h"
+#include "dxfread_incore.h"
 
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+
+static void tokenize(const std::string& input,
+                     const std::string& delimiters,
+                     std::vector<std::string>& tokens)
+{
+   using namespace std;
+   string::size_type last_pos = 0;
+   string::size_type pos = 0;
+   while(true) {
+      pos = input.find_first_of(delimiters, last_pos);
+      if( pos == string::npos ) {
+         if(input.length()-last_pos > 0)tokens.push_back(input.substr(last_pos));
+         break;
+      }
+      else {
+         if(pos-last_pos > 0)tokens.push_back(input.substr(last_pos, pos - last_pos));
+         last_pos = pos + 1;
+      }
+   }
+}
+
 
 csgfix::csgfix(std::ostream& out
               ,const wxFileName& scad
@@ -44,94 +66,146 @@ void csgfix::run()
    std::ifstream in(m_csg.GetFullPath().ToStdString());
    if(in.is_open()) {
 
-      try {
-         // open the output (filtered) csg
-         std::ofstream out(out_csg.GetFullPath().ToStdString());
-         m_out << " " << std::endl;
-         // read the input csg line by line
-         std::string line;
-         while(std::getline(in,line)) {
+      // open the output (filtered) csg
+      std::ofstream out(out_csg.GetFullPath().ToStdString());
+      m_out << " " << std::endl;
+      // read the input csg line by line
+      std::string line;
+      while(std::getline(in,line)) {
 
-            // increment the input line number (useful in error reporting)
-            m_line_number++;
+         // increment the input line number (useful in error reporting)
+         m_line_number++;
 
-            size_t imp = line.find("import(file");
-            if(imp != std::string::npos) {
+         size_t imp = line.find("import(file");
+         if(imp != std::string::npos) {
 
-               // this is an import statement
+            // this is an import statement
+            std::string indent = line.substr(0,imp);
 
-               // extract the filename of the file to be imported
-               size_t left  = line.find("\"",imp) + 1;
-               size_t right = line.find("\"",left);
-               size_t len   = right-left;
-               std::string filename = line.substr(left,len);
+            // extract the filename of the file to be imported
+            size_t left  = line.find("\"",imp) + 1;
+            size_t right = line.find("\"",left);
+            size_t len   = right-left;
+            std::string filename = line.substr(left,len);
 
-               // will convert the file to polyhedron
-               std::shared_ptr<ph3d_vector> pvec;
+            // check if this file has already been processed
+            auto it=m_files.find(filename);
+            if(it == m_files.end()) {
 
-               // check if this file has already been processed
-               auto it=m_files.find(filename);
-               if(it == m_files.end()) {
+               // the imported file is relative to the scad path
+               // change the current working directory so that relative paths may work
+               wxSetWorkingDirectory(m_scad.GetPath());
 
-                  // the imported file is relative to the scad path
-                  // change the current working directory so that relative paths may work
-                  wxSetWorkingDirectory(m_scad.GetPath());
+               // check if the ferenced file actually exists
+               wxFileName fname(filename);
+               fname.Normalize();
 
-                  // check if the ferenced file actually exists
-                  wxFileName fname(filename);
-                  fname.Normalize();
+               if(fname.Exists()) {
 
-                  if(fname.Exists()) {
+                  wxString ext = fname.GetExt().MakeLower();
+                  if(ext == "stl") {
+                     // STL file
 
-                     wxString ext = fname.GetExt().MakeLower();
-                     if(ext == "stl") {
+                     m_out << "csgfix processing " << fname.GetFullPath().ToStdString() << std::endl;
+                     auto pvec = spaceio::stl_io::read(fname.GetFullPath().ToStdString());
 
-                        m_out << "csgfix processing " << fname.GetFullPath().ToStdString() << std::endl;
+                     // run polyfix_incore, it will modify pvec if possible
+                     polyfix_incore fix(m_out,pvec,m_maxiter,m_dist_tol,m_area_tol);
+                     if(!fix.run()) {
+                        m_out << std::endl << "WARNING: failed to heal " << fname.GetFullPath().ToStdString() << std::endl;
+                     }
+                     if(pvec.get()) it = m_files.insert(std::make_pair(filename,indent + poly_string(pvec))).first;
 
-                        // read the file
-                        pvec = spaceio::stl_io::read(fname.GetFullPath().ToStdString());
+                  }
+                  else if(ext == "off" ) {
+                     // OFF file
+                     m_out << "csgfix processing " << fname.GetFullPath().ToStdString() << std::endl;
+                     auto pvec = spaceio::off_io::read(fname.GetFullPath().ToStdString());
+                     if(pvec.get()) it = m_files.insert(std::make_pair(filename,indent + poly_string(pvec))).first;
+                  }
+                  else if(ext == "dxf" ) {
 
-                        // run polyfix_incore, it will modify pvec if possible
-                        polyfix_incore fix(m_out,pvec,m_maxiter,m_dist_tol,m_area_tol);
-                        if(!fix.run()) {
-                           m_out << std::endl << "WARNING: failed to heal " << fname.GetFullPath().ToStdString() << std::endl;
+                     m_out << "csgfix processing " << fname.GetFullPath().ToStdString();
+
+                     // extract layer info
+                     std::set<string> layers;
+                     size_t ilay  = line.find("layer");
+                     std::string layer;
+                     if(ilay != string::npos) {
+                        size_t left  = line.find("\"",ilay) + 1;
+                        size_t right = line.find("\"",left);
+                        size_t len   = right-left;
+                        layer        = line.substr(left,len);
+                        if(len>0)layers.insert(layer);
+
+                        m_out << ":" << layer;
+                     }
+                     m_out << std::endl;
+
+                     double dx = 0.0;
+                     double dy = 0.0;
+                     size_t iorg = line.find("origin");
+                     if(iorg != string::npos) {
+                        size_t left  = line.find("[",iorg) + 1;
+                        size_t right = line.find("]",left);
+                        size_t len   = right-left;
+                        if(len > 0) {
+                           std::vector<std::string> tokens;
+                           tokenize(line.substr(left,len)," ,[]",tokens);
+                           if(tokens.size()==2) {
+                              std::istringstream inx(tokens[0]),iny(tokens[1]);
+                              inx >> dx;
+                              iny >> dy;
+                           }
                         }
                      }
-                     else if(ext == "off" ) {
-                        pvec = spaceio::off_io::read(fname.GetFullPath().ToStdString());
-                     }
 
-                     if(pvec.get()) {
-                        it = m_files.insert(std::make_pair(filename,poly_string(pvec))).first;
+
+                     // DXF files are keyed with layer
+                     it=m_files.find(filename+layer);
+                     if(it == m_files.end()) {
+
+                        bool include_raw    = false;
+                        double scale_factor = 1.0;
+                        double sectol       = m_dist_tol;
+                        double epspnt       = m_dist_tol;
+                        bool   keep_case    = false;
+                        dxfxmloptions opt(include_raw,scale_factor,sectol,epspnt,layers,keep_case);
+                        opt.set_auto_close(true);
+                        std::ifstream in(fname.GetFullPath().ToStdString());
+                        if(in.is_open()) {
+                           if(auto dxf_root = make_shared<dxfroot>(in,opt)) {
+                              dxfread_incore dxf(m_out,dxf_root,-dx,-dy);
+                              size_t ilevel = 2 + indent.length();
+                              if(dxf.run(ilevel)) {
+                                 it = m_files.insert(std::make_pair(filename+layer,dxf.code())).first;
+                              }
+                           }
+                        }
                      }
                   }
-
-
-                  // reset working dir after processing file
-                  wxSetWorkingDirectory(m_working_dir);
-               }
-
-               if(it != m_files.end()) {
-                  // output the substitute statement
-                  out << line.substr(0,imp) << ' ' << it->second << std::endl;
                }
                else {
-                  // we could not resolve the file, so we just copy the input line
-                  out << line << std::endl;
+                  throw std::runtime_error("File does not exist: " + fname.GetFullPath().ToStdString());
                }
+
+               // reset working dir after processing file
+               wxSetWorkingDirectory(m_working_dir);
+            }
+
+            if(it != m_files.end()) {
+               // output the substitute statement
+               out << it->second << std::endl;
             }
             else {
-               // not an import statement
+               // we could not resolve the file, so we just copy the input line
                out << line << std::endl;
             }
          }
-      }
-      catch(std::exception& ex) {
-         // something bad happened here,
-         // we just clear the files buffer and give up silently
-         // so that we use the original .csg input file instead
-         std::string msg = ex.what();
-         m_files.clear();
+         else {
+            // not an import statement
+            out << line << std::endl;
+         }
       }
    }
 

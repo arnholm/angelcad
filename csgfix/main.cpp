@@ -114,48 +114,53 @@ int main(int argc, char **argv)
    wxDateTime time_begin = wxDateTime::Now();
    size_t error_count = 0;
 
-   wxFileName scad(cmdMap["scad"]);
-   if(!scad.Exists()) {
-      cout << scad.GetFullPath() << " does not exist" << endl;
-      error_count++;
+   try {
+
+      wxFileName scad(cmdMap["scad"]);
+      if(!scad.Exists()) {
+         cout << scad.GetFullPath() << " does not exist" << endl;
+         error_count++;
+      }
+
+      wxFileName csg(cmdMap["csg"]);
+      if(!csg.Exists()) {
+         cout << csg.GetFullPath() << " does not exist" << endl;
+         error_count++;
+      }
+
+      auto it_dtol = cmdMap.find("dtol");
+      if(it_dtol != cmdMap.end()) {
+         wxString stol = it_dtol->second;
+         stol.ToCDouble(&dist_tol);
+      }
+
+      auto it_atol = cmdMap.find("atol");
+      if(it_atol != cmdMap.end()) {
+         wxString stol = it_atol->second;
+         stol.ToCDouble(&area_tol);
+      }
+
+      auto it_maxiter = cmdMap.find("maxiter");
+      if(it_maxiter != cmdMap.end()) {
+         wxString stol = it_maxiter->second;
+         long mxiter=maxiter;
+         stol.ToLong(&mxiter);
+         maxiter =  mxiter;
+      }
+
+      if(error_count> 0) return 1;
+
+      csgfix fix(cout,scad,csg,maxiter,dist_tol,area_tol);
+      fix.run();
+
+      wxDateTime time_end  = wxDateTime::Now();
+      wxTimeSpan time_used = time_end.Subtract(time_begin);
+
+      cout << endl << "... csgfix finished, time used: " << time_used.Format(wxT("%Dd %Hh %Mm %Ss")).ToStdString() << endl;
    }
-
-   wxFileName csg(cmdMap["csg"]);
-   if(!csg.Exists()) {
-      cout << csg.GetFullPath() << " does not exist" << endl;
-      error_count++;
+   catch(std::exception& ex) {
+      cerr << "csgfix exception: " << ex.what() << endl;
    }
-
-   auto it_dtol = cmdMap.find("dtol");
-   if(it_dtol != cmdMap.end()) {
-      wxString stol = it_dtol->second;
-      stol.ToCDouble(&dist_tol);
-   }
-
-   auto it_atol = cmdMap.find("atol");
-   if(it_atol != cmdMap.end()) {
-      wxString stol = it_atol->second;
-      stol.ToCDouble(&area_tol);
-   }
-
-   auto it_maxiter = cmdMap.find("maxiter");
-   if(it_maxiter != cmdMap.end()) {
-      wxString stol = it_maxiter->second;
-      long mxiter=maxiter;
-      stol.ToLong(&mxiter);
-      maxiter =  mxiter;
-   }
-
-   if(error_count> 0) return 1;
-
-   csgfix fix(cout,scad,csg,maxiter,dist_tol,area_tol);
-   fix.run();
-
-   wxDateTime time_end  = wxDateTime::Now();
-   wxTimeSpan time_used = time_end.Subtract(time_begin);
-
-   cout << endl << "... csgfix finished, time used: " << time_used.Format(wxT("%Dd %Hh %Mm %Ss")).ToStdString() << endl;
-
    return 0;
 }
 
