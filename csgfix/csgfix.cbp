@@ -90,6 +90,7 @@
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static --debug`" />
 					<Add library="polyhealerd" />
+					<Add library="dxfdomd" />
 					<Add library="spacemathd" />
 					<Add library="spaceiod" />
 				</Linker>
@@ -114,6 +115,7 @@
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui --static`" />
 					<Add library="polyhealer" />
+					<Add library="dxfdom" />
 					<Add library="spacemath" />
 					<Add library="spaceio" />
 				</Linker>
@@ -140,12 +142,10 @@
 		<Unit filename="polyfix_incore.cpp" />
 		<Unit filename="polyfix_incore.h" />
 		<Extensions>
-			<debugger>
-				<remote_debugging>
-					<options conn_type="0" serial_baud="" />
-				</remote_debugging>
-			</debugger>
+			<debugger />
 			<lib_finder disable_auto="1" />
+			<envvars />
+			<code_completion />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
