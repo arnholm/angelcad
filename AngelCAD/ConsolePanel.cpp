@@ -237,7 +237,7 @@ void ConsolePanel::StartNextJob()
          m_is_busy = false;
          m_process.ClearPid();
 
-         AppendText("Build completed! Press F7 to view.",0);
+         AppendText("Task completed!",0);
       }
    }
    else {

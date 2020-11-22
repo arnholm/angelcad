@@ -1235,40 +1235,37 @@ void AngelCADFrame::OnAuiToolBarItemCutTextClick(wxCommandEvent& event)
 
 bool AngelCADFrame::DoImportDXF(const wxString& dxf_file)
 {
-   if(AngelCADEditor* page = dynamic_cast<AngelCADEditor*>(AuiNotebook1->GetCurrentPage())) {
+   // check existence of executables
+   wxFileName dxfreader = DOC()->GetConfigFilePath(ConfigEnums::DXFREADER);
+   wxString dxfreader_message;
 
-      // check existence of executables
-      wxFileName dxfreader = DOC()->GetConfigFilePath(ConfigEnums::DXFREADER);
-      wxString dxfreader_message;
+   if( ExecutableCheck(dxfreader,dxfreader_message) ) {
 
-      if( ExecutableCheck(dxfreader,dxfreader_message) ) {
+      wxFileName dxf_path(dxf_file);
 
-         wxFileName as_path(page->FileName());
-         wxFileName dxf_path(dxf_file);
-         if(as_path.GetPath() != dxf_path.GetPath()) {
+      // dxfreader job
+      wxString cmd1 = "\"" + dxfreader.GetFullPath() + "\" -as \"" + dxf_path.GetFullPath() + "\"";
 
-            // copy the DXF file into the source directory if it does not exist
-            wxFileName org_dxf_path(dxf_path);
-            dxf_path = wxFileName(as_path.GetPath(),dxf_path.GetName(),dxf_path.GetExt());
-            if(!dxf_path.Exists()) wxCopyFile(org_dxf_path.GetFullPath(),dxf_path.GetFullPath());
+      // create the list of jubs to run (2)
+      std::list<ConsolePanel::JobPair> jobs;
+      jobs.push_back(std::make_pair(cmd1,nullptr));
+
+      // submit the jobs in the list
+      m_console->Execute(jobs);
+
+      wxFileName as_path(dxf_path);
+      as_path.SetExt("as");
+      as_path.Normalize();
+
+      // Give it a couple of seconds to complete
+      for(size_t i=0;i<10; i++) {
+         if(as_path.Exists()) {
+            DoSourceFileOpen(as_path.GetFullPath());
+            break;
          }
-
-         // create the list of jubs to run (2)
-         std::list<ConsolePanel::JobPair> jobs;
-
-         // dxfreader job
-         wxString cmd1 = "\"" + dxfreader.GetFullPath() + "\" -asfunc \"" + dxf_path.GetFullPath() + "\"";
-         jobs.push_back(std::make_pair(cmd1,page));
-
-         // submit the jobs in the list
-         m_console->Execute(jobs);
+         wxMilliSleep(500);
       }
 
-   }
-   else {
-      wxString message = "An AngelCAD source file must be selected to define the target folder";
-      wxMessageBox(message, wxT("No current source file"), wxOK, this);
-      return false;
    }
    return true;
 }
