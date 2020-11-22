@@ -259,7 +259,7 @@ void ConsolePanel::OnThreadUpdate(wxThreadEvent& evt)
    switch(retval) {
       case -1:  { TerminateJobs();
                   m_error_count++;
-                  AppendText("ERRORS found: Build stopped. Please correct and try again.",2);
+                  AppendText("Possible errors: Please evaluate message(s) above.",2);
                   break; }
       case  0:  { DisplayTextFromWorker(); break; }
       case  1:  { StartNextJob(); break; }
