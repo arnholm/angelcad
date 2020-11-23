@@ -96,6 +96,7 @@ PolyfixPanel::PolyfixPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	m_out_choice->Append(_("AMF"));
 	m_out_choice->Append(_("STL"));
 	m_out_choice->Append(_("ASTL"));
+	m_out_choice->Disable();
 	BoxSizer8->Add(m_out_choice, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticBoxSizer2->Add(BoxSizer8, 0, wxEXPAND, 5);
 	BoxSizer1->Add(StaticBoxSizer2, 0, wxALL|wxEXPAND, 5);
