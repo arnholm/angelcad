@@ -142,46 +142,52 @@ void csgfix::run()
                      }
                      m_out << std::endl;
 
-                     double dx = 0.0;
-                     double dy = 0.0;
-                     size_t iorg = line.find("origin");
-                     if(iorg != string::npos) {
-                        size_t left  = line.find("[",iorg) + 1;
-                        size_t right = line.find("]",left);
-                        size_t len   = right-left;
-                        if(len > 0) {
-                           std::vector<std::string> tokens;
-                           tokenize(line.substr(left,len)," ,[]",tokens);
-                           if(tokens.size()==2) {
-                              std::istringstream inx(tokens[0]),iny(tokens[1]);
-                              inx >> dx;
-                              iny >> dy;
-                           }
-                        }
-                     }
+                     if(layer != "undef") {
 
-
-                     // DXF files are keyed with layer
-                     it=m_files.find(filename+layer);
-                     if(it == m_files.end()) {
-
-                        bool include_raw    = false;
-                        double scale_factor = 1.0;
-                        double sectol       = m_dist_tol;
-                        double epspnt       = m_dist_tol;
-                        bool   keep_case    = false;
-                        dxfxmloptions opt(include_raw,scale_factor,sectol,epspnt,layers,keep_case);
-                        opt.set_auto_close(true);
-                        std::ifstream in(fname.GetFullPath().ToStdString());
-                        if(in.is_open()) {
-                           if(auto dxf_root = make_shared<dxfroot>(in,opt)) {
-                              dxfread_incore dxf(m_out,dxf_root,-dx,-dy);
-                              size_t ilevel = 2 + indent.length();
-                              if(dxf.run(ilevel)) {
-                                 it = m_files.insert(std::make_pair(filename+layer,dxf.code())).first;
+                        double dx = 0.0;
+                        double dy = 0.0;
+                        size_t iorg = line.find("origin");
+                        if(iorg != string::npos) {
+                           size_t left  = line.find("[",iorg) + 1;
+                           size_t right = line.find("]",left);
+                           size_t len   = right-left;
+                           if(len > 0) {
+                              std::vector<std::string> tokens;
+                              tokenize(line.substr(left,len)," ,[]",tokens);
+                              if(tokens.size()==2) {
+                                 std::istringstream inx(tokens[0]),iny(tokens[1]);
+                                 inx >> dx;
+                                 iny >> dy;
                               }
                            }
                         }
+
+                        // DXF files are keyed with layer
+                        it=m_files.find(filename+layer);
+                        if(it == m_files.end()) {
+
+                           bool include_raw    = false;
+                           double scale_factor = 1.0;
+                           double sectol       = m_dist_tol;
+                           double epspnt       = m_dist_tol;
+                           bool   keep_case    = false;
+                           dxfxmloptions opt(include_raw,scale_factor,sectol,epspnt,layers,keep_case);
+                           opt.set_auto_close(true);
+                           std::ifstream in(fname.GetFullPath().ToStdString());
+                           if(in.is_open()) {
+                              if(auto dxf_root = make_shared<dxfroot>(in,opt)) {
+                                 dxfread_incore dxf(m_out,dxf_root,-dx,-dy);
+                                 size_t ilevel = 2 + indent.length();
+                                 if(dxf.run(ilevel)) {
+                                    it = m_files.insert(std::make_pair(filename+layer,dxf.code())).first;
+                                 }
+                              }
+                           }
+                        }
+                     }
+                     else {
+                        // mini square replaces DXF with "undef" layer
+                        it = m_files.insert(std::make_pair(filename+layer,indent +"square(size = [0.05, 0.05], center = true);")).first;
                      }
                   }
                }
