@@ -219,11 +219,11 @@ void ConsolePanel::DisplayTextFromWorker()
 
 void ConsolePanel::StartNextJob()
 {
+   // display any remaining messages
+   DisplayTextFromWorker();
+
    // if errors detected, do not start next job
    if(m_error_count == 0) {
-
-      // display any remaining messages
-      DisplayTextFromWorker();
 
       // Start the next job on the list
       if(m_jobs.size() > 0) {
