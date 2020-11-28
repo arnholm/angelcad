@@ -106,6 +106,8 @@ void ConsolePanelWorker::run()
             // so in this special case we cancel the error and continue
             if(line.find("ECHO:")       != static_cast<size_t>(wxNOT_FOUND))      retval =  1;  // no error
             else if(line.find("DEPRECATED:") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
+            else if(line.find("WARNING: Ignoring") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
+            // XCSG/carve
             else if(line.find("UNEXPECTED face loop") != static_cast<size_t>(wxNOT_FOUND)) retval =  1;  // no error
             else                                                                  retval = -1;  // error
          }
