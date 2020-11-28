@@ -24,7 +24,7 @@ class hull3d : public solid {
 public:
    // constructors with script array
    hull3d(const CScriptArray* arr);
-   hull3d(const solid* s1, const solid* s2, const solid* s3=0, const solid* s4=0, const solid* s5=0);
+   hull3d(const solid* s1, const solid* s2=0, const solid* s3=0, const solid* s4=0, const solid* s5=0);
    virtual ~hull3d();
 
    /// \privatesection (hidden in documentation)
@@ -48,6 +48,7 @@ protected:
    virtual void populate_tree(node_csg* node) ;
 
    static hull3d* ctor_arr(const CScriptArray* arr) { return new hull3d(arr); }
+   static hull3d* ctor_s1(const solid* s1                                                                    ) { return new hull3d(s1);          }
    static hull3d* ctor_s2(const solid* s1, const solid* s2                                                   ) { return new hull3d(s1,s2);          }
    static hull3d* ctor_s3(const solid* s1, const solid* s2, const solid* s3                                  ) { return new hull3d(s1,s2,s3);       }
    static hull3d* ctor_s4(const solid* s1, const solid* s2, const solid* s3, const solid* s4                 ) { return new hull3d(s1,s2,s3,s4);    }
@@ -58,6 +59,7 @@ protected:
    {
       const std::string type_name = as_typeid<hull3d>();
       int r = DeclareConstructor(engine,type_name, "hull3d@ hull3d(array<solid@>@+ arr)",asFUNCTION(hull3d::ctor_arr)); as_assert( r >= 0 );
+          r = DeclareConstructor(engine,type_name, "hull3d@ hull3d(const solid@+ s1)",asFUNCTION(hull3d::ctor_s1)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull3d@ hull3d(const solid@+ s1, const solid@+ s2 )",asFUNCTION(hull3d::ctor_s2)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull3d@ hull3d(const solid@+ s1, const solid@+ s2, const solid@+ s3 )",asFUNCTION(hull3d::ctor_s3)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull3d@ hull3d(const solid@+ s1, const solid@+ s2, const solid@+ s3, const solid@+ s4 )",asFUNCTION(hull3d::ctor_s4)); as_assert( r >= 0 );

@@ -24,7 +24,7 @@ class hull2d : public shape2d {
 public:
    // constructors with script array
    hull2d(const CScriptArray* arr);
-   hull2d(const shape2d* s1, const shape2d* s2, const shape2d* s3=0, const shape2d* s4=0, const shape2d* s5=0);
+   hull2d(const shape2d* s1, const shape2d* s2=0, const shape2d* s3=0, const shape2d* s4=0, const shape2d* s5=0);
 
    virtual ~hull2d();
 
@@ -49,6 +49,7 @@ protected:
    virtual void populate_tree(node_csg* node) ;
 
    static hull2d* ctor_arr(const CScriptArray* arr) { return new hull2d(arr); }
+   static hull2d* ctor_s1(const shape2d* s1                                                                            ) { return new hull2d(s1);          }
    static hull2d* ctor_s2(const shape2d* s1, const shape2d* s2                                                         ) { return new hull2d(s1,s2);          }
    static hull2d* ctor_s3(const shape2d* s1, const shape2d* s2, const shape2d* s3                                      ) { return new hull2d(s1,s2,s3);       }
    static hull2d* ctor_s4(const shape2d* s1, const shape2d* s2, const shape2d* s3, const shape2d* s4                   ) { return new hull2d(s1,s2,s3,s4);    }
@@ -59,6 +60,7 @@ protected:
    {
        const std::string type_name = as_typeid<hull2d>();
       int r = DeclareConstructor(engine,type_name, "hull2d@ hull2d(array<shape2d@>@+ arr)",asFUNCTION(hull2d::ctor_arr)); as_assert( r >= 0 );
+          r = DeclareConstructor(engine,type_name, "hull2d@ hull2d(const shape2d@+ s1 )",asFUNCTION(hull2d::ctor_s1)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull2d@ hull2d(const shape2d@+ s1, const shape2d@+ s2 )",asFUNCTION(hull2d::ctor_s2)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull2d@ hull2d(const shape2d@+ s1, const shape2d@+ s2, const shape2d@+ s3 )",asFUNCTION(hull2d::ctor_s3)); as_assert( r >= 0 );
           r = DeclareConstructor(engine,type_name, "hull2d@ hull2d(const shape2d@+ s1, const shape2d@+ s2, const shape2d@+ s3, const shape2d@+ s4 )",asFUNCTION(hull2d::ctor_s4)); as_assert( r >= 0 );
