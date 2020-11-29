@@ -19,7 +19,7 @@
 #ifndef AS_CSG_VERSION_H
 #define AS_CSG_VERSION_H
 
-#define AS_CSG_version "D1.5-04"
+#define AS_CSG_version "D1.5-05"
 
 #endif // AS_CSG_VERSION_H
 #endif // header guard
