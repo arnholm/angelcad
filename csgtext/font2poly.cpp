@@ -23,6 +23,8 @@ static void add_bezier(double f, std::vector<pos2d>& vec, const std::vector<int>
 
    line2d l1(p1,p2);
    line2d l2(p2,p3);
+
+   // looks like 5 segments is reasonable
    size_t nseg = 5;
    double par  = 0.0;
    double dpar = 1.0/(nseg);
@@ -37,7 +39,7 @@ static void add_bezier(double f, std::vector<pos2d>& vec, const std::vector<int>
       par += dpar;
    }
 
-   // add curve optimisation here
+   // add possible curve optimisation here
 
    // add bzr points to vec (skip 1st point)
    for(size_t i=1; i<bzr.size(); i++) vec.push_back(bzr[i]);
@@ -125,7 +127,7 @@ void font2poly::render( const std::string& ttf_path
          }
       }
 
-      // update the character offest with current glyph width + spacing
+      // update the character offset with current glyph width + spacing
       dx += f*(g.width() + spacing);
    }
 
@@ -138,6 +140,8 @@ void font2poly::render( const std::string& ttf_path
       double dx = (align_h)? -v3.x()*0.5 : 0.0;
       double dy = (align_v)? -v3.y()*0.5 : 0.0;
       spacemath::vec2d v(dx,dy);
+
+      // offset all polygon coordinates
       for(auto& poly : m_poly_pos) {
          for(auto& pos : *poly) {
             pos += v;

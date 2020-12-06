@@ -10,6 +10,7 @@ public:
    poly2csg();
    virtual ~poly2csg();
 
+   // render to OpenSCAD .csg format
    std::string render(int level, std::shared_ptr<font2poly> poly);
 
 protected:

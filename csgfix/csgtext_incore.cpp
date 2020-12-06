@@ -45,8 +45,9 @@ static inline void trim(std::string& s) {
 }
 
 
-csgtext_incore::csgtext_incore()
-: m_fonts(std::make_shared<font_info>())
+csgtext_incore::csgtext_incore(std::ostream& out)
+: m_out(&out)
+, m_fonts(std::make_shared<font_info>())
 {}
 
 csgtext_incore::~csgtext_incore()
@@ -62,10 +63,25 @@ bool csgtext_incore::parse(const std::string& line, text_params& params)
       size_t l1 = line.find("(")+1;
       size_t l2 = line.rfind(")");
       std::string pstring = line.substr(l1,l2-l1);
+
+      // Remove the quote signs
       for(auto& c : pstring) c = (c == '\"')? ' ':c;
+
       std::vector<std::string> tokens;
       tokenize(pstring,",",tokens);
       for(auto& token : tokens) {
+         trim(token);
+
+         // we simplify the font specification here
+         //    OpenSCAD  :  Carlito:style=Bold Italic
+         //    Simplified:  Carlito:Bold Italic
+         // The map contains the simplified style
+
+         size_t istyle = token.find("style=");
+         if(istyle != std::string::npos) {
+            token = token.substr(0,istyle) + token.substr(istyle+6);
+         }
+
          std::vector<std::string> tspec;
          tokenize(token,"=",tspec);
          if(tspec.size() == 2) {
@@ -106,11 +122,7 @@ std::string get_font(csgtext_incore::text_params& params)
    if(get_value("font",params,test_font)) {
       trim(test_font);
       if(test_font.length() > 0) {
-         std::vector<std::string> tokens;
-         tokenize(test_font,":=",tokens);
-         if(tokens.size() == 3) {
-            font = tokens[0]+':'+tokens[2];
-         }
+         font = test_font;
       }
    }
    return font;

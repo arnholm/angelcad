@@ -218,11 +218,8 @@ void csgfix::run()
             size_t ilevel = itxt/3;
 
             if(!csgtext.get()) {
-               csgtext = std::make_shared<csgtext_incore>();
+               csgtext = std::make_shared<csgtext_incore>(m_out);
             }
-
-            std::string text;
-
             // defaults
             csgtext_incore::text_params params;
             params["font"]    = "Arial:style=Regular";
@@ -237,11 +234,14 @@ void csgfix::run()
             }
 
             if(code.length() > 0)  out <<  code << endl;
-            else                   out <<  line << endl;
+            else {
+               out <<  line << endl;
+               m_out << "Warning: could not translate : " << line << endl;
+            }
 
          }
          else {
-            // not an import statement
+            // not a translated statement
             out << line << std::endl;
          }
       }
