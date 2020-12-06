@@ -3,6 +3,47 @@
 #include "csgtext/font2poly.h"
 #include "csgtext/poly2csg.h"
 #include <sstream>
+#include <vector>
+#include <functional>
+
+static void tokenize(const std::string& input,
+                     const std::string& delimiters,
+                     std::vector<std::string>& tokens)
+{
+   using namespace std;
+   string::size_type last_pos = 0;
+   string::size_type pos = 0;
+   while(true) {
+      pos = input.find_first_of(delimiters, last_pos);
+      if( pos == string::npos ) {
+         if(input.length()-last_pos > 0)tokens.push_back(input.substr(last_pos));
+         break;
+      }
+      else {
+         if(pos-last_pos > 0)tokens.push_back(input.substr(last_pos, pos - last_pos));
+         last_pos = pos + 1;
+      }
+   }
+}
+
+// trim from start (in place)
+static inline void ltrim(std::string& s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+        std::not1(std::ptr_fun<int, int>(std::isspace))));
+}
+
+// trim from end (in place)
+static inline void rtrim(std::string& s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+        std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+}
+
+// trim from both ends (in place)
+static inline void trim(std::string& s) {
+    ltrim(s);
+    rtrim(s);
+}
+
 
 csgtext_incore::csgtext_incore()
 : m_fonts(std::make_shared<font_info>())
@@ -11,66 +52,97 @@ csgtext_incore::csgtext_incore()
 csgtext_incore::~csgtext_incore()
 {}
 
-bool csgtext_incore::parse(const std::string& line, std::string& text, std::string& font, size_t& tsize)
+bool csgtext_incore::parse(const std::string& line, text_params& params)
 {
    bool retval = false;
    size_t itxt = line.find("text(text");
 
    if(itxt != std::string::npos) {
 
-      // extract the text string to be rendered
-      size_t left  = line.find("\"",itxt) + 1;
-      size_t right = line.find("\"",left);
-      size_t len   = right-left;
-      text = line.substr(left,len);
-
-      // get the specified font, use default if we can't decode it
-      size_t ifont = line.find("font",0);
-      if(ifont != std::string::npos) {
-         left  = line.find("\"",ifont) + 1;
-         right = line.find("\"",left);
-         len   = right-left;
-         std::string scad_font = line.substr(left,len);
-         size_t i1 = scad_font.find(":",0)+1;
-         if(i1 != std::string::npos) {
-            size_t i2 = scad_font.find("=",i1);
-            if(i2 != std::string::npos) {
-               len  = i2-i1+1;
-               scad_font.erase(i1,len);
-               font = scad_font;
-            }
+      size_t l1 = line.find("(")+1;
+      size_t l2 = line.rfind(")");
+      std::string pstring = line.substr(l1,l2-l1);
+      for(auto& c : pstring) c = (c == '\"')? ' ':c;
+      std::vector<std::string> tokens;
+      tokenize(pstring,",",tokens);
+      for(auto& token : tokens) {
+         std::vector<std::string> tspec;
+         tokenize(token,"=",tspec);
+         if(tspec.size() == 2) {
+            trim(tspec[0]);
+            trim(tspec[1]);
+            params[tspec[0]] = tspec[1];
          }
       }
-
-      // get font size
-      size_t isize = line.find("size",0);
-      if(isize != std::string::npos) {
-         left  = line.find("=",isize) + 1;
-         right = line.find(",",left);
-         size_t len   = right-left;
-         std::string token = line.substr(left,len);
-         std::istringstream in(token);
-         in >> tsize;
-      }
-
-      return true;
+      retval = true;
    }
 
    return retval;
 }
 
-std::string csgtext_incore::code(size_t ilevel, const std::string& text, const std::string& font, size_t tsize)
+template <typename T>
+bool get_value(const std::string& name, csgtext_incore::text_params& params, T& value)
+{
+   auto i = params.find(name);
+   if(i == params.end()) return false;
+   std::istringstream in(i->second);
+   in >> value;
+   return true;
+}
+
+template <>
+bool get_value(const std::string& name, csgtext_incore::text_params& params, std::string& value)
+{
+   auto i = params.find(name);
+   if(i == params.end()) return false;
+   value = i->second;
+   return true;
+}
+
+std::string get_font(csgtext_incore::text_params& params)
+{
+   std::string font = "Arial:Regular";
+   std::string test_font = font;
+   if(get_value("font",params,test_font)) {
+      trim(test_font);
+      if(test_font.length() > 0) {
+         std::vector<std::string> tokens;
+         tokenize(test_font,":=",tokens);
+         if(tokens.size() == 3) {
+            font = tokens[0]+':'+tokens[2];
+         }
+      }
+   }
+   return font;
+}
+
+std::string csgtext_incore::code(size_t ilevel, text_params& params)
 {
    std::string code;
 
-   auto it = m_fonts->find(font);
-   if(it != m_fonts->end()) {
-      std::string fontfile = it->second;
+   std::string text;
+   if(get_value("text",params,text)) {
 
-      auto poly2d = std::make_shared<font2poly>();
-      poly2d->render(fontfile,text,tsize);
-      auto csg = std::make_shared<poly2csg>();
-      code = csg->render(0,poly2d);
+      auto it = m_fonts->find(get_font(params));
+      if(it != m_fonts->end()) {
+         std::string fontfile = it->second;
+
+         // look up some values that may or may not be specified
+         size_t      tsize=10;
+         size_t      spacing=1;
+         std::string halign="left";
+         std::string valign="baseline";
+
+         get_value("size",params,tsize);
+         get_value("spacing",params,spacing);
+         get_value("halign",params,halign);
+         get_value("valign",params,valign);
+
+         auto poly2d = std::make_shared<font2poly>();
+         poly2d->render(fontfile,text,tsize,spacing,halign,valign);
+         auto csg = std::make_shared<poly2csg>();
+         code = csg->render(0,poly2d);
+      }
    }
 
    return code;

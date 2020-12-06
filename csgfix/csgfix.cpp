@@ -224,12 +224,16 @@ void csgfix::run()
             std::string text;
 
             // defaults
-            std::string font = "Arial:Regular";
-            size_t tsize     = 10;
+            csgtext_incore::text_params params;
+            params["font"]    = "Arial:style=Regular";
+            params["size"]    = "10";
+            params["spacing"] = "1";
+            params["halign"]  = "left";
+            params["valign"]  = "baseline";
 
             std::string code;
-            if(csgtext->parse(line,text,font,tsize)) {
-               code = csgtext->code(ilevel,text,font,tsize);
+            if(csgtext->parse(line,params)) {
+               code = csgtext->code(ilevel,params);
             }
 
             if(code.length() > 0)  out <<  code << endl;
