@@ -8,7 +8,10 @@
 		<Project filename="dxfread/dxfread.cbp">
 			<Depends filename="as_csg/as_csg.cbp" />
 		</Project>
-		<Project filename="csgfix/csgfix.cbp" />
+		<Project filename="csgtext/csgtext.cbp" />
+		<Project filename="csgfix/csgfix.cbp">
+			<Depends filename="csgtext/csgtext.cbp" />
+		</Project>
 		<Project filename="AngelCAD/AngelCAD.cbp">
 			<Depends filename="as_csg/as_csg.cbp" />
 			<Depends filename="polyfix/polyfix.cbp" />

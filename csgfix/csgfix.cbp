@@ -32,6 +32,7 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="polyhealerd" />
 					<Add library="dxfdomd" />
+					<Add library="csgtextd" />
 					<Add library="spacemathd" />
 					<Add library="spaceiod" />
 					<Add library="msvcrtd.lib" />
@@ -61,6 +62,7 @@
 					<Add option="/INCREMENTAL:NO" />
 					<Add library="polyhealer" />
 					<Add library="dxfdom" />
+					<Add library="csgtext" />
 					<Add library="spaceio" />
 					<Add library="spacemath" />
 					<Add library="msvcrt.lib" />
@@ -136,16 +138,15 @@
 		</Linker>
 		<Unit filename="csgfix.cpp" />
 		<Unit filename="csgfix.h" />
+		<Unit filename="csgtext_incore.cpp" />
+		<Unit filename="csgtext_incore.h" />
 		<Unit filename="dxfread_incore.cpp" />
 		<Unit filename="dxfread_incore.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="polyfix_incore.cpp" />
 		<Unit filename="polyfix_incore.h" />
 		<Extensions>
-			<debugger />
 			<lib_finder disable_auto="1" />
-			<envvars />
-			<code_completion />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

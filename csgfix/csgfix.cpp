@@ -3,6 +3,7 @@
 #include "spaceio/stl_io.h"
 #include "polyfix_incore.h"
 #include "dxfread_incore.h"
+#include "csgtext_incore.h"
 
 #include <string>
 #include <sstream>
@@ -60,6 +61,9 @@ void csgfix::run()
    out_csg.SetName(m_csg.GetName()+"_filtered");
    out_csg.Normalize();
 
+   // this variable is instanciated on first encounter of text() statement
+   std::shared_ptr<csgtext_incore> csgtext;
+
    // line number in input csg
    m_line_number = 0;
 
@@ -76,7 +80,8 @@ void csgfix::run()
          // increment the input line number (useful in error reporting)
          m_line_number++;
 
-         size_t imp = line.find("import(file");
+         size_t imp  = line.find("import(file");
+         size_t itxt = line.find("text(text");
          if(imp != std::string::npos) {
 
             // this is an import statement
@@ -208,6 +213,29 @@ void csgfix::run()
                out << line << std::endl;
             }
          }
+         else if(itxt != std::string::npos) {
+            // this is a text statement
+            size_t ilevel = itxt/3;
+
+            if(!csgtext.get()) {
+               csgtext = std::make_shared<csgtext_incore>();
+            }
+
+            std::string text;
+
+            // defaults
+            std::string font = "Arial:Regular";
+            size_t tsize     = 10;
+
+            std::string code;
+            if(csgtext->parse(line,text,font,tsize)) {
+               code = csgtext->code(ilevel,text,font,tsize);
+            }
+
+            if(code.length() > 0)  out <<  code << endl;
+            else                   out <<  line << endl;
+
+         }
          else {
             // not an import statement
             out << line << std::endl;
@@ -218,7 +246,7 @@ void csgfix::run()
    // close input file so that file copy can work
    in.close();
 
-   if(m_files.size() > 0 && out_csg.Exists()) {
+   if((csgtext.get() || m_files.size()>0) && out_csg.Exists()) {
       // we did find import statements, so we use the filtered .csg
       wxRenameFile(out_csg.GetFullPath(),m_csg.GetFullPath(),true);
 
