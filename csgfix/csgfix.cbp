@@ -79,7 +79,7 @@
 				<Option compiler="gcc_generic" />
 				<Option parameters='-csg=&quot;/work/STL-files/KenBrooks/xcsg/openscad import test.csg&quot; -scad=&quot;/work/STL-files/KenBrooks/openscad import test.scad&quot; ' />
 				<Compiler>
-					<Add option="-std=c++0x" />
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
@@ -107,7 +107,7 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-Os" />
-					<Add option="-std=c++0x" />
+					<Add option="-std=c++11" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
 					<Add option="-fexceptions" />

@@ -71,7 +71,7 @@
 				<Option compiler="gcc" />
 				<Option parameters="/work/DATA/openscad_testdata/dxf/ellipse-reverse.dxf -xml -as  " />
 				<Compiler>
-					<Add option="-std=c++0x" />
+					<Add option="-std=c++11" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
 					<Add option="-fexceptions" />
@@ -95,7 +95,7 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-std=c++0x" />
+					<Add option="-std=c++11" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
 					<Add option="-fexceptions" />
