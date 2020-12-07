@@ -954,7 +954,7 @@ void AngelCADFrame::DoBuildOpenSCAD()
             jobs.push_back(std::make_pair(cmd1,page));
 
             // csgfix compilation to *.csg
-            wxString cmd2 = "\"" + csgfix.GetFullPath() + "\"  \"-scad=" + source_path.GetFullPath() + "\" -csg=\"" + csg_path.GetFullPath() + "\"";
+            wxString cmd2 = "\"" + csgfix.GetFullPath() + "\"  -scad=\"" + source_path.GetFullPath() + "\" -csg=\"" + csg_path.GetFullPath() + "\"";
             jobs.push_back(std::make_pair(cmd2,page));
 
             // XCSG compilation, using *.csg as input

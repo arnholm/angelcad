@@ -30,7 +30,7 @@ public:
    const_iterator begin() const { return m_map.begin(); }
    const_iterator end() const { return m_map.end(); }
 
-   // look up a font file using <font_name>:<font_style> syntax (e.g. "Arial:Regular" )
+   // look up a font file using <font_name>:<font_style> syntax (e.g. "Liberation Sans:Regular" )
    const_iterator find(const std::string& font_key) { return m_map.find(font_key); }
 
 protected:

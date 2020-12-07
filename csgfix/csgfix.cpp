@@ -222,7 +222,7 @@ void csgfix::run()
             }
             // defaults
             csgtext_incore::text_params params;
-            params["font"]    = "Arial:style=Regular";
+            params["font"]    = "Liberation Sans:style=Regular";
             params["size"]    = "10";
             params["spacing"] = "1";
             params["halign"]  = "left";

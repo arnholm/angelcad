@@ -77,7 +77,6 @@
 				<Option object_output=".cmp/gcc/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc_generic" />
-				<Option parameters='-csg=&quot;/work/STL-files/KenBrooks/xcsg/openscad import test.csg&quot; -scad=&quot;/work/STL-files/KenBrooks/openscad import test.scad&quot; ' />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -103,7 +102,6 @@
 				<Option object_output=".cmp/gcc/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc_generic" />
-				<Option parameters='-csg=&quot;/work/STL-files/KenBrooks/xcsg/openscad import test.csg&quot; -scad=&quot;/work/STL-files/KenBrooks/openscad import test.scad&quot; ' />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-Os" />

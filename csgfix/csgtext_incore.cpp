@@ -3,6 +3,7 @@
 #include "csgtext/font2poly.h"
 #include "csgtext/poly2csg.h"
 #include <sstream>
+//#include <fstream>
 #include <vector>
 #include <functional>
 #include <algorithm>
@@ -61,6 +62,12 @@ bool csgtext_incore::parse(const std::string& line, text_params& params)
 
    if(itxt != std::string::npos) {
 
+      // special case extraction of text, in case it contains an equal sign
+      size_t it1 = line.find("\"",itxt)+1;
+      size_t it2 = line.find("\"",it1);
+      std::string text = line.substr(it1,it2-it1);
+      params["text"] = text;
+
       size_t l1 = line.find("(")+1;
       size_t l2 = line.rfind(")");
       std::string pstring = line.substr(l1,l2-l1);
@@ -88,6 +95,17 @@ bool csgtext_incore::parse(const std::string& line, text_params& params)
          if(tspec.size() == 2) {
             trim(tspec[0]);
             trim(tspec[1]);
+
+            if(tspec[0]=="font" && tspec[1].find(':')==std::string::npos) {
+               // Font style was missing, so we see if we have some match in the font list
+               for(auto& p : *m_fonts) {
+                  if(p.first.find(tspec[1]) != std::string::npos) {
+                     tspec[1] = p.first;
+                     break;
+                  }
+               }
+            }
+
             params[tspec[0]] = tspec[1];
          }
       }
@@ -118,7 +136,7 @@ bool get_value(const std::string& name, csgtext_incore::text_params& params, std
 
 std::string get_font(csgtext_incore::text_params& params)
 {
-   std::string font = "Arial:Regular";
+   std::string font = "Liberation Sans:Regular";
    std::string test_font = font;
    if(get_value("font",params,test_font)) {
       trim(test_font);
@@ -137,6 +155,10 @@ std::string csgtext_incore::code(size_t ilevel, text_params& params)
    if(get_value("text",params,text)) {
 
       auto it = m_fonts->find(get_font(params));
+      if(it == m_fonts->end()) {
+         it = m_fonts->find("Liberation Sans:Regular");
+      }
+
       if(it != m_fonts->end()) {
          std::string fontfile = it->second;
 
@@ -155,6 +177,9 @@ std::string csgtext_incore::code(size_t ilevel, text_params& params)
          poly2d->render(fontfile,text,tsize,spacing,halign,valign);
          auto csg = std::make_shared<poly2csg>();
          code = csg->render(0,poly2d);
+      }
+      else {
+         throw std::runtime_error("ERROR: Font not found : " + params["font"] + " (no suitable replacement)");
       }
    }
 
