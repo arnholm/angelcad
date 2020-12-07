@@ -61,6 +61,7 @@ endorsement.
 #include <vector>
 #include <utility>
 #include <string>
+#include <limits>
 
 namespace font2geo {
 

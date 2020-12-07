@@ -8,7 +8,7 @@
 		<Option virtualFolders="aaa_utils/;font/" />
 		<Build>
 			<Target title="MSVC_Debug">
-				<Option output=".cmp/msvc/bin/Debug/csgtextd" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Debug/libcsgtextd" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
@@ -43,7 +43,7 @@
 				</ExtraCommands>
 			</Target>
 			<Target title="MSVC_Release">
-				<Option output=".cmp/msvc/bin/Release/csgtext" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Release/libcsgtext" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Release/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
@@ -86,13 +86,15 @@
 					<Add option="-std=c++0x" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
-					<Add option="-DNOPCH" />
 					<Add option="-fexceptions" />
-					<Add option="-D_DEBUG" />
 					<Add option="-g" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_DEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="freetype" />
+					<Add library="boost_regex" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -110,12 +112,14 @@
 					<Add option="-std=c++0x" />
 					<Add option="-W" />
 					<Add option="-fPIC" />
-					<Add option="-DNOPCH" />
 					<Add option="-fexceptions" />
 					<Add option="-Os" />
+					<Add option="-DNOPCH" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="freetype" />
+					<Add library="boost_regex" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
@@ -161,6 +165,9 @@
 		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
+			<envvars />
+			<code_completion />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

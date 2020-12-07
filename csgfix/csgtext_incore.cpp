@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <functional>
+#include <algorithm>
 
 static void tokenize(const std::string& input,
                      const std::string& delimiters,

@@ -103,9 +103,10 @@
 					<Add library="ce_angelscriptd" />
 					<Add library="spaceiod" />
 					<Add library="spacemathd" />
+					<Add library="cf_syslibd" />
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
-					<Add library="cf_syslibd" />
+					<Add library="boost_regex" />
 				</Linker>
 			</Target>
 			<Target title="GCC_Release">
@@ -135,6 +136,7 @@
 					<Add library="cf_syslib" />
 					<Add library="boost_filesystem" />
 					<Add library="boost_system" />
+					<Add library="boost_regex" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
@@ -502,6 +504,9 @@
 		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
+			<envvars />
+			<code_completion />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
