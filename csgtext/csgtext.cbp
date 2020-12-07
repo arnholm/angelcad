@@ -8,7 +8,7 @@
 		<Option virtualFolders="aaa_utils/;font/" />
 		<Build>
 			<Target title="MSVC_Debug">
-				<Option output=".cmp/msvc/bin/Debug/libcsgtextd" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Debug/libcsgtextd" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
@@ -43,7 +43,7 @@
 				</ExtraCommands>
 			</Target>
 			<Target title="MSVC_Release">
-				<Option output=".cmp/msvc/bin/Release/libcsgtext" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Release/libcsgtext" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Release/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
