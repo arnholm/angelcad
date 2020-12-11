@@ -19,6 +19,8 @@ $libdir=${instdir}/lib
 %requires libboost-system-dev
 %requires libboost-filesystem-dev
 %requires libboost-thread-dev
+%requires libboost-regex-dev
+%requires libboost-program-options-dev
 %requires xcsg
 %requires gnome-themes-standard
 %postinstall ldconfig
