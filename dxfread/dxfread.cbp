@@ -72,10 +72,10 @@
 				<Option parameters="/work/DATA/openscad_testdata/dxf/ellipse-reverse.dxf -xml -as  " />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-W" />
 					<Add option="-fPIC" />
-					<Add option="-fexceptions" />
 					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-fexceptions" />
 					<Add option="`$(#wx.config) --cxxflags --debug`" />
 					<Add option="-DNOPCH" />
 					<Add option="-D_DEBUG" />
@@ -86,6 +86,7 @@
 					<Add option="`$(#wx.config) --libs std,aui --static --debug`" />
 					<Add library="dxfdomd" />
 					<Add library="spaceiod" />
+					<Add library="spacemathd" />
 				</Linker>
 			</Target>
 			<Target title="GCC_Release">
@@ -95,11 +96,11 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-std=c++11" />
-					<Add option="-W" />
-					<Add option="-fPIC" />
-					<Add option="-fexceptions" />
 					<Add option="-Os" />
+					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
+					<Add option="-W" />
+					<Add option="-fexceptions" />
 					<Add option="`$(#wx.config) --cxxflags`" />
 					<Add option="-DNOPCH" />
 					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
@@ -109,6 +110,7 @@
 					<Add option="`$(#wx.config) --libs std,aui --static`" />
 					<Add library="dxfdom" />
 					<Add library="spaceio" />
+					<Add library="spacemath" />
 				</Linker>
 				<ExtraCommands>
 					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
