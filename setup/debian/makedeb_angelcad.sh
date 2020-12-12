@@ -7,6 +7,9 @@ if [ "$EUID" -ne 0 ];
   exit
 fi
 
+# Get user's home dir (sudo's home is /root ....)
+USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
+
 check_distro2(){
     if [[ -e /etc/redhat-release ]]
     then
@@ -36,7 +39,7 @@ echo "$PACKAGE_NAME *.deb build started....please wait"
 # CPDE_USR defines where to find the binaries to package. We don't have to check 
 # that $CPDE_USR exists, because epm will do it and report any errors
 if [ -z ${CPDE_USR+x} ]; then
-   export CPDE_USR=~/cpde_usr
+   export CPDE_USR=$USER_HOME/cpde_usr
    echo "CPDE_USR is unset, defaults to '$CPDE_USR'"; 
 else 
    echo "CPDE_USR is set to '$CPDE_USR'"; 
