@@ -15,8 +15,9 @@ Furthermore, CPDE requires building and configuring the following 3rd party libr
 | [boost](https://www.boost.org/)  | boost_system, boost_filesystem, boost_thread |
 | [msgpack](https://msgpack.org/) | C/C++ version. Not strictly required for AngelCAD build, but recommended |
 
-For more detailed detailed build instructions see [here](https://github.com/arnholm/cpde_utils/tree/master/doc/)
+Since AngelCAD 1.5-06, [FreeType](https://freetype.org/) is also required.
 
+The best way to build the 3rd party libraries is to run the build scripts found in the [cpde_3rdparty](https://github.com/arnholm/cpde_3rdparty) repository.
 
 ## libraries required ##
 
@@ -39,6 +40,7 @@ The following applications are included in the build
 | AngelView | AngelCAD 3d file viewer |
 | polyfix   | command line 3d file repair utility |
 | dxfread   | command line DXF file reader |
+| csgfix    | command line preprocessor of OpenSCAD .csg files |
 
 
 ## xcsg ##
