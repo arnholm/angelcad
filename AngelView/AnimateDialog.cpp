@@ -177,11 +177,17 @@ bool AnimateDialog::parse()
       }
       else {
          if(lspec.has_dir() || last_spec) {
+
+            // terminate this curve
             curve->set_q1(lspec.get_quat());
             curve->set_path(spline3d(points));
             points.clear();
             aspec->push_back(curve);
-            curve = nullptr;
+
+            // new curve, starting where the last one ended
+            curve = std::make_shared<AnimateCurve>();
+            points.push_back(lspec.pos);
+            curve->set_q0(lspec.get_quat());
          }
       }
    }
