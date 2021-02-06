@@ -86,11 +86,17 @@ bool PolyhedronGL::read(const wxFileName& path)
       return false;
    }
 
-   return RenderModel();
+   bool ret = RenderModel();
+
+   time(&m_read_time);
+   m_init_projection = true;
+
+   return ret;
 }
 
 bool PolyhedronGL::RenderModel(HTmatrix& T)
 {
+   clear();
    m_bbox = bbox3d();
 
    if(m_polyset.get()) {
@@ -113,8 +119,7 @@ bool PolyhedronGL::RenderModel(HTmatrix& T)
 
    }
 
-   time(&m_read_time);
-   m_init_projection = true;
+   m_init_projection = false;
 
    return true;
 }
