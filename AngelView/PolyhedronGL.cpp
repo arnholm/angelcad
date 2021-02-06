@@ -94,7 +94,7 @@ bool PolyhedronGL::read(const wxFileName& path)
    return ret;
 }
 
-bool PolyhedronGL::RenderModel(HTmatrix& T)
+bool PolyhedronGL::RenderModel(const HTmatrix& T)
 {
    clear();
    m_bbox = bbox3d();
@@ -124,7 +124,7 @@ bool PolyhedronGL::RenderModel(HTmatrix& T)
    return true;
 }
 
-void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T)
+void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset, const HTmatrix& T)
 {
 
    if(polyset.get() && (m_nvert>0) && (m_nface>0) ) {
@@ -170,7 +170,7 @@ void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset,
 }
 
 
-void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T)
+void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset,const HTmatrix& T)
 {
 
    if(polyset.get() && (m_nvert>0) && (m_nface>0) ) {

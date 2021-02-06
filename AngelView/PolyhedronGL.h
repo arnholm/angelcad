@@ -62,13 +62,13 @@ public:
    GLint nv() const { return   m_nvert; }
 
    // (re-) render the model to OpenGL with given transformation
-   bool RenderModel(HTmatrix& T = HTmatrix());
+   bool RenderModel(const HTmatrix& T = HTmatrix());
 
 protected:
    void clear();
 
-   void ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T);
-   void ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T);
+   void ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset,const HTmatrix& T);
+   void ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset,const HTmatrix& T);
 
 protected:
    GLint    m_nvert; // number of vertices

@@ -27,7 +27,7 @@ public:
    void add_image(const wxFileName& fname, const wxImage& image);
 
    //(*Declarations(AnimateDialog)
-   wxButton* Button1;
+   wxButton* AnimateButton;
    wxSpinCtrl* m_framerate;
    wxSpinCtrl* m_total_sec;
    wxStaticText* StaticText1;

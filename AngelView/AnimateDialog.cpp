@@ -46,7 +46,7 @@ AnimateDialog::AnimateDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	m_spec_text->SetFont(m_spec_textFont);
 	BoxSizer1->Add(m_spec_text, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer3->Add(0,0,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer3->Add(-1,-1,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Animation time [sec ]"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	BoxSizer3->Add(StaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	m_total_sec = new wxSpinCtrl(this, ID_SPINCTRL1, _T("10"), wxDefaultPosition, wxDefaultSize, 0, 2, 600, 10, _T("ID_SPINCTRL1"));
@@ -60,8 +60,8 @@ AnimateDialog::AnimateDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	BoxSizer1->Add(BoxSizer3, 0, wxEXPAND, 5);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer2->Add(-1,-1,3, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	Button1 = new wxButton(this, ID_BUTTON1, _("Animate"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-	BoxSizer2->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	AnimateButton = new wxButton(this, ID_BUTTON1, _("Animate"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+	BoxSizer2->Add(AnimateButton, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxEXPAND, 5);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);

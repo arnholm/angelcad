@@ -97,7 +97,7 @@
 						<option>3</option>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
+						<object class="wxButton" name="ID_BUTTON1" variable="AnimateButton" member="yes">
 							<label>Animate</label>
 							<handler function="OnAnimateButton" entry="EVT_BUTTON" />
 						</object>
