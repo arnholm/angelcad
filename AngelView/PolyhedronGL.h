@@ -18,6 +18,7 @@
 
 #include "spacemath/bbox3d.h"
 #include "spacemath/polyhedron3d.h"
+#include "spacemath/HTmatrix.h"
 #include <wx/glcanvas.h>
 #include <wx/filename.h>
 
@@ -60,12 +61,14 @@ public:
 
    GLint nv() const { return   m_nvert; }
 
+   // (re-) render the model to OpenGL with given transformation
+   bool RenderModel(HTmatrix& T = HTmatrix());
+
 protected:
    void clear();
 
-   void ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset);
-   void ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset);
-
+   void ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T);
+   void ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T);
 
 protected:
    GLint    m_nvert; // number of vertices
@@ -90,6 +93,8 @@ private:
 
    time_t   m_read_time;
    bbox3d   m_bbox;
+
+   std::shared_ptr<ph3d_vector> m_polyset; // as read from file
 };
 
 #endif // POLYHEDRONGL_H

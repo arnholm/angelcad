@@ -66,33 +66,38 @@ bool PolyhedronGL::read(const wxFileName& path)
 {
    clear();
 
-   std::shared_ptr<ph3d_vector> polyset;
+   m_polyset = std::make_shared<ph3d_vector>();
 
    std::string file_path = path.GetFullPath().ToStdString();
 
    if(spaceio::stl_io::is_stl(file_path)) {
-      polyset = spaceio::stl_io::read(file_path);
+      m_polyset = spaceio::stl_io::read(file_path);
    }
    else if(spaceio::amf_io::is_amf(file_path)) {
-      polyset = spaceio::amf_io::read(file_path);
+      m_polyset = spaceio::amf_io::read(file_path);
    }
    else if(spaceio::obj_io::is_obj(file_path)) {
-      polyset = spaceio::obj_io::read(file_path);
+      m_polyset = spaceio::obj_io::read(file_path);
    }
    else if(spaceio::off_io::is_off(file_path)) {
-      polyset = spaceio::off_io::read(file_path);
+      m_polyset = spaceio::off_io::read(file_path);
    }
    else {
       return false;
    }
 
+   return RenderModel();
+}
+
+bool PolyhedronGL::RenderModel(HTmatrix& T)
+{
    m_bbox = bbox3d();
 
-   if(polyset.get()) {
+   if(m_polyset.get()) {
 
-      size_t npoly = polyset->size();
+      size_t npoly = m_polyset->size();
       for(size_t ipoly=0; ipoly<npoly; ipoly++) {
-         std::shared_ptr<polyhedron3d> poly = (*polyset)[ipoly];
+         std::shared_ptr<polyhedron3d> poly = (*m_polyset)[ipoly];
          size_t nv = poly->vertex_size();
          for(size_t iv=0; iv<nv; iv++) {
             m_bbox.enclose(poly->vertex(iv));
@@ -103,21 +108,18 @@ bool PolyhedronGL::read(const wxFileName& path)
 
       }
       if(m_nvert==0 || m_nface==0)return false;
+      if(USE_VERTEX_ARRAY)  ConvertModelVertexArray(m_polyset,T);
+      else                  ConvertModelDirect(m_polyset,T);
 
-     if(USE_VERTEX_ARRAY)  ConvertModelVertexArray(polyset);
-     else                  ConvertModelDirect(polyset);
    }
 
-
    time(&m_read_time);
-
    m_init_projection = true;
 
    return true;
 }
 
-
-void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset)
+void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T)
 {
 
    if(polyset.get() && (m_nvert>0) && (m_nface>0) ) {
@@ -132,18 +134,21 @@ void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset)
       for(size_t ipoly=0; ipoly<npoly; ipoly++) {
          std::shared_ptr<polyhedron3d> poly = (*polyset)[ipoly];
 
-         // convert faces
-         size_t nface = poly->face_size();
+         // temporary copy of the polyhedron with transformation
+         std::shared_ptr<polyhedron3d> poly_t = poly->transform_copy(T);
+
+         // convert faces and vertices from the transformed copy
+         size_t nface = poly_t->face_size();
          for(size_t iface=0; iface<nface; iface++) {
 
-            vec3d normal = poly->face_normal(iface);
+            vec3d normal = poly_t->face_normal(iface);
             normal.normalise();
 
             // face vertex indices
-            const pface& face = poly->face(iface);
+            const pface& face = poly_t->face(iface);
             for(size_t iv=0; iv<3; iv++) {
 
-               const pos3d& pos = poly->vertex(face[iv]);
+               const pos3d& pos = poly_t->vertex(face[iv]);
 
                m_vert[ivcount++] = static_cast<GLfloat>(pos.x());
                m_vert[ivcount++] = static_cast<GLfloat>(pos.y());
@@ -160,7 +165,7 @@ void PolyhedronGL::ConvertModelVertexArray(std::shared_ptr<ph3d_vector> polyset)
 }
 
 
-void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset)
+void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset, HTmatrix& T)
 {
 
    if(polyset.get() && (m_nvert>0) && (m_nface>0) ) {
@@ -180,20 +185,23 @@ void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset)
       for(size_t ipoly=0; ipoly<npoly; ipoly++) {
          std::shared_ptr<polyhedron3d> poly = (*polyset)[ipoly];
 
+         // temporary copy of the polyhedron with transformation
+         std::shared_ptr<polyhedron3d> poly_t = poly->transform_copy(T);
+
          // convert vertices
-         size_t nvert = poly->vertex_size();
+         size_t nvert = poly_t->vertex_size();
          for(size_t ivert=0; ivert<nvert; ivert++) {
-            const pos3d& p = poly->vertex(ivert);
+            const pos3d& p = poly_t->vertex(ivert);
             m_vert[ivcount++] = static_cast<GLfloat>(p.x());
             m_vert[ivcount++] = static_cast<GLfloat>(p.y());
             m_vert[ivcount++] = static_cast<GLfloat>(p.z());
          }
 
          // convert faces
-         size_t nface = poly->face_size();
+         size_t nface = poly_t->face_size();
          for(size_t iface=0; iface<nface; iface++) {
 
-            vec3d normal = poly->face_normal(iface);
+            vec3d normal = poly_t->face_normal(iface);
             normal.normalise();
 
             // face normal
@@ -203,7 +211,7 @@ void PolyhedronGL::ConvertModelDirect(std::shared_ptr<ph3d_vector> polyset)
 
             // face vertex indices
             size_t ifoff = iface*3;
-            const pface& face = poly->face(iface);
+            const pface& face = poly_t->face(iface);
             for(size_t iv=0; iv<3; iv++) {
                // for multi-polyhedron models we must remember to offset the vertex indices
                m_face[ifcount++] = iv_offset + face[iv];
