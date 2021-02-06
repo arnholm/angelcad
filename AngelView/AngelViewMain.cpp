@@ -32,6 +32,8 @@
 #include "wxConfigSaveRestore.h"
 #include "AngelViewBitmapLibrary.h"
 
+#include "AnimateDialog.h"
+
 //(*InternalHeaders(AngelViewFrame)
 #include <wx/artprov.h>
 #include <wx/bitmap.h>
@@ -93,6 +95,8 @@ const long AngelViewFrame::ID_AUITOOLBAR1 = wxNewId();
 const long AngelViewFrame::ID_MENUITEM1 = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_FILERELOAD = wxNewId();
 const long AngelViewFrame::ID_MENUITEM2 = wxNewId();
+const long AngelViewFrame::ID_MENUITEM_CREATEANIM = wxNewId();
+const long AngelViewFrame::ID_MENUITEM_SAVEANIM = wxNewId();
 const long AngelViewFrame::idMenuQuit = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_SHOWFILLED = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_SHOWEDGES = wxNewId();
@@ -110,6 +114,7 @@ const long AngelViewFrame::ID_MENUITEM_FROMZPOS = wxNewId();
 const long AngelViewFrame::idMenuAbout = wxNewId();
 const long AngelViewFrame::ID_STATUSBAR1 = wxNewId();
 const long AngelViewFrame::ID_TIMER1 = wxNewId();
+const long AngelViewFrame::ID_TIMER2 = wxNewId();
 //*)
 
 
@@ -126,6 +131,7 @@ AngelViewFrame* AngelViewFrame::m_self=0;
 AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
 : m_config(0)
 , m_jdn_filemod(0.0)
+, m_animate_dlg(0)
 {
    m_self = this;
    m_watcher.SetOwner(this);
@@ -183,6 +189,11 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    MenuItem17 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Save Image ..."), wxEmptyString, wxITEM_NORMAL);
    Menu1->Append(MenuItem17);
    Menu1->AppendSeparator();
+   MenuItem19 = new wxMenuItem(Menu1, ID_MENUITEM_CREATEANIM, _("Create Animation ..."), wxEmptyString, wxITEM_NORMAL);
+   Menu1->Append(MenuItem19);
+   MenuItem20 = new wxMenuItem(Menu1, ID_MENUITEM_SAVEANIM, _("Save Animation ..."), wxEmptyString, wxITEM_NORMAL);
+   Menu1->Append(MenuItem20);
+   Menu1->AppendSeparator();
    MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
    Menu1->Append(MenuItem1);
    MenuBar1->Append(Menu1, _("&File"));
@@ -229,6 +240,7 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
    SetStatusBar(StatusBar1);
    Timer1.SetOwner(this, ID_TIMER1);
+   m_animate_timer.SetOwner(this, ID_TIMER2);
 
    Connect(ID_AUITOOLBARITEM_FILEOPEN,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelViewFrame::OnFileOpen);
    Connect(ID_AUITOOLBARITEM_VIEWRESET,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelViewFrame::OnViewReset);
@@ -249,6 +261,7 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileOpen);
    Connect(ID_MENUITEM_FILERELOAD,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileReload);
    Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileSaveImage);
+   Connect(ID_MENUITEM_CREATEANIM,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnCreateAnumation);
    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnQuit);
    Connect(ID_MENUITEM_SHOWFILLED,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnShowPolygonsMenuBar);
    Connect(ID_MENUITEM_SHOWEDGES,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnShowPolygonsMenuBar);
@@ -265,6 +278,7 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    Connect(ID_MENUITEM_FROMZPOS,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnViewZpos);
    Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnAbout);
    Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&AngelViewFrame::OnTimer1Trigger);
+   Connect(ID_TIMER2,wxEVT_TIMER,(wxObjectEventFunction)&AngelViewFrame::OnAnimateTimer);
    Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&AngelViewFrame::OnClose);
    //*)
 
@@ -742,3 +756,71 @@ void AngelViewFrame::OnRMBrotate(wxCommandEvent& event)
    Refresh();
 }
 
+
+void AngelViewFrame::OnCreateAnumation(wxCommandEvent& event)
+{
+   if(!m_animate_dlg) m_animate_dlg = new AnimateDialog(this);
+   m_animate_dlg->Show();
+}
+
+void AngelViewFrame::DoAnimate()
+{
+   if(std::shared_ptr<AnimateSpec> spec = m_animate_dlg->animate_spec()) {
+      m_animate_timer.Start(spec->millisec_per_frame());
+   }
+}
+
+void AngelViewFrame::OnAnimateTimer(wxTimerEvent& event)
+{
+   bool stop_animation = true;
+
+   if(std::shared_ptr<AnimateSpec> spec = m_animate_dlg->animate_spec()) {
+      if(std::shared_ptr<AnimateCurve> curve = spec->get_current_curve()) {
+         size_t istep = curve->get_istep();
+         size_t nstep = curve->get_nstep();
+         if(istep < nstep) {
+
+            // compute the curve parameter and get the corresponding transformation
+            double dp  = 1.0/(nstep-1);
+            double par = istep*dp;
+            HTmatrix T = curve->interpolate(par);
+
+            // compute transformed OpenGL structure
+            if(wxGetApp().GetModel().RenderModel(T)) {
+               // draw the transformed model
+               m_canvas->GetCurrentContext()->DoSceneDraw();
+               m_canvas->Refresh(false);
+
+        //      wxPaintEvent ev;
+        //       wxPostEvent(m_canvas->GetEventHandler(), ev);
+
+               wxImage image;
+               if(m_canvas->GetCurrentContext()->GetScreenImage(image)) {
+
+                  // we got a new image, so save it as a new animation frame
+                  spec->increment_frame_counter();
+
+                  wxFileName fname(m_filename);
+                  fname.SetName(fname.GetName()+'_'+wxString::Format("%04d",(int)spec->frame_counter()));
+                  fname.SetExt("png");
+                  m_animate_dlg->add_image(fname,image);
+
+                  stop_animation = false;
+               }
+            }
+
+            // increment step on this ci\urve
+            curve->increment_istep();
+            istep = curve->get_istep();
+            if(istep >= nstep) {
+               // move to next curve
+               spec->increment_current_curve();
+            }
+         }
+      }
+   }
+
+   if(stop_animation) {
+      m_animate_timer.Stop();
+   }
+}

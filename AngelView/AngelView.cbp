@@ -25,6 +25,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --libs aui,gl,core,base`" />
@@ -53,6 +54,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --libs aui,gl,core,base`" />
@@ -87,6 +89,7 @@
 					<Add option="-D_DEBUG" />
 					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
 					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui,gl --static --debug`" />
@@ -113,6 +116,7 @@
 					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY" />
 					<Add option="-DBOOST_SYSTEM_NO_DEPRECATED" />
 					<Add directory="/user/include" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(#wx.config) --libs std,aui,gl --static`" />
@@ -132,6 +136,7 @@
 		<Compiler>
 			<Add directory="$(CPDE_USR)/include" />
 			<Add directory="$(#boost.include)" />
+			<Add directory="$(#EIGEN.include)" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="$(#wx)/include" />
@@ -158,6 +163,12 @@
 		<Unit filename="AngelViewDropTarget.h" />
 		<Unit filename="AngelViewMain.cpp" />
 		<Unit filename="AngelViewMain.h" />
+		<Unit filename="AnimateCurve.cpp" />
+		<Unit filename="AnimateCurve.h" />
+		<Unit filename="AnimateDialog.cpp" />
+		<Unit filename="AnimateDialog.h" />
+		<Unit filename="AnimateSpec.cpp" />
+		<Unit filename="AnimateSpec.h" />
 		<Unit filename="PolyhedronGL.cpp" />
 		<Unit filename="PolyhedronGL.h" />
 		<Unit filename="resource.rc">
@@ -200,16 +211,15 @@
 			<Option virtualFolder="OpenGL/" />
 		</Unit>
 		<Unit filename="wxsmith/AngelViewframe.wxs" />
+		<Unit filename="wxsmith/AnimateDialog.wxs" />
 		<Extensions>
-			<code_completion />
-			<envvars />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="AngelViewApp.cpp" main="AngelViewFrame" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxFrame wxs="wxsmith/AngelViewframe.wxs" src="AngelViewMain.cpp" hdr="AngelViewMain.h" fwddecl="0" i18n="1" name="AngelViewFrame" language="CPP" />
+					<wxDialog wxs="wxsmith/AnimateDialog.wxs" src="AnimateDialog.cpp" hdr="AnimateDialog.h" fwddecl="0" i18n="1" name="AnimateDialog" language="CPP" />
 				</resources>
 			</wxsmith>
-			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

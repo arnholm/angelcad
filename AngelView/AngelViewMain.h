@@ -33,6 +33,7 @@
 
 #include <memory>
 #include "AngelFileSystemWatcher.h"
+#include "AnimateDialog.h"
 
 //(*Headers(AngelViewFrame)
 #include <wx/aui/aui.h>
@@ -55,6 +56,7 @@ public:
 
    void DoFileOpen(const wxFileName& filename, bool init_projection);
 
+   void DoAnimate();
 private:
 
    void OnFileEvent(wxFileSystemWatcherEvent& event);
@@ -93,6 +95,8 @@ private:
    void OnFileReload(wxCommandEvent& event);
    void OnShowBacksideToolbar(wxCommandEvent& event);
    void OnShowBackSideMenuBar(wxCommandEvent& event);
+   void OnCreateAnumation(wxCommandEvent& event);
+   void OnAnimateTimer(wxTimerEvent& event);
    //*)
 
    void OnMRUFile(wxCommandEvent& event);
@@ -122,6 +126,8 @@ private:
    static const long ID_MENUITEM1;
    static const long ID_MENUITEM_FILERELOAD;
    static const long ID_MENUITEM2;
+   static const long ID_MENUITEM_CREATEANIM;
+   static const long ID_MENUITEM_SAVEANIM;
    static const long idMenuQuit;
    static const long ID_MENUITEM_SHOWFILLED;
    static const long ID_MENUITEM_SHOWEDGES;
@@ -139,6 +145,7 @@ private:
    static const long idMenuAbout;
    static const long ID_STATUSBAR1;
    static const long ID_TIMER1;
+   static const long ID_TIMER2;
    //*)
 
    //(*Declarations(AngelViewFrame)
@@ -156,6 +163,8 @@ private:
    wxMenuItem* MenuItem16;
    wxMenuItem* MenuItem17;
    wxMenuItem* MenuItem18;
+   wxMenuItem* MenuItem19;
+   wxMenuItem* MenuItem20;
    wxMenuItem* MenuItem3;
    wxMenuItem* MenuItem4;
    wxMenuItem* MenuItem5;
@@ -166,6 +175,7 @@ private:
    wxPanel* m_center;
    wxStatusBar* StatusBar1;
    wxTimer Timer1;
+   wxTimer m_animate_timer;
    //*)
 
    DECLARE_EVENT_TABLE()
@@ -176,6 +186,8 @@ private:
    AngelFileSystemWatcher m_watcher;
    wxConfig*              m_config;
    wxFileHistory          m_mru;
+
+   AnimateDialog*         m_animate_dlg;
 
 private:
    static AngelViewFrame* m_self;

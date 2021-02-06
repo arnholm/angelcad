@@ -245,6 +245,14 @@
 					<handler function="OnFileSaveImage" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
+				<object class="wxMenuItem" name="ID_MENUITEM_CREATEANIM" variable="MenuItem19" member="yes">
+					<label>Create Animation ...</label>
+					<handler function="OnCreateAnumation" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM_SAVEANIM" variable="MenuItem20" member="yes">
+					<label>Save Animation ...</label>
+				</object>
+				<object class="separator" />
 				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">
 					<label>Quit</label>
 					<accel>Alt-F4</accel>
@@ -334,6 +342,9 @@
 		<object class="wxTimer" name="ID_TIMER1" variable="Timer1" member="yes">
 			<oneshot>1</oneshot>
 			<handler function="OnTimer1Trigger" entry="EVT_TIMER" />
+		</object>
+		<object class="wxTimer" name="ID_TIMER2" variable="m_animate_timer" member="yes">
+			<handler function="OnAnimateTimer" entry="EVT_TIMER" />
 		</object>
 	</object>
 </wxsmith>
