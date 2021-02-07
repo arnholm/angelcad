@@ -30,8 +30,8 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="m_spec_text" member="yes">
-					<value>  0   0   0  1 0  0      0  0 1&#x0A; 50  50 100&#x0A;100 100 200&#x0A; 50  50 300  &#x0A;  0   0 400  0 1 0.5   -0.2 0 1</value>
-					<size>380,150</size>
+					<value>0       0    0&#x0A;100    50   50&#x0A;200   100  100&#x0A;250   250  150&#x0A;150   300  200&#x0A;-150  300  250&#x0A;-300    0  300  -1  0 1   0 -1 1&#x0A;-250 -250  325&#x0A;0    -300  350   0 -1 1   1  0 1&#x0A;200  -200  400&#x0A;150  -150  400&#x0A;0       0  400&#x0A;0       0   0</value>
+					<size>380,250</size>
 					<font>
 						<size>10</size>
 						<style>normal</style>
@@ -48,16 +48,11 @@
 			</object>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
-					<object class="spacer">
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_orbit" member="yes">
 							<label>Orbit</label>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxTOP|wxBOTTOM|wxLEFT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -65,15 +60,15 @@
 						<object class="wxSpinCtrl" name="ID_SPINCTRL3" variable="m_orbit_deg" member="yes">
 							<value>360</value>
 							<max>3600</max>
-							<size>50,-1</size>
+							<size>70,-1</size>
 							<style>wxALIGN_RIGHT</style>
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
-							<label>Animation time [sec ]</label>
+							<label>Duration [sec ]</label>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -83,7 +78,7 @@
 							<value>30</value>
 							<min>2</min>
 							<max>600</max>
-							<size>50,-1</size>
+							<size>70,-1</size>
 							<style>wxALIGN_RIGHT</style>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -101,7 +96,7 @@
 							<value>10</value>
 							<min>1</min>
 							<max>25</max>
-							<size>50,-1</size>
+							<size>70,-1</size>
 							<style>wxALIGN_RIGHT</style>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
