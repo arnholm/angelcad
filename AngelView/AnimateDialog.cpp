@@ -43,7 +43,7 @@ AnimateDialog::AnimateDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	wxFont StaticText2Font(10,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD,false,_T("Arial"),wxFONTENCODING_DEFAULT);
 	StaticText2->SetFont(StaticText2Font);
 	BoxSizer1->Add(StaticText2, 0, wxALL|wxEXPAND, 5);
-	m_spec_text = new wxTextCtrl(this, ID_TEXTCTRL1, _("0       0    0\n100    50   50\n200   100  100\n250   250  150\n150   300  200\n-150  300  250\n-300    0  300  -1  0 1   0 -1 1\n-250 -250  325\n0    -300  350   0 -1 1   1  0 1\n200  -200  400\n150  -150  400\n0       0  400\n0       0   0"), wxDefaultPosition, wxSize(380,250), wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+	m_spec_text = new wxTextCtrl(this, ID_TEXTCTRL1, _("0       0    0\n100    50   50\n200   100  100\n250   250  200\n150   300  250\n-150  300  300\n-300    0  350   -1   0   1    0 -1 1\n-250 -250  390\n0    -300  410    0  -1   1    1  0 1\n300  -250  390\n150  -150  380  0.6  0.9 0.5  -1  0 1\n0       0  350 \n0       0  300 -0.6 -0.6 0.5   1  0 1\n0       0  100    1 -0.5  0  -0.2 0 1\n0       0   0"), wxDefaultPosition, wxSize(380,300), wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	wxFont m_spec_textFont(10,wxFONTFAMILY_MODERN,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Courier New"),wxFONTENCODING_DEFAULT);
 	m_spec_text->SetFont(m_spec_textFont);
 	BoxSizer1->Add(m_spec_text, 1, wxALL|wxEXPAND, 5);
