@@ -240,17 +240,21 @@
 					<handler function="OnFileReload" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
-				<object class="wxMenuItem" name="ID_MENUITEM2" variable="MenuItem17" member="yes">
+				<object class="wxMenuItem" name="ID_MENUITEM_FILESAVEIMAGE" variable="MenuItem17" member="yes">
 					<label>Save Image ...</label>
+					<enabled>0</enabled>
 					<handler function="OnFileSaveImage" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="ID_MENUITEM_CREATEANIM" variable="MenuItem19" member="yes">
 					<label>Create Animation ...</label>
+					<enabled>0</enabled>
 					<handler function="OnCreateAnumation" entry="EVT_MENU" />
 				</object>
 				<object class="wxMenuItem" name="ID_MENUITEM_SAVEANIM" variable="MenuItem20" member="yes">
 					<label>Save Animation ...</label>
+					<enabled>0</enabled>
+					<handler function="OnSaveAnimation" entry="EVT_MENU" />
 				</object>
 				<object class="separator" />
 				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">

@@ -12,6 +12,8 @@
 const long AnimateDialog::ID_STATICTEXT1 = wxNewId();
 const long AnimateDialog::ID_STATICTEXT2 = wxNewId();
 const long AnimateDialog::ID_TEXTCTRL1 = wxNewId();
+const long AnimateDialog::ID_CHECKBOX1 = wxNewId();
+const long AnimateDialog::ID_SPINCTRL3 = wxNewId();
 const long AnimateDialog::ID_STATICTEXT3 = wxNewId();
 const long AnimateDialog::ID_SPINCTRL1 = wxNewId();
 const long AnimateDialog::ID_STATICTEXT4 = wxNewId();
@@ -44,17 +46,23 @@ AnimateDialog::AnimateDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,c
 	m_spec_text = new wxTextCtrl(this, ID_TEXTCTRL1, _("  0   0   0  1 0  0      0  0 1\n 50  50 100\n100 100 200\n 50  50 300  \n  0   0 400  0 1 0.5   -0.2 0 1"), wxDefaultPosition, wxSize(380,150), wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL1"));
 	wxFont m_spec_textFont(10,wxFONTFAMILY_MODERN,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL,false,_T("Courier New"),wxFONTENCODING_DEFAULT);
 	m_spec_text->SetFont(m_spec_textFont);
-	BoxSizer1->Add(m_spec_text, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer1->Add(m_spec_text, 1, wxALL|wxEXPAND, 5);
 	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer3->Add(-1,-1,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	m_orbit = new wxCheckBox(this, ID_CHECKBOX1, _("Orbit"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
+	m_orbit->SetValue(false);
+	BoxSizer3->Add(m_orbit, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	m_orbit_deg = new wxSpinCtrl(this, ID_SPINCTRL3, _T("360"), wxDefaultPosition, wxSize(50,-1), wxALIGN_RIGHT, 0, 3600, 360, _T("ID_SPINCTRL3"));
+	m_orbit_deg->SetValue(_T("360"));
+	BoxSizer3->Add(m_orbit_deg, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Animation time [sec ]"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	BoxSizer3->Add(StaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	m_total_sec = new wxSpinCtrl(this, ID_SPINCTRL1, _T("10"), wxDefaultPosition, wxDefaultSize, 0, 2, 600, 10, _T("ID_SPINCTRL1"));
-	m_total_sec->SetValue(_T("10"));
+	m_total_sec = new wxSpinCtrl(this, ID_SPINCTRL1, _T("30"), wxDefaultPosition, wxSize(50,-1), wxALIGN_RIGHT, 2, 600, 30, _T("ID_SPINCTRL1"));
+	m_total_sec->SetValue(_T("30"));
 	BoxSizer3->Add(m_total_sec, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Frames/Sec"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	BoxSizer3->Add(StaticText4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	m_framerate = new wxSpinCtrl(this, ID_SPINCTRL2, _T("10"), wxDefaultPosition, wxDefaultSize, 0, 1, 25, 10, _T("ID_SPINCTRL2"));
+	m_framerate = new wxSpinCtrl(this, ID_SPINCTRL2, _T("10"), wxDefaultPosition, wxSize(50,-1), wxALIGN_RIGHT, 1, 25, 10, _T("ID_SPINCTRL2"));
 	m_framerate->SetValue(_T("10"));
 	BoxSizer3->Add(m_framerate, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer3, 0, wxEXPAND, 5);
@@ -100,12 +108,16 @@ bool AnimateDialog::get_line_spec(long iline, line_spec& lspec)
       }
    }
 
-   if(vals.size() < 3) {
+
+   if(vals.size() == 0) {
+      // creates invalid lspec that is silently ignored
+   }
+   else if(vals.size() < 3) {
       wxMessageBox("At least 3 values must be specified", "Error in line " + std::to_string(iline+1));
       return false;
    }
-
-   if(vals.size() >= 3) {
+   else {
+      lspec.is_valid = true;
       lspec.pos = pos3d(vals[0],vals[1],vals[2]);
    }
    if(vals.size() >= 9) {
@@ -143,7 +155,7 @@ bool AnimateDialog::parse()
       for(long iline=0; iline<nlines; iline++) {
          line_spec lspec;
          if(get_line_spec(iline,lspec)) {
-            lspecs.push_back(lspec);
+            if(lspec.is_valid)lspecs.push_back(lspec);
          }
          else return false;
       }
@@ -156,7 +168,8 @@ bool AnimateDialog::parse()
 
    size_t sectot = m_total_sec->GetValue();
    size_t fsec   = m_framerate->GetValue();
-   auto aspec = std::make_shared<AnimateSpec>(sectot,fsec);
+   auto orbit = std::make_pair<bool,double>(m_orbit->IsChecked(),m_orbit_deg->GetValue());
+   auto aspec = std::make_shared<AnimateSpec>(sectot,fsec,orbit);
 
    std::shared_ptr<AnimateCurve> curve = nullptr;
 
@@ -203,7 +216,6 @@ bool AnimateDialog::parse()
 
 void AnimateDialog::OnAnimateButton(wxCommandEvent& event)
 {
-   m_images.clear();
    if(parse()) {
 
       // hide only if parsing was successful
@@ -214,7 +226,3 @@ void AnimateDialog::OnAnimateButton(wxCommandEvent& event)
    }
 }
 
-void AnimateDialog::add_image(const wxFileName& fname, const wxImage& image)
-{
-   m_images.push_back(std::make_pair(fname,image));
-}

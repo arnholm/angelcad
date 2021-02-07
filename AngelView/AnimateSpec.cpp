@@ -1,8 +1,9 @@
 #include "AnimateSpec.h"
 
-AnimateSpec::AnimateSpec(size_t sectot, size_t fsec)
+AnimateSpec::AnimateSpec(size_t sectot, size_t fsec, const std::pair<bool,double>& orbit)
 : m_sectot(sectot)
 , m_fsec(fsec)
+, m_orbit(orbit)
 , m_curve_index(0)
 , m_frame_counter(0)
 {}

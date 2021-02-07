@@ -9,12 +9,14 @@ public:
    using curve_vector   = std::vector<std::shared_ptr<AnimateCurve>>;
    using const_iterator = curve_vector::const_iterator;
 
-   AnimateSpec(size_t sectot, size_t fsec);
+   AnimateSpec(size_t sectot, size_t fsec, const std::pair<bool,double>& orbit);
    virtual ~AnimateSpec();
 
    void push_back(std::shared_ptr<AnimateCurve> curve) { m_curves.push_back(curve); }
 
    void finalize();
+
+   const std::pair<bool,double>& orbit() const { return m_orbit; }
 
    size_t millisec_per_frame() const { return 1000*m_sectot/total_frames(); }
    size_t total_frames() const       { return m_sectot*m_fsec; }
@@ -34,11 +36,12 @@ public:
    void increment_frame_counter() { m_frame_counter++; }
 
 private:
-   size_t        m_sectot;    // total number of seconds in animation
-   size_t        m_fsec;      // Frames per second
-   curve_vector  m_curves;
-   size_t        m_curve_index; // keeps track of current curve during animation
-   size_t        m_frame_counter; // animation frame counter
+   size_t                 m_sectot;      // total number of seconds in animation
+   size_t                 m_fsec;        // Frames per second
+   std::pair<bool,double> m_orbit;
+   curve_vector           m_curves;
+   size_t                 m_curve_index; // keeps track of current curve during animation
+   size_t                 m_frame_counter; // animation frame counter
 };
 
 #endif // ANIMATESPEC_H

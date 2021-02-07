@@ -6,15 +6,13 @@
 
 //(*Headers(AnimateDialog)
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
 #include <wx/spinctrl.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 //*)
-
-#include <wx/filename.h>
-#include <wx/image.h>
 
 class AnimateDialog: public wxDialog {
 public:
@@ -24,11 +22,11 @@ public:
 
    std::shared_ptr<AnimateSpec> animate_spec() const { return m_aspec; }
 
-   void add_image(const wxFileName& fname, const wxImage& image);
-
    //(*Declarations(AnimateDialog)
    wxButton* AnimateButton;
+   wxCheckBox* m_orbit;
    wxSpinCtrl* m_framerate;
+   wxSpinCtrl* m_orbit_deg;
    wxSpinCtrl* m_total_sec;
    wxStaticText* StaticText1;
    wxStaticText* StaticText2;
@@ -43,6 +41,8 @@ protected:
    static const long ID_STATICTEXT1;
    static const long ID_STATICTEXT2;
    static const long ID_TEXTCTRL1;
+   static const long ID_CHECKBOX1;
+   static const long ID_SPINCTRL3;
    static const long ID_STATICTEXT3;
    static const long ID_SPINCTRL1;
    static const long ID_STATICTEXT4;
@@ -54,6 +54,8 @@ protected:
 
 private:
    struct line_spec {
+      line_spec(): is_valid(false) {}
+      bool                   is_valid;
       pos3d                  pos;
       std::shared_ptr<vec3d> xdir;
       std::shared_ptr<vec3d> zdir;
@@ -70,8 +72,7 @@ private:
    DECLARE_EVENT_TABLE()
 
 private:
-   std::shared_ptr<AnimateSpec>             m_aspec;
-   std::list<std::pair<wxFileName,wxImage>> m_images;  // processed animation images
+   std::shared_ptr<AnimateSpec>  m_aspec;
 };
 
 #endif

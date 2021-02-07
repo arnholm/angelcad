@@ -33,6 +33,7 @@
 #include "AngelViewBitmapLibrary.h"
 
 #include "AnimateDialog.h"
+#include <wx/dirdlg.h>
 
 //(*InternalHeaders(AngelViewFrame)
 #include <wx/artprov.h>
@@ -94,7 +95,7 @@ const long AngelViewFrame::ID_AUITOOLBARITEM_SHOWBACK = wxNewId();
 const long AngelViewFrame::ID_AUITOOLBAR1 = wxNewId();
 const long AngelViewFrame::ID_MENUITEM1 = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_FILERELOAD = wxNewId();
-const long AngelViewFrame::ID_MENUITEM2 = wxNewId();
+const long AngelViewFrame::ID_MENUITEM_FILESAVEIMAGE = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_CREATEANIM = wxNewId();
 const long AngelViewFrame::ID_MENUITEM_SAVEANIM = wxNewId();
 const long AngelViewFrame::idMenuQuit = wxNewId();
@@ -117,6 +118,8 @@ const long AngelViewFrame::ID_TIMER1 = wxNewId();
 const long AngelViewFrame::ID_TIMER2 = wxNewId();
 //*)
 
+wxDEFINE_EVENT(ID_CUSTOM_SAVEANIMATEFILE, wxCommandEvent);
+
 
 BEGIN_EVENT_TABLE(AngelViewFrame,wxFrame)
    //(*EventTable(AngelViewFrame)
@@ -124,6 +127,9 @@ BEGIN_EVENT_TABLE(AngelViewFrame,wxFrame)
    EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, AngelViewFrame::OnMRUFile)
    EVT_FSWATCHER(wxID_ANY,AngelViewFrame::OnFileEvent)
    EVT_UPDATE_UI(wxID_ANY,AngelViewFrame::OnUpdateUI)
+
+   EVT_COMMAND(wxID_ANY, ID_CUSTOM_SAVEANIMATEFILE, AngelViewFrame::OnSaveAnimateFiles)
+
 END_EVENT_TABLE()
 
 AngelViewFrame* AngelViewFrame::m_self=0;
@@ -186,13 +192,16 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    Menu1->Append(MenuItem18);
    MenuItem18->Enable(false);
    Menu1->AppendSeparator();
-   MenuItem17 = new wxMenuItem(Menu1, ID_MENUITEM2, _("Save Image ..."), wxEmptyString, wxITEM_NORMAL);
+   MenuItem17 = new wxMenuItem(Menu1, ID_MENUITEM_FILESAVEIMAGE, _("Save Image ..."), wxEmptyString, wxITEM_NORMAL);
    Menu1->Append(MenuItem17);
+   MenuItem17->Enable(false);
    Menu1->AppendSeparator();
    MenuItem19 = new wxMenuItem(Menu1, ID_MENUITEM_CREATEANIM, _("Create Animation ..."), wxEmptyString, wxITEM_NORMAL);
    Menu1->Append(MenuItem19);
+   MenuItem19->Enable(false);
    MenuItem20 = new wxMenuItem(Menu1, ID_MENUITEM_SAVEANIM, _("Save Animation ..."), wxEmptyString, wxITEM_NORMAL);
    Menu1->Append(MenuItem20);
+   MenuItem20->Enable(false);
    Menu1->AppendSeparator();
    MenuItem1 = new wxMenuItem(Menu1, idMenuQuit, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
    Menu1->Append(MenuItem1);
@@ -260,8 +269,9 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    Connect(ID_AUITOOLBARITEM_SHOWBACK,wxEVT_COMMAND_TOOL_CLICKED,(wxObjectEventFunction)&AngelViewFrame::OnShowBacksideToolbar);
    Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileOpen);
    Connect(ID_MENUITEM_FILERELOAD,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileReload);
-   Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileSaveImage);
+   Connect(ID_MENUITEM_FILESAVEIMAGE,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnFileSaveImage);
    Connect(ID_MENUITEM_CREATEANIM,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnCreateAnumation);
+   Connect(ID_MENUITEM_SAVEANIM,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnSaveAnimation);
    Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnQuit);
    Connect(ID_MENUITEM_SHOWFILLED,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnShowPolygonsMenuBar);
    Connect(ID_MENUITEM_SHOWEDGES,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&AngelViewFrame::OnShowPolygonsMenuBar);
@@ -281,6 +291,8 @@ AngelViewFrame::AngelViewFrame(wxWindow* parent,wxWindowID id)
    Connect(ID_TIMER2,wxEVT_TIMER,(wxObjectEventFunction)&AngelViewFrame::OnAnimateTimer);
    Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&AngelViewFrame::OnClose);
    //*)
+
+ //  Bind(ID_CUSTOM_SAVEANIMATEFILE, &AngelViewFrame::OnSaveAnimateFiles, this);
 
    // do all bitmap work using bitmap library
    InitBitmaps();
@@ -481,6 +493,10 @@ void AngelViewFrame::DoFileOpen(const wxFileName& filename, bool init_projection
          StatusBar1->SetStatusText(status);
 
          MenuBar1->Enable(ID_MENUITEM_FILERELOAD,true);
+         MenuBar1->Enable(ID_MENUITEM_FILESAVEIMAGE,true);
+
+         MenuBar1->Enable(ID_MENUITEM_CREATEANIM,true);
+         MenuBar1->Enable(ID_MENUITEM_SAVEANIM,true);
       }
       else {
          // file failed to load, remove from history
@@ -765,6 +781,7 @@ void AngelViewFrame::OnCreateAnumation(wxCommandEvent& event)
 
 void AngelViewFrame::DoAnimate()
 {
+   m_images.clear();
    if(std::shared_ptr<AnimateSpec> spec = m_animate_dlg->animate_spec()) {
       m_animate_timer.Start(spec->millisec_per_frame());
    }
@@ -788,6 +805,14 @@ void AngelViewFrame::OnAnimateTimer(wxTimerEvent& event)
             // compute transformed OpenGL structure
             if(wxGetApp().GetModel().RenderModel(T)) {
                // draw the transformed model
+
+               const auto& orbit = spec->orbit();
+               if(orbit.first) {
+                  size_t totframes = spec->total_frames();
+                  double rad = orbit.second*M_PI/180;
+                  m_canvas->GetCurrentContext()->RotateYV(rad/totframes);
+                  m_canvas->GetCurrentContext()->RotateApply();
+               }
                m_canvas->GetCurrentContext()->DoSceneDraw();
                m_canvas->Refresh(false);
 
@@ -803,7 +828,7 @@ void AngelViewFrame::OnAnimateTimer(wxTimerEvent& event)
                   wxFileName fname(m_filename);
                   fname.SetName(fname.GetName()+'_'+wxString::Format("%04d",(int)spec->frame_counter()));
                   fname.SetExt("png");
-                  m_animate_dlg->add_image(fname,image);
+                  m_images.push_back(std::make_pair(fname,image));
 
                   stop_animation = false;
                }
@@ -822,5 +847,36 @@ void AngelViewFrame::OnAnimateTimer(wxTimerEvent& event)
 
    if(stop_animation) {
       m_animate_timer.Stop();
+   }
+}
+
+void AngelViewFrame::OnSaveAnimation(wxCommandEvent& event)
+{
+   if(m_images.size() > 0) {
+      const wxFileName& fn = m_images.begin()->first;
+      wxString save_path   = fn.GetPath();
+      wxDirDialog dlg(this,"Directory for animation files",save_path);
+      if(dlg.ShowModal() == wxID_OK) {
+         dlg.Show(false);
+         save_path = dlg.GetPath();
+         for(auto& p : m_images) {
+            wxFileName& fname     = p.first;
+            const wxBitmap& frame = p.second;
+            fname.SetPath(save_path);
+         }
+
+         wxCommandEvent ev(ID_CUSTOM_SAVEANIMATEFILE);
+         wxPostEvent(this, ev);
+      }
+   }
+}
+
+void AngelViewFrame::OnSaveAnimateFiles(wxCommandEvent& event)
+{
+   wxBusyCursor wait;
+   for(auto& p : m_images) {
+      wxFileName& fname     = p.first;
+      const wxBitmap& frame = p.second;
+      frame.SaveFile(fname.GetFullPath(),wxBITMAP_TYPE_PNG);
    }
 }

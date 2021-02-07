@@ -57,7 +57,11 @@ public:
    void DoFileOpen(const wxFileName& filename, bool init_projection);
 
    void DoAnimate();
+
+  //static const long ID_CUSTOM_SAVEANIMATEFILE;
 private:
+   void OnSaveAnimateFiles(wxCommandEvent& event);
+
 
    void OnFileEvent(wxFileSystemWatcherEvent& event);
    void InitBitmaps();
@@ -97,6 +101,7 @@ private:
    void OnShowBackSideMenuBar(wxCommandEvent& event);
    void OnCreateAnumation(wxCommandEvent& event);
    void OnAnimateTimer(wxTimerEvent& event);
+   void OnSaveAnimation(wxCommandEvent& event);
    //*)
 
    void OnMRUFile(wxCommandEvent& event);
@@ -125,7 +130,7 @@ private:
    static const long ID_AUITOOLBAR1;
    static const long ID_MENUITEM1;
    static const long ID_MENUITEM_FILERELOAD;
-   static const long ID_MENUITEM2;
+   static const long ID_MENUITEM_FILESAVEIMAGE;
    static const long ID_MENUITEM_CREATEANIM;
    static const long ID_MENUITEM_SAVEANIM;
    static const long idMenuQuit;
@@ -187,7 +192,8 @@ private:
    wxConfig*              m_config;
    wxFileHistory          m_mru;
 
-   AnimateDialog*         m_animate_dlg;
+   AnimateDialog*                            m_animate_dlg;
+   std::list<std::pair<wxFileName,wxBitmap>> m_images;  // processed animation images
 
 private:
    static AngelViewFrame* m_self;

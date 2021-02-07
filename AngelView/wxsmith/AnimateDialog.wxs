@@ -42,7 +42,7 @@
 					</font>
 					<style>wxTE_MULTILINE</style>
 				</object>
-				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 				<option>1</option>
 			</object>
@@ -54,6 +54,24 @@
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
+						<object class="wxCheckBox" name="ID_CHECKBOX1" variable="m_orbit" member="yes">
+							<label>Orbit</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxSpinCtrl" name="ID_SPINCTRL3" variable="m_orbit_deg" member="yes">
+							<value>360</value>
+							<max>3600</max>
+							<size>50,-1</size>
+							<style>wxALIGN_RIGHT</style>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
 							<label>Animation time [sec ]</label>
 						</object>
@@ -62,9 +80,11 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxSpinCtrl" name="ID_SPINCTRL1" variable="m_total_sec" member="yes">
-							<value>10</value>
+							<value>30</value>
 							<min>2</min>
 							<max>600</max>
+							<size>50,-1</size>
+							<style>wxALIGN_RIGHT</style>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -81,6 +101,8 @@
 							<value>10</value>
 							<min>1</min>
 							<max>25</max>
+							<size>50,-1</size>
+							<style>wxALIGN_RIGHT</style>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
