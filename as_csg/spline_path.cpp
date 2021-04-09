@@ -41,11 +41,19 @@ spline_path::spline_path(const CScriptArray* p, const CScriptArray* v)
 
    for(size_t ip=0;ip<points.size();ip++) {
       pos3* pos = points[ip];
+      if(!pos) {
+         string message = "spline_path: NULL pos3d encountered at array index=" + std::to_string(ip);
+         throw logic_error(message);
+      }
       m_p.push_back(*pos);
    }
 
    for(size_t iv=0;iv<vectors.size();iv++) {
       vec3* vec = vectors[iv];
+      if(!vec) {
+         string message = "spline_path: NULL vec3d encountered at array index=" + std::to_string(iv);
+         throw logic_error(message);
+      }
       m_v.push_back(*vec);
    }
 
@@ -64,6 +72,10 @@ spline_path::spline_path(const CScriptArray* p, const vec3* v)
 
    for(size_t ip=0;ip<points.size();ip++) {
       pos3* pos = points[ip];
+      if(!pos) {
+         string message = "spline_path: NULL pos3d encountered at array index=" + std::to_string(ip);
+         throw logic_error(message);
+      }
       m_p.push_back(*pos);
       m_v.push_back(*v);
    }
@@ -72,5 +84,4 @@ spline_path::spline_path(const CScriptArray* p, const vec3* v)
 
 spline_path::~spline_path()
 {}
-
 
